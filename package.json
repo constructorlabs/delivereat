@@ -11,6 +11,8 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "jest": "^22.3.0"
+    "hbs": "^4.0.1",
+    "jest": "^22.3.0",
+    "node-fetch": "^2.0.0"
   }
 }
