@@ -1,0 +1,16 @@
+{
+  "name": "delivereat",
+  "version": "1.0.0",
+  "description": "Let's create an app that allows customers to order food online.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jest": "^22.3.0"
+  }
+}
