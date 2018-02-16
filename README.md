@@ -5,6 +5,7 @@ Let's create an app that allows customers to order food online.
 A few notes before we get started
 
 * Fork and clone repo at [https://github.com/constructorlabs/delivereat](https://github.com/constructorlabs/delivereat)
+* Start by building the simplest thing that works. Add to it as you go along. Test your application as frequently as possible to make sure it does what you expect
 * Create a RESTful API for your service. Think about a good way to organise your API into **nouns** and **verbs**, which correspond to **resources** and **actions**
 * Split your code into an API on the server and render data from server in browser
 * Splitting out our application into an API and interface allows us to re-use the API. For example we could use it to create a native mobile app or allow third parties to place orders on our system
@@ -23,7 +24,7 @@ A few notes before we get started
 ## Features
 
 **Menu**
-
+* Design a menu for a restuarant such as food items, prices etc
 * Create an API endpoint that returns a menu of items with prices available to order
 * Create a page that displays the menu to the user using the API
 
