@@ -1,8 +1,8 @@
 {
-  "name": "delivereat",
+  "name": "FoodThing",
   "version": "1.0.0",
-  "description": "Let's create an app that allows customers to order food online.",
-  "main": "index.js",
+  "description": "An app that allows customers to order food online.",
+  "main": "application/server.js",
   "scripts": {
     "test": "jest"
   },

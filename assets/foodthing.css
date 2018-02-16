@@ -1,0 +1,31 @@
+body {
+	margin: 1em;
+}
+
+h2 {
+	margin-bottom: 0;
+}
+
+.menu-group {
+	margin: 1em 0;
+}
+
+.item-group {
+	border-bottom: 1px solid #999;
+	padding: 0.5em 0;
+}
+
+.item-title {
+	font-weight: bold;
+}
+
+.item-price {
+	display: block;
+	width: 3em;
+	float: right;
+	before: content('£');
+}
+
+.item-description {
+	font-style: italic;
+}
