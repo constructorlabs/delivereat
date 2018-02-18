@@ -37,7 +37,8 @@ h2 {
 	font-size: 0.85em;
 }
 
-.item-description, .item-price, .item-quantity, #total-price {
+.item-description, .item-price, .item-quantity, #delivery-charge,
+	#subtotal, #total-price {
 	font-family: 'Noticia Text', serif;
 }
 
@@ -76,6 +77,14 @@ h2 {
 		width: 66%;
 		margin: 0 auto;
 	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1.5em;
+	}
+
+	#total-price {
+		font-size: 2em;
+	}
 }
 
 @media (max-width: 767px) {
@@ -88,6 +97,14 @@ h2 {
 		width: 75%;
 		margin: 0 auto;
 	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1.25em;
+	}
+
+	#total-price {
+		font-size: 1.5em;
+	}
 }
 
 @media (max-width: 575px) {
@@ -99,22 +116,49 @@ h2 {
 	#menu {
 		width: 100%;
 	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1em;
+	}
+
+	#total-price {
+		font-size: 1.25em;
+	}
+}
+
+#subtotal-label, #delivery-charge-label {
+	display: inline-block;
+	width: 8em;
+	float: right;
+	text-align: right;
+}
+
+#subtotal-value, #delivery-charge-value {
+	display: inline-block;
+	width: 5em;
+	float: right;
+	font-weight: bold;
+	text-align: right;
+}
+
+#subtotal, #delivery-charge, #total-price {
+	clear: both;
 }
 
 #total-price {
 	margin-bottom: 5em;
-	font-size: 2em;
 }
 
 #total-price-label {
 	display: inline-block;
-	width: 5em;
+	width: 6em;
 	float: right;
+	text-align: right;
 }
 
 #total-price-value {
 	display: inline-block;
-	width: 5em;
+	width: 3.75em;
 	float: right;
 	font-weight: bold;
 	text-align: right;

@@ -50,16 +50,24 @@ function renderMenu (data) {
 			});
 	});
 
+	let subtotalDiv = createDiv(menu, 'subtotal');
+	createDiv(subtotalDiv, 'subtotal-value', undefined, '£0.00');
+	createDiv(subtotalDiv, 'subtotal-label', undefined, 'Subtotal');
+
+	let deliveryChargeDiv = createDiv(menu, 'delivery-charge');
+	createDiv(deliveryChargeDiv, 'delivery-charge-value', undefined, '£5.00');
+	createDiv(deliveryChargeDiv, 'delivery-charge-label', undefined, 'Delivery charge');
+
 	let totalPriceDiv = createDiv(menu, 'total-price');
 	totalPriceDiv.setAttribute('data-items', itemCount);
-	createDiv(totalPriceDiv, 'total-price-value', undefined, '£0.00');
+	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
 	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
 }
 
 function createDiv (parent, itemId, itemClass, itemContent) {
 	let itemElement = document.createElement('div');
 	if (itemId) itemElement.setAttribute('id', itemId);
-	itemElement.setAttribute('class', itemClass);
+	if (itemClass) itemElement.setAttribute('class', itemClass);
 	if (itemContent) itemElement.innerHTML = itemContent;
 	parent.appendChild(itemElement);
 	return itemElement;
@@ -77,42 +85,44 @@ function createQuantityPicker (parent, id) {
 	let quantityUpId = `${itemId}-up`;
 
 	createDiv(quantityPicker, quantityDownId, 'quantity-change', '➖')
-		.addEventListener('click', () => { quantityDown(itemId) });
+		.addEventListener('click', () => { updateQuantities(itemId, -1) });
 
 	createDiv(quantityPicker, quantityUpId, 'quantity-change', '➕')
-		.addEventListener('click', () => { quantityUp(itemId) });
+		.addEventListener('click', () => { updateQuantities(itemId, 1) });
 
 	parent.appendChild(quantityPicker);
 }
 
-function quantityUp (id) {
+function updateQuantities (id, change) {
 	let itemQuantity = document.getElementById(id);
-	itemQuantity.innerHTML = Number(itemQuantity.innerHTML) + 1;
-	updateTotal();
+	let value = Number(itemQuantity.innerHTML);
+
+	if (value == 0 && change < 0) return;
+
+	let newValue = value + change;
+	itemQuantity.innerHTML = newValue;
+
+	localStorage[id] = newValue;
+
+	updateDisplayTotal();
 }
 
-function quantityDown (id) {
-	let itemQuantity = document.getElementById(id);
-
-	if (Number(itemQuantity.innerHTML) > 0) {
-		itemQuantity.innerHTML = Number(itemQuantity.innerHTML) - 1;
-		updateTotal();
-	}
-}
-
-function updateTotal () {
+function updateDisplayTotal () {
 	let totalPriceDiv = document.getElementById('total-price');
 	let totalItems = Number(totalPriceDiv.getAttribute('data-items'));
 
-	let totalPrice = 0;
+	let subtotal = 0;
 
 	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
 		let item = document.getElementById(`item-${itemNumber}`);
 		let price = item.getAttribute('data-price');
 		let quantity = document.getElementById(`item-${itemNumber}-quantity`).innerHTML;
 
-		totalPrice += (price * quantity);
+		subtotal += (price * quantity);
 	}
 
+	let totalPrice = subtotal + 5;
+
+	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
 	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
 }
