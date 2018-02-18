@@ -50,6 +50,7 @@ h2 {
 	padding: 0.1em;
 	margin-top: -0.2em;
 	border: 1px solid #ccc;
+	border-radius: 0.25em;
 }
 
 .item-quantity {

@@ -17,6 +17,21 @@ function getMenuData () {
 		});
 }
 
+function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
+	let itemElement = document.createElement('div');
+	if (itemId)         itemElement.setAttribute('id', itemId);
+	if (itemClass)      itemElement.setAttribute('class', itemClass);
+	if (itemContent)    itemElement.innerHTML = itemContent;
+	if (dataAttributes) {
+		for (const [key, value] of Object.entries(dataAttributes)) {
+			itemElement.setAttribute(key, value);
+		}
+	}
+
+	parent.appendChild(itemElement);
+	return itemElement;
+}
+
 function renderMenu (data) {
 	let menu = document.getElementById('menu');
 	let menuGroups = data.groups;
@@ -65,21 +80,6 @@ function renderMenu (data) {
 	);
 	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
 	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
-}
-
-function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
-	let itemElement = document.createElement('div');
-	if (itemId)         itemElement.setAttribute('id', itemId);
-	if (itemClass)      itemElement.setAttribute('class', itemClass);
-	if (itemContent)    itemElement.innerHTML = itemContent;
-	if (dataAttributes) {
-		for (const [key, value] of Object.entries(dataAttributes)) {
-			itemElement.setAttribute(key, value);
-		}
-	}
-
-	parent.appendChild(itemElement);
-	return itemElement;
 }
 
 function createQuantityPicker (parent, id) {
