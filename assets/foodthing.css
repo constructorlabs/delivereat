@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Noticia+Text:400i');
+
 body {
 	margin: 1em;
+}
+
+h1, h2 {
+	font-family: 'Alegreya SC', serif;
 }
 
 h2 {
@@ -16,6 +22,7 @@ h2 {
 }
 
 .item-title {
+	font-family: 'Alegreya SC', serif;
 	font-weight: bold;
 }
 
@@ -27,7 +34,11 @@ h2 {
 
 .item-description {
 	padding-top: 0.25em;
-	font-style: italic;
+	font-size: 0.85em;
+}
+
+.item-description, .item-price, .item-quantity, #total-price {
+	font-family: 'Noticia Text', serif;
 }
 
 .quantity-picker {
@@ -36,7 +47,8 @@ h2 {
 	float: right;
 	background: #eee;
 	padding: 0.1em;
-	margin-top: -0.15em;
+	margin-top: -0.2em;
+	border: 1px solid #ccc;
 }
 
 .item-quantity {
@@ -87,4 +99,23 @@ h2 {
 	#menu {
 		width: 100%;
 	}
+}
+
+#total-price {
+	margin-bottom: 5em;
+	font-size: 2em;
+}
+
+#total-price-label {
+	display: inline-block;
+	width: 5em;
+	float: right;
+}
+
+#total-price-value {
+	display: inline-block;
+	width: 5em;
+	float: right;
+	font-weight: bold;
+	text-align: right;
 }
