@@ -13,7 +13,7 @@ function getMenuData () {
 			renderMenu(json);
 		})
 		.catch(error => {
-			document.write(`Couldn't get ${fetchUrl}: ${response}`);
+			document.write(`Couldn't get ${fetchUrl}: ${error}`);
 		});
 }
 
@@ -21,8 +21,10 @@ function renderMenu (data) {
 	let menu = document.getElementById('menu');
 	let menuGroups = data.groups;
 
+	let itemCount = 0;
+
 	Object.keys(menuGroups).forEach(group => {
-		let groupDiv = createMenuDiv(menu, `group-${group.toLowerCase()}`, 'menu-group');
+		let groupDiv = createDiv(menu, `group-${group.toLowerCase()}`, 'menu-group');
 
 		let groupTitle = document.createElement('h2');
 		groupTitle.innerHTML = group;
@@ -38,22 +40,43 @@ function renderMenu (data) {
 			let itemDiv = document.createElement('div');
 			itemDiv.setAttribute('class', 'item-group');
 
-			createMenuDiv(itemDiv, undefined, 'item-price', price);
-			createMenuDiv(itemDiv, undefined, 'item-title', menuItem);
+			createQuantityPicker(itemDiv, ++itemCount);
+			createDiv(itemDiv, undefined, 'item-price', price);
+			createDiv(itemDiv, undefined, 'item-title', menuItem);
 
 			if (description)
-				createMenuDiv(itemDiv, undefined, 'item-description', description);
+				createDiv(itemDiv, undefined, 'item-description', description);
 
 			groupDiv.appendChild(itemDiv);
 		});
 	});
 }
 
-function createMenuDiv (parent, itemId, itemClass, itemText) {
+function createQuantityPicker (parent, id) {
+	let quantityPicker = document.createElement('div');
+	quantityPicker.setAttribute('class', 'quantity-picker');
+
+	let itemId = `item-${id}-quantity`;
+
+	createDiv(quantityPicker, itemId, 'item-quantity', '0');
+
+	let quantityDownId = `${itemId}-down`;
+	let quantityUpId = `${itemId}-up`;
+
+	createDiv(quantityPicker, quantityDownId, 'quantity-change', '➖')
+		.addEventListener('click', () => { quantityDown(itemId) });
+
+	createDiv(quantityPicker, quantityUpId, 'quantity-change', '➕')
+		.addEventListener('click', () => { quantityUp(itemId) });
+
+	parent.appendChild(quantityPicker);
+}
+
+function createDiv (parent, itemId, itemClass, itemContent) {
 	let itemElement = document.createElement('div');
 	if (itemId) itemElement.setAttribute('id', itemId);
 	itemElement.setAttribute('class', itemClass);
-	if (itemText) itemElement.innerHTML = itemText;
+	if (itemContent) itemElement.innerHTML = itemContent;
 	parent.appendChild(itemElement);
 	return itemElement;
 }
@@ -70,12 +93,25 @@ function createMenuGroup (group) {
 	let itemDiv = document.createElement('div');
 	itemDiv.setAttribute('class', 'item-group');
 
-	createMenuDiv(itemDiv, 'item-price', price);
-	createMenuDiv(itemDiv, 'item-title', menuItem);
+	createDiv(itemDiv, 'item-price', price);
+	createDiv(itemDiv, 'item-title', menuItem);
 
 	if (description) {
-		createMenuDiv(itemDiv, 'item-description', description);
+		createDiv(itemDiv, 'item-description', description);
 	}
 
 	groupDiv.appendChild(itemDiv);
+}
+
+function quantityUp (id) {
+	let itemQuantity = document.getElementById(id);
+	itemQuantity.innerHTML = Number(itemQuantity.innerHTML) + 1;
+}
+
+function quantityDown (id) {
+	let itemQuantity = document.getElementById(id);
+
+	if (Number(itemQuantity.innerHTML) > 0) {
+		itemQuantity.innerHTML = Number(itemQuantity.innerHTML) - 1;
+	}
 }
