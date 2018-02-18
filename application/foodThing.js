@@ -15,8 +15,9 @@ function showMenu (req, res) {
 	return res.render('menu');
 }
 
-function submitOrder (req, res) {
-	return res.send('order submitted');
+function receiveOrder (req, res) {
+	console.log(req.body);
+	return res.send({response : 'order received'});
 }
 
 function currentOrders (req, res) {
@@ -30,6 +31,6 @@ function updateOrder (req, res) {
 module.exports.homePage      = homePage;
 module.exports.menuData      = menuData;
 module.exports.showMenu      = showMenu;
-module.exports.submitOrder   = submitOrder;
+module.exports.receiveOrder  = receiveOrder;
 module.exports.currentOrders = currentOrders;
 module.exports.updateOrder   = updateOrder;

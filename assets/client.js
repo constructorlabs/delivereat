@@ -19,12 +19,13 @@ function getMenuData () {
 
 function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
 	let itemElement = document.createElement('div');
+
 	if (itemId)         itemElement.setAttribute('id', itemId);
 	if (itemClass)      itemElement.setAttribute('class', itemClass);
 	if (itemContent)    itemElement.innerHTML = itemContent;
 	if (dataAttributes) {
 		for (const [key, value] of Object.entries(dataAttributes)) {
-			itemElement.setAttribute(key, value);
+			itemElement.setAttribute(`data-${key}`, value);
 		}
 	}
 
@@ -52,19 +53,26 @@ function renderMenu (data) {
 			let currentItem = currentGroup[menuItem];
 			let description = currentItem.description;
 			let price = currentItem.price;
+			let size = currentItem.size;
 
 			let itemDiv = createDiv(
 				groupDiv, `item-${itemCount}`, 'item-group', undefined,
-				{ 'data-price' : price }
+				{ 'price' : price }
 			);
 
 			createQuantityPicker(itemDiv, itemCount);
 			createDiv(itemDiv, `item-${itemCount}-price`, 'item-price', '£' + price);
-			createDiv(itemDiv, undefined, 'item-title', menuItem);
+			let itemTitle = createDiv(itemDiv, undefined, 'item-title', menuItem);
 
-			if (description)
+			if (size) {
+				itemTitle.innerHTML += ` (${size})`;
+			}
+
+			if (description) {
 				createDiv(itemDiv, undefined, 'item-description', description);
-			});
+			}
+		});
+
 	});
 
 	let subtotalDiv = createDiv(menu, 'subtotal');
@@ -76,12 +84,19 @@ function renderMenu (data) {
 	createDiv(deliveryChargeDiv, 'delivery-charge-label', undefined, 'Delivery charge');
 
 	let totalPriceDiv = createDiv(
-		menu, 'total-price', undefined, undefined, { 'data-items' : itemCount }
+		menu, 'total-price', undefined, undefined, { 'items' : itemCount }
 	);
 	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
 	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
 
 	updateDisplayTotal(); // with values loaded into quantity pickers
+
+	let submitOrderButton = document.createElement('button');
+	submitOrderButton.setAttribute('id', 'submit-order');
+	submitOrderButton.innerHTML = 'Place order';
+	submitOrderButton.addEventListener('click', () => { submitOrder() });
+
+	menu.appendChild(submitOrderButton);
 }
 
 function createQuantityPicker (parent, id) {
@@ -139,4 +154,36 @@ function updateDisplayTotal () {
 
 	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
 	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
+}
+
+function submitOrder () {
+	let totalPriceDiv = document.getElementById('total-price');
+	let totalItems = Number(totalPriceDiv.getAttribute('data-items'));
+
+	let order = {};
+
+	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
+		let itemQuantity = localStorage[`item-${itemNumber}-quantity`]
+			? Number(localStorage[`item-${itemNumber}-quantity`])
+			: 0;
+
+		order[`item-${itemNumber}`] = itemQuantity;
+	}
+
+	fetch('http://localhost:8080/submitOrder', {
+		body: JSON.stringify(order),
+		headers: {
+			'content-type': 'application/json'
+		},
+		method: 'POST'
+	})
+	.then(response => {
+		return response.json();
+	})
+	.then(json => {
+		console.log(json);
+	})
+	.catch(error => {
+		document.write(`Couldn't submit order: ${error}.`);
+	});
 }

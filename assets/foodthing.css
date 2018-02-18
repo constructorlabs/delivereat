@@ -37,8 +37,13 @@ h2 {
 	font-size: 0.85em;
 }
 
+.item-size {
+	display: inline;
+	border: 1px solid black;
+}
+
 .item-description, .item-price, .item-quantity, #delivery-charge,
-	#subtotal, #total-price {
+	#subtotal, #total-price, #submit-order {
 	font-family: 'Noticia Text', serif;
 }
 
@@ -147,7 +152,6 @@ h2 {
 }
 
 #total-price {
-	margin-bottom: 5em;
 }
 
 #total-price-label {
@@ -163,4 +167,12 @@ h2 {
 	float: right;
 	font-weight: bold;
 	text-align: right;
+}
+
+#submit-order {
+	clear: both;
+	float: right;
+	margin: 1em 0 2em 0;
+	font-weight: bold;
+	font-size: 1.5em;
 }

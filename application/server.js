@@ -13,6 +13,6 @@ express()
 	.get(  '/',              foodThing.showMenu       )
 	.get(  '/menuData',      foodThing.menuData       )
 	.get(  '/currentOrders', foodThing.currentOrders  )
-	.post( '/submitOrder',   foodThing.submitOrder    )
+	.post( '/submitOrder',   foodThing.receiveOrder   )
 	.post( '/updateOrder',   foodThing.updateOrder    )
 	.listen(8080, () => console.log('Starting FoodThing on port 8080.'));
