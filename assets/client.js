@@ -80,6 +80,8 @@ function renderMenu (data) {
 	);
 	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
 	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
+
+	updateDisplayTotal(); // with values loaded into quantity pickers
 }
 
 function createQuantityPicker (parent, id) {
@@ -88,15 +90,17 @@ function createQuantityPicker (parent, id) {
 
 	let itemId = `item-${id}-quantity`;
 
-	createDiv(quantityPicker, itemId, 'item-quantity', '0');
+	let itemQuantity = localStorage[itemId] ? localStorage[itemId] : '0';
+
+	createDiv(quantityPicker, itemId, 'item-quantity', itemQuantity);
 
 	let quantityDownId = `${itemId}-down`;
 	let quantityUpId = `${itemId}-up`;
 
-	createDiv(quantityPicker, quantityDownId, 'quantity-change', '➖')
+	createDiv(quantityPicker, quantityDownId, 'quantity-change', '➖') // '-'
 		.addEventListener('click', () => { updateQuantities(itemId, -1) });
 
-	createDiv(quantityPicker, quantityUpId, 'quantity-change', '➕')
+	createDiv(quantityPicker, quantityUpId, 'quantity-change', '➕')   // '+'
 		.addEventListener('click', () => { updateQuantities(itemId, 1) });
 
 	parent.appendChild(quantityPicker);
@@ -123,9 +127,10 @@ function updateDisplayTotal () {
 	let subtotal = 0;
 
 	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
-		let item = document.getElementById(`item-${itemNumber}`);
-		let price = item.getAttribute('data-price');
-		let quantity = document.getElementById(`item-${itemNumber}-quantity`).innerHTML;
+		let itemId   = `item-${itemNumber}`;
+		let item     = document.getElementById(itemId);
+		let price    = item.getAttribute('data-price');
+		let quantity = document.getElementById(`${itemId}-quantity`).innerHTML;
 
 		subtotal += (price * quantity);
 	}
