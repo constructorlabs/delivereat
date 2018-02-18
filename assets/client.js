@@ -38,8 +38,10 @@ function renderMenu (data) {
 			let description = currentItem.description;
 			let price = currentItem.price;
 
-			let itemDiv = createDiv(groupDiv, `item-${itemCount}`, 'item-group');
-			itemDiv.setAttribute(`data-price`, price);
+			let itemDiv = createDiv(
+				groupDiv, `item-${itemCount}`, 'item-group', undefined,
+				{ 'data-price' : price }
+			);
 
 			createQuantityPicker(itemDiv, itemCount);
 			createDiv(itemDiv, `item-${itemCount}-price`, 'item-price', '£' + price);
@@ -58,17 +60,24 @@ function renderMenu (data) {
 	createDiv(deliveryChargeDiv, 'delivery-charge-value', undefined, '£5.00');
 	createDiv(deliveryChargeDiv, 'delivery-charge-label', undefined, 'Delivery charge');
 
-	let totalPriceDiv = createDiv(menu, 'total-price');
-	totalPriceDiv.setAttribute('data-items', itemCount);
+	let totalPriceDiv = createDiv(
+		menu, 'total-price', undefined, undefined, { 'data-items' : itemCount }
+	);
 	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
 	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
 }
 
-function createDiv (parent, itemId, itemClass, itemContent) {
+function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
 	let itemElement = document.createElement('div');
-	if (itemId) itemElement.setAttribute('id', itemId);
-	if (itemClass) itemElement.setAttribute('class', itemClass);
-	if (itemContent) itemElement.innerHTML = itemContent;
+	if (itemId)         itemElement.setAttribute('id', itemId);
+	if (itemClass)      itemElement.setAttribute('class', itemClass);
+	if (itemContent)    itemElement.innerHTML = itemContent;
+	if (dataAttributes) {
+		for (const [key, value] of Object.entries(dataAttributes)) {
+			itemElement.setAttribute(key, value);
+		}
+	}
+
 	parent.appendChild(itemElement);
 	return itemElement;
 }
