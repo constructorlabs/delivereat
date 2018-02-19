@@ -3,6 +3,28 @@
 const menuJson = require('../data/menu');
 const menu = JSON.parse(menuJson);
 
+const [twilioClient, outgoing_number] = initTwilio();
+
+function initTwilio () {
+	let twilio_user, twilio_auth_token, outgoing_number;
+
+	if (process.env.twilio_auth_token) {
+		twilio_user       = process.env.twilio_user;
+		twilio_auth_token = process.env.twilio_auth_token;
+		outgoing_number   = process.env.outgoing_number;
+	} else {
+		const config = require('../config.js');
+		twilio_user       = config.twilio_user;
+		twilio_auth_token = config.twilio_auth_token;
+		outgoing_number   = config.outgoing_number;
+	}
+
+	let twilio = require('twilio');
+	let twilioClient = new twilio(twilio_user, twilio_auth_token);
+
+	return [ twilioClient, outgoing_number ];
+}
+
 function homePage (req, res) {
 	return res.render('home');
 }
@@ -17,6 +39,20 @@ function showMenu (req, res) {
 
 function receiveOrder (req, res) {
 	console.log(req.body);
+
+	twilioClient.messages.create({
+		body: 'Your order from FoodThing is on its way!',
+		to: '', // To do: input phone number on order page
+		from: outgoing_number
+	})
+	.then(
+		(message) => console.log(`SMS sent: ${message.sid}`)
+	)
+	.catch(error => {
+		console.log(`Couldn't send SMS: ${error}`);
+	});
+
+
 	return res.send({ success : 1 });
 }
 
