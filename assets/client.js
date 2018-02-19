@@ -2,6 +2,8 @@
 
 getMenuData();
 
+const menuFuncs = menuItemFuncs();
+
 function getMenuData () {
 	let fetchUrl = 'http://localhost:8080/menuData';
 
@@ -15,6 +17,53 @@ function getMenuData () {
 		.catch(error => {
 			document.write(`Couldn't get ${fetchUrl}: ${error}`);
 		});
+}
+
+function menuItemFuncs () {
+	let itemCount = 0;
+
+	const funcs = {
+		incrementItemCount () {
+			itemCount++;
+			return itemCount;
+		},
+		itemCount () {
+			return itemCount;
+		}
+	}
+
+	return funcs;
+}
+
+function createPageItem (args) {
+	let parent         = args.parent;
+	let itemType       = args.type || 'div';
+	let itemId         = args.cssId;
+	let itemClass      = args.cssClass;
+	let itemContent    = args.content;
+	let itemListener   = args.listener;
+	let dataAttributes = args.dataAttributes;
+
+	let item = document.createElement(itemType);
+
+	if (parent)         parent.appendChild(item);
+	if (itemId)         item.setAttribute('id', itemId);
+	if (itemClass)      item.setAttribute('class', itemClass);
+	if (itemContent)    item.innerHTML = itemContent;
+	if (dataAttributes) {
+		for (const [key, value] of Object.entries(dataAttributes)) {
+			item.setAttribute(`data-${key}`, value);
+		}
+	}
+
+	if (itemListener) {
+		let event = itemListener.event;
+		let func = itemListener.func;
+		item.addEventListener(event, func);
+	}
+
+	return item;
+
 }
 
 function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
@@ -37,88 +86,177 @@ function renderMenu (data) {
 	let menu = document.getElementById('menu');
 	let menuGroups = data.groups;
 
-	let itemCount = 0;
-
 	Object.keys(menuGroups).forEach(group => {
-		let groupDiv = createDiv(menu, `group-${group.toLowerCase()}`, 'menu-group');
-
-		let groupTitle = document.createElement('h2');
-		groupTitle.innerHTML = group;
-		groupDiv.appendChild(groupTitle);
-
-		let currentGroup = menuGroups[group];
-
-		Object.keys(currentGroup).forEach(menuItem => {
-			itemCount++;
-			let currentItem = currentGroup[menuItem];
-			let description = currentItem.description;
-			let price = currentItem.price;
-			let size = currentItem.size;
-
-			let itemDiv = createDiv(
-				groupDiv, `item-${itemCount}`, 'item-group', undefined,
-				{ 'price' : price }
-			);
-
-			createQuantityPicker(itemDiv, itemCount);
-			createDiv(itemDiv, `item-${itemCount}-price`, 'item-price', '£' + price);
-			let itemTitle = createDiv(itemDiv, undefined, 'item-title', menuItem);
-
-			if (size) {
-				itemTitle.innerHTML += ` (${size})`;
-			}
-
-			if (description) {
-				createDiv(itemDiv, undefined, 'item-description', description);
-			}
-		});
-
+		createMenuGroup(group, menuGroups)
 	});
 
-	let subtotalDiv = createDiv(menu, 'subtotal');
-	createDiv(subtotalDiv, 'subtotal-value', undefined, '£0.00');
-	createDiv(subtotalDiv, 'subtotal-label', undefined, 'Subtotal');
-
-	let deliveryChargeDiv = createDiv(menu, 'delivery-charge');
-	createDiv(deliveryChargeDiv, 'delivery-charge-value', undefined, '£5.00');
-	createDiv(deliveryChargeDiv, 'delivery-charge-label', undefined, 'Delivery charge');
-
-	let totalPriceDiv = createDiv(
-		menu, 'total-price', undefined, undefined, { 'items' : itemCount }
-	);
-	createDiv(totalPriceDiv, 'total-price-value', undefined, '£5.00');
-	createDiv(totalPriceDiv, 'total-price-label', undefined, 'Order total');
+	createTotals(menu, menuFuncs.itemCount());
 
 	updateDisplayTotal(); // with values loaded into quantity pickers
 
-	let submitOrderButton = document.createElement('button');
-	submitOrderButton.setAttribute('id', 'submit-order');
-	submitOrderButton.innerHTML = 'Place order';
-	submitOrderButton.addEventListener('click', () => { submitOrder() });
+	let submitOrderButton = createPageItem({
+		parent: menu,
+		type: 'button',
+		cssId: 'submit-order',
+		content: 'Place order',
+		listener: {
+			event: 'click',
+			func: () => { submitOrder() }
+		}
+	});
+}
 
-	menu.appendChild(submitOrderButton);
+function createMenuGroup (group, menuGroups) {
+	let groupDiv = createPageItem({
+		parent: menu,
+		cssId: `group-${group.toLowerCase()}`,
+		cssClass: 'menu-group'
+	});
+
+	let groupTitle = createPageItem({
+		parent: groupDiv,
+		type: 'h2',
+		content: group,
+	});
+
+	let currentGroup = menuGroups[group];
+
+	Object.keys(currentGroup).forEach(menuItem => {
+		menuFuncs.incrementItemCount();
+		let currentItem = currentGroup[menuItem];
+		createMenuItem(groupDiv, menuItem, currentItem, menuFuncs.itemCount());
+	});
+}
+
+function createTotals (menu, itemCount) {
+	let subtotalDiv = createPageItem({
+		parent: menu,
+		cssId: 'subtotal'
+	});
+	createPageItem({
+		parent: subtotalDiv,
+		cssId: 'subtotal-value',
+		content: '£0.00'
+	});
+	createPageItem({
+		parent: subtotalDiv,
+		cssId: 'subtotal-label',
+		content: 'Subtotal'
+	});
+
+	let deliveryChargeDiv = createPageItem({
+		parent: menu,
+		cssId: 'delivery-charge'
+	});
+	createPageItem({
+		parent: deliveryChargeDiv,
+		cssId: 'delivery-charge-value',
+		content: '£5.00'
+	});
+	createPageItem({
+		parent: deliveryChargeDiv,
+		cssId: 'delivery-charge-label',
+		content: 'Delivery charge'
+	});
+
+	let totalPriceDiv = createPageItem({
+		parent: menu,
+		cssId: 'total-price',
+	});
+	createPageItem({
+		parent: totalPriceDiv,
+		cssId: 'total-price-value',
+		content: '£5.00'
+	});
+	createPageItem({
+		parent: totalPriceDiv,
+		cssId: 'total-price-label',
+		content: 'Order total'
+	});
+}
+
+function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
+	let description = currentItem.description;
+	let price = currentItem.price;
+	let size = currentItem.size;
+
+	let itemDiv = createPageItem({
+		parent: groupDiv,
+		cssId: `item-${itemCount}`,
+		cssClass: 'item-group',
+		dataAttributes: { 'price' : price }
+	});
+
+	createQuantityPicker(itemDiv, itemCount);
+
+	createPageItem({
+		parent: itemDiv,
+		cssId: `item-${itemCount}-price`,
+		cssClass: 'item-price',
+		content: '£' + price
+	});
+
+	let itemTitle = createPageItem({
+		parent: itemDiv,
+		cssClass: 'item-title',
+		content: menuItem
+	});
+
+	if (size) {
+		itemTitle.innerHTML += ` (${size})`;
+	}
+
+	if (description) {
+		createPageItem({
+			parent: itemDiv,
+			cssClass: 'item-description',
+			content: description
+		});
+	}
 }
 
 function createQuantityPicker (parent, id) {
-	let quantityPicker = document.createElement('div');
-	quantityPicker.setAttribute('class', 'quantity-picker');
+	let quantityPicker = createPageItem({
+		parent: parent,
+		type: 'div',
+		cssClass: 'quantity-picker'
+	});
 
 	let itemId = `item-${id}-quantity`;
 
 	let itemQuantity = localStorage[itemId] ? localStorage[itemId] : '0';
 
-	createDiv(quantityPicker, itemId, 'item-quantity', itemQuantity);
+	createPageItem({
+		parent: quantityPicker,
+		cssId: itemId,
+		cssClass: 'item-quantity',
+		content: itemQuantity
+	});
 
 	let quantityDownId = `${itemId}-down`;
 	let quantityUpId = `${itemId}-up`;
 
-	createDiv(quantityPicker, quantityDownId, 'quantity-change', '➖') // '-'
-		.addEventListener('click', () => { updateQuantities(itemId, -1) });
+	createPageItem({
+		parent: quantityPicker,
+		cssId: quantityDownId,
+		cssClass: 'quantity-change',
+		content: '➖', // '-'
+		listener: {
+			event: 'click',
+			func: () => { updateQuantities(itemId, -1) }
+		}
+	});
 
-	createDiv(quantityPicker, quantityUpId, 'quantity-change', '➕')   // '+'
-		.addEventListener('click', () => { updateQuantities(itemId, 1) });
-
-	parent.appendChild(quantityPicker);
+	createPageItem({
+		parent: quantityPicker,
+		cssId: quantityUpId,
+		cssClass: 'quantity-change',
+		content: '➕', // '+'
+		listener: {
+			event: 'click',
+			func: () => { updateQuantities(itemId, 1) }
+		}
+	});
 }
 
 function updateQuantities (id, change) {
@@ -136,8 +274,7 @@ function updateQuantities (id, change) {
 }
 
 function updateDisplayTotal () {
-	let totalPriceDiv = document.getElementById('total-price');
-	let totalItems = Number(totalPriceDiv.getAttribute('data-items'));
+	let totalItems = menuFuncs.itemCount();
 
 	let subtotal = 0;
 
@@ -158,7 +295,7 @@ function updateDisplayTotal () {
 
 function submitOrder () {
 	let totalPriceDiv = document.getElementById('total-price');
-	let totalItems = Number(totalPriceDiv.getAttribute('data-items'));
+	let totalItems = menuFuncs.itemCount();
 
 	let order = {};
 
