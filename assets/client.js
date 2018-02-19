@@ -290,17 +290,18 @@ function updateDisplayTotal () {
 }
 
 function submitOrder () {
-	let totalPriceDiv = document.getElementById('total-price');
 	let totalItems = menuFuncs.itemCount();
 
 	let order = {};
 
 	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
-		let itemQuantity = localStorage[`item-${itemNumber}-quantity`]
-			? Number(localStorage[`item-${itemNumber}-quantity`])
+		let identifier = `item-${itemNumber}`;
+
+		let itemQuantity = localStorage[identifier + '-quantity']
+			? Number(localStorage[identifier + '-quantity'])
 			: 0;
 
-		order[`item-${itemNumber}`] = itemQuantity;
+		order[identifier] = itemQuantity;
 	}
 
 	fetch('http://localhost:8080/submitOrder', {
