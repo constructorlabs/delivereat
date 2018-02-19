@@ -63,7 +63,6 @@ function createPageItem (args) {
 	}
 
 	return item;
-
 }
 
 function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
@@ -233,12 +232,9 @@ function createQuantityPicker (parent, id) {
 		content: itemQuantity
 	});
 
-	let quantityDownId = `${itemId}-down`;
-	let quantityUpId = `${itemId}-up`;
-
 	createPageItem({
 		parent: quantityPicker,
-		cssId: quantityDownId,
+		cssId: `${itemId}-down`,
 		cssClass: 'quantity-change',
 		content: '➖', // '-'
 		listener: {
@@ -249,7 +245,7 @@ function createQuantityPicker (parent, id) {
 
 	createPageItem({
 		parent: quantityPicker,
-		cssId: quantityUpId,
+		cssId: `${itemId}-up`,
 		cssClass: 'quantity-change',
 		content: '➕', // '+'
 		listener: {
