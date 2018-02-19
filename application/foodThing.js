@@ -17,7 +17,7 @@ function showMenu (req, res) {
 
 function receiveOrder (req, res) {
 	console.log(req.body);
-	return res.send({response : 'order received'});
+	return res.send({ success : 1 });
 }
 
 function currentOrders (req, res) {

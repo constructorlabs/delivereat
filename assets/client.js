@@ -315,9 +315,23 @@ function submitOrder () {
 		return response.json();
 	})
 	.then(json => {
-		console.log(json);
+		if (json.success) orderReceived();
 	})
 	.catch(error => {
 		document.write(`Couldn't submit order: ${error}.`);
+	});
+}
+
+function orderReceived () {
+	let menu = document.getElementById('menu');
+
+	while (menu.firstChild) {
+		menu.removeChild(menu.firstChild);
+	}
+
+	createPageItem({
+		parent: menu,
+		type: 'h1',
+		content: 'Order received!'
 	});
 }
