@@ -6,6 +6,8 @@ const foodThing = require('./foodThing');
 const hbs = require('hbs');
 hbs.registerPartials(__dirname + '/../views/partials');
 
+const port = process.env.PORT || 8080;
+
 express()
 	.use( bodyParser.json() )
 	.set(  'view engine', 'hbs' )
@@ -15,4 +17,4 @@ express()
 	.get(  '/currentOrders', foodThing.currentOrders  )
 	.post( '/submitOrder',   foodThing.receiveOrder   )
 	.post( '/updateOrder',   foodThing.updateOrder    )
-	.listen(8080, () => console.log('Starting FoodThing on port 8080.'));
+	.listen(port, () => console.log(`Starting FoodThing on port ${port}.`));
