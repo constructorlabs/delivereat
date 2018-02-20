@@ -22,6 +22,7 @@ function parseMenuData () {
 function menuItemFuncs () {
 	let itemCount = 0;
 	let menuData = {};
+	let orderTotal = 0;
 
 	const funcs = {
 		incrementItemCount () {
@@ -36,6 +37,12 @@ function menuItemFuncs () {
 		},
 		getMenuData () {
 			return menuData;
+		},
+		storeOrderTotal (value) {
+			orderTotal = value;
+		},
+		getOrderTotal () {
+			return orderTotal;
 		}
 	}
 
@@ -309,7 +316,7 @@ function updateDisplayTotal () {
 		submitOrderButton.disabled = false;
 	}
 
-	// To do: store internally
+	menuFuncs.storeOrderTotal(totalPrice);
 	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
 	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
 }
@@ -335,6 +342,7 @@ function submitOrder () {
 	userPhone = userPhone.replace(/\D/g, '');
 	userPhone = userPhone.replace(/^0/, '+44');
 	orderData.userPhone = userPhone;
+	orderData.totalPrice = menuFuncs.getOrderTotal();
 
 	fetch('/submitOrder', {
 		body: JSON.stringify(orderData),
@@ -364,7 +372,7 @@ function orderReceived (orderData) {
 	createPageItem({
 		parent: menu,
 		type: 'h1',
-		content: 'Order received!'
+		content: 'Order received'
 	});
 
 	let userPhone = orderData.userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
@@ -373,7 +381,7 @@ function orderReceived (orderData) {
 
 	createPageItem({
 		parent: menu,
-		cssId: 'confirmation-message',
+		cssClass: 'confirmation-message',
 		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}. You're getting:`
 	});
 
@@ -398,4 +406,11 @@ function orderReceived (orderData) {
 		});
 	});
 
+	let orderTotal = menuFuncs.getOrderTotal();
+
+	createPageItem({
+		parent: menu,
+		cssClass: 'confirmation-message',
+		content: `Your order total was &pound;${orderTotal}.`
+	});
 }

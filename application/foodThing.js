@@ -38,8 +38,6 @@ function showMenu (req, res) {
 }
 
 function receiveOrder (req, res) {
-	console.log(req.body);
-
 	let orderData = req.body;
 
 	twilioClient.messages.create({
