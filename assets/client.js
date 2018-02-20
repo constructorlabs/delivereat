@@ -75,8 +75,6 @@ function renderMenu (data) {
 
 	createTotals(menu, menuFuncs.itemCount());
 
-	updateDisplayTotal(); // with values loaded into quantity pickers
-
 	let phoneNumberForm = createPageItem({
 		parent: menu,
 		type: 'form',
@@ -102,6 +100,8 @@ function renderMenu (data) {
 			func: () => { submitOrder() }
 		}
 	});
+
+	updateDisplayTotal(); // with values loaded into quantity pickers
 }
 
 function createMenuGroup (group, menuGroups) {
@@ -201,7 +201,12 @@ function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
 	});
 
 	if (size) {
-		itemTitle.innerHTML += ` (${size})`;
+		createPageItem({
+			parent: itemTitle,
+			type: 'span',
+			cssClass: 'item-size',
+			content: ` (${size})`
+		});
 	}
 
 	if (description) {
@@ -282,7 +287,16 @@ function updateDisplayTotal () {
 		subtotal += (price * quantity);
 	}
 
-	let totalPrice = subtotal + 5;
+	let deliveryCharge = 5;
+	let totalPrice = subtotal + deliveryCharge;
+
+	let submitOrderButton = document.getElementById('submit-order');
+
+	if (totalPrice == deliveryCharge) {
+		submitOrderButton.disabled = true;
+	} else {
+		submitOrderButton.disabled = false;
+	}
 
 	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
 	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
@@ -341,8 +355,7 @@ function orderReceived (userPhone) {
 
 	createPageItem({
 		parent: menu,
-		type: 'div',
 		cssId: 'confirmation-message',
 		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}.`
-	})
+	});
 }
