@@ -249,13 +249,6 @@ function createQuantityPicker (parent, id) {
 
 	createPageItem({
 		parent: quantityPicker,
-		cssId: itemId,
-		cssClass: 'item-quantity',
-		content: itemQuantity
-	});
-
-	createPageItem({
-		parent: quantityPicker,
 		cssId: `${itemId}-down`,
 		cssClass: 'quantity-change',
 		content: '➖', // '-'
@@ -263,6 +256,13 @@ function createQuantityPicker (parent, id) {
 			event: 'click',
 			func: () => { updateQuantities(itemId, -1) }
 		}
+	});
+
+	createPageItem({
+		parent: quantityPicker,
+		cssId: itemId,
+		cssClass: 'item-quantity',
+		content: itemQuantity
 	});
 
 	createPageItem({

@@ -52,7 +52,7 @@ h2 {
 	width: 4.5em;
 	float: right;
 	background: #eee;
-	padding: 0.1em;
+	padding: 0.1em 0.1em 0.1em 0.5em;
 	margin-top: -0.2em;
 	border: 1px solid #ccc;
 	border-radius: 0.25em;
@@ -61,7 +61,7 @@ h2 {
 .item-quantity {
 	display: inline-block;
 	width: 1.5em;
-	margin-right: 0.25em;
+	margin-right: 0.15em;
 	padding: 0.1em;
 	font-weight: bold;
 	text-align: center;
