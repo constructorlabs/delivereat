@@ -7,7 +7,7 @@ const menuFuncs = menuItemFuncs();
 function getMenuData () {
 	let fetchUrl = 'http://localhost/menuData';
 
-	fetch(fetchUrl, { mode: 'no-cors' })
+	fetch(fetchUrl)
 		.then(response => {
 			return response.json()
 		})
@@ -330,7 +330,6 @@ function submitOrder () {
 			'content-type': 'application/json'
 		},
 		method: 'POST',
-		mode: 'no-cors'
 	})
 	.then(response => {
 		return response.json();
