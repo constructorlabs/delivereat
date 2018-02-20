@@ -5,7 +5,7 @@ getMenuData();
 const menuFuncs = menuItemFuncs();
 
 function getMenuData () {
-	let fetchUrl = 'http://localhost/menuData';
+	let fetchUrl = '/menuData';
 
 	fetch(fetchUrl)
 		.then(response => {
@@ -322,7 +322,7 @@ function submitOrder () {
 	userPhone = userPhone.replace(/^0/, '+44');
 	order.userPhone = userPhone;
 
-	fetch('http://localhost/submitOrder', {
+	fetch('/submitOrder', {
 		body: JSON.stringify(order),
 		headers: {
 			'content-type': 'application/json'
