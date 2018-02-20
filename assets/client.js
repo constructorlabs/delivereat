@@ -65,22 +65,6 @@ function createPageItem (args) {
 	return item;
 }
 
-function createDiv (parent, itemId, itemClass, itemContent, dataAttributes) {
-	let itemElement = document.createElement('div');
-
-	if (itemId)         itemElement.setAttribute('id', itemId);
-	if (itemClass)      itemElement.setAttribute('class', itemClass);
-	if (itemContent)    itemElement.innerHTML = itemContent;
-	if (dataAttributes) {
-		for (const [key, value] of Object.entries(dataAttributes)) {
-			itemElement.setAttribute(`data-${key}`, value);
-		}
-	}
-
-	parent.appendChild(itemElement);
-	return itemElement;
-}
-
 function renderMenu (data) {
 	let menu = document.getElementById('menu');
 	let menuGroups = data.groups;
