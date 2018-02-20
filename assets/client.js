@@ -1,18 +1,18 @@
 'use strict';
 
-getMenuData();
+parseMenuData();
 
 const menuFuncs = menuItemFuncs();
 
-function getMenuData () {
+function parseMenuData () {
 	let fetchUrl = '/menuData';
 
 	fetch(fetchUrl)
 		.then(response => {
 			return response.json()
 		})
-		.then(json => {
-			renderMenu(json);
+		.then(menuData => {
+			renderMenu(menuData);
 		})
 		.catch(error => {
 			document.write(`Couldn't get ${fetchUrl}: ${error}`);
@@ -21,6 +21,7 @@ function getMenuData () {
 
 function menuItemFuncs () {
 	let itemCount = 0;
+	let menuData = {};
 
 	const funcs = {
 		incrementItemCount () {
@@ -29,6 +30,12 @@ function menuItemFuncs () {
 		},
 		itemCount () {
 			return itemCount;
+		},
+		storeMenuData (data) {
+			menuData = data;
+		},
+		getMenuData () {
+			return menuData;
 		}
 	}
 
@@ -178,6 +185,10 @@ function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
 	let price = currentItem.price;
 	let size = currentItem.size;
 
+	let menuData = menuFuncs.getMenuData();
+	menuData[itemCount] = menuItem;
+	menuFuncs.storeMenuData(menuData);
+
 	let itemDiv = createPageItem({
 		parent: groupDiv,
 		cssId: `item-${itemCount}`,
@@ -298,6 +309,7 @@ function updateDisplayTotal () {
 		submitOrderButton.disabled = false;
 	}
 
+	// To do: store internally
 	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
 	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
 }
@@ -317,13 +329,15 @@ function submitOrder () {
 		order[identifier] = itemQuantity;
 	}
 
+	let orderData = { order: order };
+
 	let userPhone = document.getElementById('phone-number-input').value;
 	userPhone = userPhone.replace(/\D/g, '');
 	userPhone = userPhone.replace(/^0/, '+44');
-	order.userPhone = userPhone;
+	orderData.userPhone = userPhone;
 
 	fetch('/submitOrder', {
-		body: JSON.stringify(order),
+		body: JSON.stringify(orderData),
 		headers: {
 			'content-type': 'application/json'
 		},
@@ -333,14 +347,14 @@ function submitOrder () {
 		return response.json();
 	})
 	.then(json => {
-		if (json.success) orderReceived(userPhone);
+		if (json.success) orderReceived(orderData);
 	})
 	.catch(error => {
 		document.write(`Couldn't submit order: ${error}.`);
 	});
 }
 
-function orderReceived (userPhone) {
+function orderReceived (orderData) {
 	let menu = document.getElementById('menu');
 
 	while (menu.firstChild) {
@@ -353,11 +367,35 @@ function orderReceived (userPhone) {
 		content: 'Order received!'
 	});
 
-	userPhone = userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
+	let userPhone = orderData.userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
+
+	let menuData = menuFuncs.getMenuData();
 
 	createPageItem({
 		parent: menu,
 		cssId: 'confirmation-message',
-		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}.`
+		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}. You're getting:`
 	});
+
+	let orderList = createPageItem({
+		parent: menu,
+		type: 'ul',
+		cssId: 'order-list'
+	});
+
+	let order = orderData.order;
+
+	Object.keys(order).forEach( orderItem => {
+		let itemNumber = orderItem.replace('item-', '');
+
+		if (order[orderItem] == 0) return;
+		if (orderItem)
+
+		createPageItem({
+			parent: orderList,
+			type: 'li',
+			content: `${order[orderItem]} × ${menuData[itemNumber]}`
+		});
+	});
+
 }

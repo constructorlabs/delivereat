@@ -43,7 +43,7 @@ h2 {
 
 .item-description, .item-price, .item-quantity, #delivery-charge,
 	#subtotal, #total-price, #submit-order, #phone-number-input,
-	#confirmation-message {
+	#confirmation-message, #order-list {
 	font-family: 'Noticia Text', serif;
 }
 
@@ -187,4 +187,12 @@ h2 {
 
 #confirmation-message {
 	font-size: 1.5em;
+}
+
+#order-list {
+	list-style-type: none;
+}
+
+#order-list li::before {
+	content: "❧\00a0";
 }
