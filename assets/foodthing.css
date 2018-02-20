@@ -91,6 +91,10 @@ h2 {
 	#total-price {
 		font-size: 2em;
 	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1.25em;
+	}
 }
 
 @media (max-width: 767px) {
@@ -111,6 +115,10 @@ h2 {
 	#total-price {
 		font-size: 1.5em;
 	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1.1em;
+	}
 }
 
 @media (max-width: 575px) {
@@ -129,6 +137,10 @@ h2 {
 
 	#total-price {
 		font-size: 1.25em;
+	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1em;
 	}
 }
 
@@ -176,14 +188,12 @@ h2 {
 
 #phone-number-label {
 	float: right;
-	font-size: 1.25em;
 	padding: 0.1em 0.5em 0 0;
 }
 
 #phone-number-input {
 	width: 8em;
 	float: right;
-	font-size: 1.25em;
 	text-align: center;
 }
 
