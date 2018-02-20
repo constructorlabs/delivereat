@@ -93,6 +93,21 @@ function renderMenu (data) {
 
 	updateDisplayTotal(); // with values loaded into quantity pickers
 
+	let phoneNumberForm = createPageItem({
+		parent: menu,
+		type: 'form',
+		cssId: 'phone-number-form'
+	});
+
+	let phoneNumberInput = createPageItem({
+		parent: phoneNumberForm,
+		type: 'input',
+		cssId: 'phone-number-input',
+	});
+
+	phoneNumberInput.setAttribute('type', 'text');
+	phoneNumberInput.setAttribute('value', '07000 000000');
+
 	let submitOrderButton = createPageItem({
 		parent: menu,
 		type: 'button',
@@ -304,6 +319,11 @@ function submitOrder () {
 		order[identifier] = itemQuantity;
 	}
 
+	let userPhone = document.getElementById('phone-number-input').value;
+	userPhone = userPhone.replace(/\D/g, '');
+	userPhone = userPhone.replace(/^0/, '+44');
+	order.userPhone = userPhone;
+
 	fetch('http://localhost:8080/submitOrder', {
 		body: JSON.stringify(order),
 		headers: {
@@ -315,14 +335,14 @@ function submitOrder () {
 		return response.json();
 	})
 	.then(json => {
-		if (json.success) orderReceived();
+		if (json.success) orderReceived(userPhone);
 	})
 	.catch(error => {
 		document.write(`Couldn't submit order: ${error}.`);
 	});
 }
 
-function orderReceived () {
+function orderReceived (userPhone) {
 	let menu = document.getElementById('menu');
 
 	while (menu.firstChild) {
@@ -334,4 +354,11 @@ function orderReceived () {
 		type: 'h1',
 		content: 'Order received!'
 	});
+
+	createPageItem({
+		parent: menu,
+		type: 'div',
+		cssId: 'confirmation-message',
+		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}.`
+	})
 }

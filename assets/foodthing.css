@@ -43,7 +43,8 @@ h2 {
 }
 
 .item-description, .item-price, .item-quantity, #delivery-charge,
-	#subtotal, #total-price, #submit-order {
+	#subtotal, #total-price, #submit-order, #phone-number-input,
+	#confirmation-message {
 	font-family: 'Noticia Text', serif;
 }
 
@@ -174,5 +175,17 @@ h2 {
 	float: right;
 	margin: 1em 0 2em 0;
 	font-weight: bold;
+	font-size: 1.5em;
+}
+
+#phone-number-input {
+	clear: both;
+	width: 8em;
+	float: left;
+	font-size: 1.25em;
+	text-align: center;
+}
+
+#confirmation-message {
 	font-size: 1.5em;
 }

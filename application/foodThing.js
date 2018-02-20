@@ -40,9 +40,11 @@ function showMenu (req, res) {
 function receiveOrder (req, res) {
 	console.log(req.body);
 
+	let order = req.body;
+
 	twilioClient.messages.create({
 		body: 'Your order from FoodThing is on its way!',
-		to: '', // To do: input phone number on order page
+		to: order.userPhone,
 		from: outgoing_number
 	})
 	.then(
