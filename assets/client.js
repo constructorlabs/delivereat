@@ -99,7 +99,22 @@ function renderMenu (data) {
 		parent: phoneNumberForm,
 		type: 'input',
 		cssId: 'phone-number-input',
+		listener: {
+			event: 'keydown',
+			func: (e) => {
+				if (e.keyCode === 13) e.preventDefault();
+			}
+		}
 	});
+
+	let phoneNumberLabel = createPageItem({
+		parent: phoneNumberForm,
+		type: 'label',
+		cssId: 'phone-number-label',
+		content: 'Please enter your phone number:'
+	});
+
+	phoneNumberLabel.setAttribute('for', 'phone-number-input');
 
 	phoneNumberInput.setAttribute('type', 'text');
 	phoneNumberInput.setAttribute('value', '07000 000000');
