@@ -353,6 +353,8 @@ function orderReceived (userPhone) {
 		content: 'Order received!'
 	});
 
+	userPhone = userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
+
 	createPageItem({
 		parent: menu,
 		cssId: 'confirmation-message',
