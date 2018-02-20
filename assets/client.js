@@ -117,7 +117,6 @@ function renderMenu (data) {
 	phoneNumberLabel.setAttribute('for', 'phone-number-input');
 
 	phoneNumberInput.setAttribute('type', 'text');
-	phoneNumberInput.setAttribute('value', '07000 000000');
 
 	let submitOrderButton = createPageItem({
 		parent: menu,
