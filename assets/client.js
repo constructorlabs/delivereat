@@ -50,6 +50,8 @@ function menuItemFuncs () {
 }
 
 function createPageItem (args) {
+	if (args.noShow) return;
+
 	let parent         = args.parent;
 	let itemType       = args.type || 'div';
 	let itemId         = args.cssId;
@@ -79,6 +81,15 @@ function createPageItem (args) {
 	return item;
 }
 
+function createPageGroup (...items) {
+	let parent = items.shift();
+
+	items.forEach(pageItem => {
+		pageItem.parent = parent;
+		createPageItem(pageItem);
+	});
+}
+
 function renderMenu (data) {
 	let menu = document.getElementById('menu');
 	let menuGroups = data.groups;
@@ -89,6 +100,23 @@ function renderMenu (data) {
 
 	createTotals(menu, menuFuncs.itemCount());
 
+	createPhoneNumberBlock(menu);
+
+	let submitOrderButton = createPageItem({
+		parent: menu,
+		type: 'button',
+		cssId: 'submit-order',
+		content: 'Place order',
+		listener: {
+			event: 'click',
+			func: () => { submitOrder() }
+		}
+	});
+
+	updateDisplayTotal(); // with values loaded into quantity pickers
+}
+
+function createPhoneNumberBlock (menu) {
 	let phoneNumberForm = createPageItem({
 		parent: menu,
 		type: 'form',
@@ -117,19 +145,6 @@ function renderMenu (data) {
 	phoneNumberLabel.setAttribute('for', 'phone-number-input');
 
 	phoneNumberInput.setAttribute('type', 'text');
-
-	let submitOrderButton = createPageItem({
-		parent: menu,
-		type: 'button',
-		cssId: 'submit-order',
-		content: 'Place order',
-		listener: {
-			event: 'click',
-			func: () => { submitOrder() }
-		}
-	});
-
-	updateDisplayTotal(); // with values loaded into quantity pickers
 }
 
 function createMenuGroup (group, menuGroups) {
@@ -155,50 +170,50 @@ function createMenuGroup (group, menuGroups) {
 }
 
 function createTotals (menu, itemCount) {
-	let subtotalDiv = createPageItem({
-		parent: menu,
-		cssId: 'subtotal'
-	});
-	createPageItem({
-		parent: subtotalDiv,
-		cssId: 'subtotal-value',
-		content: '£0.00'
-	});
-	createPageItem({
-		parent: subtotalDiv,
-		cssId: 'subtotal-label',
-		content: 'Subtotal'
-	});
+	createPageGroup(
+		createPageItem({
+			parent: menu,
+			cssId: 'subtotal'
+		}),
+		{
+			cssId: 'subtotal-value',
+			content: '£0.00'
+		},
+		{
+			cssId: 'subtotal-label',
+			content: 'Subtotal'
+		}
+	);
 
-	let deliveryChargeDiv = createPageItem({
-		parent: menu,
-		cssId: 'delivery-charge'
-	});
-	createPageItem({
-		parent: deliveryChargeDiv,
-		cssId: 'delivery-charge-value',
-		content: '£5.00'
-	});
-	createPageItem({
-		parent: deliveryChargeDiv,
-		cssId: 'delivery-charge-label',
-		content: 'Delivery charge'
-	});
+	createPageGroup(
+		createPageItem({
+			parent: menu,
+			cssId: 'delivery-charge'
+		}),
+		{
+			cssId: 'delivery-charge-value',
+			content: '£5.00'
+		},
+		{
+			cssId: 'delivery-charge-label',
+			content: 'Delivery charge'
+		}
+	);
 
-	let totalPriceDiv = createPageItem({
-		parent: menu,
-		cssId: 'total-price',
-	});
-	createPageItem({
-		parent: totalPriceDiv,
-		cssId: 'total-price-value',
-		content: '£5.00'
-	});
-	createPageItem({
-		parent: totalPriceDiv,
-		cssId: 'total-price-label',
-		content: 'Order total'
-	});
+	createPageGroup(
+		createPageItem({
+			parent: menu,
+			cssId: 'total-price',
+		}),
+		{
+			cssId: 'total-price-value',
+			content: '£5.00'
+		},
+		{
+			cssId: 'total-price-label',
+			content: 'Order total'
+		}
+	);
 }
 
 function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
@@ -206,6 +221,8 @@ function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
 	let price = currentItem.price;
 	let size = currentItem.size;
 
+	// To do: put identifiers into menu data and use them here
+	// instead of counting items as they come into use
 	let menuData = menuFuncs.getMenuData();
 	menuData[itemCount] = menuItem;
 	menuFuncs.storeMenuData(menuData);
@@ -232,63 +249,57 @@ function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
 		content: menuItem
 	});
 
-	if (size) {
-		createPageItem({
-			parent: itemTitle,
-			type: 'span',
-			cssClass: 'item-size',
-			content: ` (${size})`
-		});
-	}
+	createPageItem({
+		parent: itemTitle,
+		type: 'span',
+		cssClass: 'item-size',
+		content: ` (${size})`,
+		noShow: size ? undefined : 1
+	});
 
-	if (description) {
-		createPageItem({
-			parent: itemDiv,
-			cssClass: 'item-description',
-			content: description
-		});
-	}
+	createPageItem({
+		parent: itemDiv,
+		cssClass: 'item-description',
+		content: description,
+		noShow: description ? undefined : 1
+	});
 }
 
 function createQuantityPicker (parent, id) {
-	let quantityPicker = createPageItem({
-		parent: parent,
-		type: 'div',
-		cssClass: 'quantity-picker'
-	});
-
 	let itemId = `item-${id}-quantity`;
 
 	let itemQuantity = localStorage[itemId] ? localStorage[itemId] : '0';
 
-	createPageItem({
-		parent: quantityPicker,
-		cssId: `${itemId}-down`,
-		cssClass: 'quantity-change',
-		content: '➖', // '-'
-		listener: {
-			event: 'click',
-			func: () => { updateQuantities(itemId, -1) }
+	createPageGroup(
+		createPageItem({
+			parent: parent,
+			type: 'div',
+			cssClass: 'quantity-picker'
+		}),
+		{
+			cssId: `${itemId}-down`,
+			cssClass: 'quantity-change',
+			content: '➖', // '-'
+			listener: {
+				event: 'click',
+				func: () => { updateQuantities(itemId, -1) }
+			}
+		},
+		{
+			cssId: itemId,
+			cssClass: 'item-quantity',
+			content: itemQuantity
+		},
+		{
+			cssId: `${itemId}-up`,
+			cssClass: 'quantity-change',
+			content: '➕', // '+'
+			listener: {
+				event: 'click',
+				func: () => { updateQuantities(itemId, 1) }
+			}
 		}
-	});
-
-	createPageItem({
-		parent: quantityPicker,
-		cssId: itemId,
-		cssClass: 'item-quantity',
-		content: itemQuantity
-	});
-
-	createPageItem({
-		parent: quantityPicker,
-		cssId: `${itemId}-up`,
-		cssClass: 'quantity-change',
-		content: '➕', // '+'
-		listener: {
-			event: 'click',
-			func: () => { updateQuantities(itemId, 1) }
-		}
-	});
+	);
 }
 
 function updateQuantities (id, change) {
@@ -313,6 +324,8 @@ function updateDisplayTotal () {
 	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
 		let itemId   = `item-${itemNumber}`;
 		let item     = document.getElementById(itemId);
+
+		// To do: these need to move to menuFuncs
 		let price    = item.getAttribute('data-price');
 		let quantity = document.getElementById(`${itemId}-quantity`).innerHTML;
 
@@ -340,6 +353,7 @@ function submitOrder () {
 
 	let order = {};
 
+	// To do: see note in createMenuItem() about not using item numbering
 	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
 		let identifier = `item-${itemNumber}`;
 
@@ -352,6 +366,7 @@ function submitOrder () {
 
 	let orderData = { order: order };
 
+	// To do: closures for phone number formatting
 	let userPhone = document.getElementById('phone-number-input').value;
 	userPhone = userPhone.replace(/\D/g, '');
 	userPhone = userPhone.replace(/^0/, '+44');
