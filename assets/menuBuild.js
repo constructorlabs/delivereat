@@ -45,10 +45,6 @@ function setElementContent(id, content) {
 	document.getElementById(id).innerHTML = content;
 }
 
-function getElementContent(id) {
-	return document.getElementById(id).innerHTML;
-}
-
 function formatPhoneNumber (number, format) {
 	if (format == 'input') {
 		number = number.replace(/\D/g, '');
@@ -244,7 +240,7 @@ function createMenuItem (groupDiv, name, currentItem) {
 		dataAttributes: { 'price' : price }
 	});
 
-	createQuantityPicker(itemDiv, itemId);
+	createQuantityPicker(itemDiv, `item-${itemId}-quantity`);
 
 	createPageItem({
 		parent: itemDiv,
@@ -275,10 +271,12 @@ function createMenuItem (groupDiv, name, currentItem) {
 	});
 }
 
-function createQuantityPicker (parent, id) {
-	let itemId = `item-${id}-quantity`;
+function createQuantityPicker (parent, identifier) {
+	let storedItemQuantity = localStorage[identifier];
 
-	let itemQuantity = localStorage[itemId] ? localStorage[itemId] : '0';
+	let itemQuantity = storedItemQuantity
+		? storedItemQuantity
+		: '0';
 
 	createPageGroup(
 		createPageItem({
@@ -287,40 +285,40 @@ function createQuantityPicker (parent, id) {
 			cssClass: 'quantity-picker'
 		}),
 		{
-			cssId: `${itemId}-down`,
+			cssId: `${identifier}-down`,
 			cssClass: 'quantity-change',
 			content: '➖', // '-'
 			listener: {
 				event: 'click',
-				func: () => { updateQuantities(itemId, -1) }
+				func: () => { updateQuantities(identifier, -1) }
 			}
 		},
 		{
-			cssId: itemId,
+			cssId: identifier,
 			cssClass: 'item-quantity',
 			content: itemQuantity
 		},
 		{
-			cssId: `${itemId}-up`,
+			cssId: `${identifier}-up`,
 			cssClass: 'quantity-change',
 			content: '➕', // '+'
 			listener: {
 				event: 'click',
-				func: () => { updateQuantities(itemId, 1) }
+				func: () => { updateQuantities(identifier, 1); }
 			}
 		}
 	);
 }
 
-function updateQuantities (id, change) {
-	let value = Number(getElementContent(id));
+function updateQuantities (identifier, change) {
+	let value = Number(localStorage[identifier]);
 
 	if (value == 0 && change < 0) return;
 
 	let newValue = value + change;
-	setElementContent(id, newValue);
+	setElementContent(identifier, newValue);
 
-	localStorage[id] = newValue;
+	localStorage[identifier] = newValue;
 
 	updateDisplayTotal();
 }
@@ -329,14 +327,15 @@ function updateDisplayTotal () {
 	let menuData = getMenuData();
 	let subtotal = 0;
 
+	// To do: refactoring candidate: related code in submitOrder(), createQuantityPicker()
 	let itemQuantities = document.querySelectorAll('.item-quantity');
 
 	itemQuantities.forEach(item => {
-		let itemId = item.getAttribute('id').replace(/item-(.*?)-quantity/, '$1');
-		let price = menuData[itemId].price;
+		let identifier = item.getAttribute('id');
+		let itemId = identifier.replace(/item-(.*?)-quantity/, '$1');
 
-		// To do: this needs to move to menuFuncs
-		let quantity = getElementContent(`item-${itemId}-quantity`);
+		let price = menuData[itemId].price;
+		let quantity = localStorage[identifier];
 
 		subtotal += (price * quantity);
 	});
@@ -369,7 +368,7 @@ function submitOrder () {
 		let storedItemQuantity = localStorage[identifier];
 
 		let itemQuantity = storedItemQuantity
-			? Number(storedItemQuantity)
+			? storedItemQuantity
 			: 0;
 
 		order[identifier.replace('-quantity', '')] = itemQuantity;
