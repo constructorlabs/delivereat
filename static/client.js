@@ -6,7 +6,7 @@ function displayMenu(menu){
   menu.forEach(function(menuItem){
     const itemContainer = document.createElement('li');
     itemContainer.innerHTML = `
-      <div class="menu-item">${menuItem.name} <span>${menuItem.price}</span></div>
+      <div class="list-item">${menuItem.name} <span>${menuItem.price}</span></div>
       <input type="number" data-key="${menuItem.key}" class="quantity" />
     `;
     listContainer.appendChild(itemContainer);
