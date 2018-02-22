@@ -364,15 +364,15 @@ function submitOrder () {
 	let itemQuantities = document.querySelectorAll('.item-quantity');
 
 	itemQuantities.forEach(item => {
-		let identifier = item.getAttribute('id').replace('-quantity', '');
+		let identifier = item.getAttribute('id');
 
-		let storedItemQuantity = localStorage[identifier + '-quantity'];
+		let storedItemQuantity = localStorage[identifier];
 
 		let itemQuantity = storedItemQuantity
 			? Number(storedItemQuantity)
 			: 0;
 
-		order[identifier] = itemQuantity;
+		order[identifier.replace('-quantity', '')] = itemQuantity;
 	});
 
 	let orderData = { order: order };
