@@ -398,27 +398,25 @@ function orderReceived (orderData) {
 		menu.removeChild(menu.firstChild);
 	}
 
-	createPageItem({
-		parent: menu,
-		type: 'h1',
-		content: 'Order received'
-	});
-
 	let userPhone = orderData.userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
 
 	let menuData = menuFuncs.getMenuData();
 
-	createPageItem({
-		parent: menu,
-		cssClass: 'confirmation-message',
-		content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}. You're getting:`
-	});
-
-	let orderList = createPageItem({
-		parent: menu,
-		type: 'ul',
-		cssId: 'order-list'
-	});
+	createPageGroup(
+		menu,
+		{
+			type: 'h1',
+			content: 'Order received'
+		},
+		{
+			cssClass: 'confirmation-message',
+			content: `Thanks for your order! We've sent a confirmation text to you at ${userPhone}. You're getting:`
+		},
+		{
+			type: 'ul',
+			cssId: 'order-list'
+		}
+	);
 
 	let order = orderData.order;
 
@@ -429,13 +427,13 @@ function orderReceived (orderData) {
 		if (orderItem)
 
 		createPageItem({
-			parent: orderList,
+			parent: document.getElementById('order-list'),
 			type: 'li',
 			content: `${order[orderItem]} × ${menuData[itemNumber]}`
 		});
 	});
 
-	let orderTotal = menuFuncs.getOrderTotal();
+	let orderTotal = menuFuncs.getOrderTotal().toFixed(2);
 
 	createPageItem({
 		parent: menu,
