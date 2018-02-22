@@ -41,6 +41,23 @@ export function getMenuData ()   { return menuFuncs.getMenuData()   };
 function storeOrderTotal (value) { menuFuncs.storeOrderTotal(value) };
 export function getOrderTotal () { return menuFuncs.getOrderTotal() };
 
+function setElementContent(id, content) {
+	document.getElementById(id).innerHTML = content;
+}
+
+function getElementContent(id) {
+	return document.getElementById(id).innerHTML;
+}
+
+function formatPhoneNumber (number, format) {
+	if (format == 'input') {
+		number = number.replace(/\D/g, '');
+		return number.replace(/^0/, '+44');
+	} else if (format == 'output') {
+		return number.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
+	}
+}
+
 function createPageItem (args) {
 	if (args.noShow) return;
 
@@ -154,10 +171,10 @@ function createMenuGroup (group, menuGroups) {
 
 	let currentGroup = menuGroups[group];
 
-	Object.keys(currentGroup).forEach(menuItem => {
+	Object.keys(currentGroup).forEach(name => {
 		incrementItemCount();
-		let currentItem = currentGroup[menuItem];
-		createMenuItem(groupDiv, menuItem, currentItem, getItemCount());
+		let currentItem = currentGroup[name];
+		createMenuItem(groupDiv, name, currentItem);
 	});
 }
 
@@ -208,29 +225,30 @@ function createTotals (menu, itemCount) {
 	);
 }
 
-function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
+function createMenuItem (groupDiv, name, currentItem) {
 	let description = currentItem.description;
 	let price = currentItem.price;
 	let size = currentItem.size;
+	let itemId = currentItem.id;
 
 	// To do: put identifiers into menu data and use them here
 	// instead of counting items as they come into use
 	let menuData = getMenuData();
-	menuData[itemCount] = menuItem;
+	menuData[itemId] = { name: name, price: price };
 	storeMenuData(menuData);
 
 	let itemDiv = createPageItem({
 		parent: groupDiv,
-		cssId: `item-${itemCount}`,
+		cssId: `item-${itemId}`,
 		cssClass: 'item-group',
 		dataAttributes: { 'price' : price }
 	});
 
-	createQuantityPicker(itemDiv, itemCount);
+	createQuantityPicker(itemDiv, itemId);
 
 	createPageItem({
 		parent: itemDiv,
-		cssId: `item-${itemCount}-price`,
+		cssId: `item-${itemId}-price`,
 		cssClass: 'item-price',
 		content: '£' + price
 	});
@@ -238,7 +256,7 @@ function createMenuItem (groupDiv, menuItem, currentItem, itemCount) {
 	let itemTitle = createPageItem({
 		parent: itemDiv,
 		cssClass: 'item-title',
-		content: menuItem
+		content: name
 	});
 
 	createPageItem({
@@ -295,13 +313,12 @@ function createQuantityPicker (parent, id) {
 }
 
 function updateQuantities (id, change) {
-	let itemQuantity = document.getElementById(id);
-	let value = Number(itemQuantity.innerHTML);
+	let value = Number(getElementContent(id));
 
 	if (value == 0 && change < 0) return;
 
 	let newValue = value + change;
-	itemQuantity.innerHTML = newValue;
+	setElementContent(id, newValue);
 
 	localStorage[id] = newValue;
 
@@ -309,20 +326,20 @@ function updateQuantities (id, change) {
 }
 
 function updateDisplayTotal () {
-	let totalItems = getItemCount();
-
+	let menuData = getMenuData();
 	let subtotal = 0;
 
-	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
-		let itemId   = `item-${itemNumber}`;
-		let item     = document.getElementById(itemId);
+	let itemQuantities = document.querySelectorAll('.item-quantity');
 
-		// To do: these need to move to menuFuncs
-		let price    = item.getAttribute('data-price');
-		let quantity = document.getElementById(`${itemId}-quantity`).innerHTML;
+	itemQuantities.forEach(item => {
+		let itemId = item.getAttribute('id').replace(/item-(.*?)-quantity/, '$1');
+		let price = menuData[itemId].price;
+
+		// To do: this needs to move to menuFuncs
+		let quantity = getElementContent(`item-${itemId}-quantity`);
 
 		subtotal += (price * quantity);
-	}
+	});
 
 	let deliveryCharge = 5;
 	let totalPrice = subtotal + deliveryCharge;
@@ -336,32 +353,35 @@ function updateDisplayTotal () {
 	}
 
 	storeOrderTotal(totalPrice);
-	document.getElementById('subtotal-value').innerHTML = '£' + subtotal.toFixed(2);
-	document.getElementById('total-price-value').innerHTML = '£' + totalPrice.toFixed(2);
+	setElementContent('subtotal-value', '£' + subtotal.toFixed(2));
+	setElementContent('total-price-value', '£' + totalPrice.toFixed(2));
 }
 
 function submitOrder () {
 	let totalItems = getItemCount();
 
 	let order = {};
+	let itemQuantities = document.querySelectorAll('.item-quantity');
 
-	// To do: see note in createMenuItem() about not using item numbering
-	for (let itemNumber = 1; itemNumber <= totalItems; itemNumber++) {
-		let identifier = `item-${itemNumber}`;
+	itemQuantities.forEach(item => {
+		let identifier = item.getAttribute('id').replace('-quantity', '');
 
-		let itemQuantity = localStorage[identifier + '-quantity']
-			? Number(localStorage[identifier + '-quantity'])
+		let storedItemQuantity = localStorage[identifier + '-quantity'];
+
+		let itemQuantity = storedItemQuantity
+			? Number(storedItemQuantity)
 			: 0;
 
 		order[identifier] = itemQuantity;
-	}
+	});
 
 	let orderData = { order: order };
 
-	// To do: closures for phone number formatting
-	let userPhone = document.getElementById('phone-number-input').value;
-	userPhone = userPhone.replace(/\D/g, '');
-	userPhone = userPhone.replace(/^0/, '+44');
+	let userPhone = formatPhoneNumber(
+		document.getElementById('phone-number-input').value,
+		'input'
+	);
+
 	orderData.userPhone = userPhone;
 	orderData.totalPrice = getOrderTotal();
 
@@ -383,6 +403,7 @@ function submitOrder () {
 	});
 }
 
+// To do: intermediate step of orderConfirmation()
 function orderReceived (orderData) {
 	let menu = document.getElementById('menu');
 
@@ -390,7 +411,7 @@ function orderReceived (orderData) {
 		menu.removeChild(menu.firstChild);
 	}
 
-	let userPhone = orderData.userPhone.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
+	let userPhone = formatPhoneNumber(orderData.userPhone, 'output');
 
 	let menuData = getMenuData();
 
@@ -416,13 +437,13 @@ function orderReceived (orderData) {
 		let itemNumber = orderItem.replace('item-', '');
 
 		if (order[orderItem] == 0) return;
-		if (orderItem)
-
-		createPageItem({
-			parent: document.getElementById('order-list'),
-			type: 'li',
-			content: `${order[orderItem]} × ${menuData[itemNumber]}`
-		});
+		if (orderItem) {
+			createPageItem({
+				parent: document.getElementById('order-list'),
+				type: 'li',
+				content: `${order[orderItem]} × ${menuData[itemNumber].name}`
+			});
+		}
 	});
 
 	let orderTotal = getOrderTotal().toFixed(2);
