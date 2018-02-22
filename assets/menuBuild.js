@@ -437,13 +437,13 @@ function orderReceived (orderData) {
 		let itemNumber = orderItem.replace('item-', '');
 
 		if (order[orderItem] == 0) return;
-		if (orderItem) {
-			createPageItem({
-				parent: document.getElementById('order-list'),
-				type: 'li',
-				content: `${order[orderItem]} × ${menuData[itemNumber].name}`
-			});
-		}
+
+		createPageItem({
+			parent: document.getElementById('order-list'),
+			type: 'li',
+			content: `${order[orderItem]} × ${menuData[itemNumber].name}`,
+			noShow: orderItem ? undefined : 1
+		});
 	});
 
 	let orderTotal = getOrderTotal().toFixed(2);
