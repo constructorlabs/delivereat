@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css?family=Alegreya+SC|Noticia+Text:400i');
+
+body {
+	margin: 1em;
+}
+
+h1, h2 {
+	font-family: 'Alegreya SC', serif;
+}
+
+h2 {
+	margin-bottom: 0;
+}
+
+.menu-group {
+	margin: 1em 0;
+}
+
+.item-group {
+	border-bottom: 1px solid #999;
+	padding: 0.5em 0;
+}
+
+.item-title {
+	font-family: 'Alegreya SC', serif;
+	font-weight: bold;
+}
+
+.item-price {
+	display: block;
+	width: 3em;
+	float: right;
+}
+
+.item-description {
+	padding-top: 0.25em;
+	font-size: 0.85em;
+}
+
+.item-size {
+	font-size: 0.8em;
+}
+
+.item-description, .item-price, .item-quantity, #delivery-charge,
+	#subtotal, #total-price, #submit-order, #phone-number-label,
+	#phone-number-input, .confirmation-message, #order-list {
+	font-family: 'Noticia Text', serif;
+}
+
+.quantity-picker {
+	display: block;
+	width: 4.5em;
+	float: right;
+	background: #eee;
+	padding: 0.1em 0.1em 0.1em 0.5em;
+	margin-top: -0.2em;
+	border: 1px solid #ccc;
+	border-radius: 0.25em;
+}
+
+.item-quantity {
+	display: inline-block;
+	width: 1.5em;
+	margin-right: 0.15em;
+	padding: 0.1em;
+	font-weight: bold;
+	text-align: center;
+}
+
+.quantity-change {
+	display: inline;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+@media (min-width: 768px) {
+	h1 {
+		font-size: 3.5em;
+		margin: 0.25em 0;
+	}
+
+	#menu {
+		width: 66%;
+		margin: 0 auto;
+	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1.5em;
+	}
+
+	#total-price {
+		font-size: 2em;
+	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1.25em;
+	}
+}
+
+@media (max-width: 767px) {
+	h1 {
+		font-size: 2.5em;
+		margin: 0.2em 0;
+	}
+
+	#menu {
+		width: 75%;
+		margin: 0 auto;
+	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1.25em;
+	}
+
+	#total-price {
+		font-size: 1.5em;
+	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1.1em;
+	}
+}
+
+@media (max-width: 575px) {
+	h1 {
+		font-size: 1.75em;
+		margin: 0.15em 0;
+	}
+
+	#menu {
+		width: 100%;
+	}
+
+	#subtotal, #delivery-charge {
+		font-size: 1em;
+	}
+
+	#total-price {
+		font-size: 1.25em;
+	}
+
+	#phone-number-input, #phone-number-label {
+		font-size: 1em;
+	}
+}
+
+#subtotal-label, #delivery-charge-label {
+	display: inline-block;
+	width: 8em;
+	float: right;
+	text-align: right;
+}
+
+#subtotal-value, #delivery-charge-value {
+	display: inline-block;
+	width: 5em;
+	float: right;
+	font-weight: bold;
+	text-align: right;
+}
+
+#subtotal, #delivery-charge, #total-price {
+	clear: both;
+}
+
+#total-price {
+}
+
+#total-price-label {
+	display: inline-block;
+	width: 6em;
+	float: right;
+	text-align: right;
+}
+
+#total-price-value {
+	display: inline-block;
+	width: 3.75em;
+	float: right;
+	font-weight: bold;
+	text-align: right;
+}
+
+#phone-number-form {
+	clear: both;
+	padding-top: 0.5em;
+}
+
+#phone-number-label {
+	float: right;
+	padding: 0.1em 0.5em 0 0;
+}
+
+#phone-number-input {
+	width: 8em;
+	float: right;
+	text-align: center;
+}
+
+.confirmation-message {
+	font-size: 1.5em;
+}
+
+#submit-order {
+	clear: both;
+	float: right;
+	margin: 0.5em 0 2em 0;
+	font-weight: bold;
+	font-size: 1.5em;
+}
+
+#order-list {
+	list-style-type: none;
+}
+
+#order-list li::before {
+	content: "❧\00a0";
+}
