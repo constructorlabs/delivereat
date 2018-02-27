@@ -3,6 +3,15 @@ const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
 
+const pgp = require('pg-promise')();
+const db = pgp({
+    host: 'localhost',
+    port: 5432,
+    database: process.env.DATABASE,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD
+});
+
 app.set('view engine', 'hbs');
 app.use('/static', express.static('static'));
 app.use(bodyParser.json());
@@ -42,6 +51,23 @@ const menuMap = menu.reduce(function(acc, menuItem){
   return acc;
 }, {});
 
+function getMenuFromDb(db){
+  return db.many('SELECT * FROM menu')
+    .then(function(result){
+      return result.map(function(item){
+        return {
+          id: item.id,
+          name: item.item_name,
+          price: item.price
+        }
+      });
+    })
+    .catch(function(error){
+      console.log(error);
+      return null;
+    });
+}
+
 app.get('/', function(req, res){
   res.render('index', {});
 });
@@ -54,6 +80,18 @@ app.get('/api/menu', function(req, res){
   res.json({
     menu:menu
   });
+});
+
+app.get('/api/db/menu', function(req, res){
+  debugger;
+  getMenuFromDb(db)
+    .then(function(menuItems){
+      if(menu === null){
+        res.status(404).end();
+      } else {
+        res.send(menuItems);
+      }
+    });
 });
 
 app.post('/api/orders', function(req, res){
