@@ -83,7 +83,6 @@ app.get('/api/menu', function(req, res){
 });
 
 app.get('/api/db/menu', function(req, res){
-  debugger;
   getMenuFromDb(db)
     .then(function(menuItems){
       if(menu === null){
