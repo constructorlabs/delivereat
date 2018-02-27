@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
 const app = express();
+const getMenuFromDb = require('./services/get-menu');
 
 const pgp = require('pg-promise')();
 const db = pgp({
@@ -51,22 +52,7 @@ const menuMap = menu.reduce(function(acc, menuItem){
   return acc;
 }, {});
 
-function getMenuFromDb(db){
-  return db.many('SELECT * FROM menu')
-    .then(function(result){
-      return result.map(function(item){
-        return {
-          id: item.id,
-          name: item.item_name,
-          price: item.price
-        }
-      });
-    })
-    .catch(function(error){
-      console.log(error);
-      return null;
-    });
-}
+
 
 app.get('/', function(req, res){
   res.render('index', {});
@@ -85,7 +71,7 @@ app.get('/api/menu', function(req, res){
 app.get('/api/db/menu', function(req, res){
   getMenuFromDb(db)
     .then(function(menuItems){
-      if(menu === null){
+      if(menuItems === null){
         res.status(404).end();
       } else {
         res.send(menuItems);
