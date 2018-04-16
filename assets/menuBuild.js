@@ -32,24 +32,15 @@ function getMenuFuncs () {
 
 const menuFuncs = getMenuFuncs();
 
-function incrementItemCount ()   { menuFuncs.incrementItemCount()   };
-export function getItemCount ()  { return menuFuncs.getItemCount()  };
-
-function storeMenuData (data)    { menuFuncs.storeMenuData(data)    };
-export function getMenuData ()   { return menuFuncs.getMenuData()   };
-
-function storeOrderTotal (value) { menuFuncs.storeOrderTotal(value) };
-export function getOrderTotal () { return menuFuncs.getOrderTotal() };
-
 function setElementContent(id, content) {
 	document.getElementById(id).innerHTML = content;
 }
 
 function formatPhoneNumber (number, format) {
-	if (format == 'input') {
+	if (format === 'input') {
 		number = number.replace(/\D/g, '');
 		return number.replace(/^0/, '+44');
-	} else if (format == 'output') {
+	} else if (format === 'output') {
 		return number.replace(/\+44(\d{4})(\d{6})/, '0$1 $2');
 	}
 }
@@ -103,7 +94,7 @@ export function renderMenu (data) {
 		createMenuGroup(group, menuGroups)
 	});
 
-	createTotals(menu, getItemCount());
+	createTotals(menu, menuFuncs.getItemCount());
 
 	createPhoneNumberBlock(menu);
 
@@ -148,7 +139,6 @@ function createPhoneNumberBlock (menu) {
 	});
 
 	phoneNumberLabel.setAttribute('for', 'phone-number-input');
-
 	phoneNumberInput.setAttribute('type', 'text');
 }
 
@@ -168,7 +158,7 @@ function createMenuGroup (group, menuGroups) {
 	let currentGroup = menuGroups[group];
 
 	Object.keys(currentGroup).forEach(name => {
-		incrementItemCount();
+		menuFuncs.incrementItemCount();
 		let currentItem = currentGroup[name];
 		createMenuItem(groupDiv, name, currentItem);
 	});
@@ -229,9 +219,9 @@ function createMenuItem (groupDiv, name, currentItem) {
 
 	// To do: put identifiers into menu data and use them here
 	// instead of counting items as they come into use
-	let menuData = getMenuData();
+	let menuData = menuFuncs.getMenuData();
 	menuData[itemId] = { name: name, price: price };
-	storeMenuData(menuData);
+	menuFuncs.storeMenuData(menuData);
 
 	let itemDiv = createPageItem({
 		parent: groupDiv,
@@ -313,7 +303,7 @@ function createQuantityPicker (parent, identifier) {
 function updateQuantities (identifier, change) {
 	let value = Number(localStorage[identifier]);
 
-	if (value == 0 && change < 0) return;
+	if (value === 0 && change < 0) return;
 
 	let newValue = value + change;
 	setElementContent(identifier, newValue);
@@ -324,13 +314,13 @@ function updateQuantities (identifier, change) {
 }
 
 function updateDisplayTotal () {
-	let menuData = getMenuData();
+	let menuData = menuFuncs.getMenuData();
 	let subtotal = 0;
 
 	// To do: refactoring candidate: related code in submitOrder(), createQuantityPicker()
 	let itemQuantities = document.querySelectorAll('.item-quantity');
 
-	itemQuantities.forEach(item => {
+	itemQuantities.forEach( item => {
 		let identifier = item.getAttribute('id');
 		let itemId = identifier.replace(/item-(.*?)-quantity/, '$1');
 
@@ -345,19 +335,19 @@ function updateDisplayTotal () {
 
 	let submitOrderButton = document.getElementById('submit-order');
 
-	if (totalPrice == deliveryCharge) {
+	if (totalPrice === deliveryCharge) {
 		submitOrderButton.disabled = true;
 	} else {
 		submitOrderButton.disabled = false;
 	}
 
-	storeOrderTotal(totalPrice);
+	menuFuncs.storeOrderTotal(totalPrice);
 	setElementContent('subtotal-value', '£' + subtotal.toFixed(2));
 	setElementContent('total-price-value', '£' + totalPrice.toFixed(2));
 }
 
 function submitOrder () {
-	let totalItems = getItemCount();
+	let totalItems = menuFuncs.getItemCount();
 
 	let order = {};
 	let itemQuantities = document.querySelectorAll('.item-quantity');
@@ -382,7 +372,7 @@ function submitOrder () {
 	);
 
 	orderData.userPhone = userPhone;
-	orderData.totalPrice = getOrderTotal();
+	orderData.totalPrice = menuFuncs.getOrderTotal();
 
 	fetch('/submitOrder', {
 		body: JSON.stringify(orderData),
@@ -391,15 +381,15 @@ function submitOrder () {
 		},
 		method: 'POST',
 	})
-	.then(response => {
-		return response.json();
-	})
-	.then(json => {
-		if (json.success) orderReceived(orderData);
-	})
-	.catch(error => {
-		document.write(`Couldn't submit order: ${error}.`);
-	});
+		.then( response => {
+			return response.json();
+		})
+		.then( json => {
+			if (json.success) orderReceived(orderData);
+		})
+		.catch( error => {
+			document.write(`Couldn't submit order: ${error}.`);
+		});
 }
 
 // To do: intermediate step of orderConfirmation()
@@ -412,7 +402,7 @@ function orderReceived (orderData) {
 
 	let userPhone = formatPhoneNumber(orderData.userPhone, 'output');
 
-	let menuData = getMenuData();
+	let menuData = menuFuncs.getMenuData();
 
 	createPageGroup(
 		menu,
@@ -435,7 +425,7 @@ function orderReceived (orderData) {
 	Object.keys(order).forEach( orderItem => {
 		let itemNumber = orderItem.replace('item-', '');
 
-		if (order[orderItem] == 0) return;
+		if (order[orderItem] === 0) return;
 
 		createPageItem({
 			parent: document.getElementById('order-list'),
@@ -445,7 +435,7 @@ function orderReceived (orderData) {
 		});
 	});
 
-	let orderTotal = getOrderTotal().toFixed(2);
+	let orderTotal = menuFuncs.getOrderTotal().toFixed(2);
 
 	createPageItem({
 		parent: menu,

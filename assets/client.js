@@ -1,11 +1,10 @@
 'use strict';
 
-import {
-	renderMenu, getItemCount, getMenuData, getOrderTotal
-} from './menuBuild.js';
+import { renderMenu } from './menuBuild.js';
 
 fetchMenuData();
 
+// To do: give renderMenu as callback
 function fetchMenuData () {
 	let fetchUrl = '/menuData';
 
