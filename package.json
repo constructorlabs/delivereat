@@ -1,16 +1,36 @@
 {
-  "name": "delivereat",
+  "name": "react-testing",
   "version": "1.0.0",
-  "description": "Let's create an app that allows customers to order food online.",
+  "description": "An app which allows customers to order food online",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
+  "babel": {
+    "presets": [
+      "babel-preset-react",
+      "babel-preset-env"
+    ]
+  },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "jest": "^22.3.0"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "hbs": "^4.0.1",
+    "jest": "^22.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "babel-jest": "^22.4.1",
+    "babel-loader": "^7.1.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^22.4.2",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9"
   }
 }
