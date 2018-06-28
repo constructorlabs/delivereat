@@ -52,7 +52,7 @@ A few notes before we get started
 
 **Notification**
 
-* Send the user an SMS using (Twilio)[https://www.twilio.com/] when their order is ready
+* Send the user an SMS using [Twilio](https://www.twilio.com/) when their order is ready
 
 ## Technical notes
 
@@ -74,7 +74,7 @@ fetch('http://localhost:8080/api/order', {
   });
 ```
 
-* Check out (Nodemon)[https://nodemon.io/] to automatically rebuild and restart your server when changes are saved.
+* Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
 
 ## README
 
