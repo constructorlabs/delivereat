@@ -66,7 +66,10 @@ A few notes before we get started
 ```js
 fetch('http://localhost:8080/api/order', {
     method: 'post',
-    body: JSON.stringify(order)
+    body: JSON.stringify(order),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }).then(function(response) {
     return response.json();
   }).then(function(data) {
