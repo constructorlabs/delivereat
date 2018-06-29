@@ -1,4 +1,5 @@
 import React from 'react';
+import Display from './Display';
 
 class App extends React.Component {
   constructor(){
@@ -9,6 +10,7 @@ class App extends React.Component {
     return (
       <div>
         Delivereat app
+        <Display />
       </div>
     )
   }
