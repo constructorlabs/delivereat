@@ -108,6 +108,10 @@ ul {
   font-size: 12px;
 }
 
+.dish__price {
+  display: block;
+}
+
 /* .dish__ingredients .dish__ingredients--ingredient {
   display: inline;
   font-size: 14px;

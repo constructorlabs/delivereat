@@ -21,7 +21,11 @@ class Dish extends React.Component {
                             return <li className="dish__ingredients--ingredient" key={ingredient}>{ingredient}, </li>
                         })}
                     </ul> */}
-                    <span className="dish__price"><strong>Price: </strong>&pound;{price}</span>
+                    <span className="dish__price"><strong>Unit Price: </strong>&pound;{price}</span>
+                    <label htmlFor="dish__quantity">
+                        <strong>Quantity:</strong>
+                        <input id="dish__quantity" name="dish__quantity" type="number" />
+                    </label>
                 </div>
             </div>
         )
