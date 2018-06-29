@@ -1,3 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+/* font-family: 'Rubik', sans-serif; */
 body {
   margin: 0;
+}
+
+/* Header */
+header.main-header {
+  padding: 20px;
+  background: #fc4a1a;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.main-heading {
+  font-family: 'Rubik', sans-serif;
+  text-align: center;
+  color: #fff;
+}
+
+/* Dishes */
+.dish__image {
+  max-width: 100%;
+  width: 150px;
 }

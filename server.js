@@ -13,21 +13,21 @@ function getMenu() {
       id: 1,
       name: "Gazpacho",
       price: 3,
-      images: ["./static/imgs/dishes/pizza.jpg"],
+      image: "./static/imgs/dishes/pizza.jpg",
       ingredients: ['Red Tomatos', 'Cucumber', 'Red Pepper', 'Garlic', 'Olive Oil', 'Red wine vinager', 'Salt', 'Blavck Pepper']
     },
     2: {
       id: 2,
       name: "Paella",
       price: 6,
-      images: ["./static/imgs/dishes/pizza.jpg"],
+      image: "./static/imgs/dishes/pizza.jpg",
       ingredients: ['Rice', 'Seafood', 'Stuff']
     },
     3: {
       id: 3,
       name: "Strawberry cheesecake",
       price: 2,
-      images: ["./static/imgs/dishes/pizza.jpg"],
+      image: "./static/imgs/dishes/pizza.jpg",
       ingredients: ['Strawberries', 'Cheese', 'Cream']
     }
   };
