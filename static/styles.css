@@ -1,3 +1,83 @@
 body {
   margin: 0;
+  background-image: url("./erol-ahmed-296514-unsplash.jpg");
+  background-size: cover;
+
+  color: #202830;
+}
+
+/* App content */
+
+.app {
+  height: 100vh;
+}
+
+.header {
+  background: #ddd7c9;
+  opacity: 0.8;
+}
+
+.footer {
+  background: #ddd7c9;
+  opacity: 0.8;
+}
+
+/* Header content */
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.titletext {
+  /* padding-right: 110px; */
+  font-size: 80px;
+  font-family: "Luckiest Guy", cursive;
+}
+
+/* Main content */
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menuitem {
+  /* width: 350px; */
+  width: auto;
+  margin: 10px;
+  padding: 15px;
+  text-align: center;
+
+  border: solid;
+  border-color: #202830;
+  background: khaki;
+}
+
+.menuitem__image {
+  display: none;
+}
+
+/* Footer content */
+
+@media (min-width: 768px) {
+  .titletext {
+    padding-right: 110px;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .menuitem {
+    width: 350px;
+  }
+
+  .menuitem__image {
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+  }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import Menu from "./Menu";
+import Nav from "./Nav";
 
 class App extends React.Component {
   constructor() {
@@ -25,9 +26,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        DeliverEat
-        <Menu returnMenu={this.returnMenu} menu={this.state.menu} />
+      <div classname="app">
+        <div className="header">
+          <Nav />
+        </div>
+        <div className="main">
+          <Menu returnMenu={this.returnMenu} menu={this.state.menu} />
+        </div>
+        <div className="footer" />
       </div>
     );
   }
