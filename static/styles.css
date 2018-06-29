@@ -51,10 +51,37 @@ ul {
   display: flex;
   align-items: center;
 
+  position: relative;
   margin-bottom: 20px;
   padding: 10px;
   background-color: #fff;
   border-radius: var(--radius);
+}
+
+.dish__addToCart {
+  background-color: tomato;
+  color: #fff;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  padding: 5px 10px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  letter-spacing: 0.05rem;
+}
+
+.dish__addToCart:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.dish__addToCart-icon {
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 0px 5px;
+  color: tomato;
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .dish__details {
@@ -66,7 +93,6 @@ ul {
 .dish__heading {
   margin: 0;
   font-size: 17px;
-  color: #999;
 }
 
 .dish__image {
