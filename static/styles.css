@@ -16,6 +16,7 @@ header.main-header {
   font-family: 'Rubik', sans-serif;
   text-align: center;
   color: #fff;
+  letter-spacing: 0.05rem;
 }
 
 /* Dishes */
