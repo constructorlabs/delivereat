@@ -6,6 +6,16 @@ body {
   margin: 0;
 }
 
+body h1 {
+  font-family: "Poor Story", cursive;
+}
+
+body h2,
+h3,
+p {
+  font-family: "Roboto", sans-serif;
+}
+
 /* .app {
  
 } */
@@ -23,44 +33,36 @@ body {
   border-radius: 50%;
   width: 3rem;
   float: left;
+  margin-right: 5px;
 }
-/* 
-.display {
 
-}
+/* .display {
+} */
 
 .display__title {
-
+  text-align: center;
 }
-
+/* 
 .display__menuItems {
-
 }
 
 .display__menuItem {
-
 }
 
 .display__menuItem--title {
-
 }
 
 .display__menuItem--subtitle {
-
 }
 
 .display__menuItem--label {
-
 }
 
 .display__menuItem--input {
-
 }
 
 .display__menuItem--button {
+}
 
-} */
-
-/* .display__menuItem--hr {
-
+.display__menuItem--hr {
 } */

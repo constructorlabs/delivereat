@@ -41,7 +41,7 @@ class Display extends React.Component {
     return (
       <div className="display">
         <h1 className="display__title">The Menu</h1>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <ul className="display__menuItems">
             {this.state.menuItems.map(item => {
               return (

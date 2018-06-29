@@ -32,10 +32,10 @@ class Item extends React.Component {
             step="1"
             onChange={this.handleChange}
             value={this.state.quantity}
+            min="0"
           />
           <button className="display__menuItem--button">Add to Order</button>
         </label>
-
         <hr className="display__menuItem--hr" />
       </li>
     );
