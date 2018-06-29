@@ -3,6 +3,10 @@
 /* font-family: 'Open Sans', sans-serif; */
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+:root {
+  --radius: 5px;
+}
+
 body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -33,12 +37,13 @@ ul {
 
 /* Menu */
 .menu-wrapper {
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 
 .menu__heading {
   color: #666;
   margin: 0 0 10px;
+  font-size: 1.4rem;
 }
 
 /* Dishes */
@@ -49,7 +54,7 @@ ul {
   margin-bottom: 20px;
   padding: 10px;
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: var(--radius);
 }
 
 .dish__details {
@@ -67,15 +72,49 @@ ul {
 .dish__image {
   width: 120px;
   height: 120px;
-  border-radius: 5px;
+  border-radius: var(--radius);
   background-position: center;
   background-size: cover;
 }
 
 .dish__ingredients {
   margin: 5px 0;
+  font-size: 12px;
 }
-.dish__ingredients .dish__ingredients--ingredient {
+
+/* .dish__ingredients .dish__ingredients--ingredient {
   display: inline;
   font-size: 14px;
+} */
+
+/* Search */
+.search {
+  position: relative;
+  padding: 0 10px;
+  margin: 10px auto;
+}
+
+.search__input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: var(--radius);
+  box-sizing: border-box;
+}
+
+.search__button{
+  background: none;
+  border: none;
+  position: absolute;
+  right: 10px;
+  top: 6px;
+}
+
+.search__button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.search__button path {
+  fill: #666;
 }
