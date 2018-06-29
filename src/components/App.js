@@ -1,14 +1,28 @@
 import React from 'react';
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
 
-  render(){
+  handleMenuReq() {
+    fetch('/api/menu')
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        console.log(result);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  render() {
     return (
       <div>
-        Delivereat app
+        Delivereat App
+        <button id="get-menu" onClick={this.handleMenuReq}>Get menu</button>
       </div>
     )
   }

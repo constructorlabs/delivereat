@@ -2,13 +2,15 @@
   "name": "react-testing",
   "version": "1.0.0",
   "description": "An app which allows customers to order food online",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "jest",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "dev-watch": "npm run dev -- --watch",
+    "build": "webpack --mode production",
+    "nodemon": "nodemon ./server.js localhost:8080"
   },
-  "author": "",
+  "author": "Ralph",
   "license": "ISC",
   "babel": {
     "presets": [
@@ -30,6 +32,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "jest": "^22.4.2",
+    "nodemon": "^1.17.5",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }
