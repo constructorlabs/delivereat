@@ -36,8 +36,10 @@ p {
   margin-right: 5px;
 }
 
-/* .display {
-} */
+.display {
+  background-color: #fdfdfd;
+  color: #222;
+}
 
 .display__title {
   text-align: center;

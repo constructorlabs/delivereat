@@ -7,6 +7,7 @@ class Item extends React.Component {
       quantity: 0
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -34,7 +35,6 @@ class Item extends React.Component {
             value={this.state.quantity}
             min="0"
           />
-          <button className="display__menuItem--button">Add to Order</button>
         </label>
         <hr className="display__menuItem--hr" />
       </li>
