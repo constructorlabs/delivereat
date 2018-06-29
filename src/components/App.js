@@ -1,16 +1,35 @@
-import React from 'react';
+import React from "react";
+import Menu from "./Menu";
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
+
+    this.state = {
+      menu: []
+    };
+
+    this.returnMenu = this.returnMenu.bind(this);
   }
 
-  render(){
+  returnMenu(result) {
+    // const resultArr = Object.values(result);
+    const resultArr = Object.keys(result).map(function(item) {
+      return result[item];
+    });
+    this.setState({
+      menu: resultArr
+    });
+    console.log("this.state.menu", this.state.menu);
+  }
+
+  render() {
     return (
       <div>
-        Delivereat app
+        DeliverEat
+        <Menu returnMenu={this.returnMenu} menu={this.state.menu} />
       </div>
-    )
+    );
   }
 }
 
