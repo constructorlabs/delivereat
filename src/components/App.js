@@ -1,18 +1,19 @@
-import React from 'react';
-import Display from './Display';
+import React from "react";
+import Display from "./Display";
+import Header from "./Header";
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
   }
 
-  render(){
+  render() {
     return (
-      <div>
-        Delivereat app
+      <div className="app">
+        <Header />
         <Display />
       </div>
-    )
+    );
   }
 }
 

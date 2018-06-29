@@ -1,3 +1,66 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
+
+/* .app {
+ 
+} */
+
+.app__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: aquamarine;
+  padding-top: 3rem;
+  padding-left: 1rem;
+}
+
+.app__logo {
+  border-radius: 50%;
+  width: 3rem;
+  float: left;
+}
+/* 
+.display {
+
+}
+
+.display__title {
+
+}
+
+.display__menuItems {
+
+}
+
+.display__menuItem {
+
+}
+
+.display__menuItem--title {
+
+}
+
+.display__menuItem--subtitle {
+
+}
+
+.display__menuItem--label {
+
+}
+
+.display__menuItem--input {
+
+}
+
+.display__menuItem--button {
+
+} */
+
+/* .display__menuItem--hr {
+
+} */
