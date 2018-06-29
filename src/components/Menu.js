@@ -31,10 +31,14 @@ class Menu extends React.Component {
                 <h1>Menu</h1>
                 <div id="menu-container" className="menu-container">
 
-                    {Object.keys(this.state.menu).map(dish => {
+                    {Object.keys(this.state.menu).map(dishKey => {
+                        const { id, name, price, image, ingredients } = this.state.menu[dishKey];
                         return <Dish
-                            key={this.state.menu[dish].id}
-                            name={this.state.menu[dish].name} />
+                            key={id}
+                            name={name}
+                            price={price}
+                            image={image}
+                            ingredients={ingredients} />
                     })}
                 </div>
             </div>
