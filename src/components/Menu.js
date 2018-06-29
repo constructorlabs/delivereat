@@ -27,8 +27,8 @@ class Menu extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Menu</h1>
+            <div className="menu menu-wrapper">
+                <h1 className="menu__heading">Menu</h1>
                 <div id="menu-container" className="menu-container">
 
                     {Object.keys(this.state.menu).map(dishKey => {
@@ -38,7 +38,7 @@ class Menu extends React.Component {
                             name={name}
                             price={price}
                             image={image}
-                            ingredients={ingredients} />
+                            ingredients={ingredients.join(", ")} />
                     })}
                 </div>
             </div>

@@ -14,7 +14,7 @@ function getMenu() {
       name: "Gazpacho",
       price: 3,
       image: "./static/imgs/dishes/pizza.jpg",
-      ingredients: ['Red Tomatos', 'Cucumber', 'Red Pepper', 'Garlic', 'Olive Oil', 'Red wine vinager', 'Salt', 'Blavck Pepper']
+      ingredients: ['Red Tomatos', 'Cucumber', 'Garlic', 'Red Pepper', 'Olive Oil', 'Wine vinager', 'Salt', 'Blavck Pepper']
     },
     2: {
       id: 2,
