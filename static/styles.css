@@ -2,8 +2,12 @@ body {
   margin: 0;
   background-image: url("./erol-ahmed-296514-unsplash.jpg");
   background-size: cover;
-
+  font-family: "Roboto", sans-serif;
   color: #202830;
+}
+
+h2 {
+  padding: none;
 }
 
 /* App content */
@@ -17,9 +21,20 @@ body {
   opacity: 0.8;
 }
 
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 10px;
   background: #ddd7c9;
   opacity: 0.8;
+  font-family: "Luckiest Guy", cursive;
 }
 
 /* Header content */
@@ -30,12 +45,22 @@ body {
 }
 
 .titletext {
-  /* padding-right: 110px; */
-  font-size: 80px;
+  font-size: 60px;
   font-family: "Luckiest Guy", cursive;
 }
 
 /* Main content */
+
+.orderform {
+  width: 350px;
+  margin: 10px;
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+  border: solid;
+  border-color: #202830;
+  background: #e8e8e6;
+}
 
 .menu {
   display: flex;
@@ -47,19 +72,45 @@ body {
   /* width: 350px; */
   width: auto;
   margin: 10px;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 
   border: solid;
   border-color: #202830;
-  background: khaki;
+  background: #f0e68ce0;
 }
 
 .menuitem__image {
   display: none;
 }
 
+.quantitybutton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.orderform {
+  padding: 20px;
+}
+
+.orderformitem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 /* Footer content */
+
+.footer__credits {
+  padding: 20px;
+}
+
+@media (min-width: 450px) {
+  .titletext {
+    font-size: 80px;
+  }
+}
 
 @media (min-width: 768px) {
   .titletext {

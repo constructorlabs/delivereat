@@ -10,7 +10,7 @@ class Menu extends React.Component {
     fetch("http://localhost:8080/menu")
       .then(response => response.json())
       .then(result => {
-        console.log("Fetch result:", result);
+        // console.log("Fetch result:", result);
         this.props.returnMenu(result);
       })
       .catch(error => console.log(error));
@@ -25,7 +25,13 @@ class Menu extends React.Component {
       <div className="menu">
         <title>Menu</title>
         {this.props.menu.map(item => {
-          return <MenuItem menu={item} key={item.id} />;
+          return (
+            <MenuItem
+              menu={item}
+              key={item.id}
+              getOrder={this.props.getOrder}
+            />
+          );
         })}
       </div>
     );

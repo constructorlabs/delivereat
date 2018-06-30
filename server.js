@@ -70,6 +70,27 @@ const storage = {
       img: "./static/stickyrice.jpg",
       price: 3.75,
       type: "side"
+    },
+    10: {
+      id: 10,
+      name: "Chang",
+      img: "./static/chang.jpg",
+      price: 4.0,
+      type: "drink"
+    },
+    11: {
+      id: 11,
+      name: "Mekhong",
+      img: "./static/mekhong.jpg",
+      price: 5.25,
+      type: "drink"
+    },
+    12: {
+      id: 12,
+      name: "Lemongrass Iced Tea",
+      img: "./static/icedtea.jpg",
+      price: 3.0,
+      type: "drink"
     }
   }
 };
