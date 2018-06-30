@@ -2,11 +2,13 @@ import React from 'react';
 import Dish from './Dish';
 
 class Menu extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             menu: {},
         }
+
+        this.ordersHandler = this.ordersHandler.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +27,10 @@ class Menu extends React.Component {
             });
     }
 
+    ordersHandler(dishId, quantity) {
+        this.props.receiver(dishId, quantity);
+    }
+
     render() {
         return (
             <div className="menu menu-wrapper">
@@ -35,10 +41,12 @@ class Menu extends React.Component {
                         const { id, name, price, image, ingredients } = this.state.menu[dishKey];
                         return <Dish
                             key={id}
+                            id={id}
                             name={name}
                             price={price}
                             image={image}
-                            ingredients={ingredients.join(", ")} />
+                            ingredients={ingredients.join(", ")}
+                            receiver={this.ordersHandler} />
                     })}
                 </div>
             </div>

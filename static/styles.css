@@ -5,6 +5,9 @@
 
 :root {
   --radius: 5px;
+  --primary-color: #fc4a1a;
+  --secondary-color: #f7b733;
+  --grey : #666;
 }
 
 body {
@@ -23,9 +26,9 @@ ul {
 /* Header */
 .main-header {
   padding: 20px;
-  background: #fc4a1a;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: var(--primary-color);  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, var(--secondary-color), var(--primary-color));  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, var(--secondary-color), var(--primary-color)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .main-heading {
@@ -41,7 +44,7 @@ ul {
 }
 
 .menu__heading {
-  color: #666;
+  color: var(--grey);
   margin: 0 0 10px;
   font-size: 1.4rem;
 }
@@ -58,30 +61,36 @@ ul {
   border-radius: var(--radius);
 }
 
-.dish__addToCart {
-  background-color: tomato;
+.dish__quantity-increase,
+.dish__quantity-decrease {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: orange;
+  text-align: center;
+  margin-right: 4px;
   color: #fff;
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  padding: 5px 10px;
+  font-size: 20px;
   border-radius: var(--radius);
-  font-size: 12px;
-  letter-spacing: 0.05rem;
 }
 
-.dish__addToCart:hover {
+.dish__quantity-increase:hover,
+.dish__quantity-decrease:hover {
   cursor: pointer;
   opacity: .8;
 }
 
-.dish__addToCart-icon {
-  background-color: #fff;
-  border-radius: 50%;
-  padding: 0px 5px;
-  color: tomato;
-  display: inline-block;
-  margin-right: 5px;
+.dish__quantity-decrease.disabled {
+  display:none;
+}
+
+.dish__quantity-details {
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.dish__quantity-details.disabled {
+  display:none;
 }
 
 .dish__details {
@@ -110,6 +119,14 @@ ul {
 
 .dish__price {
   display: block;
+  margin-bottom: 10px;
+  font-size: .8rem;
+}
+
+.dish_quantity {
+  border-radius: var(--radius);
+  border: 1px solid #f1f1f1;
+  padding: 3px 10px;
 }
 
 /* .dish__ingredients .dish__ingredients--ingredient {
@@ -146,5 +163,35 @@ ul {
 }
 
 .search__button path {
-  fill: #666;
+  fill: var(--grey);
+}
+
+/* Basket */
+
+.basket {
+  position: absolute;
+  right: 20px;
+}
+.basket:hover {
+  cursor: pointer;
+  opacity: .6;
+}
+
+.basket__count {
+  width: 17px;
+  height: 17px;
+  border-radius: 50px;
+  color: #fff;
+  text-align: center;
+  background-color: var(--primary-color);
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  font-size: 11px;
+}
+
+.basket__checkout {
+  position: absolute;
+  left: -73px;
+  top: 5px;
 }
