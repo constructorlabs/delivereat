@@ -6,9 +6,24 @@ app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
+// Orders List
+function getOrders() {
+  let orders = {};
+
+  return {
+    showOrders() {
+      return orders;
+    },
+    addOrders(newOrders) {
+      orders = Object.assign({}, orders, newOrders);
+      console.log("Data received on the server", newOrders)
+    }
+  };
+}
+
 // Menu list
 function getMenu() {
-  const menu = {
+  let menu = {
     1: {
       id: 1,
       name: "Strawberry cheesecake",
@@ -54,7 +69,9 @@ function getMenu() {
     }
   };
 }
+
 const { showMenu, showDish } = getMenu();
+const { showOrders, addOrders } = getOrders();
 
 // Render index.hbs template
 app.get('/', function (req, res) {
@@ -79,8 +96,26 @@ app.get('/api/menu/:menuId', function (req, res) {
   }
 });
 
+app.get('/api/getorders', function (req, res) {
+  if (showOrders()) {
+    res.json(showOrders());
+  } else {
+    res.status(404).json({ error: 'Orders not found' });
+  }
+});
+
+app.put("/api/order", function (req, res) {
+  const order = req.body;
+  if (order) {
+    res.json(order)
+    addOrders(order);
+  } else {
+    res.status(404).json({ error: "Order error" });
+  }
+});
 
 // Server stuff
 app.listen(8080, function () {
   console.log('Listening on port 8080');
 });
+

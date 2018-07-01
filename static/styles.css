@@ -247,7 +247,10 @@ button {
   opacity: .8;
 }
 
-
+.basket__options {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* Back to menu button */
 .menu__back-to-menu {
