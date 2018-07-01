@@ -1,3 +1,74 @@
 body {
   margin: 0;
 }
+
+.header {
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  height: 10vh;
+  background-color: brown;
+  /* max-width: 1200px; */
+  text-align: center;
+}
+
+.menu_container {
+  display: flex;
+  flex: 3;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.itemMenu {
+  display: block;
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+  margin: 10px 10px 10px 10px;
+  background-color: bisque;
+  min-width: 20vh;
+  max-height: 20vh;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-evenly;
+}
+
+.basket {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: bisque;
+}
+.basketitems {
+  overflow: auto;
+  width: 70vh;
+}
+
+
+.form {
+  text-align: center;
+  align-self: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  .basket {
+    display: flex;
+    height: 20vh;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: bisque;
+  }
+
+  .menu_container {
+    display: flex;
+    height: 70vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
