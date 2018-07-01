@@ -37,12 +37,16 @@ p {
 }
 
 .display {
+  margin-top: 0;
+  padding-top: 0;
   background-color: #fdfdfd;
   color: #222;
 }
 
 .display__title {
+  padding-top: 2rem;
   text-align: center;
+  margin-top: 0;
 }
 /* 
 .display__menuItems {

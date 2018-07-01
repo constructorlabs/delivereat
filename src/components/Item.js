@@ -7,7 +7,6 @@ class Item extends React.Component {
       quantity: 0
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
