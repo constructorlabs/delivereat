@@ -199,7 +199,7 @@ button {
 
 .basket__checkout {
   position: absolute;
-  left: -130px;
+  left: -100px;
   top: 3px;
   opacity: 1;
   transition: opacity 1s ease;
@@ -209,6 +209,51 @@ button {
 .basket__checkout.hidden {
   opacity: 0;
   transition: opacity 1s ease;
+}
+
+.basket__empty {
+  display: block;
+  font-display: 1rem;
+  text-align: center;
+  margin: 100px 0;
+}
+
+.basket__empty.disabled {
+  display: none;
+}
+
+.basket__checkout-button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.basket__checkout-button {
+  padding: 10px 30px;
+  color: #fff;
+  background-color: var(--primary-color);
+  text-align: center;
+  display: inline-block;
+}
+
+.basket__checkout-button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+.basket__checkout-button.disabled {
+  display: none;
+}
+
+
+
+/* Back to menu button */
+.menu__back-to-menu {
+  font-size: 0.8rem;
+  color: var(--grey);
+}
+.menu__back-to-menu:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 /* Footer */

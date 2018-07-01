@@ -35,7 +35,10 @@ class Dish extends React.Component {
         }
     }
 
+
+
     render() {
+        // console.log("qty: ", this.state.quantity);
         const { id, image, name, ingredients, price } = this.props;
         return (
             <div className="dish">

@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from './Header';
 import Basket from './Basket';
+import Menu from './Menu/Menu';
+import Orders from './Orders/Orders';
 import Search from './Search';
-import Menu from './Menu';
 import Footer from './Footer';
 
 class App extends React.Component {
@@ -11,19 +12,18 @@ class App extends React.Component {
     this.state = {
       orders: {},
       basket: 0,
-      orderAmount: 0
+      orderAmount: 0,
+      section: "Menu"
     }
     this.ordersHandler = this.ordersHandler.bind(this);
+    this.sectionHandler = this.sectionHandler.bind(this);
   }
 
   // {
   //   "1": {
   //     "dishId": 1,
-  //     "qty": "1"
-  //   },
-  //   "2": {
-  //     "dishId": 3,
-  //     "qty": "6"
+  //     "qty": 1,
+  //     "price": 3
   //   }
   // }
 
@@ -76,15 +76,31 @@ class App extends React.Component {
     ));
   }
 
+  sectionHandler(section) {
+    this.setState({
+      section: section
+    });
+  }
+
   render() {
     console.log("Orders state: ", this.state.orders);
+    const section = this.state.section;
+    let currentSection;
+    if (section === "Menu") {
+      currentSection = <Menu receiver={this.ordersHandler} />;
+    } else if (section === "Orders") {
+      currentSection = <Orders receiver={this.ordersHandler} receiverOrder={this.sectionHandler} orders={this.state.orders} />;
+    } else {
 
+    }
     return (
       <div className="app-wrapper">
         <Header title="Delivereat" />
         <Search />
-        <Basket basketCount={this.state.basket} orderAmount={this.state.orderAmount} />
-        <Menu receiver={this.ordersHandler} />
+        <Basket receiver={this.sectionHandler}
+          basketCount={this.state.basket}
+          orderAmount={this.state.orderAmount} />
+        {currentSection}
         <Footer />
       </div>
     )
