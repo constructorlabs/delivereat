@@ -210,3 +210,13 @@ button {
   opacity: 0;
   transition: opacity 1s ease;
 }
+
+/* Footer */
+.footer {
+  text-align: center;
+  background-color: var(--grey);
+  padding: 10px 0;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.03rem;
+}

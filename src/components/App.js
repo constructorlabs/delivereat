@@ -3,6 +3,7 @@ import Header from './Header';
 import Basket from './Basket';
 import Search from './Search';
 import Menu from './Menu';
+import Footer from './Footer';
 
 class App extends React.Component {
   constructor() {
@@ -84,6 +85,7 @@ class App extends React.Component {
         <Search />
         <Basket basketCount={this.state.basket} orderAmount={this.state.orderAmount} />
         <Menu receiver={this.ordersHandler} />
+        <Footer />
       </div>
     )
   };
