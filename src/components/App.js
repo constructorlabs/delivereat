@@ -9,7 +9,8 @@ class App extends React.Component {
     super();
     this.state = {
       orders: {},
-      basket: 0
+      basket: 0,
+      orderAmount: 0
     }
     this.ordersHandler = this.ordersHandler.bind(this);
   }
@@ -25,7 +26,7 @@ class App extends React.Component {
   //   }
   // }
 
-  ordersHandler(dishId, quantity) {
+  ordersHandler(dishId, quantity, price, action) {
     // Find if dish is already in orders and get position
     const dishPosition = Object.keys(this.state.orders).find(order => {
       return this.state.orders[order].dishId === dishId;
@@ -38,6 +39,7 @@ class App extends React.Component {
         delete orders[dishPosition];
       } else {
         orders[dishPosition].qty = quantity;
+        orders[dishPosition].price = price;
       }
       this.setState({
         orders: orders
@@ -49,7 +51,8 @@ class App extends React.Component {
       const newOrder = {
         [orderId]: {
           "dishId": dishId,
-          "qty": quantity
+          "qty": quantity,
+          "price": price
         }
       };
       this.setState({
@@ -62,7 +65,12 @@ class App extends React.Component {
       {
         basket: Object.keys(currentState.orders).reduce((acc, item) => {
           return acc + parseInt(currentState.orders[item].qty, 10);
-        }, 0)
+        }, 0),
+        orderAmount: (() => {
+          return action === "decrease"
+            ? currentState.orderAmount - price
+            : currentState.orderAmount + price;
+        })()
       }
     ));
   }
@@ -74,7 +82,7 @@ class App extends React.Component {
       <div className="app-wrapper">
         <Header title="Delivereat" />
         <Search />
-        <Basket basketCount={this.state.basket} />
+        <Basket basketCount={this.state.basket} orderAmount={this.state.orderAmount} />
         <Menu receiver={this.ordersHandler} />
       </div>
     )

@@ -9,34 +9,29 @@ class Dish extends React.Component {
         }
 
         this.ordersHandler = this.ordersHandler.bind(this);
-        this.quantityHandler = this.quantityHandler.bind(this);
+        this.increaseQuantityHandler = this.increaseQuantityHandler.bind(this);
+        this.decreaseQuantityHandler = this.decreaseQuantityHandler.bind(this);
     }
 
-    ordersHandler(dishId, quantity) {
-        this.props.receiver(dishId, quantity);
+    ordersHandler(dishId, quantity, price, action) {
+        this.props.receiver(dishId, quantity, price, action);
     }
 
-    quantityHandler(e, dishId) {
-        this.setState({
-            quantity: e.target.value
-        })
-        this.ordersHandler(dishId, e.target.value)
-    }
-
-    increaseItemHandler(dishId) {
+    increaseQuantityHandler(dishId, price, action) {
         const qty = this.state.quantity + 1;
         this.setState({
             quantity: qty
         })
-        this.ordersHandler(dishId, qty)
+        this.ordersHandler(dishId, qty, price)
     }
-    decreaseItemHandler(dishId) {
+
+    decreaseQuantityHandler(dishId, price, action) {
         if (this.state.quantity > 0) {
             const qty = this.state.quantity - 1;
             this.setState({
                 quantity: qty
             })
-            this.ordersHandler(dishId, qty)
+            this.ordersHandler(dishId, qty, price, action)
         }
     }
 
@@ -49,10 +44,10 @@ class Dish extends React.Component {
                     <h2 className="dish__heading">{name}</h2>
                     <p className="dish__ingredients">{ingredients}.</p>
                     <span className="dish__price"><strong>Price: </strong>&pound;{price}</span>
-                    <button onClick={(e) => this.decreaseItemHandler(id)}
+                    <button onClick={(e) => this.decreaseQuantityHandler(id, price, "decrease")}
                         id="dish__quantity-decrease"
                         className={"dish__quantity-decrease " + (this.state.quantity > 0 ? '' : 'disabled')}>–</button>
-                    <button onClick={(e) => this.increaseItemHandler(id)}
+                    <button onClick={(e) => this.increaseQuantityHandler(id, price, "increase")}
                         id="dish__quantity-increase"
                         className="dish__quantity-increase">+</button>
                     <div id="dish__quantity-details"

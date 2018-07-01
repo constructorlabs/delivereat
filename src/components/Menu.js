@@ -27,8 +27,8 @@ class Menu extends React.Component {
             });
     }
 
-    ordersHandler(dishId, quantity) {
-        this.props.receiver(dishId, quantity);
+    ordersHandler(dishId, quantity, price, action) {
+        this.props.receiver(dishId, quantity, price, action);
     }
 
     render() {
