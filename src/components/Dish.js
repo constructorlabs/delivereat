@@ -23,19 +23,21 @@ class Dish extends React.Component {
         this.ordersHandler(dishId, e.target.value)
     }
 
-    increaseItem(dishId) {
+    increaseItemHandler(dishId) {
         const qty = this.state.quantity + 1;
         this.setState({
             quantity: qty
         })
         this.ordersHandler(dishId, qty)
     }
-    decreaseItem(dishId) {
-        const qty = this.state.quantity - 1;
-        this.setState({
-            quantity: qty
-        })
-        this.ordersHandler(dishId, qty)
+    decreaseItemHandler(dishId) {
+        if (this.state.quantity > 0) {
+            const qty = this.state.quantity - 1;
+            this.setState({
+                quantity: qty
+            })
+            this.ordersHandler(dishId, qty)
+        }
     }
 
     render() {
@@ -47,12 +49,12 @@ class Dish extends React.Component {
                     <h2 className="dish__heading">{name}</h2>
                     <p className="dish__ingredients">{ingredients}.</p>
                     <span className="dish__price"><strong>Price: </strong>&pound;{price}</span>
-                    <div onClick={(e) => this.decreaseItem(id)}
+                    <button onClick={(e) => this.decreaseItemHandler(id)}
                         id="dish__quantity-decrease"
-                        className={"dish__quantity-decrease " + (this.state.quantity > 0 ? '' : 'disabled')}>–</div>
-                    <div onClick={(e) => this.increaseItem(id)}
+                        className={"dish__quantity-decrease " + (this.state.quantity > 0 ? '' : 'disabled')}>–</button>
+                    <button onClick={(e) => this.increaseItemHandler(id)}
                         id="dish__quantity-increase"
-                        className="dish__quantity-increase">+</div>
+                        className="dish__quantity-increase">+</button>
                     <div id="dish__quantity-details"
                         className={"dish__quantity-details " + (this.state.quantity > 0 ? '' : 'disabled')}>
                         {this.state.quantity} in the basket.
