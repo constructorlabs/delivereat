@@ -70,7 +70,7 @@ button {
   display: inline-block;
   width: 30px;
   height: 30px;
-  background-color: orange;
+  background-color: var(--secondary-color);
   text-align: center;
   margin-right: 4px;
   color: #fff;
@@ -199,7 +199,7 @@ button {
 
 .basket__checkout {
   position: absolute;
-  left: -100px;
+  left: -110px;
   top: 3px;
   opacity: 1;
   transition: opacity 1s ease;
@@ -225,23 +225,26 @@ button {
 .basket__checkout-button_wrapper {
   display: flex;
   justify-content: flex-end;
+  flex-direction: column;
+  text-align: right;
+}
+
+.basket__checkout-button_wrapper.disabled {
+  display: none;
 }
 
 .basket__checkout-button {
   padding: 10px 30px;
   color: #fff;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   text-align: center;
   display: inline-block;
+  margin-top: 40px;
 }
 
 .basket__checkout-button:hover {
   cursor: pointer;
   opacity: .8;
-}
-
-.basket__checkout-button.disabled {
-  display: none;
 }
 
 
@@ -264,4 +267,37 @@ button {
   color: #fff;
   font-size: 0.7rem;
   letter-spacing: 0.03rem;
+}
+
+@media(min-width: 768px){
+  .app-wrapper {
+    max-width: 1200px;
+    width: 80%;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .menu-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  .menu-container .dish:nth-child(odd) {
+    margin-right: 10px;
+  }
+
+  .menu-container .dish:nth-child(even) {
+    margin-left: 10px;
+  }
+
+  .basket__checkout-button_wrapper {
+    grid-column: 1/4;
+  }
+
+  .basket__checkout-button{
+    align-self: end;
+    
+    width: 120px;
+  }
 }

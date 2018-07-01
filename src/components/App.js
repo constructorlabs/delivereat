@@ -89,7 +89,7 @@ class App extends React.Component {
     if (section === "Menu") {
       currentSection = <Menu receiver={this.ordersHandler} />;
     } else if (section === "Orders") {
-      currentSection = <Orders receiver={this.ordersHandler} receiverOrder={this.sectionHandler} orders={this.state.orders} />;
+      currentSection = <Orders orderAmount={this.state.orderAmount} receiver={this.ordersHandler} receiverOrder={this.sectionHandler} orders={this.state.orders} />;
     } else {
 
     }

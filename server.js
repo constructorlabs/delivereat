@@ -11,24 +11,31 @@ function getMenu() {
   const menu = {
     1: {
       id: 1,
-      name: "Gazpacho",
-      price: 3,
-      image: "./static/imgs/dishes/pizza.jpg",
-      ingredients: ['Red Tomatos', 'Cucumber', 'Garlic', 'Red Pepper', 'Olive Oil', 'Wine vinager', 'Salt', 'Blavck Pepper']
+      name: "Strawberry cheesecake",
+      price: 2,
+      image: "./static/imgs/dishes/cake.jpg",
+      ingredients: ['Strawberries', 'Cheese', 'Cream']
     },
     2: {
       id: 2,
       name: "Paella",
       price: 6,
-      image: "./static/imgs/dishes/pizza.jpg",
+      image: "./static/imgs/dishes/paella.jpg",
       ingredients: ['Rice', 'Seafood', 'Stuff']
     },
     3: {
       id: 3,
-      name: "Strawberry cheesecake",
-      price: 2,
+      name: "Pizza",
+      price: 8,
       image: "./static/imgs/dishes/pizza.jpg",
-      ingredients: ['Strawberries', 'Cheese', 'Cream']
+      ingredients: ['Mozzarella', 'Tomato', 'Basil', 'Mushrooms', 'Green Pepper']
+    },
+    4: {
+      id: 4,
+      name: "Gazpacho",
+      price: 3,
+      image: "./static/imgs/dishes/gazpacho.jpg",
+      ingredients: ['Red Tomatos', 'Cucumber', 'Garlic', 'Red Pepper', 'Olive Oil', 'Wine vinager', 'Salt', 'Blavck Pepper']
     }
   };
 

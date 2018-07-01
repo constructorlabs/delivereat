@@ -6,6 +6,7 @@ class Orders extends React.Component {
         super(props);
         this.state = {
             menu: {},
+            deliveryPrice: 2.50
         }
 
         this.ordersHandler = this.ordersHandler.bind(this);
@@ -58,14 +59,17 @@ class Orders extends React.Component {
                             receiver={this.ordersHandler}
                             menu={this.state.menu} />
                     })}
-                    <div className="basket__checkout-button_wrapper">
+                    <div className={"basket__checkout-button_wrapper " + (Object.keys(this.props.orders).length > 0 ? '' : 'disabled')}>
+                        <div>Order: <strong>&pound;{this.props.orderAmount}</strong></div>
+                        <div>Delivery: <strong>&pound;{this.state.deliveryPrice}</strong></div>
+                        <div>Total Amount: <strong>&pound;{this.props.orderAmount + this.state.deliveryPrice}</strong></div>
                         <div id="basket__checkout-button"
-                            className={"basket__checkout-button " + (Object.keys(this.props.orders).length > 0 ? '' : 'disabled')}>
+                            className="basket__checkout-button">
                             CHECKOUT
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         )
     }
 }
