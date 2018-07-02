@@ -1,9 +1,9 @@
 import React from 'react';
 import Header from './Header';
-import Basket from './Basket';
-import Menu from './Menu/Menu';
-import Orders from './Orders/Orders';
-import OldOrders from './Orders/OldOrders';
+import BasketWidget from './basket/BasketWidget';
+import Menu from './menu/Menu';
+import Basket from './basket/Basket';
+import OldOrders from './orders/OldOrders';
 import Search from './Search';
 import Footer from './Footer';
 
@@ -16,7 +16,8 @@ class App extends React.Component {
       basket: 0,
       orderAmount: 0,
       section: "Menu",
-      oldOrders: {}
+      oldOrders: {},
+      deliveryPrice: 2.50
     }
     this.ordersHandler = this.ordersHandler.bind(this);
     this.sectionHandler = this.sectionHandler.bind(this);
@@ -129,18 +130,21 @@ class App extends React.Component {
         menu={this.state.menu}
         orders={this.state.orders}
       />;
-      basket = <Basket
+      basket = <BasketWidget
         receiver={this.sectionHandler}
         basketCount={this.state.basket}
         orderAmount={this.state.orderAmount}
+        menu={this.state.menu}
       />;
     } else if (section === "Orders") {
-      currentSection = <Orders
+      currentSection = <Basket
         orderAmount={this.state.orderAmount}
         receiver={this.ordersHandler}
         receiverOrder={this.sectionHandler}
         orders={this.state.orders}
         oldOrders={this.oldOrdersHandler}
+        menu={this.state.menu}
+        deliveryPrice={this.state.deliveryPrice}
       />;
       basket = null;
     } else if (section === "OldOrders") {
