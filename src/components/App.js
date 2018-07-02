@@ -117,7 +117,8 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("Orders state: ", this.state.orders);
+    // console.log("Orders state: ", this.state.orders);
+
     const section = this.state.section;
     let currentSection;
     let basket;
@@ -125,6 +126,7 @@ class App extends React.Component {
       currentSection = <Menu
         receiver={this.ordersHandler}
         menu={this.state.menu}
+        orders={this.state.orders}
       />;
       basket = <Basket
         receiver={this.sectionHandler}

@@ -1,67 +1,44 @@
 import React from 'react';
 
-class Dish extends React.Component {
-    constructor() {
-        super();
+function Dish(props) {
 
-        this.state = {
-            quantity: 0
-        }
-
-        this.ordersHandler = this.ordersHandler.bind(this);
-        this.increaseQuantityHandler = this.increaseQuantityHandler.bind(this);
-        this.decreaseQuantityHandler = this.decreaseQuantityHandler.bind(this);
+    function ordersHandler(dishId, quantity, price, action) {
+        props.receiver(dishId, quantity, price, action);
     }
 
-    ordersHandler(dishId, quantity, price, action) {
-        this.props.receiver(dishId, quantity, price, action);
+    function increaseQuantityHandler(dishId, price, action) {
+        const qty = props.quantity + 1;
+        ordersHandler(dishId, qty, price)
     }
 
-    increaseQuantityHandler(dishId, price, action) {
-        const qty = this.state.quantity + 1;
-        this.setState({
-            quantity: qty
-        })
-        this.ordersHandler(dishId, qty, price)
-    }
-
-    decreaseQuantityHandler(dishId, price, action) {
-        if (this.state.quantity > 0) {
-            const qty = this.state.quantity - 1;
-            this.setState({
-                quantity: qty
-            })
-            this.ordersHandler(dishId, qty, price, action)
+    function decreaseQuantityHandler(dishId, price, action) {
+        if (quantity > 0) {
+            const qty = props.quantity - 1;
+            ordersHandler(dishId, qty, price, action)
         }
     }
 
-
-
-    render() {
-        // console.log("qty: ", this.state.quantity);
-        const { id, image, name, ingredients, price } = this.props;
-        return (
-            <div className="dish">
-                <div className="dish__image" style={{ backgroundImage: `url(${image})` }}></div>
-                <div className="dish__details">
-                    <h2 className="dish__heading">{name}</h2>
-                    <p className="dish__ingredients">{ingredients}.</p>
-                    <span className="dish__price"><strong>Price: </strong>&pound;{price}</span>
-                    <button onClick={(e) => this.decreaseQuantityHandler(id, price, "decrease")}
-                        id="dish__quantity-decrease"
-                        className={"dish__quantity-decrease " + (this.state.quantity > 0 ? '' : 'disabled')}>–</button>
-                    <button onClick={(e) => this.increaseQuantityHandler(id, price, "increase")}
-                        id="dish__quantity-increase"
-                        className="dish__quantity-increase">+</button>
-                    <div id="dish__quantity-details"
-                        className={"dish__quantity-details " + (this.state.quantity > 0 ? '' : 'disabled')}>
-                        {this.state.quantity} in the basket.
+    const { id, image, name, ingredients, price, quantity } = props;
+    return (
+        <div className="dish">
+            <div className="dish__image" style={{ backgroundImage: `url(${image})` }}></div>
+            <div className="dish__details">
+                <h2 className="dish__heading">{name}</h2>
+                <p className="dish__ingredients">{ingredients}.</p>
+                <span className="dish__price"><strong>Price: </strong>&pound;{price}</span>
+                <button onClick={(e) => decreaseQuantityHandler(id, price, "decrease")}
+                    id="dish__quantity-decrease"
+                    className={"dish__quantity-decrease " + (quantity > 0 ? '' : 'disabled')}>–</button>
+                <button onClick={(e) => increaseQuantityHandler(id, price, "increase")}
+                    id="dish__quantity-increase"
+                    className="dish__quantity-increase">+</button>
+                <div id="dish__quantity-details"
+                    className={"dish__quantity-details " + (quantity > 0 ? '' : 'disabled')}>
+                    {quantity} in the basket.
                         </div>
-
-                </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default Dish;
