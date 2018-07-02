@@ -118,6 +118,16 @@ app.get("/menu/:menuItemId", function(req, res) {
   }
 });
 
+// POST to create order history
+// PATCH to update stock
+// DELETE to let users delete order history
+
+app.post("/api/order", function(req, res) {
+  // res.json(req.body);
+  // res.send("Hello World!");
+  // res.render("hello", req.body);
+});
+
 app.listen(8080, function() {
   console.log("Listening on port 8080");
 });

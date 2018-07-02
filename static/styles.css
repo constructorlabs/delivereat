@@ -10,6 +10,10 @@ h2 {
   padding: none;
 }
 
+button {
+  font-family: "Roboto", sans-serif;
+}
+
 /* App content */
 
 .app {
@@ -31,7 +35,7 @@ h2 {
   display: flex;
   justify-content: flex-end;
 
-  margin-top: 10px;
+  margin-top: 5px;
   background: #ddd7c9;
   opacity: 0.8;
   font-family: "Luckiest Guy", cursive;
@@ -52,20 +56,45 @@ h2 {
 /* Main content */
 
 .orderform {
-  width: 350px;
+  width: auto;
   margin: 10px;
-  padding: 10px;
   margin-top: 20px;
+  padding: 20px;
   text-align: center;
+  font-size: 8px;
   border: solid;
   border-color: #202830;
   background: #e8e8e6;
+}
+
+.orderform__deliverycharge {
+  font-size: 10px;
+  text-align: right;
+}
+
+.orderform__total {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.orderform__button {
+  margin-left: 10px;
+}
+
+.orderformitem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .menu {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 5px;
+  padding-top: 10px;
 }
 
 .menuitem {
@@ -87,17 +116,6 @@ h2 {
 .quantitybutton {
   display: flex;
   justify-content: flex-end;
-}
-
-.orderform {
-  padding: 20px;
-}
-
-.orderformitem {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* Footer content */
@@ -130,5 +148,10 @@ h2 {
     display: inline-block;
     width: 300px;
     height: 200px;
+  }
+
+  .orderform {
+    width: 350px;
+    font-size: 100%;
   }
 }

@@ -46,6 +46,7 @@ class MenuItem extends React.Component {
       alert("Please select an item to place an order");
     } else {
       this.createOrder();
+      this.setState({ itemQuantity: 0 });
     }
   }
 

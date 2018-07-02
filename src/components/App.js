@@ -9,11 +9,15 @@ class App extends React.Component {
 
     this.state = {
       menu: [],
-      orders: []
+      orders: [],
+      orderhistory: []
     };
 
     this.returnMenu = this.returnMenu.bind(this);
     this.getOrder = this.getOrder.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.clearOrder = this.clearOrder.bind(this);
+    this.getOrderHistory = this.getOrderHistory.bind(this);
   }
 
   returnMenu(result) {
@@ -23,25 +27,49 @@ class App extends React.Component {
     this.setState({
       menu: resultArr
     });
-    console.log("this.state.menu", this.state.menu);
   }
 
   getOrder(order) {
-    console.log("Order:", order);
+    // console.log("Order:", order);
     this.setState({
       orders: [...this.state.orders, order]
     });
   }
 
+  handleDelete(key) {
+    // console.log("Item deleted");
+    this.setState(prevState => ({
+      orders: prevState.orders.filter(el => el.orderId != key)
+    }));
+  }
+
+  clearOrder() {
+    this.setState({
+      orders: []
+    });
+  }
+
+  getOrderHistory(data) {
+    this.setState({
+      orderhistory: data
+    });
+  }
+
   render() {
-    console.log("this.state.orders:", this.state.orders);
     return (
       <div className="app">
         <div className="header">
           <Nav />
         </div>
         <div className="main">
-          <OrderForm orders={this.state.orders} />
+          {this.state.orders == ![] ? null : (
+            <OrderForm
+              orders={this.state.orders}
+              handleDelete={this.handleDelete}
+              clearOrder={this.clearOrder}
+              getOrderHistory={this.getOrderHistory}
+            />
+          )}
           <Menu
             returnMenu={this.returnMenu}
             menu={this.state.menu}

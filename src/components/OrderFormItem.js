@@ -43,7 +43,7 @@ class OrderFormItem extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.deleteFormItem();
+    this.props.deleteFormItem(this.props.order.orderId);
   }
 
   render() {
