@@ -12,6 +12,7 @@ class App extends React.Component {
     super();
     this.state = {
       orders: {},
+      menu: {},
       basket: 0,
       orderAmount: 0,
       section: "Menu",
@@ -29,7 +30,21 @@ class App extends React.Component {
   //     "price": 3
   //   }
   // }
-
+  componentDidMount() {
+    fetch('/api/menu')
+      .then(response => {
+        return response.json();
+      })
+      .then(result => {
+        this.setState({
+          menu: result
+        })
+        return result;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
   ordersHandler(dishId, quantity, price, action) {
     // Find if dish is already in orders and get position
     const dishPosition = Object.keys(this.state.orders).find(order => {
@@ -107,7 +122,10 @@ class App extends React.Component {
     let currentSection;
     let basket;
     if (section === "Menu") {
-      currentSection = <Menu receiver={this.ordersHandler} />;
+      currentSection = <Menu
+        receiver={this.ordersHandler}
+        menu={this.state.menu}
+      />;
       basket = <Basket
         receiver={this.sectionHandler}
         basketCount={this.state.basket}
