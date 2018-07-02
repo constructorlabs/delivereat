@@ -3,19 +3,11 @@ import React from "react";
 class Item extends React.Component {
   constructor() {
     super();
-    this.state = {
-      quantity: 0
-    };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    event.preventDefault();
-    const quantity = event.target.value;
-    this.setState({
-      quantity
-    });
-    this.props.receiveNewQuantity(this.props.item.id, quantity);
+    this.props.receiveNewQuantity(this.props.item.id, event.target.value);
   }
 
   render() {
@@ -31,7 +23,6 @@ class Item extends React.Component {
             type="number"
             step="1"
             onChange={this.handleChange}
-            value={this.state.quantity}
             min="0"
           />
           <button className="display__menuItem--button">Add to Order</button>
