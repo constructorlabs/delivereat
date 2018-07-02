@@ -5,7 +5,7 @@ function Menu(props) {
     function ordersHandler(dishId, quantity, price, action) {
         props.receiver(dishId, quantity, price, action);
     }
-    // console.log("Menu", props.menu);
+
     return (
         <div className="menu menu-wrapper">
             <h1 className="menu__heading">Menu</h1>

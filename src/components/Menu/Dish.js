@@ -1,6 +1,7 @@
 import React from 'react';
 
 function Dish(props) {
+    const { id, image, name, ingredients, price, quantity } = props;
 
     function ordersHandler(dishId, quantity, price, action) {
         props.receiver(dishId, quantity, price, action);
@@ -18,7 +19,6 @@ function Dish(props) {
         }
     }
 
-    const { id, image, name, ingredients, price, quantity } = props;
     return (
         <div className="dish">
             <div className="dish__image" style={{ backgroundImage: `url(${image})` }}></div>
@@ -34,8 +34,7 @@ function Dish(props) {
                     className="dish__quantity-increase">+</button>
                 <div id="dish__quantity-details"
                     className={"dish__quantity-details " + (quantity > 0 ? '' : 'disabled')}>
-                    {quantity} in the basket.
-                        </div>
+                    {quantity} in the basket.</div>
             </div>
         </div>
     )

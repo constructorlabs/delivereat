@@ -122,6 +122,7 @@ class App extends React.Component {
     const section = this.state.section;
     let currentSection;
     let basket;
+
     if (section === "Menu") {
       currentSection = <Menu
         receiver={this.ordersHandler}
