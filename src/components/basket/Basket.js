@@ -2,7 +2,7 @@ import React from 'react';
 import BasketProduct from './BasketProduct';
 import BasketPriceDisplay from './BasketPriceDisplay';
 import BasketEmptyMessage from './BasketEmptyMessage';
-import BasketNavigation from './BasketNavigation';
+import BasketNavigation from '../navs/SubNavigation';
 
 function Basket(props) {
 
