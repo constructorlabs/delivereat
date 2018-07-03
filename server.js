@@ -14,9 +14,12 @@ function getOrders() {
     showOrders() {
       return orders;
     },
-    addOrders(newOrders) {
-      orders = Object.assign({}, orders, newOrders);
-      console.log("Data received on the server", newOrders)
+    addOrders(newOrder) {
+      const keys = Object.keys(orders)
+      const id = keys.length ? +keys.pop() + 1 : 1;
+      orders = Object.assign({}, orders, { [id]: newOrder });
+      console.log("Data received on the server", newOrder)
+      console.log("orders", orders);
     }
   };
 }
@@ -96,15 +99,26 @@ app.get('/api/menu/:menuId', function (req, res) {
   }
 });
 
-app.get('/api/getorders', function (req, res) {
-  if (showOrders()) {
-    res.json(showOrders());
+app.get('/api/orders', function (req, res) {
+  const orders = showOrders();
+  if (orders) {
+    if (req.query.delivered === "false") {
+      const filtered = Object.entries(orders).reduce((acc, [id, order]) => {
+        if (order.delivered === false) {
+          acc[id] = order
+        }
+        return acc;
+      }, {})
+      res.json(filtered);
+    } else {
+      res.json(orders);
+    }
   } else {
     res.status(404).json({ error: 'Orders not found' });
   }
 });
 
-app.put("/api/order", function (req, res) {
+app.post("/api/order", function (req, res) {
   const order = req.body;
   if (order) {
     res.json(order)

@@ -11,12 +11,12 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      orders: {},
+      currentOrders: {},
+      oldOrders: {},
       menu: {},
       basket: 0,
       orderAmount: 0,
       section: "Menu",
-      oldOrders: {},
       deliveryPrice: 2.50
     }
     this.ordersHandler = this.ordersHandler.bind(this);
@@ -48,43 +48,48 @@ class App extends React.Component {
   }
   ordersHandler(dishId, quantity, price, action) {
     // Find if dish is already in orders and get position
-    const dishPosition = Object.keys(this.state.orders).find(order => {
-      return this.state.orders[order].dishId === dishId;
+    const dishPosition = Object.keys(this.state.currentOrders).find(order => {
+      return this.state.currentOrders[order].dishId === dishId;
     });
 
     // If dish is already in orders update it
     if (dishPosition) {
-      let orders = Object.assign({}, this.state.orders);
+      let currentOrders = Object.assign({}, this.state.currentOrders);
       if (quantity < 1) {
-        delete orders[dishPosition];
+        delete currentOrders[dishPosition];
       } else {
-        orders[dishPosition].qty = quantity;
-        orders[dishPosition].price = price;
+        currentOrders[dishPosition].qty = quantity;
+        currentOrders[dishPosition].unitPrice = price;
+        currentOrders[dishPosition].price = price * quantity;
       }
       this.setState({
-        orders: orders
+        currentOrders: currentOrders
       });
     }
     // If dish is not already in orders add it
     else {
-      const orderId = Object.keys(this.state.orders).length > 0 ? parseInt(Object.keys(this.state.orders).pop()) + 1 : 1;
+      const orderId = Object.keys(this.state.currentOrders).length > 0
+        ? parseInt(Object.keys(this.state.currentOrders).pop()) + 1
+        : 1;
+
       const newOrder = {
         [orderId]: {
           "dishId": dishId,
           "qty": quantity,
-          "price": price
+          "unitPrice": price,
+          "price": price * quantity
         }
       };
       this.setState({
-        orders: Object.assign({}, this.state.orders, newOrder)
+        currentOrders: Object.assign({}, this.state.currentOrders, newOrder)
       });
     }
 
     // Update basket count
     this.setState(currentState => (
       {
-        basket: Object.keys(currentState.orders).reduce((acc, item) => {
-          return acc + parseInt(currentState.orders[item].qty, 10);
+        basket: Object.keys(currentState.currentOrders).reduce((acc, item) => {
+          return acc + parseInt(currentState.currentOrders[item].qty, 10);
         }, 0),
         orderAmount: (() => {
           return action === "decrease"
@@ -102,7 +107,7 @@ class App extends React.Component {
   }
 
   oldOrdersHandler() {
-    fetch('/api/getorders')
+    fetch('/api/orders')
       .then(function (response) {
         return response.json();
       })
@@ -110,6 +115,7 @@ class App extends React.Component {
         this.setState({
           oldOrders: data
         });
+        return data;
         // console.log("Old ords", data)
       })
       .catch(error => {
@@ -128,7 +134,7 @@ class App extends React.Component {
       currentSection = <Menu
         receiver={this.ordersHandler}
         menu={this.state.menu}
-        orders={this.state.orders}
+        orders={this.state.currentOrders}
       />;
       basket = <BasketWidget
         receiver={this.sectionHandler}
@@ -141,7 +147,7 @@ class App extends React.Component {
         orderAmount={this.state.orderAmount}
         receiver={this.ordersHandler}
         receiverOrder={this.sectionHandler}
-        orders={this.state.orders}
+        orders={this.state.currentOrders}
         oldOrders={this.oldOrdersHandler}
         menu={this.state.menu}
         deliveryPrice={this.state.deliveryPrice}
@@ -149,8 +155,8 @@ class App extends React.Component {
       basket = null;
     } else if (section === "OldOrders") {
       currentSection = <OldOrders
-        orders={this.state.orders}
         oldOrders={this.state.oldOrders}
+        menu={this.state.menu}
         receiverOrder={this.sectionHandler}
         receiver={this.oldOrdersHandler}
       />;

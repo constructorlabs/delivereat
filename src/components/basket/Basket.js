@@ -3,8 +3,11 @@ import BasketProduct from './BasketProduct';
 import BasketPriceDisplay from './BasketPriceDisplay';
 import BasketEmptyMessage from './BasketEmptyMessage';
 import BasketNavigation from '../navs/SubNavigation';
+import BasketCheckoutButton from './BasketCheckoutButton';
 
 function Basket(props) {
+    const totalAmount = props.orderAmount + props.deliveryPrice;
+    const deliveryPrice = props.deliveryPrice;
 
     function ordersHandler(dishId, quantity, price, action) {
         props.receiver(dishId, quantity, price, action);
@@ -20,9 +23,19 @@ function Basket(props) {
     }
 
     function checkoutHandler(order) {
+
+        const date = new Date();
+        const orderDate = date.toDateString() + ", " + date.getHours() + ":" + date.getMinutes();
+        const orderNew = Object.assign(
+            {},
+            order, { orderDate },
+            { delivered: false },
+            { deliveryPrice: deliveryPrice },
+            { totalAmount: totalAmount })
+
         fetch('/api/order', {
-            method: 'put',
-            body: JSON.stringify(order),
+            method: 'post',
+            body: JSON.stringify(orderNew),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -37,6 +50,7 @@ function Basket(props) {
                 console.log('/api/order', error);
             });
     }
+
 
     return (
         <div className="menu menu-wrapper">
@@ -64,10 +78,14 @@ function Basket(props) {
 
                 {/* Price display */}
                 <BasketPriceDisplay
+                    totalAmount={totalAmount}
                     orders={props.orders}
                     orderAmount={props.orderAmount}
-                    deliveryPrice={props.deliveryPrice}
-                    receiverCheckOutHandler={checkoutHandler} />
+                    deliveryPrice={props.deliveryPrice} />
+
+                <BasketCheckoutButton
+                    receiverCheckOutHandler={checkoutHandler}
+                    orders={props.orders} />
             </div>
         </div >
     )
