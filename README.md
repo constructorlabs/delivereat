@@ -77,7 +77,7 @@ fetch('http://localhost:8080/api/order', {
   });
 ```
 
-* Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
+* Look at `package.json` to see how [Nodemon](https://nodemon.io/) is being used to automatically rebuild and restart your server when changes are saved.
 
 ## README
 
