@@ -28,7 +28,8 @@ function Basket(props) {
         const orderDate = date.toDateString() + ", " + date.getHours() + ":" + date.getMinutes();
         const orderNew = Object.assign(
             {},
-            order, { orderDate },
+            { products: [order] },
+            { orderDate },
             { delivered: false },
             { deliveryPrice: deliveryPrice },
             { totalAmount: totalAmount })
