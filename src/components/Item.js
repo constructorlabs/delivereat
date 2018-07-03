@@ -25,7 +25,6 @@ class Item extends React.Component {
             onChange={this.handleChange}
             min="0"
           />
-          <button className="display__menuItem--button">Add to Order</button>
         </label>
         <hr className="display__menuItem--hr" />
       </li>

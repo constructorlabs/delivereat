@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      menuItems: [],
+      menuItems: {},
       currentOrder: {},
       quantity: 0
     };
@@ -19,11 +19,11 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
-          menuItems: Object.values(data)
+          menuItems: data
         });
-        console.log(this.state);
+        // console.log(this.state);
       });
   }
 
@@ -41,15 +41,12 @@ class App extends React.Component {
     console.log(this.state.currentOrder);
     return (
       <div className="app">
-        <Header
-          menuItems={this.state.menuItems}
-          currentOrder={this.state.currentOrder}
-          quantity={this.state.quantity}
-        />
+        <Header />
         <Menu
           receiveNewQuantity={this.receiveNewQuantity}
-          menuItems={this.state.menuItems}
+          menuItems={Object.values(this.state.menuItems)}
           currentOrder={this.state.currentOrder}
+          basketMenuItems={this.state.menuItems}
         />
       </div>
     );

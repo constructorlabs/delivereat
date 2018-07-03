@@ -1,17 +1,14 @@
 import React from "react";
 
-function Header() {
-  return (
-    <header className="app__header">
-      <img src="../../static/DeliverRat-logo.png" className="app__logo" />
-      <h1>DeliverRat</h1>
-      <Basket
-        menuItems={this.props.menuItems}
-        currentOrder={this.props.currentOrder}
-        quantity={this.props.quantity}
-      />
-    </header>
-  );
+class Header extends React.Component {
+  render() {
+    return (
+      <header className="app__header">
+        <img src="../../static/rabbit.png" className="app__logo" />
+        <h1>DeliverRabbit</h1>
+      </header>
+    );
+  }
 }
 
 export default Header;

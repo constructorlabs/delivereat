@@ -34,24 +34,7 @@ const menu = {
   }
 };
 
-const orders = {
-  1: [
-    {
-      item: 1,
-      quantity: 4
-    },
-    {
-      item: 4,
-      quantity: 1
-    }
-  ],
-  2: [
-    {
-      item: 5,
-      quantity: 3
-    }
-  ]
-};
+const orders = {};
 
 app.get("/", function(req, res) {
   res.render("index");
@@ -69,6 +52,21 @@ function getItem(menu, item) {
 app.get("/menu/:item", function(req, res) {
   const menuItem = getItem(menu, req.params.item);
   res.json(menuItem);
+});
+
+/// Create new order
+function createOrder(newOrder) {
+  const lastId = Object.keys(orders).pop();
+  const id = lastId ? lastId : 0;
+  const newId = +id + 1;
+  newOrder.id = newId;
+  orders[newId] = newOrder;
+  return newOrder;
+}
+
+app.post("/order", function(req, res) {
+  const newReq = createOrder(req.body);
+  res.json(orders);
 });
 
 //// Gets all orders
