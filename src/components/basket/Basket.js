@@ -2,7 +2,7 @@ import React from 'react';
 import BasketProduct from './BasketProduct';
 import BasketPriceDisplay from './BasketPriceDisplay';
 import BasketEmptyMessage from './BasketEmptyMessage';
-import BasketNavigation from '../navs/SubNavigation';
+import SubNavigation from '../navs/SubNavigation';
 import BasketCheckoutButton from './BasketCheckoutButton';
 
 function Basket(props) {
@@ -45,7 +45,7 @@ function Basket(props) {
                 return response.json();
             })
             .then(function (data) {
-                console.log("Data sent to the server :", data)
+                // console.log("Data sent to the server :", data)
             })
             .catch(error => {
                 console.log('/api/order', error);
@@ -56,7 +56,7 @@ function Basket(props) {
     return (
         <div className="menu menu-wrapper">
 
-            <BasketNavigation
+            <SubNavigation
                 receiverSection={sectionHandler}
                 receiverOldOrders={oldOrdersHandler} />
 

@@ -252,6 +252,40 @@ button {
   justify-content: space-between;
 }
 
+/* Orders */
+
+.old-order {
+  background-color: #fff;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+.old-order__products {
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+
+.old-order__re-order-wrapper{
+  display: flex;
+  justify-content: end;
+}
+
+.old-order__re-order {
+  padding: 5px 15px;
+  color: #fff;
+  background-color: var(--secondary-color);
+  text-align: center;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  border-radius: var(--radius)
+}
+
+.old-order__re-order:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
 /* Back to menu button */
 .menu__back-to-menu {
   font-size: 0.8rem;

@@ -18,8 +18,8 @@ function getOrders() {
       const keys = Object.keys(orders)
       const id = keys.length ? +keys.pop() + 1 : 1;
       orders = Object.assign({}, orders, { [id]: newOrder });
-      console.log("Data received on the server", newOrder)
-      console.log("orders", orders);
+      // console.log("Data received on the server", newOrder)
+      // console.log("orders", orders);
     }
   };
 }

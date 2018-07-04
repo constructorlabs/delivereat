@@ -24,13 +24,6 @@ class App extends React.Component {
     this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
   }
 
-  // {
-  //   "1": {
-  //     "dishId": 1,
-  //     "qty": 1,
-  //     "price": 3
-  //   }
-  // }
   componentDidMount() {
     fetch('/api/menu')
       .then(response => {
@@ -107,7 +100,7 @@ class App extends React.Component {
   }
 
   oldOrdersHandler() {
-    fetch('/api/orders')
+    fetch('/api/orders?delivered=false')
       .then(function (response) {
         return response.json();
       })
@@ -116,7 +109,6 @@ class App extends React.Component {
           oldOrders: data
         });
         return data;
-        // console.log("Old ords", data)
       })
       .catch(error => {
         console.log(error);
@@ -124,8 +116,6 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log("Orders state: ", this.state.orders);
-
     const section = this.state.section;
     let currentSection;
     let basket;
@@ -158,7 +148,7 @@ class App extends React.Component {
         oldOrders={this.state.oldOrders}
         menu={this.state.menu}
         receiverOrder={this.sectionHandler}
-        receiver={this.oldOrdersHandler}
+        receiverSection={this.sectionHandler}
       />;
       basket = null;
     }
