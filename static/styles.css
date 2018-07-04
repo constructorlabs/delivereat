@@ -1,3 +1,116 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'sayno';
+  src: url('./font/say.woff2') format('woff2'),
+  url('./font/sayNo.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.title{
+  
+  font-family: 'sayno';
+}
+
 body {
   margin: 0;
+  background-image: url("./images/beans2.jpg");
+}
+
+.toggle{
+  
+  margin-right: 5px;
+}
+
+.header{
+  text-align: center;
+}
+
+.header_img{
+  width: 350px;
+  height: 200px;
+}
+
+.app_menu{
+  display: block;
+}
+
+.app_orders{
+  display: none;
+}
+
+.menu{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+
+.item{
+  margin: 5px;
+    border: 1px solid black;
+    
+}
+
+.item_img{
+  width: 200px;
+  height: 200px;
+}
+
+.current_order{
+  
+  text-align: center;
+  color: black;
+  background-color: #e6ac00;
+}
+
+.order_delete_label{
+  color:red;
+}
+
+.charge{
+  display: none;
+}
+
+.orders_history{
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.single_order{
+  margin: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+.order_commands{
+margin-right: 5px;
+
+
+}
+
+.reorder{
+  color: green;
+}
+
+.x{
+  color: red;
+}
+
+@media(min-width: 700px){
+    
+
+
+  .menu{
+    
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
 }
