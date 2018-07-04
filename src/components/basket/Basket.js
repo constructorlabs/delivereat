@@ -1,6 +1,4 @@
 import React from 'react';
-import Header from '../Header';
-import Search from '../Search';
 import BasketProduct from './BasketProduct';
 import BasketPriceDisplay from './BasketPriceDisplay';
 import BasketEmptyMessage from './BasketEmptyMessage';
@@ -15,17 +13,11 @@ function Basket(props) {
         props.receiver(dishId, quantity, price, action);
     }
 
-    function sectionHandler(section) {
-        props.receiverOrder(section);
-    }
-
-    function oldOrdersHandler(section) {
-        sectionHandler(section);
+    function oldOrdersHandler() {
         props.oldOrders();
     }
 
     function checkoutHandler(order) {
-
         const date = new Date();
         const orderDate = date.toDateString() + ", " + date.getHours() + ":" + date.getMinutes();
         const orderNew = Object.assign(
@@ -57,11 +49,7 @@ function Basket(props) {
 
     return (
         <div className="menu menu-wrapper">
-
-            <Header title="Delivereat" />
-            <Search />
             <SubNavigation
-                receiverSection={sectionHandler}
                 receiverOldOrders={oldOrdersHandler} />
 
             <h1 className="menu__heading">Basket</h1>

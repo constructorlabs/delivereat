@@ -5,9 +5,7 @@ import BasketWidget from './basket/BasketWidget';
 import Menu from './menu/Menu';
 import Basket from './basket/Basket';
 import OldOrders from './orders/OldOrders';
-import Search from './Search';
 import Footer from './Footer';
-import Main from './Main';
 
 class App extends React.Component {
   constructor() {
@@ -18,11 +16,9 @@ class App extends React.Component {
       menu: {},
       basket: 0,
       orderAmount: 0,
-      section: "Menu",
       deliveryPrice: 2.50
     }
     this.ordersHandler = this.ordersHandler.bind(this);
-    this.sectionHandler = this.sectionHandler.bind(this);
     this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
   }
 
@@ -41,7 +37,6 @@ class App extends React.Component {
         console.log(error);
       });
   }
-
   ordersHandler(dishId, quantity, price, action) {
     // Find if dish is already in orders and get position
     const dishPosition = Object.keys(this.state.currentOrders).find(order => {
@@ -96,12 +91,6 @@ class App extends React.Component {
     ));
   }
 
-  sectionHandler(section) {
-    this.setState({
-      section: section
-    });
-  }
-
   oldOrdersHandler() {
     fetch('/api/orders?delivered=false')
       .then(function (response) {
@@ -119,51 +108,37 @@ class App extends React.Component {
   }
 
   render() {
-    const section = this.state.section;
-    let currentSection;
-    let basket;
-
-    // if (section === "Menu") {
-    //   currentSection = <Menu
-    //     receiver={this.ordersHandler}
-    //     menu={this.state.menu}
-    //     orders={this.state.currentOrders}
-    //   />;
-    //   basket = <BasketWidget
-    //     receiver={this.sectionHandler}
-    //     basketCount={this.state.basket}
-    //     orderAmount={this.state.orderAmount}
-    //     menu={this.state.menu}
-    //   />;
-    // } else if (section === "Orders") {
-    //   currentSection = <Basket
-    //     orderAmount={this.state.orderAmount}
-    //     receiver={this.ordersHandler}
-    //     receiverOrder={this.sectionHandler}
-    //     orders={this.state.currentOrders}
-    //     oldOrders={this.oldOrdersHandler}
-    //     menu={this.state.menu}
-    //     deliveryPrice={this.state.deliveryPrice}
-    //   />;
-    //   basket = null;
-    // } else if (section === "OldOrders") {
-    //   currentSection = <OldOrders
-    //     oldOrders={this.state.oldOrders}
-    //     menu={this.state.menu}
-    //     receiverOrder={this.sectionHandler}
-    //     receiverSection={this.sectionHandler}
-    //   />;
-    //   basket = null;
-    // }
-
     return (
       <div className="app-wrapper">
         <Header title="Delivereat" />
-
-        <Main />
-        {/* <Search />
-        {basket}
-        {currentSection} */}
+        <BasketWidget
+          basketCount={this.state.basket}
+          orderAmount={this.state.orderAmount}
+          menu={this.state.menu} />
+        <Switch>
+          <Route exact path="/" render={() => <Menu
+            receiver={this.ordersHandler}
+            menu={this.state.menu}
+            orders={this.state.currentOrders} />}
+          />
+          <Route exact path="/menu" render={() => <Menu
+            receiver={this.ordersHandler}
+            menu={this.state.menu}
+            orders={this.state.currentOrders} />}
+          />
+          <Route exact path="/basket" render={() => <Basket
+            orderAmount={this.state.orderAmount}
+            receiver={this.ordersHandler}
+            orders={this.state.currentOrders}
+            oldOrders={this.oldOrdersHandler}
+            menu={this.state.menu}
+            deliveryPrice={this.state.deliveryPrice} />}
+          />
+          <Route exact path="/old-orders" render={() => <OldOrders
+            oldOrders={this.state.oldOrders}
+            menu={this.state.menu} />}
+          />
+        </Switch>
         <Footer />
       </div>
     )

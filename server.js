@@ -18,7 +18,7 @@ function getOrders() {
       const keys = Object.keys(orders)
       const id = keys.length ? +keys.pop() + 1 : 1;
       orders = Object.assign({}, orders, { [id]: newOrder });
-      // console.log("Data received on the server", newOrder)
+      console.log("Data received on the server", newOrder)
       // console.log("orders", orders);
     }
   };
@@ -76,10 +76,7 @@ function getMenu() {
 const { showMenu, showDish } = getMenu();
 const { showOrders, addOrders } = getOrders();
 
-// Render index.hbs template
-app.get('*', function (req, res) {
-  res.render('index');
-});
+
 
 // Get menu
 app.get('/api/menu', function (req, res) {
@@ -126,6 +123,11 @@ app.post("/api/order", function (req, res) {
   } else {
     res.status(404).json({ error: "Order error" });
   }
+});
+
+// Render index.hbs template
+app.get('*', function (req, res) {
+  res.render('index');
 });
 
 // Server stuff

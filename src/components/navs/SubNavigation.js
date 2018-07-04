@@ -1,19 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function BasketNavigation(props) {
 
-    function sectionHandler(section) {
-        props.receiverSection(section);
-    }
-
-    function oldOrdersHandler(section) {
-        props.receiverOldOrders(section);
+    function oldOrdersHandler() {
+        props.receiverOldOrders();
     }
 
     return (
         <div className="basket__options">
-            <h5 onClick={(e) => sectionHandler("Menu")} className="menu__back-to-menu">Back to Menu</h5>
-            <h5 onClick={(e) => oldOrdersHandler("OldOrders")} className="menu__back-to-menu">Old orders</h5>
+            <Link to="/menu"><h5 className="menu__back-to-menu">Back to Menu</h5></Link>
+            <Link to="/old-orders"><h5 onClick={oldOrdersHandler} className="menu__back-to-menu">Old orders</h5></Link>
         </div>
     )
 }
