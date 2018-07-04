@@ -1,13 +1,13 @@
 import React from 'react';
 
-function BasketPriceDisplay(props) {
+function BasketCheckoutButton(props) {
     return (
-        <div onClick={() => props.receiverCheckOutHandler(props.orders)}
-            id="basket__checkout-button"
-            className="basket__checkout-button">
+        <div className={"basket__checkout-button " + (Object.keys(props.orders).length > 0 ? '' : 'hidden')}
+            onClick={() => props.receiverCheckOutHandler(props.orders)}
+            id="basket__checkout-button">
             CHECKOUT
         </div>
     )
 }
 
-export default BasketPriceDisplay;
+export default BasketCheckoutButton;

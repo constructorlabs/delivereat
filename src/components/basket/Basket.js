@@ -4,6 +4,7 @@ import BasketPriceDisplay from './BasketPriceDisplay';
 import BasketEmptyMessage from './BasketEmptyMessage';
 import SubNavigation from '../navs/SubNavigation';
 import BasketCheckoutButton from './BasketCheckoutButton';
+import BasketOrderSent from './BasketOrderSent';
 
 function Basket(props) {
     const totalAmount = props.orderAmount + props.deliveryPrice;
@@ -38,7 +39,8 @@ function Basket(props) {
             .then(function (response) {
                 return response.json();
             })
-            .then(function (data) {
+            .then((data) => {
+                props.orderSentReceiver();
                 // console.log("Data sent to the server :", data)
             })
             .catch(error => {
@@ -56,6 +58,8 @@ function Basket(props) {
             <div id="menu-container" className="menu-container">
                 {/* If basket is empty display message */}
                 <BasketEmptyMessage orders={props.orders} />
+
+                <BasketOrderSent orderSent={props.orderSent} />
 
                 {/* Products display */}
                 {Object.keys(props.orders).map(orderKey => {

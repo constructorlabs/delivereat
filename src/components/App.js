@@ -16,10 +16,12 @@ class App extends React.Component {
       menu: {},
       basket: 0,
       orderAmount: 0,
-      deliveryPrice: 2.50
+      deliveryPrice: 2.50,
+      orderSent: false
     }
     this.ordersHandler = this.ordersHandler.bind(this);
     this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
+    this.checkOrderSentHandler = this.checkOrderSentHandler.bind(this);
   }
 
   componentDidMount() {
@@ -107,6 +109,12 @@ class App extends React.Component {
       });
   }
 
+  checkOrderSentHandler() {
+    this.setState({
+      orderSent: true
+    })
+  }
+
   render() {
     return (
       <div className="app-wrapper">
@@ -132,7 +140,9 @@ class App extends React.Component {
             orders={this.state.currentOrders}
             oldOrders={this.oldOrdersHandler}
             menu={this.state.menu}
-            deliveryPrice={this.state.deliveryPrice} />}
+            deliveryPrice={this.state.deliveryPrice}
+            orderSent={this.state.orderSent}
+            orderSentReceiver={this.checkOrderSentHandler} />}
           />
           <Route exact path="/old-orders" render={() => <OldOrders
             oldOrders={this.state.oldOrders}

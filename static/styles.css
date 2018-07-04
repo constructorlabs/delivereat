@@ -247,10 +247,31 @@ button {
   opacity: .8;
 }
 
+.basket__checkout-button_wrapper.hidden {
+  display: none;
+}
+
+.basket__checkout-button.hidden{
+display: none;
+}
+
 .basket__options {
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
+}
+
+.basket-order__sent {
+  background-color: rgba(75, 181, 67, .6);
+  color: #fff;
+  border-radius: var(--radius);
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  animation: fade-in 1s 1;
+}
+.basket-order__sent.hidden {
+  display: none;
 }
 
 /* Orders */
@@ -287,6 +308,15 @@ button {
   opacity: .8;
 }
 
+.old-orders__empty {
+  text-align: center;
+  margin: 100px 0;
+}
+
+.old-orders__empty.hidden {
+  display: none;
+}
+
 /* Back to menu button */
 .menu__back-to-menu {
   font-size: 0.8rem;
@@ -306,6 +336,25 @@ button {
   font-size: 0.7rem;
   letter-spacing: 0.03rem;
 }
+/* Kepping footer at the bottom */
+html,
+body,
+.app-wrapper {
+  height:100%;
+}
+#root {
+  padding-bottom: 60px;
+  min-height:100%;
+  position:relative;
+}
+
+.footer {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:60px;
+}
+
 
 @media(min-width: 768px){
   .app-wrapper {
@@ -333,9 +382,16 @@ button {
     grid-column: 1/4;
   }
 
+  
   .basket__checkout-button{
     align-self: end;
     
     width: 120px;
+    border-radius: var(--radius)
   }
+}
+
+@keyframes fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
