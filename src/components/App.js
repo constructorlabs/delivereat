@@ -1,16 +1,14 @@
 import React from "react";
 import Menu from "./Menu";
+import Header from "./Header";
+import Main from "./Main";
 
 function App() {
   return (
     <div>
-      <header className="header">
-        <img className="logo" src="./static/images/munchieslogo-1.jpg" />
+      <Header />
 
-        <h1>Baked Delivery</h1>
-        <p className="tagline">Never worry about the munchies again</p>
-      </header>
-      <Menu />
+      <Main />
       <footer className="footer">
         "High"-street food delivered straight to your sofa!
       </footer>

@@ -103,11 +103,7 @@ const menu = {
   }
 };
 
-app.get("/", function(req, res) {
-  res.render("index");
-});
-
-app.get("/menu", function(req, res) {
+app.get("/menu-items", function(req, res) {
   res.json(menu);
 });
 
@@ -128,7 +124,9 @@ app.delete("/deleteOrder", (req, res) => {
   res.json(orders);
 });
 
-// Git test
+app.get("*", function(req, res) {
+  res.render("index");
+});
 
 app.listen(8080, function() {
   console.log("Listening on port 8080");

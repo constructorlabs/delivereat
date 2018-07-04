@@ -1,6 +1,6 @@
 import React from "react";
 
-function Order({ order, handleClick, handleClose }) {
+function Order({ order, showOrder, handleClick, handleClose }) {
   return (
     <div className="order__display">
       <h3 className="order__title">Great choice, dude!</h3>
@@ -19,7 +19,7 @@ function Order({ order, handleClick, handleClose }) {
         })}
         <p>
           Total: £
-          {order.total}{" "}
+          {order.total}
         </p>
         <p className="delivery__charge">*includes £2.40 delivery charge*</p>
         <button onClick={handleClick} className="submit__order-button">

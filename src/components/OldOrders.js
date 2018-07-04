@@ -1,14 +1,23 @@
 import React from "react";
 
-function OldOrders({
-  oldItem,
-  number,
-  handleDelete,
-  previousOrders,
-  handleReorder
-}) {
+function OldOrders({ handleDelete, previousOrders, handleReorder }) {
   function oldOrderReorder(event) {
     handleReorder(oldItem);
+  }
+
+  function getOrder(order) {
+    return Object.keys(order).map(singleItem => {
+      if (singleItem == "total") return <p style={{ color: "black" }}>TOTAL</p>;
+
+      // console.log("test", order[singleItem]);
+      // console.log("name", order[singleItem].name);
+      return (
+        <li key={singleItem} className="display__oldOrders-items">
+          <p>{order[singleItem].name}</p>
+          <p className="oldOrders__item-name">x{order[singleItem].quantity}</p>
+        </li>
+      );
+    });
   }
 
   function oldOrderDelete(event) {
@@ -16,30 +25,27 @@ function OldOrders({
     handleDelete(number);
   }
 
+  console.log("whole order", previousOrders);
+
   return (
     <div className="display__oldOrders">
       <h3 className="oldOrders__title">
         Previous <br />Order
       </h3>
-
-      {Object.keys(oldItem).map(singleItem => {
-        {
-          if (singleItem == "total") return;
-        }
-        return (
-          <ul>
-            <li key={singleItem} className="display__oldOrders-items">
-              <p>{oldItem[singleItem].name}</p>
-              <p className="oldOrders__item-name">
-                x{oldItem[singleItem].quantity}
-              </p>
+      <ul>
+        {Object.keys(previousOrders).map(prevOrder => {
+          return (
+            <li>
+              <ul style={{ display: "flex" }}>
+                {getOrder(previousOrders[prevOrder])}
+              </ul>
             </li>
-          </ul>
-        );
-      })}
+          );
+        })}
+      </ul>
 
       <p>
-        Total: <br /> £ {oldItem.total}
+        Total:<br /> £ {previousOrders.total}
       </p>
       <button onClick={oldOrderReorder}>Reorder</button>
       <button onClick={oldOrderDelete}>Delete Order</button>

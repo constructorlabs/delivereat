@@ -1,6 +1,6 @@
 import React from "react";
 
-function MenuItem({ item, receiveOrder }) {
+function MenuItem({ item, showOrder, order, receiveOrder }) {
   function handleChange(event) {
     receiveOrder(item, event.target.value);
   }

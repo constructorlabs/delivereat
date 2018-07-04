@@ -9,20 +9,17 @@ class Menu extends React.Component {
     this.state = {
       menuItems: {},
       order: {},
-      showOrder: false,
-      previousOrders: {}
+      showOrder: false
     };
 
-    this.handleClick = this.handleClick.bind(this);
     this.handleOrder = this.handleOrder.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleReorder = this.handleReorder.bind(this);
     this.receiveOrder = this.receiveOrder.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    fetch(`/menu`)
+    fetch(`/menu-items`)
       .then(function(response) {
         return response.json();
       })
@@ -67,7 +64,7 @@ class Menu extends React.Component {
 
     fetch("http://localhost:8080/makeOrder", {
       method: "post",
-      body: JSON.stringify(this.state.order),
+      body: JSON.stringify(self.state.order),
       headers: {
         "Content-Type": "application/json"
       }
@@ -110,71 +107,59 @@ class Menu extends React.Component {
     });
   }
 
-  handleDelete(number) {
-    const self = this;
-    fetch("http://localhost:8080/deleteOrder", {
-      method: "delete",
-      body: JSON.stringify({ toDelete: number }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        fetch(`/order`)
-          .then(function(response) {
-            return response.json();
-          })
-          .then(data => {
-            self.setState({
-              previousOrders: data
-            });
-          });
-      });
-  }
+  // handleDelete(number) {
+  //   const self = this;
+  //   fetch("http://localhost:8080/deleteOrder", {
+  //     method: "delete",
+  //     body: JSON.stringify({ toDelete: number }),
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //     .then(function(response) {
+  //       return response.json();
+  //     })
+  //     .then(function(data) {
+  //       fetch(`/order`)
+  //         .then(function(response) {
+  //           return response.json();
+  //         })
+  //         .then(data => {
+  //           self.setState({
+  //             previousOrders: data
+  //           });
+  //         });
+  //     });
+  // }
 
-  handleReorder(reorder) {
-    const self = this;
+  // handleReorder(reorder) {
+  //   const self = this;
 
-    fetch("http://localhost:8080/makeOrder", {
-      method: "post",
-      body: JSON.stringify(reorder),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        fetch(`/order`)
-          .then(function(response) {
-            return response.json();
-          })
-          .then(data => {
-            self.setState({
-              previousOrders: data
-            });
-          });
-      });
-  }
+  //   fetch("http://localhost:8080/makeOrder", {
+  //     method: "post",
+  //     body: JSON.stringify(reorder),
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //     .then(function(response) {
+  //       return response.json();
+  //     })
+  //     .then(function(data) {
+  //       fetch(`/order`)
+  //         .then(function(response) {
+  //           return response.json();
+  //         })
+  //         .then(data => {
+  //           self.setState({
+  //             previousOrders: data
+  //           });
+  //         });
+  //     });
+  // }
   render() {
     return (
       <div>
-        <h2 className="display__title">
-          What's Baking?
-          <button onClick={this.handleOrder} className="showOldOrders">
-            Old Orders
-          </button>
-          <p className="stoner__quote">
-            "People say you can abuse marijuana. Well sh*t, you can abuse
-            cheeseburgers too, you know? <br />You don‘t go around closing
-            Burger King because you can abuse something." <br />- Joe Rogan,
-            pothead
-          </p>
-        </h2>
         {this.state.showOrder ? (
           <Order
             handleClose={this.handleClose}
@@ -182,18 +167,7 @@ class Menu extends React.Component {
             order={this.state.order}
           />
         ) : null}
-        {Object.keys(this.state.previousOrders).map(oldItem => {
-          return (
-            <OldOrders
-              key={oldItem}
-              number={oldItem}
-              oldItem={this.state.previousOrders[oldItem]}
-              previousOrders={this.state.previousOrders}
-              handleDelete={this.handleDelete}
-              handleReorder={this.handleReorder}
-            />
-          );
-        })}
+
         <h3 className="bakers__dozen">Check out the Baked Dozen...</h3>
         {Object.values(this.state.menuItems).map(item => {
           return (
