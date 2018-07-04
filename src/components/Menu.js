@@ -7,10 +7,9 @@ class Menu extends React.Component {
   }
 
   fetchMenu() {
-    fetch("http://localhost:8080/menu")
+    fetch("http://localhost:8080/api/menu")
       .then(response => response.json())
       .then(result => {
-        // console.log("Fetch result:", result);
         this.props.returnMenu(result);
       })
       .catch(error => console.log(error));

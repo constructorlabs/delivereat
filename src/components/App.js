@@ -2,6 +2,7 @@ import React from "react";
 import Menu from "./Menu";
 import Nav from "./Nav";
 import OrderForm from "./OrderForm";
+import OrderHistory from "./OrderHistory";
 
 class App extends React.Component {
   constructor() {
@@ -9,8 +10,8 @@ class App extends React.Component {
 
     this.state = {
       menu: [],
-      orders: [],
-      orderhistory: []
+      orders: {},
+      orderhistory: ""
     };
 
     this.returnMenu = this.returnMenu.bind(this);
@@ -30,14 +31,31 @@ class App extends React.Component {
   }
 
   getOrder(order) {
-    // console.log("Order:", order);
-    this.setState({
-      orders: [...this.state.orders, order]
+    const matchingOrder = Array.from(this.state.orders).find(currentOrder => {
+      return order.id === currentOrder.id;
     });
+
+    if (matchingOrder) {
+      matchingOrder.quantity += order.quantity;
+      matchingOrder.price += order.price;
+
+      const ordersWithoutCurrentOrder = this.state.orders.filter(
+        currentOrder => {
+          return currentOrder.id !== order.id;
+        }
+      );
+
+      this.setState({
+        orders: ordersWithoutCurrentOrder.concat(matchingOrder)
+      });
+    } else {
+      this.setState({
+        orders: [...this.state.orders, order]
+      });
+    }
   }
 
   handleDelete(key) {
-    // console.log("Item deleted");
     this.setState(prevState => ({
       orders: prevState.orders.filter(el => el.orderId != key)
     }));
@@ -45,29 +63,47 @@ class App extends React.Component {
 
   clearOrder() {
     this.setState({
-      orders: []
+      orders: {}
     });
   }
 
-  getOrderHistory(data) {
-    this.setState({
-      orderhistory: data
-    });
+  getOrderHistory(event) {
+    event.preventDefault();
+    fetch("/api/order", { method: "get" })
+      .then(response => response.json())
+      .then(result => {
+        console.log("fetch order:", result);
+        this.setState({
+          orderhistory: result
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
+    console.log("set order hist:", this.state.orderhistory);
     return (
       <div className="app">
         <div className="header">
           <Nav />
         </div>
+        <button
+          className="orderform__history"
+          onClick={this.getOrderHistory}
+          type="submit"
+        >
+          View Order History
+        </button>;
         <div className="main">
-          {this.state.orders == ![] ? null : (
+          {this.state.orderhistory === "" ? null : (
+            <OrderHistory orderhistory={this.state.orderhistory} />
+          )}
+          {this.state.orders == {} ? null : (
             <OrderForm
               orders={this.state.orders}
               handleDelete={this.handleDelete}
               clearOrder={this.clearOrder}
-              getOrderHistory={this.getOrderHistory}
+              returnOrderHistory={this.returnOrderHistory}
             />
           )}
           <Menu

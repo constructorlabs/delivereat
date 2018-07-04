@@ -18,6 +18,7 @@ button {
 
 .app {
   height: 100vh;
+  text-align: center;
 }
 
 .header {
@@ -55,7 +56,7 @@ button {
 
 /* Main content */
 
-.orderform {
+.form {
   width: auto;
   margin: 10px;
   margin-top: 20px;
@@ -87,6 +88,10 @@ button {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.orderform__history {
+  margin-top: 20px;
 }
 
 .menu {
@@ -150,7 +155,7 @@ button {
     height: 200px;
   }
 
-  .orderform {
+  .form {
     width: 350px;
     font-size: 100%;
   }

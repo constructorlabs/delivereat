@@ -14,7 +14,7 @@ class OrderForm extends React.Component {
 
   componentDidMount() {
     const { orders } = this.props;
-    let prices = orders.map(el => el.price);
+    let prices = Array.from(orders).map(el => el.price);
     let totalPrice = prices.reduce(function(acc, item) {
       return acc + item;
     }, 0);
@@ -25,42 +25,22 @@ class OrderForm extends React.Component {
     });
   }
 
-  componentDidUpdate(prevProps) {
-    const { orders } = this.props;
-    if (orders !== prevProps.orders) {
-      let prices = orders.map(el => el.price);
-      console.log("prices:", prices);
-      let totalPrice = prices.reduce(function(acc, item) {
-        return acc + item;
-      }, 0);
-      let priceWithDelivery = totalPrice + 2.95;
-      console.log("totalPrice:", totalPrice);
-      this.setState({
-        subtotal: totalPrice,
-        total: priceWithDelivery
-      });
-    }
-  }
-
   deleteFormItem(key) {
     this.props.handleDelete(key);
   }
 
   sendOrder() {
-    fetch("http://localhost:8080/api/order", {
+    fetch("/api/order", {
       method: "post",
       body: JSON.stringify(this.props.orders),
       headers: {
         "Content-Type": "application/json"
       }
     })
-      .then(function(response) {
-        return response.json();
+      .then(response => {
+        return response.ok ? response.json() : Promise.reject(response);
       })
-      .then(function(data) {
-        this.props.getOrderHistory(data);
-      });
-    console.log("Sending order");
+      .catch(error => console.log(error));
   }
 
   handleSubmit(event) {
@@ -69,26 +49,29 @@ class OrderForm extends React.Component {
   }
 
   render() {
-    console.log("this.state.total:", this.state.total);
+    const { orders } = this.props;
+    let prices = Array.from(orders).map(el => el.price);
+    let totalPrice = prices.reduce(function(acc, item) {
+      return acc + item;
+    }, 0);
+    let priceWithDelivery = totalPrice + 2.95;
+
     return (
-      <div className="orderform">
+      <div className="form">
         <h2>Order</h2>
-        {this.props.orders.map(item => {
+        {Object.keys(this.props.orders).map(item => {
           return (
             <OrderFormItem
-              order={item}
-              key={item.orderId}
+              order={this.props.orders[item]}
+              key={this.props.orders[item].orderId}
               deleteFormItem={this.deleteFormItem}
             />
           );
         })}
-        <h6 className="orderform__deliverycharge">
-          {" "}
-          Subtotal: £{this.state.subtotal}
-        </h6>
+        <h6 className="orderform__deliverycharge"> Subtotal: £{totalPrice}</h6>
         <p className="orderform__deliverycharge">Delivery charge: £2.95</p>
         <div className="orderform__total">
-          <p>Total: £{this.state.total}</p>
+          <p>Total: £{priceWithDelivery}</p>
           <button
             className="orderform__button"
             onClick={this.handleSubmit}

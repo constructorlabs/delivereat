@@ -33,6 +33,7 @@ class MenuItem extends React.Component {
     let price = this.props.menu.price * this.state.itemQuantity;
     const order = {
       item: this.props.menu.name,
+      id: this.props.menu.id,
       price: price,
       quantity: this.state.itemQuantity,
       orderId: orderId

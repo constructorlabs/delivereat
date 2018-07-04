@@ -92,23 +92,33 @@ const storage = {
       price: 3.0,
       type: "drink"
     }
-  }
+  },
+  orders: {},
+  id: 1
 };
 
 function getMenu(storage) {
   return storage.menu;
 }
 
+function getOrders(storage) {
+  return storage.orders;
+}
+
+function getId(storage) {
+  return storage.id;
+}
+
 app.get("/", function(req, res) {
   res.render("index");
 });
 
-app.get("/menu", function(req, res) {
+app.get("/api/menu", function(req, res) {
   const menu = getMenu(storage);
   res.json(menu);
 });
 
-app.get("/menu/:menuItemId", function(req, res) {
+app.get("/api/menu/:menuItemId", function(req, res) {
   const menu = getMenu(storage);
   const item = menu[req.params.menuItemId];
   if (item) {
@@ -122,10 +132,21 @@ app.get("/menu/:menuItemId", function(req, res) {
 // PATCH to update stock
 // DELETE to let users delete order history
 
+// app.post("/api/order", function(req, res) {
+//   res.json(req.body);
+// });
 app.post("/api/order", function(req, res) {
-  // res.json(req.body);
-  // res.send("Hello World!");
-  // res.render("hello", req.body);
+  const orderId = `order-${storage.id++}`;
+  const tempOrder = req.body;
+  tempOrder.id = orderId;
+  storage.orders = Object.assign({}, storage.orders, { [orderId]: tempOrder });
+
+  res.status(201).json(tempOrder);
+});
+
+app.get("/api/order", function(req, res) {
+  const orders = getOrders(storage);
+  res.json(orders);
 });
 
 app.listen(8080, function() {
