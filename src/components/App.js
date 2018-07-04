@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./Menu";
 import Header from "./Header";
+import Footer from "./Footer";
 
 class App extends React.Component {
   constructor() {
@@ -38,7 +39,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.currentOrder);
+    // console.log(this.state.currentOrder);
     return (
       <div className="app">
         <Header />
@@ -48,6 +49,7 @@ class App extends React.Component {
           currentOrder={this.state.currentOrder}
           basketMenuItems={this.state.menuItems}
         />
+        <Footer />
       </div>
     );
   }

@@ -6,8 +6,8 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="display">
-        <div className="display__content">
-          <h1 className="display__title">The Menu</h1>
+        <div className="display__menu">
+          <h1 className="display__menu--title">The Menu</h1>
           <form>
             <ul className="display__menuItems">
               {this.props.menuItems.map(item => {

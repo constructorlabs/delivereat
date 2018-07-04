@@ -7,30 +7,65 @@ app.use("/static", express.static("static"));
 app.set("view engine", "hbs");
 
 const menu = {
+  0: {
+    id: 0,
+    name: "Strawberry cheesecake",
+    price: 6,
+    img: "../static/cheesecake.jpg",
+    desc:
+      "Baked cheesecake on a sweetmeal biscuit base topped with strawberries in a sauce"
+  },
   1: {
     id: 1,
-    name: "Strawberry cheesecake",
-    price: 6
+    name: "Chocolate Cake",
+    price: 5,
+    img: "../static/chocolatecake.jpg",
+    desc: "Chocolate Cake layered and topped with Belgian Chocolate Buttercream"
   },
   2: {
     id: 2,
-    name: "Chocolate Cake",
-    price: 5
+    name: "Victoria Sponge",
+    price: 7,
+    img: "../static/victoriasponge.jpg",
+    desc:
+      "Layers of sponge sandwiched with buttercream and raspberry jam, topped with a dusting of sugar"
   },
   3: {
     id: 3,
-    name: "Victoria Sponge",
-    price: 7
+    name: "Muffin",
+    price: 3,
+    img: "../static/muffin.jpg",
+    desc: "Vanilla flavour mini muffins with milk chocolate chips"
   },
   4: {
     id: 4,
-    name: "Scone",
-    price: 3
+    name: "Crumpet",
+    price: 4,
+    img: "../static/crumpet.jpg",
+    desc: "Soft, fluffy and deliciously gluten free"
   },
   5: {
     id: 5,
-    name: "Crumpet",
-    price: 4
+    name: "Waffles",
+    price: 5,
+    img: "../static/waffles.jpg",
+    desc:
+      "Soft, toasted waffles and their characteristic sweet, creamy caramel fillings"
+  },
+  6: {
+    id: 6,
+    name: "Custard Tart",
+    price: 8,
+    img: "../static/custardtart.jpg",
+    desc:
+      "Shortcrust pastry tarts filled with egg custard made with free range eggs, topped with nutmeg"
+  },
+  7: {
+    id: 7,
+    name: "Lemon Tart",
+    price: 1,
+    img: "../static/lemontart.jpg",
+    desc: "Shortcrust pastry with lemon filling and a sugar dusting"
   }
 };
 

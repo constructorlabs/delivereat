@@ -3,10 +3,9 @@ import React from "react";
 class Basket extends React.Component {
   constructor() {
     super();
-    this.state = {
-      previousOrder: {}
-    };
+
     this.handleClick = this.handleClick.bind(this);
+    this.getBasket = this.getBasket.bind(this);
   }
 
   handleClick(event) {
@@ -21,50 +20,53 @@ class Basket extends React.Component {
       .then(function(response) {
         return response.json();
       })
-      .then(() => fetch(`order`))
-      .then(function(response) {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({
-          previousOrder: data
-        });
-      })
       .catch(error => console.log(error));
   }
 
   getBasket(total) {
     const deliveryCharge = total * 0.1;
+    const fixedDeliveryCharge = deliveryCharge.toFixed(2);
     const orderTotal = total + deliveryCharge;
+    const newOrderIds = Object.keys(this.props.currentOrder);
+    const orderedItems = newOrderIds.map(orderId => {
+      return (
+        <li key={orderId} className="display__basket--listItem">
+          {this.props.basketMenuItems[orderId].name}
+        </li>
+      );
+    });
     return total > 0 ? (
       <div>
-        <p>Food: £{total}</p>
-        <p>Delivery: £{deliveryCharge}</p>
-        <p>Total: £{orderTotal}</p>
-        <button onClick={this.handleClick} className="app__basket--button">
+        <ul className="basketItem--list">{orderedItems}</ul>
+        {/* {return orderTotal < 10 ? (
+        <div>
+          <p>Subtotal £{total}</p>
+          <p>minimum order has to be £10</p>
+          <p>Delivery Fee £{fixedDeliveryCharge}</p>
+          <p>Total £{orderTotal}</p>
+          <button
+            onClick={this.handleClick}
+            className="app__basket--button"
+            disabled
+          >
+            Order Now
+          </button>
+        </div>
+        ) : ( */}
+        {/* <div> */}
+        <p>Subtotal £{total}</p>
+        <p>Delivery Fee £{fixedDeliveryCharge}</p>
+        <p>Total £{orderTotal}</p>
+        <button onClick={this.handleClick} className="display__basket--button">
           Order Now
         </button>
-        <a onClick={this.fetchAllOrders}>
-          <p className="app__basket--previous-orders">Previous Orders</p>
-        </a>
+        {/* </div> */}
+        {/* )}; */}
       </div>
     ) : (
-      <div />
-    );
-  }
-
-  prevOrder() {
-    const prevOrder = this.state.previousOrder;
-    return previousOrder !== {} ? (
-      <div className="previous-order">
-        <ul>
-          {prevOrder.map(order => {
-            return <li key="order.id" />;
-          })}
-        </ul>
+      <div>
+        <p>Your basket is empty</p>
       </div>
-    ) : (
-      <div />
     );
   }
 
@@ -76,12 +78,15 @@ class Basket extends React.Component {
         this.props.basketMenuItems[orderId].price);
     }, 0);
     return (
-      <div className="app__basket">
-        <img
-          src="../../static/shopping-basket.png"
-          className="app__basket--img"
-        />
-        {this.getBasket(total)}
+      <div className="display__basket">
+        <div className="display__basket--box">
+          <img
+            src="../../static/shopping-basket.png"
+            className="display__basket--icon"
+          />
+          <hr />
+          {this.getBasket(total)}
+        </div>
       </div>
     );
   }
