@@ -8,7 +8,6 @@ class Item extends React.Component {
 
   handleChange(event) {
     this.props.receiveNewQuantity(this.props.item.id, event.target.value);
-    // event.target.value = "";
   }
 
   render() {

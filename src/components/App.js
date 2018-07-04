@@ -11,7 +11,9 @@ class App extends React.Component {
       currentOrder: {},
       quantity: 0
     };
+
     this.receiveNewQuantity = this.receiveNewQuantity.bind(this);
+    this.receiveWipeOrder = this.receiveWipeOrder.bind(this);
   }
 
   componentDidMount() {
@@ -20,12 +22,16 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
-        // console.log(data);
         this.setState({
           menuItems: data
         });
-        // console.log(this.state);
       });
+  }
+
+  receiveWipeOrder() {
+    this.setState({
+      currentOrder: {}
+    });
   }
 
   receiveNewQuantity(id, quantity) {
@@ -39,12 +45,12 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log(this.state.currentOrder);
     return (
       <div className="app">
         <Header />
         <Menu
           receiveNewQuantity={this.receiveNewQuantity}
+          receiveWipeOrder={this.receiveWipeOrder}
           menuItems={Object.values(this.state.menuItems)}
           currentOrder={this.state.currentOrder}
           basketMenuItems={this.state.menuItems}

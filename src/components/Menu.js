@@ -31,6 +31,7 @@ class Menu extends React.Component {
           basketMenuItems={this.props.menuItems}
           currentOrder={this.props.currentOrder}
           quantity={this.props.quantity}
+          receiveWipeOrder={this.props.receiveWipeOrder}
         />
       </div>
     );

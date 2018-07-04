@@ -21,6 +21,8 @@ class Basket extends React.Component {
         return response.json();
       })
       .catch(error => console.log(error));
+
+    this.props.receiveWipeOrder();
   }
 
   getBasket(total) {
@@ -38,34 +40,27 @@ class Basket extends React.Component {
     return total > 0 ? (
       <div>
         <ul className="basketItem--list">{orderedItems}</ul>
-        {/* {return orderTotal < 10 ? (
-        <div>
-          <p>Subtotal £{total}</p>
-          <p>minimum order has to be £10</p>
-          <p>Delivery Fee £{fixedDeliveryCharge}</p>
-          <p>Total £{orderTotal}</p>
-          <button
-            onClick={this.handleClick}
-            className="app__basket--button"
-            disabled
-          >
-            Order Now
-          </button>
-        </div>
-        ) : ( */}
-        {/* <div> */}
         <p>Subtotal £{total}</p>
         <p>Delivery Fee £{fixedDeliveryCharge}</p>
         <p>Total £{orderTotal}</p>
-        <button onClick={this.handleClick} className="display__basket--button">
+        <button
+          onClick={this.handleClick}
+          className="display__basket--button"
+          id="display__basket--button"
+        >
           Order Now
         </button>
-        {/* </div> */}
-        {/* )}; */}
       </div>
     ) : (
       <div>
         <p>Your basket is empty</p>
+        <button
+          onClick={this.handleClick}
+          className="display__basket--button-disabled"
+          disabled
+        >
+          Order Now
+        </button>
       </div>
     );
   }

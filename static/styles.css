@@ -64,7 +64,19 @@ p {
 
 .display__basket--button {
   background-color: #23b282;
-  color: #222;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1rem;
+  border: none;
+  width: 100%;
+}
+
+.display__basket--button-disabled {
+  background-color: grey;
+  color: white;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -149,7 +161,6 @@ p {
 
   .display__menu {
     flex: 2;
-    /* overflow: hidden; */
   }
 
   .display__basket hr {
@@ -159,7 +170,7 @@ p {
   .display__basket--box {
     position: sticky;
     top: 0;
-    box-shadow: 0px 10px 40px #e6fff2;
+    box-shadow: 0px 10px 15px #e0e0e0;
     margin-right: 2rem;
     margin-left: 2rem;
     padding-bottom: 2rem;
@@ -184,6 +195,18 @@ p {
   }
 
   .display__basket--button {
+    width: 95%;
+  }
+
+  .display__basket--button-disabled {
+    background-color: grey;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border: none;
     width: 95%;
   }
 
