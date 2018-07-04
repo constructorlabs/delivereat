@@ -7,6 +7,7 @@ import Basket from './basket/Basket';
 import OldOrders from './orders/OldOrders';
 import Search from './Search';
 import Footer from './Footer';
+import Main from './Main';
 
 class App extends React.Component {
   constructor() {
@@ -158,9 +159,11 @@ class App extends React.Component {
     return (
       <div className="app-wrapper">
         <Header title="Delivereat" />
-        <Search />
+
+        <Main />
+        {/* <Search />
         {basket}
-        {currentSection}
+        {currentSection} */}
         <Footer />
       </div>
     )

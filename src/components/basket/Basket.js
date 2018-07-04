@@ -7,30 +7,25 @@ import BasketEmptyMessage from './BasketEmptyMessage';
 import SubNavigation from '../navs/SubNavigation';
 import BasketCheckoutButton from './BasketCheckoutButton';
 
-class Basket extends React.Component {
+function Basket(props) {
+    const totalAmount = props.orderAmount + props.deliveryPrice;
+    const deliveryPrice = props.deliveryPrice;
 
-    constructor(props) {
-        super(props)
-        this.state({
-            totalAmount: this.props.orderAmount + this.props.deliveryPrice,
-            deliveryPrice: this.props.deliveryPrice,
-        })
+    function ordersHandler(dishId, quantity, price, action) {
+        props.receiver(dishId, quantity, price, action);
     }
 
-    ordersHandler(dishId, quantity, price, action) {
-        this.props.receiver(dishId, quantity, price, action);
+    function sectionHandler(section) {
+        props.receiverOrder(section);
     }
 
-    sectionHandler(section) {
-        this.props.receiverOrder(section);
+    function oldOrdersHandler(section) {
+        sectionHandler(section);
+        props.oldOrders();
     }
 
-    oldOrdersHandler(section) {
-        this.sectionHandler(section);
-        this.props.oldOrders();
-    }
+    function checkoutHandler(order) {
 
-    checkoutHandler(order) {
         const date = new Date();
         const orderDate = date.toDateString() + ", " + date.getHours() + ":" + date.getMinutes();
         const orderNew = Object.assign(
@@ -59,47 +54,46 @@ class Basket extends React.Component {
             });
     }
 
-    render() {
-        return (
-            <div className="menu menu-wrapper">
 
-                <Header title="Delivereat" />
-                <Search />
-                <SubNavigation
-                    receiverSection={sectionHandler}
-                    receiverOldOrders={oldOrdersHandler} />
+    return (
+        <div className="menu menu-wrapper">
 
-                <h1 className="menu__heading">Basket</h1>
-                <div id="menu-container" className="menu-container">
-                    {/* If basket is empty display message */}
-                    <BasketEmptyMessage orders={this.props.orders} />
+            <Header title="Delivereat" />
+            <Search />
+            <SubNavigation
+                receiverSection={sectionHandler}
+                receiverOldOrders={oldOrdersHandler} />
 
-                    {/* Products display */}
-                    {Object.keys(this.props.orders).map(orderKey => {
-                        const { dishId, price, qty } = this.props.orders[orderKey];
-                        return <BasketProduct
-                            key={dishId}
-                            dishId={dishId}
-                            price={price}
-                            qty={qty}
-                            receiver={ordersHandler}
-                            menu={this.props.menu} />
-                    })}
+            <h1 className="menu__heading">Basket</h1>
+            <div id="menu-container" className="menu-container">
+                {/* If basket is empty display message */}
+                <BasketEmptyMessage orders={props.orders} />
 
-                    {/* Price display */}
-                    <BasketPriceDisplay
-                        totalAmount={totalAmount}
-                        orders={this.props.orders}
-                        orderAmount={this.props.orderAmount}
-                        deliveryPrice={this.props.deliveryPrice} />
+                {/* Products display */}
+                {Object.keys(props.orders).map(orderKey => {
+                    const { dishId, price, qty } = props.orders[orderKey];
+                    return <BasketProduct
+                        key={dishId}
+                        dishId={dishId}
+                        price={price}
+                        qty={qty}
+                        receiver={ordersHandler}
+                        menu={props.menu} />
+                })}
 
-                    <BasketCheckoutButton
-                        receiverCheckOutHandler={this.checkoutHandler}
-                        orders={this.props.orders} />
-                </div>
-            </div >
-        )
-    }
+                {/* Price display */}
+                <BasketPriceDisplay
+                    totalAmount={totalAmount}
+                    orders={props.orders}
+                    orderAmount={props.orderAmount}
+                    deliveryPrice={props.deliveryPrice} />
+
+                <BasketCheckoutButton
+                    receiverCheckOutHandler={checkoutHandler}
+                    orders={props.orders} />
+            </div>
+        </div >
+    )
 }
 
 export default Basket;

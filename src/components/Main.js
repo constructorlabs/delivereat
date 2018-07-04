@@ -7,6 +7,7 @@ import Search from './Search';
 function Main() {
     return (
         <Switch>
+            {/* <Route exact path="/" exact component={App} /> */}
             <Route exact path="/Basket" exact component={Basket} />
             <Route exact path="/mymenu" exact component={Search} />
         </Switch>
