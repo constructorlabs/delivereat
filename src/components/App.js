@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
 import BasketWidget from './basket/BasketWidget';
 import Menu from './menu/Menu';
@@ -39,6 +40,7 @@ class App extends React.Component {
         console.log(error);
       });
   }
+
   ordersHandler(dishId, quantity, price, action) {
     // Find if dish is already in orders and get position
     const dishPosition = Object.keys(this.state.currentOrders).find(order => {
@@ -120,38 +122,38 @@ class App extends React.Component {
     let currentSection;
     let basket;
 
-    if (section === "Menu") {
-      currentSection = <Menu
-        receiver={this.ordersHandler}
-        menu={this.state.menu}
-        orders={this.state.currentOrders}
-      />;
-      basket = <BasketWidget
-        receiver={this.sectionHandler}
-        basketCount={this.state.basket}
-        orderAmount={this.state.orderAmount}
-        menu={this.state.menu}
-      />;
-    } else if (section === "Orders") {
-      currentSection = <Basket
-        orderAmount={this.state.orderAmount}
-        receiver={this.ordersHandler}
-        receiverOrder={this.sectionHandler}
-        orders={this.state.currentOrders}
-        oldOrders={this.oldOrdersHandler}
-        menu={this.state.menu}
-        deliveryPrice={this.state.deliveryPrice}
-      />;
-      basket = null;
-    } else if (section === "OldOrders") {
-      currentSection = <OldOrders
-        oldOrders={this.state.oldOrders}
-        menu={this.state.menu}
-        receiverOrder={this.sectionHandler}
-        receiverSection={this.sectionHandler}
-      />;
-      basket = null;
-    }
+    // if (section === "Menu") {
+    //   currentSection = <Menu
+    //     receiver={this.ordersHandler}
+    //     menu={this.state.menu}
+    //     orders={this.state.currentOrders}
+    //   />;
+    //   basket = <BasketWidget
+    //     receiver={this.sectionHandler}
+    //     basketCount={this.state.basket}
+    //     orderAmount={this.state.orderAmount}
+    //     menu={this.state.menu}
+    //   />;
+    // } else if (section === "Orders") {
+    //   currentSection = <Basket
+    //     orderAmount={this.state.orderAmount}
+    //     receiver={this.ordersHandler}
+    //     receiverOrder={this.sectionHandler}
+    //     orders={this.state.currentOrders}
+    //     oldOrders={this.oldOrdersHandler}
+    //     menu={this.state.menu}
+    //     deliveryPrice={this.state.deliveryPrice}
+    //   />;
+    //   basket = null;
+    // } else if (section === "OldOrders") {
+    //   currentSection = <OldOrders
+    //     oldOrders={this.state.oldOrders}
+    //     menu={this.state.menu}
+    //     receiverOrder={this.sectionHandler}
+    //     receiverSection={this.sectionHandler}
+    //   />;
+    //   basket = null;
+    // }
 
     return (
       <div className="app-wrapper">

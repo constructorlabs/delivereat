@@ -77,7 +77,7 @@ const { showMenu, showDish } = getMenu();
 const { showOrders, addOrders } = getOrders();
 
 // Render index.hbs template
-app.get('/', function (req, res) {
+app.get('*', function (req, res) {
   res.render('index');
 });
 
