@@ -1,3 +1,439 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  overflow: auto;
+
   margin: 0;
+  font-family: "Luckiest Guy", cursive;
+}
+
+.header {
+  offset: static;
+  width: 100%;
+  text-align: center;
+  background-color: yellow;
+  color: rebeccapurple;
+  margin: 0;
+  padding: 10px;
+  border-bottom-color: green;
+  border-left-color: yellow;
+  border-right-color: yellow;
+  border-top-color: yellow;
+  border-style: solid;
+}
+
+.logo {
+  display: block;
+  top: 10px;
+  float: right;
+
+  max-width: 70%;
+  border-color: green;
+  border-style: solid;
+  border-radius: 80%;
+  width: 120px;
+  height: 110px;
+}
+
+.display {
+  display: flex;
+  overflow: auto;
+
+  background-color: tomato;
+  color: gainsboro;
+}
+
+.display__menu {
+  display: block;
+  padding: 20px;
+  margin: 0;
+}
+
+.display__menu-title {
+  font-size: 20px;
+}
+
+.display__title {
+  display: flex;
+  flex-direction: row;
+
+  background-color: palevioletred;
+  color: rgba(255, 255, 0, 0.89);
+
+  padding: 20px;
+  margin: 0;
+
+  justify-content: space-evenly;
+  align-items: center;
+
+  border-left-color: palevioletred;
+  border-right-color: palevioletred;
+  border-bottom-color: green;
+  border-top-color: green;
+  border-style: solid;
+}
+
+.bakers__dozen {
+  display: none;
+
+  background-color: tomato;
+  color: gainsboro;
+
+  text-align: left;
+
+  padding: 5px;
+  margin: 0;
+}
+
+.showOldOrders {
+  width: 100px;
+}
+
+.li__menu {
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  box-shadow: 0 0 10px 1px gainsboro;
+}
+
+.specialTag {
+  color: black;
+}
+
+.display__menu-images {
+  --wh: 200px;
+
+  display: block;
+  width: var(--wh);
+  height: var(--wh);
+  border: 3px solid green;
+  border-radius: var(--wh);
+  text-align: center;
+}
+
+.order__display {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
+  background-color: green;
+  color: gainsboro;
+
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 10px;
+
+  border: 3px;
+  border-style: solid;
+  border-color: yellow;
+}
+
+.delivery__charge {
+  color: rebeccapurple;
+
+  font-style: italic;
+  font-weight: bold;
+}
+
+.display__oldOrders {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  border-style: solid;
+  border-color: green;
+
+  background-color: rebeccapurple;
+  color: whitesmoke;
+
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.oldOrders__item-name {
+  width: 50px;
+
+  text-align: center;
+}
+
+.orders__image {
+  display: none;
+
+  width: 200px;
+  height: 90px;
+}
+
+.stoner__quote {
+  display: none;
+
+  font-size: 18px;
+  font-style: italic;
+}
+
+.footer {
+  width: 100%;
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+
+  background-color: yellow;
+  color: rebeccapurple;
+
+  border-bottom-color: yellow;
+  border-left-color: yellow;
+  border-right-color: yellow;
+  border-top-color: green;
+  border-style: solid;
+
+  padding: 10px;
+}
+
+button {
+  font-family: "Luckiest Guy", cursive;
+
+  height: 10px;
+
+  background-color: green;
+  color: yellow;
+
+  border-color: rebeccapurple;
+  border-style: solid;
+  border-radius: 21px;
+}
+
+@media (min-width: 768px) {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    overflow: auto;
+
+    margin: 0;
+    font-family: "Luckiest Guy", cursive;
+  }
+
+  .header {
+    offset: static;
+    width: 100%;
+    text-align: center;
+    background-color: yellow;
+    color: rebeccapurple;
+    margin: 0;
+    padding: 10px;
+    border-bottom-color: green;
+    border-left-color: yellow;
+    border-right-color: yellow;
+    border-top-color: yellow;
+    border-style: solid;
+  }
+
+  .logo {
+    display: block;
+    top: 10px;
+    float: right;
+
+    max-width: 70%;
+    border-color: green;
+    border-style: solid;
+    border-radius: 80%;
+    width: 120px;
+    height: 110px;
+  }
+
+  .display {
+    /* display: flex; */
+    overflow: auto;
+
+    background-color: tomato;
+    color: gainsboro;
+  }
+
+  .display__menu {
+    display: block;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .display__menu-title {
+    font-size: 20px;
+  }
+
+  .display__title {
+    display: flex;
+    flex-direction: row;
+
+    background-color: palevioletred;
+    color: rgba(255, 255, 0, 0.89);
+
+    padding: 20px;
+    margin: 0;
+
+    justify-content: space-evenly;
+    align-items: center;
+
+    border-left-color: palevioletred;
+    border-right-color: palevioletred;
+    border-bottom-color: green;
+    border-top-color: green;
+    border-style: solid;
+  }
+
+  .bakers__dozen {
+    display: block;
+
+    background-color: tomato;
+    color: gainsboro;
+
+    text-align: left;
+
+    padding: 5px;
+    margin: 0;
+  }
+
+  .showOldOrders {
+    width: 100px;
+  }
+
+  .li__menu {
+    list-style: none;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  hr {
+    border: 0;
+    height: 0;
+    box-shadow: 0 0 10px 1px gainsboro;
+  }
+
+  .specialTag {
+    color: black;
+  }
+
+  .display__menu-images {
+    --wh: 250px;
+  }
+
+  .order__display {
+    display: flex;
+    position: fixed;
+    flex-direction: row;
+    overflow: auto;
+
+    background-color: green;
+    color: gainsboro;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    right: 0px;
+    width: 300px;
+    padding: 10px;
+
+    border: 3px;
+    border-style: solid;
+    border-color: yellow;
+    border-radius: 40%;
+  }
+
+  .delivery__charge {
+    color: rebeccapurple;
+
+    font-style: italic;
+    font-weight: bold;
+  }
+
+  .display__oldOrders {
+    display: flex;
+    flex-direction: row;
+
+    height: 100px;
+    width: 100%;
+
+    border-style: solid;
+    border-color: green;
+
+    background-color: rebeccapurple;
+    color: whitesmoke;
+
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .oldOrders__title {
+    display: block;
+  }
+
+  .oldOrders__item-name {
+    width: 50px;
+
+    text-align: center;
+  }
+
+  .orders__image {
+    display: block;
+
+    width: 200px;
+    height: 90px;
+  }
+
+  .stoner__quote {
+    display: block;
+
+    font-size: 18px;
+    font-style: italic;
+  }
+
+  .footer {
+    width: 100%;
+
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    text-align: center;
+
+    background-color: yellow;
+    color: rebeccapurple;
+
+    border-bottom-color: yellow;
+    border-left-color: yellow;
+    border-right-color: yellow;
+    border-top-color: green;
+    border-style: solid;
+
+    padding: 20px;
+  }
+
+  button {
+    font-family: "Luckiest Guy", cursive;
+
+    height: 20px;
+
+    background-color: green;
+    color: yellow;
+
+    border-color: rebeccapurple;
+    border-style: solid;
+    border-radius: 40%;
+  }
 }
