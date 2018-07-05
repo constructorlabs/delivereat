@@ -24363,7 +24363,10 @@ var App = function (_React$Component) {
       return _react2.default.createElement(
         "div",
         { className: "app__body" },
-        _react2.default.createElement(_Header2.default, { logoActive: this.state.logoActive }),
+        _react2.default.createElement(_Header2.default, {
+          toggleLogo: this.toggleLogo,
+          logoActive: this.state.logoActive
+        }),
         _react2.default.createElement(_Main2.default, { toggleLogo: this.toggleLogo }),
         _react2.default.createElement(
           "footer",
@@ -24403,11 +24406,18 @@ var _reactRouterDom = __webpack_require__(/*! react-router-dom */ "./node_module
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function Header() {
+function Header(_ref) {
+  var toggleLogo = _ref.toggleLogo,
+      logoActive = _ref.logoActive;
+
   return _react2.default.createElement(
     "header",
     { className: "header" },
-    _react2.default.createElement("img", { className: "logo", src: "./static/images/munchieslogo-1.jpg" }),
+    _react2.default.createElement("img", {
+      onClick: toggleLogo,
+      className: logoActive ? "logo" : "logo__null",
+      src: "./static/images/munchieslogo-1.jpg"
+    }),
     _react2.default.createElement(
       "h1",
       null,
@@ -24517,7 +24527,7 @@ function HomePage() {
       _react2.default.createElement(
         "p",
         { className: "homepage__welcome-para" },
-        "Welcome to Baked Delivery, the brainchild of munchie conessuire, Hamzah Kurdi. Never worry about the munchies again, we deliver a variety of budtastic food to meet your needs.",
+        "Welcome to Baked Delivery, the brainchild of munchie connoisseur, Hamzah Kurdi. Never worry about the munchies again, we deliver a variety of budtastic food to meet your needs.",
         _react2.default.createElement("br", null),
         " ",
         _react2.default.createElement("br", null),
@@ -24594,7 +24604,8 @@ var Main = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
     _this.state = {
-      previousOrders: {}
+      previousOrders: {},
+      active: false
     };
 
     _this.reorderReceiver = _this.reorderReceiver.bind(_this);

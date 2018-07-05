@@ -9,7 +9,8 @@ class Main extends React.Component {
     super();
 
     this.state = {
-      previousOrders: {}
+      previousOrders: {},
+      active: false
     };
 
     this.reorderReceiver = this.reorderReceiver.bind(this);

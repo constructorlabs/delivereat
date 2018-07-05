@@ -52,7 +52,7 @@ body {
   border-bottom-style: none;
 }
 
-.logo {
+.logo__null {
   display: block;
   top: 10px;
   float: right;
@@ -63,6 +63,42 @@ body {
   border-radius: 80%;
   width: 120px;
   height: 110px;
+}
+
+.logo {
+  display: block;
+  /* float: right; */
+
+  max-width: 70%;
+  border-color: green;
+  border-style: solid;
+  border-radius: 80%;
+  width: 120px;
+  height: 110px;
+
+  animation-name: car;
+  animation-duration: 10s;
+}
+
+@keyframes car {
+  0% {
+    right: 0px;
+    top: 0px;
+  }
+  25% {
+    left: 200px;
+    top: 0px;
+  }
+  50% {
+    left: 200px;
+  }
+  75% {
+    left: 0px;
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+  }
 }
 
 .homepage__display {

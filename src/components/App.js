@@ -23,7 +23,10 @@ class App extends React.Component {
   render() {
     return (
       <div className="app__body">
-        <Header logoActive={this.state.logoActive} />
+        <Header
+          toggleLogo={this.toggleLogo}
+          logoActive={this.state.logoActive}
+        />
 
         <Main toggleLogo={this.toggleLogo} />
         <footer className="footer">

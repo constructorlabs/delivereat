@@ -7,7 +7,7 @@ function HomePage() {
       <nav className="homepage__nav">
         <h2 className="homepage__welcome">Wassup bro!</h2>{" "}
         <p className="homepage__welcome-para">
-          Welcome to Baked Delivery, the brainchild of munchie conessuire,
+          Welcome to Baked Delivery, the brainchild of munchie connoisseur,
           Hamzah Kurdi. Never worry about the munchies again, we deliver a
           variety of budtastic food to meet your needs.
           <br /> <br /> <br />Stay Baked, bro.

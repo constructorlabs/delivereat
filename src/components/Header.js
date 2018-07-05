@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ toggleLogo, logoActive }) {
   return (
     <header className="header">
-      <img className="logo" src="./static/images/munchieslogo-1.jpg" />
+      <img
+        onClick={toggleLogo}
+        className={logoActive ? "logo" : "logo__null"}
+        src="./static/images/munchieslogo-1.jpg"
+      />
 
       <h1>Baked Delivery</h1>
       <p className="tagline">Never worry about the munchies again</p>
