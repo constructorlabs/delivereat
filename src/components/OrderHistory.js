@@ -12,7 +12,6 @@ class OrderHistory extends React.Component {
   }
 
   deleteFormItem(key) {
-    console.log("key2:", key);
     this.props.handleClearHistory(key);
   }
 

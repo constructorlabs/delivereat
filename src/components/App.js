@@ -76,7 +76,6 @@ class App extends React.Component {
     fetch("/api/order", { method: "get" })
       .then(response => response.json())
       .then(result => {
-        console.log("fetch order:", result);
         if (Object.keys(result).length === 0) {
           alert("Please place an order to view order");
         } else {
@@ -90,18 +89,19 @@ class App extends React.Component {
   }
 
   handleClearHistory(key) {
-    delete this.state.orderhistory[key];
-    this.setState({
-      orderhistory: this.state.orderhistory
-    });
+    // const tempOrderHistory = [...this.state.orderhistory];
+    // delete tempOrderHistory[key];
+    // this.setState({
+    //   orderhistory: tempOrderHistory
+    // });
 
     fetch(`/api/order/${key}`, { method: "delete" })
       .then(response => response.json())
       .then(result => {
         console.log("delete result:", result);
-        // this.setState({
-        //   orderhistory: result
-        // })
+        this.setState({
+          orderhistory: result
+        });
       })
       .catch(error => console.log(error));
   }
