@@ -155,6 +155,13 @@ app.delete("/api/order/:key", function(req, res) {
   res.status(201).json(orderhistory);
 });
 
-app.listen(8080, function() {
-  console.log("Listening on port 8080");
+// Use when not on Heroku app
+// app.listen(8080, function() {
+//   console.log("Listening on port 8080");
+// });
+
+// Heroku app port
+const port = process.env.PORT || 8080;
+listen(port, function() {
+  console.log(`Listening on port number ${port}`);
 });
