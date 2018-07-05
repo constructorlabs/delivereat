@@ -77,7 +77,9 @@ class App extends React.Component {
       .then(response => response.json())
       .then(result => {
         if (Object.keys(result).length === 0) {
-          alert("Please place an order to view order");
+          alert(
+            "โปรดสั่งซื้อเพื่อดูประวัติคำสั่งซื้อ || Please place an order to view order history"
+          );
         } else {
           this.setState({
             orderhistory: result,
@@ -120,7 +122,7 @@ class App extends React.Component {
           <Nav />
         </div>
         <button
-          className="orderform__history"
+          className="orderform__history button"
           onClick={this.getOrderHistory}
           type="submit"
         >

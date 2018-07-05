@@ -20120,7 +20120,7 @@ var App = function (_React$Component) {
         return response.json();
       }).then(function (result) {
         if (Object.keys(result).length === 0) {
-          alert("Please place an order to view order");
+          alert("โปรดสั่งซื้อเพื่อดูประวัติคำสั่งซื้อ || Please place an order to view order history");
         } else {
           _this2.setState({
             orderhistory: result,
@@ -20175,7 +20175,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           "button",
           {
-            className: "orderform__history",
+            className: "orderform__history button",
             onClick: this.getOrderHistory,
             type: "submit"
           },
@@ -20392,7 +20392,7 @@ var MenuItem = function (_React$Component) {
     value: function handleSubmit(event) {
       event.preventDefault();
       if (this.state.itemQuantity <= 0) {
-        alert("Please select an item to place an order");
+        alert("โปรดเลือกรายการที่จะสั่งซื้อ || Please select an item to place an order");
       } else {
         this.createOrder();
         this.setState({ itemQuantity: 0 });

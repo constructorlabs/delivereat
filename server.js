@@ -73,20 +73,41 @@ const storage = {
     },
     10: {
       id: 10,
+      name: "Coconut Ice Cream",
+      img: "./static/coconuticecream.jpeg",
+      price: 3.25,
+      type: "dessert"
+    },
+    11: {
+      id: 11,
+      name: "Green Tea Ice Cream",
+      img: "./static/greenteaicecream.jpeg",
+      price: 3.25,
+      type: "dessert"
+    },
+    12: {
+      id: 12,
+      name: "Mango Sticky Rice",
+      img: "./static/mangostickyrice.jpeg",
+      price: 4,
+      type: "dessert"
+    },
+    13: {
+      id: 13,
       name: "Chang",
       img: "./static/chang.jpg",
       price: 4.0,
       type: "drink"
     },
-    11: {
-      id: 11,
+    14: {
+      id: 14,
       name: "Mekhong",
       img: "./static/mekhong.jpg",
       price: 5.25,
       type: "drink"
     },
-    12: {
-      id: 12,
+    15: {
+      id: 15,
       name: "Lemongrass Iced Tea",
       img: "./static/icedtea.jpg",
       price: 3.0,
@@ -103,10 +124,6 @@ function getMenu(storage) {
 
 function getOrders(storage) {
   return storage.orders;
-}
-
-function getId(storage) {
-  return storage.id;
 }
 
 app.get("/", function(req, res) {
@@ -128,13 +145,6 @@ app.get("/api/menu/:menuItemId", function(req, res) {
   }
 });
 
-// POST to create order history
-// PATCH to update stock
-// DELETE to let users delete order history
-
-// app.post("/api/order", function(req, res) {
-//   res.json(req.body);
-// });
 app.post("/api/order", function(req, res) {
   const orderId = `order-${storage.id++}`;
   const tempOrder = req.body;
@@ -156,12 +166,12 @@ app.delete("/api/order/:key", function(req, res) {
 });
 
 // Use when not on Heroku app
-// app.listen(8080, function() {
-//   console.log("Listening on port 8080");
-// });
+app.listen(8080, function() {
+  console.log("Listening on port 8080");
+});
 
 // Heroku app port
-const port = process.env.PORT || 8080;
-app.listen(port, function() {
-  console.log(`Listening on port number ${port}`);
-});
+// const port = process.env.PORT || 8080;
+// app.listen(port, function() {
+//   console.log(`Listening on port number ${port}`);
+// });

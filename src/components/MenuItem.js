@@ -44,7 +44,9 @@ class MenuItem extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.state.itemQuantity <= 0) {
-      alert("Please select an item to place an order");
+      alert(
+        "โปรดเลือกรายการที่จะสั่งซื้อ || Please select an item to place an order"
+      );
     } else {
       this.createOrder();
       this.setState({ itemQuantity: 0 });

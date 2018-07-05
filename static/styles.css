@@ -92,6 +92,19 @@ button {
 
 .orderform__history {
   margin-top: 20px;
+  padding: 15px 35px;
+  transition: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  outline: none;
+  border: solid;
+  border-color: #202830;
+  border-radius: 60px;
+  color: #202830;
+  background: #ddd7c9;
+  opacity: 0.8;
 }
 
 .orderform-history__closebutton {
