@@ -125,7 +125,7 @@ class App extends React.Component {
           type="submit"
         >
           View Order History
-        </button>;
+        </button>
         <div className="main">
           {Object.keys(this.state.orderhistory).length === 0 ||
           this.state.closed === true ? null : (

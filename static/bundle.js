@@ -20181,7 +20181,6 @@ var App = function (_React$Component) {
           },
           "View Order History"
         ),
-        ";",
         _react2.default.createElement(
           "div",
           { className: "main" },
