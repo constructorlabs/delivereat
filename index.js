@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
 app.use("/static", express.static("static"));
@@ -124,7 +125,11 @@ app.get("/order/:orderNum", function(req, res) {
   }
 });
 
-// Server Listener
-app.listen(8080, function() {
-  console.log("Listening on port 8080");
+// Local Server Listener
+// app.listen(8080, function() {
+//   console.log("Listening on port 8080");
+// });
+// Heroku Server
+ListeningStateChangedEvent(port, function() {
+  console.log(`Listening on port number ${port}`);
 });
