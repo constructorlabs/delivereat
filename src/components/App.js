@@ -1,16 +1,64 @@
-import React from 'react';
+import React from "react";
+import Menu from "./Menu";
+import Header from "./Header";
+import Footer from "./Footer";
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
+    this.state = {
+      menuItems: {},
+      currentOrder: {},
+      quantity: 0
+    };
+
+    this.receiveNewQuantity = this.receiveNewQuantity.bind(this);
+    this.receiveWipeOrder = this.receiveWipeOrder.bind(this);
   }
 
-  render(){
+  componentDidMount() {
+    fetch(`/menu`)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        this.setState({
+          menuItems: data
+        });
+      });
+  }
+
+  receiveWipeOrder() {
+    this.setState({
+      currentOrder: {}
+    });
+  }
+
+  receiveNewQuantity(id, quantity) {
+    const currentOrder = Object.assign({}, this.state.currentOrder, {
+      [id]: +quantity
+    });
+
+    this.setState({
+      currentOrder
+    });
+  }
+
+  render() {
     return (
-      <div>
-        Delivereat app
+      <div className="app">
+        <Header />
+        <Menu
+          receiveNewQuantity={this.receiveNewQuantity}
+          receiveInputValues={this.receiveInputValues}
+          receiveWipeOrder={this.receiveWipeOrder}
+          menuItems={Object.values(this.state.menuItems)}
+          currentOrder={this.state.currentOrder}
+          basketMenuItems={this.state.menuItems}
+        />
+        <Footer />
       </div>
-    )
+    );
   }
 }
 
