@@ -155,6 +155,7 @@ app.delete("/api/order/:key", function(req, res) {
   res.status(201).json(orderhistory);
 });
 
-app.listen(8080, function() {
-  console.log("Listening on port 8080");
+const port = process.env.PORT || 8080;
+listen(port, function() {
+  console.log(`Listening on port number ${port}`);
 });
