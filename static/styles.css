@@ -94,6 +94,23 @@ button {
   margin-top: 20px;
 }
 
+.orderform-history__closebutton {
+  --badge-wh: 25px;
+  --offset: calc(var(--badge-wh) * -0.5);
+
+  position: absolute;
+  display: block;
+  width: var(--badge-wh);
+  height: var(--badge-wh);
+  margin: var(--offset) 0 0 var(--offset);
+  border-radius: var(--badge-wh);
+  text-align: center;
+  line-height: var(--badge-wh);
+  font-weight: bold;
+  background: white;
+  color: red;
+}
+
 .menu {
   display: flex;
   flex-wrap: wrap;

@@ -11,7 +11,8 @@ class App extends React.Component {
     this.state = {
       menu: [],
       orders: {},
-      orderhistory: ""
+      orderhistory: {},
+      closed: true
     };
 
     this.returnMenu = this.returnMenu.bind(this);
@@ -19,6 +20,8 @@ class App extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.clearOrder = this.clearOrder.bind(this);
     this.getOrderHistory = this.getOrderHistory.bind(this);
+    this.handleClearHistory = this.handleClearHistory.bind(this);
+    this.closeWasClicked = this.closeWasClicked.bind(this);
   }
 
   returnMenu(result) {
@@ -31,7 +34,8 @@ class App extends React.Component {
   }
 
   getOrder(order) {
-    const matchingOrder = Array.from(this.state.orders).find(currentOrder => {
+    const things = Array.from(this.state.orders);
+    const matchingOrder = things.find(currentOrder => {
       return order.id === currentOrder.id;
     });
 
@@ -73,11 +77,39 @@ class App extends React.Component {
       .then(response => response.json())
       .then(result => {
         console.log("fetch order:", result);
-        this.setState({
-          orderhistory: result
-        });
+        if (Object.keys(result).length === 0) {
+          alert("Please place an order to view order");
+        } else {
+          this.setState({
+            orderhistory: result,
+            closed: false
+          });
+        }
       })
       .catch(error => console.log(error));
+  }
+
+  handleClearHistory(key) {
+    delete this.state.orderhistory[key];
+    this.setState({
+      orderhistory: this.state.orderhistory
+    });
+
+    fetch(`/api/order/${key}`, { method: "delete" })
+      .then(response => response.json())
+      .then(result => {
+        console.log("delete result:", result);
+        // this.setState({
+        //   orderhistory: result
+        // })
+      })
+      .catch(error => console.log(error));
+  }
+
+  closeWasClicked() {
+    this.setState({
+      closed: true
+    });
   }
 
   render() {
@@ -95,10 +127,15 @@ class App extends React.Component {
           View Order History
         </button>;
         <div className="main">
-          {this.state.orderhistory === "" ? null : (
-            <OrderHistory orderhistory={this.state.orderhistory} />
+          {Object.keys(this.state.orderhistory).length === 0 ||
+          this.state.closed === true ? null : (
+            <OrderHistory
+              orderhistory={this.state.orderhistory}
+              handleClearHistory={this.handleClearHistory}
+              closeWasClicked={this.closeWasClicked}
+            />
           )}
-          {this.state.orders == {} ? null : (
+          {Object.keys(this.state.orders).length === 0 ? null : (
             <OrderForm
               orders={this.state.orders}
               handleDelete={this.handleDelete}

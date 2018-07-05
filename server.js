@@ -149,6 +149,12 @@ app.get("/api/order", function(req, res) {
   res.json(orders);
 });
 
+app.delete("/api/order/:key", function(req, res) {
+  orderhistory = storage.orders;
+  delete orderhistory[req.params.key];
+  res.status(201).json(orderhistory);
+});
+
 app.listen(8080, function() {
   console.log("Listening on port 8080");
 });
