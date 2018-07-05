@@ -1,54 +1,69 @@
 import React from "react";
+import OlderOrdersItem from "./OldOrdersItem";
 
-function OldOrders({ handleDelete, previousOrders, handleReorder }) {
-  function oldOrderReorder(event) {
-    handleReorder(oldItem);
+function OldOrders({ previousOrders, reorderReceiver, receiveReorderNew }) {
+  function handleReorder(reorder) {
+    fetch("/api/orders", {
+      method: "post",
+      body: JSON.stringify(reorder),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        return fetch(`/api/orders`);
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        receiveReorderNew(data);
+      });
   }
 
-  function getOrder(order) {
-    return Object.keys(order).map(singleItem => {
-      if (singleItem == "total") return <p style={{ color: "black" }}>TOTAL</p>;
-
-      // console.log("test", order[singleItem]);
-      // console.log("name", order[singleItem].name);
-      return (
-        <li key={singleItem} className="display__oldOrders-items">
-          <p>{order[singleItem].name}</p>
-          <p className="oldOrders__item-name">x{order[singleItem].quantity}</p>
-        </li>
-      );
-    });
+  function handleDelete(number) {
+    fetch(`/api/orders/${number}`, {
+      method: "delete"
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        return fetch(`/api/orders`);
+      })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        reorderReceiver(data);
+      });
   }
-
-  function oldOrderDelete(event) {
-    console.log(number);
-    handleDelete(number);
-  }
-
-  console.log("whole order", previousOrders);
 
   return (
     <div className="display__oldOrders">
       <h3 className="oldOrders__title">
-        Previous <br />Order
+        Previous <br />Orders
       </h3>
-      <ul>
-        {Object.keys(previousOrders).map(prevOrder => {
-          return (
-            <li>
-              <ul style={{ display: "flex" }}>
-                {getOrder(previousOrders[prevOrder])}
-              </ul>
-            </li>
-          );
-        })}
-      </ul>
 
-      <p>
-        Total:<br /> £ {previousOrders.total}
-      </p>
-      <button onClick={oldOrderReorder}>Reorder</button>
-      <button onClick={oldOrderDelete}>Delete Order</button>
+      {Object.keys(previousOrders).map(prevOrder => {
+        return (
+          <OlderOrdersItem
+            key={prevOrder.id}
+            number={prevOrder}
+            prevOrder={prevOrder}
+            previousOrders={previousOrders}
+            handleDelete={handleDelete}
+            handleReorder={handleReorder}
+            reorderReceiver={reorderReceiver}
+            receiveReorderNew={receiveReorderNew}
+          />
+        );
+      })}
+
       <img className="orders__image" src="./static/images/coolpizzalogo.png" />
     </div>
   );

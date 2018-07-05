@@ -6,22 +6,50 @@ body {
   overflow: auto;
 
   margin: 0;
+  min-height: 100vh;
+
   font-family: "Luckiest Guy", cursive;
 }
 
+.app__body {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+}
+
 .header {
-  offset: static;
   width: 100%;
+
   text-align: center;
+
   background-color: yellow;
   color: rebeccapurple;
+
   margin: 0;
-  padding: 10px;
+
   border-bottom-color: green;
   border-left-color: yellow;
   border-right-color: yellow;
   border-top-color: yellow;
+}
+
+.header__nav {
   border-style: solid;
+  border-top-color: green;
+  border-right-color: yellow;
+  border-left-color: yellow;
+  border-top-width: 5px;
+}
+
+.header__links {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-around;
+  align-items: center;
+
+  border-bottom-style: none;
 }
 
 .logo {
@@ -37,12 +65,55 @@ body {
   height: 110px;
 }
 
-.display {
+.homepage__display {
   display: flex;
+}
+
+.homepage__nav {
+  width: 300px;
+  overflow: auto;
+
+  font-size: 12px;
+
+  border-style: solid;
+  border-right-color: green;
+  border-right-width: 5px;
+  border-top-width: 0;
+
+  background-color: tomato;
+}
+
+.homepage__message-container {
   overflow: auto;
 
   background-color: tomato;
-  color: gainsboro;
+  color: #003300;
+}
+
+.homepage__message-title {
+  color: #003300;
+}
+
+.homepage__welcome {
+  color: #003300;
+}
+
+.homepage__welcome-para {
+  font-size: 18px;
+
+  color: #003300;
+}
+
+/* .menu {
+  display: flex;
+} */
+
+.display {
+  display: grid;
+  overflow: auto;
+  background-color: tomato;
+  color: #003300;
+  grid-template-columns: repeat(2, minmax(250px, 1fr));
 }
 
 .display__menu {
@@ -53,6 +124,7 @@ body {
 
 .display__menu-title {
   font-size: 20px;
+  color: #003300;
 }
 
 .display__title {
@@ -60,9 +132,8 @@ body {
   flex-direction: row;
 
   background-color: palevioletred;
-  color: rgba(255, 255, 0, 0.89);
+  color: #003300;
 
-  padding: 20px;
   margin: 0;
 
   justify-content: space-evenly;
@@ -79,7 +150,7 @@ body {
   display: none;
 
   background-color: tomato;
-  color: gainsboro;
+  color: #003300;
 
   text-align: left;
 
@@ -101,7 +172,7 @@ li {
 hr {
   border: 0;
   height: 0;
-  box-shadow: 0 0 10px 1px gainsboro;
+  box-shadow: 0 0 10px 1px #003300;
 }
 
 .specialTag {
@@ -148,7 +219,9 @@ hr {
 
 .display__oldOrders {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  overflow: auto;
 
   width: 100%;
 
@@ -183,10 +256,15 @@ hr {
   font-style: italic;
 }
 
+.message__inputs {
+  border-style: groove;
+  border-color: green;
+}
+
 .footer {
   width: 100%;
 
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   text-align: center;
@@ -228,7 +306,7 @@ button {
     font-family: "Luckiest Guy", cursive;
   }
 
-  .header {
+  /* .header {
     offset: static;
     width: 100%;
     text-align: center;
@@ -241,7 +319,7 @@ button {
     border-right-color: yellow;
     border-top-color: yellow;
     border-style: solid;
-  }
+  } */
 
   .logo {
     display: block;
@@ -256,14 +334,6 @@ button {
     height: 110px;
   }
 
-  .display {
-    /* display: flex; */
-    overflow: auto;
-
-    background-color: tomato;
-    color: gainsboro;
-  }
-
   .display__menu {
     display: block;
     padding: 20px;
@@ -272,6 +342,7 @@ button {
 
   .display__menu-title {
     font-size: 20px;
+    color: #003300;
   }
 
   .display__title {
@@ -279,18 +350,13 @@ button {
     flex-direction: row;
 
     background-color: palevioletred;
-    color: rgba(255, 255, 0, 0.89);
+    color: #003300;
 
-    padding: 20px;
     margin: 0;
 
     justify-content: space-evenly;
     align-items: center;
 
-    border-left-color: palevioletred;
-    border-right-color: palevioletred;
-    border-bottom-color: green;
-    border-top-color: green;
     border-style: solid;
   }
 
@@ -298,7 +364,7 @@ button {
     display: block;
 
     background-color: tomato;
-    color: gainsboro;
+    color: #003300;
 
     text-align: left;
 
@@ -316,12 +382,6 @@ button {
 
   li {
     list-style: none;
-  }
-
-  hr {
-    border: 0;
-    height: 0;
-    box-shadow: 0 0 10px 1px gainsboro;
   }
 
   .specialTag {
@@ -346,6 +406,7 @@ button {
     align-items: center;
 
     right: 0px;
+    bottom: 400px;
     width: 300px;
     padding: 10px;
 
@@ -364,9 +425,10 @@ button {
 
   .display__oldOrders {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 
-    height: 100px;
+    overflow: auto;
+
     width: 100%;
 
     border-style: solid;
@@ -393,8 +455,7 @@ button {
   .orders__image {
     display: block;
 
-    width: 200px;
-    height: 90px;
+    width: auto;
   }
 
   .stoner__quote {
@@ -407,7 +468,7 @@ button {
   .footer {
     width: 100%;
 
-    position: fixed;
+    position: relative;
     left: 0;
     bottom: 0;
     text-align: center;
@@ -435,5 +496,29 @@ button {
     border-color: rebeccapurple;
     border-style: solid;
     border-radius: 40%;
+  }
+
+  .homepage__display {
+    display: flex;
+  }
+
+  .homepage__nav {
+    width: 300px;
+    overflow: auto;
+
+    font-size: 12px;
+
+    border-style: solid;
+    border-right-color: green;
+    border-right-width: 5px;
+    border-top-width: 0;
+
+    background-color: tomato;
+  }
+
+  .homepage__message-container {
+    overflow: auto;
+
+    background-color: tomato;
   }
 }

@@ -6,7 +6,7 @@ function MenuItem({ item, showOrder, order, receiveOrder }) {
   }
 
   return (
-    <form className="display">
+    <form>
       <ul className="display__menu-items">
         <li key={item.id} className="display__menu">
           <h3 className="display__menu-title">{item.name}</h3>

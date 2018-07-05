@@ -24,10 +24,6 @@ function Header() {
             <Link to="/old-orders">Old Orders</Link>
           </li>
           <b />
-
-          <li>
-            <Link to="/portfolio">Contact Information</Link>
-          </li>
         </ul>
       </nav>
       <h2 className="display__title">

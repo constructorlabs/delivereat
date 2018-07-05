@@ -9,6 +9,8 @@ app.set("view engine", "hbs");
 let orders = {};
 let id = 1;
 
+let messID = 1;
+
 const menu = {
   1: {
     id: 1,
@@ -103,11 +105,44 @@ const menu = {
   }
 };
 
+let messages = {
+  1: {
+    message: "When you smoke herb, it reveals you to yourself",
+    person: "Bob Marley"
+  },
+
+  2: {
+    message:
+      "I used to smoke marijuana. But only in the evening. Oh, occassionally the late-afternoon but usually the evening - or mid-afternoon. Sometimes the early-mid-late morning. So just the morning, afternoon, and evening. But never at dusk",
+    person: "Steve Martin"
+  },
+
+  3: {
+    message:
+      "Why is marijuana illegal? It grows naturally from the ground just like flowers. Doesn't the idea of making nature against the law seem to you a bit...unatural?",
+    person: "Bill Hicks"
+  }
+};
+
 app.get("/menu-items", function(req, res) {
   res.json(menu);
 });
 
-app.post("/makeOrder", (req, res) => {
+app.get("/api/messages", function(req, res) {
+  res.json(messages);
+});
+
+app.post("/api/messages", function(req, res) {
+  console.log(req.body);
+  let messageID = `Message${messID}`;
+  messID++;
+  let tempMessage = { [messageID]: req.body.result };
+  messages = Object.assign({}, messages, tempMessage);
+  console.log(messages);
+  res.json(messages);
+});
+
+app.post("/api/orders", (req, res) => {
   let orderID = `Orders${id}`;
   id++;
   const tempOrder = { [orderID]: req.body };
@@ -115,12 +150,12 @@ app.post("/makeOrder", (req, res) => {
   res.json(orders);
 });
 
-app.get("/order", function(req, res) {
+app.get("/api/orders", function(req, res) {
   res.json(orders);
 });
 
-app.delete("/deleteOrder", (req, res) => {
-  delete orders[req.body.toDelete];
+app.delete("/api/orders/:id", (req, res) => {
+  delete orders[req.params.id];
   res.json(orders);
 });
 

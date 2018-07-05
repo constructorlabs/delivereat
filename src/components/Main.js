@@ -11,10 +11,14 @@ class Main extends React.Component {
     this.state = {
       previousOrders: {}
     };
+
+    this.reorderReceiver = this.reorderReceiver.bind(this);
+    this.receiveUpdateOrder = this.receiveUpdateOrder.bind(this);
+    this.receiveReorderNew = this.receiveReorderNew.bind(this);
   }
 
   componentDidMount() {
-    fetch(`/order`)
+    fetch(`/api/orders`)
       .then(function(response) {
         return response.json();
       })
@@ -25,78 +29,49 @@ class Main extends React.Component {
       });
   }
 
-  handleDelete(number) {
-    const self = this;
-    fetch("http://localhost:8080/deleteOrder", {
-      method: "delete",
-      body: JSON.stringify({ toDelete: number }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        fetch(`/order`)
-          .then(function(response) {
-            return response.json();
-          })
-          .then(data => {
-            self.setState({
-              previousOrders: data
-            });
-          });
-      });
+  reorderReceiver(data) {
+    this.setState({
+      previousOrders: data
+    });
   }
 
-  handleReorder(reorder) {
-    const self = this;
+  receiveUpdateOrder(data) {
+    this.setState({
+      previousOrders: data
+    });
+  }
 
-    fetch("http://localhost:8080/makeOrder", {
-      method: "post",
-      body: JSON.stringify(reorder),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
-      })
-      .then(function(data) {
-        fetch(`/order`)
-          .then(function(response) {
-            return response.json();
-          })
-          .then(data => {
-            self.setState({
-              previousOrders: data
-            });
-          });
-      });
+  receiveReorderNew(data) {
+    this.setState({
+      previousOrders: data
+    });
   }
 
   render() {
     return (
-      <main>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route
-            path="/menu"
-            render={() => <Menu previousOrders={this.state.previousOrders} />}
-          />
-          <Route
-            path="/old-orders"
-            render={() => (
-              <OldOrders
-                previousOrders={this.state.previousOrders}
-                // handleDelete={this.handleDelete}
-                // handleReorder={this.handleReorder}
-              />
-            )}
-          />
-        </Switch>
-      </main>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route
+          path="/menu"
+          render={() => (
+            <Menu
+              previousOrders={this.state.previousOrders}
+              receiveUpdateOrder={this.receiveUpdateOrder}
+              toggleLogo={this.props.toggleLogo}
+            />
+          )}
+        />
+        <Route
+          path="/old-orders"
+          render={() => (
+            <OldOrders
+              previousOrders={this.state.previousOrders}
+              reorderReceiver={this.reorderReceiver}
+              receiveReorderNew={this.receiveReorderNew}
+            />
+          )}
+        />
+      </Switch>
     );
   }
 }

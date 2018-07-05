@@ -1,7 +1,6 @@
 import React from "react";
 import MenuItem from "./MenuItem";
 import Order from "./Order";
-import OldOrders from "./OldOrders";
 
 class Menu extends React.Component {
   constructor() {
@@ -62,7 +61,7 @@ class Menu extends React.Component {
   handleClick(event) {
     const self = this;
 
-    fetch("http://localhost:8080/makeOrder", {
+    fetch("/api/orders", {
       method: "post",
       body: JSON.stringify(self.state.order),
       headers: {
@@ -73,28 +72,32 @@ class Menu extends React.Component {
         return response.json();
       })
       .then(function(data) {
-        fetch(`/order`)
+        fetch(`/api/orders`)
           .then(function(response) {
             return response.json();
           })
           .then(data => {
-            self.setState({
-              previousOrders: data
-            });
+            console.log("handleClick");
+
+            self.props.receiveUpdateOrder(data);
           });
       });
 
     this.setState({
       order: {}
     });
+
+    this.props.toggleLogo();
   }
 
   handleOrder(event) {
-    fetch(`/order`)
+    fetch(`/api/orders`)
       .then(function(response) {
         return response.json();
       })
       .then(data => {
+        console.log("hello");
+
         this.setState({
           previousOrders: data
         });
@@ -107,59 +110,9 @@ class Menu extends React.Component {
     });
   }
 
-  // handleDelete(number) {
-  //   const self = this;
-  //   fetch("http://localhost:8080/deleteOrder", {
-  //     method: "delete",
-  //     body: JSON.stringify({ toDelete: number }),
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(function(response) {
-  //       return response.json();
-  //     })
-  //     .then(function(data) {
-  //       fetch(`/order`)
-  //         .then(function(response) {
-  //           return response.json();
-  //         })
-  //         .then(data => {
-  //           self.setState({
-  //             previousOrders: data
-  //           });
-  //         });
-  //     });
-  // }
-
-  // handleReorder(reorder) {
-  //   const self = this;
-
-  //   fetch("http://localhost:8080/makeOrder", {
-  //     method: "post",
-  //     body: JSON.stringify(reorder),
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   })
-  //     .then(function(response) {
-  //       return response.json();
-  //     })
-  //     .then(function(data) {
-  //       fetch(`/order`)
-  //         .then(function(response) {
-  //           return response.json();
-  //         })
-  //         .then(data => {
-  //           self.setState({
-  //             previousOrders: data
-  //           });
-  //         });
-  //     });
-  // }
   render() {
     return (
-      <div>
+      <div className="display">
         {this.state.showOrder ? (
           <Order
             handleClose={this.handleClose}
@@ -168,7 +121,6 @@ class Menu extends React.Component {
           />
         ) : null}
 
-        <h3 className="bakers__dozen">Check out the Baked Dozen...</h3>
         {Object.values(this.state.menuItems).map(item => {
           return (
             <MenuItem
