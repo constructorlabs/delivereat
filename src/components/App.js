@@ -23,6 +23,7 @@ class App extends React.Component {
     this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
     this.checkOrderSentHandler = this.checkOrderSentHandler.bind(this);
     this.receiverDeletedOrder = this.receiverDeletedOrder.bind(this);
+    this.receiverAddOrder = this.receiverAddOrder.bind(this);
   }
 
   componentDidMount() {
@@ -116,9 +117,18 @@ class App extends React.Component {
     })
   }
 
+  receiverAddOrder(updatedOldOrders) {
+    this.setState({
+      oldOrders: updatedOldOrders
+    })
+  }
+
   checkOrderSentHandler() {
     this.setState({
-      orderSent: true
+      orderSent: true,
+      currentOrders: {},
+      orderAmount: 0,
+      basket: 0
     })
   }
 
@@ -144,7 +154,7 @@ class App extends React.Component {
           <Route exact path="/basket" render={() => <Basket
             orderAmount={this.state.orderAmount}
             receiver={this.ordersHandler}
-            orders={this.state.currentOrders}
+            currentOrders={this.state.currentOrders}
             oldOrders={this.oldOrdersHandler}
             menu={this.state.menu}
             deliveryPrice={this.state.deliveryPrice}
@@ -154,7 +164,8 @@ class App extends React.Component {
           <Route exact path="/old-orders" render={() => <OldOrders
             oldOrders={this.state.oldOrders}
             menu={this.state.menu}
-            receiverDeletedOrder={this.receiverDeletedOrder} />}
+            receiverDeletedOrder={this.receiverDeletedOrder}
+            receiverAddOrder={this.receiverAddOrder} />}
           />
         </Switch>
         <Footer />

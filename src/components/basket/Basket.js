@@ -20,7 +20,9 @@ function Basket(props) {
 
     function checkoutHandler(order) {
         const date = new Date();
-        const orderDate = date.toDateString() + ", " + date.getHours() + ":" + date.getMinutes();
+        const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : '' + date.getMinutes();
+        const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : '' + date.getSeconds();
+        const orderDate = date.toDateString() + ", " + date.getHours() + ":" + minutes + ":" + seconds;
         const orderNew = Object.assign(
             {},
             { products: [order] },
@@ -56,14 +58,16 @@ function Basket(props) {
 
             <h1 className="menu__heading">Basket</h1>
             <div id="menu-container" className="menu-container">
-                {/* If basket is empty display message */}
-                <BasketEmptyMessage orders={props.orders} />
 
+                {/* If order is checked out display "Order placed" message */}
                 <BasketOrderSent orderSent={props.orderSent} />
 
+                {/* If basket is empty display "Empty basket" message */}
+                <BasketEmptyMessage orders={props.currentOrders} />
+
                 {/* Products display */}
-                {Object.keys(props.orders).map(orderKey => {
-                    const { dishId, price, qty } = props.orders[orderKey];
+                {Object.keys(props.currentOrders).map(orderKey => {
+                    const { dishId, price, qty } = props.currentOrders[orderKey];
                     return <BasketProduct
                         key={dishId}
                         dishId={dishId}
@@ -76,15 +80,15 @@ function Basket(props) {
                 {/* Price display */}
                 <BasketPriceDisplay
                     totalAmount={totalAmount}
-                    orders={props.orders}
+                    orders={props.currentOrders}
                     orderAmount={props.orderAmount}
                     deliveryPrice={props.deliveryPrice} />
 
                 <BasketCheckoutButton
                     receiverCheckOutHandler={checkoutHandler}
-                    orders={props.orders} />
+                    orders={props.currentOrders} />
             </div>
-        </div >
+        </div>
     )
 }
 

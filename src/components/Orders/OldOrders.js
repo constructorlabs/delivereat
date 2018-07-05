@@ -18,6 +18,7 @@ function OldOrders(props) {
                     order={order}
                     menu={props.menu}
                     receiverDeletedOrder={props.receiverDeletedOrder}
+                    oldOrdersReceiver={props.receiverAddOrder}
                 />
             })}
         </div>

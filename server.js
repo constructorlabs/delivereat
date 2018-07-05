@@ -17,7 +17,7 @@ function getOrders() {
     addOrders(newOrder) {
       const keys = Object.keys(orders)
       const id = keys.length ? +keys.pop() + 1 : 1;
-      orders = Object.assign({}, orders, { [id]: newOrder });
+      orders = Object.assign({}, { [id]: newOrder }, orders);
       console.log("Data received on the server", orders)
       // console.log("orders", orders);
     },
@@ -123,8 +123,8 @@ app.get('/api/orders', function (req, res) {
 app.post("/api/order", function (req, res) {
   const order = req.body;
   if (order) {
-    res.json(order)
     addOrders(order);
+    res.json(showOrders())
   } else {
     res.status(404).json({ error: "Order error" });
   }
