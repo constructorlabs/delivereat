@@ -18,8 +18,13 @@ function getOrders() {
       const keys = Object.keys(orders)
       const id = keys.length ? +keys.pop() + 1 : 1;
       orders = Object.assign({}, orders, { [id]: newOrder });
-      console.log("Data received on the server", newOrder)
+      console.log("Data received on the server", orders)
       // console.log("orders", orders);
+    },
+    delOrder(id) {
+      console.log("orders in del", orders);
+      delete orders[id];
+      console.log("orders in del", orders);
     }
   };
 }
@@ -74,7 +79,7 @@ function getMenu() {
 }
 
 const { showMenu, showDish } = getMenu();
-const { showOrders, addOrders } = getOrders();
+const { showOrders, addOrders, delOrder } = getOrders();
 
 
 
@@ -124,6 +129,18 @@ app.post("/api/order", function (req, res) {
     res.status(404).json({ error: "Order error" });
   }
 });
+
+app.post("/api/order/:id", function (req, res) {
+  const order = req.params.id;
+  console.log("order deleted in server: " + order);
+  if (order) {
+    delOrder(order);
+    res.json(showOrders())
+  } else {
+    res.status(404).json({ error: "Order delete error" });
+  }
+});
+
 
 // Render index.hbs template
 app.get('*', function (req, res) {

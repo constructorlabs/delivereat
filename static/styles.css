@@ -303,9 +303,21 @@ display: none;
   border-radius: var(--radius)
 }
 
+.old-order__delete,
 .old-order__re-order:hover {
   cursor: pointer;
   opacity: .8;
+}
+
+.old-order__delete {  padding: 5px 15px;
+  color: #fff;
+  background-color: tomato;
+  text-align: center;
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  border-radius: var(--radius);
+  margin-left: 10px;
 }
 
 .old-orders__empty {
@@ -350,7 +362,7 @@ body,
 
 .footer {
   position:absolute;
-  bottom:0;
+  bottom:-30px;
   width:100%;
   height:60px;
 }

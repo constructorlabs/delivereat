@@ -15,7 +15,9 @@ function OldOrders(props) {
                     date={props.oldOrders[order].orderDate}
                     totalAmount={props.oldOrders[order].totalAmount}
                     products={props.oldOrders[order].products}
+                    order={order}
                     menu={props.menu}
+                    receiverDeletedOrder={props.receiverDeletedOrder}
                 />
             })}
         </div>

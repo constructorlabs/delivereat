@@ -22,6 +22,7 @@ class App extends React.Component {
     this.ordersHandler = this.ordersHandler.bind(this);
     this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
     this.checkOrderSentHandler = this.checkOrderSentHandler.bind(this);
+    this.receiverDeletedOrder = this.receiverDeletedOrder.bind(this);
   }
 
   componentDidMount() {
@@ -109,6 +110,12 @@ class App extends React.Component {
       });
   }
 
+  receiverDeletedOrder(updatedOldOrders) {
+    this.setState({
+      oldOrders: updatedOldOrders
+    })
+  }
+
   checkOrderSentHandler() {
     this.setState({
       orderSent: true
@@ -146,7 +153,8 @@ class App extends React.Component {
           />
           <Route exact path="/old-orders" render={() => <OldOrders
             oldOrders={this.state.oldOrders}
-            menu={this.state.menu} />}
+            menu={this.state.menu}
+            receiverDeletedOrder={this.receiverDeletedOrder} />}
           />
         </Switch>
         <Footer />
