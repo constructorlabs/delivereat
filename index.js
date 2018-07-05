@@ -130,6 +130,6 @@ app.get("/order/:orderNum", function(req, res) {
 //   console.log("Listening on port 8080");
 // });
 // Heroku Server
-ListeningStateChangedEvent(port, function() {
+app.listen(port, function() {
   console.log(`Listening on port number ${port}`);
 });
