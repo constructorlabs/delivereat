@@ -29,6 +29,7 @@ class Item extends React.Component {
               step="1"
               onChange={this.handleChange}
               min="0"
+              value={this.props.quantity}
             />
           </label>
         </div>

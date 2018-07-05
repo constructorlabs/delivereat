@@ -46,6 +46,8 @@ p {
 
 .display__basket {
   flex: 1;
+  position: sticky;
+  bottom: 0;
   text-align: center;
   background-color: mintcream;
 }
@@ -57,33 +59,37 @@ p {
   padding-bottom: 2rem;
 }
 
+.display__basket--box hr {
+  display: none;
+}
+
 .display__basket--icon {
   width: 2rem;
   padding-top: 1.5rem;
 }
 
 .display__basket--button {
-  background-color: #23b282;
-  color: white;
+  display: inline-block;
+  width: 100%;
   padding: 15px 32px;
+  border: none;
+  font-size: 1rem;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  border: none;
-  width: 100%;
+  background-color: #23b282;
+  color: white;
 }
 
 .display__basket--button-disabled {
-  background-color: grey;
-  color: white;
+  display: inline-block;
+  width: 100%;
   padding: 15px 32px;
+  border: none;
+  font-size: 1rem;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 1rem;
-  border: none;
-  width: 100%;
+  background-color: grey;
+  color: white;
 }
 
 .display__basket--button:hover {
@@ -91,10 +97,7 @@ p {
 }
 
 .basketItem--list {
-  font-weight: 900;
-  font-size: 1.25rem;
-  text-align: center;
-  list-style-type: square;
+  display: none;
 }
 
 .display__menu--title {
@@ -178,6 +181,10 @@ p {
     background-color: mintcream;
   }
 
+  .display__basket--box hr {
+    display: block;
+  }
+
   .display__menuItems {
     text-align: left;
   }
@@ -211,6 +218,11 @@ p {
   }
 
   .basketItem--list {
+    display: block;
+    font-weight: 900;
+    font-size: 1.25rem;
+    text-align: center;
+    list-style-type: square;
     text-align: left;
   }
 

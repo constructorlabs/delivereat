@@ -23,6 +23,7 @@ class Basket extends React.Component {
       .catch(error => console.log(error));
 
     this.props.receiveWipeOrder();
+    alert("Thank you for your order!");
   }
 
   getBasket(total) {

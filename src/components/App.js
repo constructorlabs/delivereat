@@ -50,6 +50,7 @@ class App extends React.Component {
         <Header />
         <Menu
           receiveNewQuantity={this.receiveNewQuantity}
+          receiveInputValues={this.receiveInputValues}
           receiveWipeOrder={this.receiveWipeOrder}
           menuItems={Object.values(this.state.menuItems)}
           currentOrder={this.state.currentOrder}

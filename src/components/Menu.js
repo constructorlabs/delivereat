@@ -16,11 +16,8 @@ class Menu extends React.Component {
                     item={item}
                     key={item.id}
                     receiveNewQuantity={this.props.receiveNewQuantity}
-                    quantity={
-                      (this.props.currentOrder[item.id] &&
-                        this.props.currentOrder[item.id].quantity) ||
-                      0
-                    }
+                    receiveInputValue={this.props.receiveInputValue}
+                    quantity={this.props.currentOrder[item.id] || 0}
                   />
                 );
               })}
