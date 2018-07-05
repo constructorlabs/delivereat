@@ -1,10 +1,18 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './Header';
+<<<<<<< HEAD
 import BasketWidget from './basket/BasketWidget';
 import Menu from './menu/Menu';
 import Basket from './basket/Basket';
 import OldOrders from './orders/OldOrders';
+=======
+import Basket from './Basket';
+import Menu from './Menu/Menu';
+import Orders from './Orders/Orders';
+import OldOrders from './Orders/OldOrders';
+import Search from './Search';
+>>>>>>> 3d6587c540fd9b74707fc66cda39c2960d598af1
 import Footer from './Footer';
 
 class App extends React.Component {
@@ -16,6 +24,7 @@ class App extends React.Component {
       menu: {},
       basket: 0,
       orderAmount: 0,
+<<<<<<< HEAD
       deliveryPrice: 2.50,
       orderSent: false
     }
@@ -24,6 +33,14 @@ class App extends React.Component {
     this.checkOrderSentHandler = this.checkOrderSentHandler.bind(this);
     this.receiverDeletedOrder = this.receiverDeletedOrder.bind(this);
     this.receiverAddOrder = this.receiverAddOrder.bind(this);
+=======
+      section: "Menu",
+      oldOrders: {}
+    }
+    this.ordersHandler = this.ordersHandler.bind(this);
+    this.sectionHandler = this.sectionHandler.bind(this);
+    this.oldOrdersHandler = this.oldOrdersHandler.bind(this);
+>>>>>>> 3d6587c540fd9b74707fc66cda39c2960d598af1
   }
 
   componentDidMount() {
@@ -117,6 +134,7 @@ class App extends React.Component {
     })
   }
 
+<<<<<<< HEAD
   receiverAddOrder(updatedOldOrders) {
     this.setState({
       oldOrders: updatedOldOrders
@@ -168,6 +186,46 @@ class App extends React.Component {
             receiverAddOrder={this.receiverAddOrder} />}
           />
         </Switch>
+=======
+  oldOrdersHandler() {
+    fetch('/api/getorders')
+      .then(function (response) {
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({
+          oldOrders: data
+        });
+        // console.log("Old ords", data)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  render() {
+    console.log("Orders state: ", this.state.orders);
+    const section = this.state.section;
+    let currentSection;
+    let basket;
+    if (section === "Menu") {
+      currentSection = <Menu receiver={this.ordersHandler} />;
+      basket = <Basket receiver={this.sectionHandler} basketCount={this.state.basket} orderAmount={this.state.orderAmount} />;
+    } else if (section === "Orders") {
+      currentSection = <Orders orderAmount={this.state.orderAmount} receiver={this.ordersHandler} receiverOrder={this.sectionHandler} orders={this.state.orders} oldOrders={this.oldOrdersHandler} />;
+      basket = null;
+    } else if (section === "OldOrders") {
+      currentSection = <OldOrders orders={this.state.orders} oldOrders={this.state.oldOrders} receiverOrder={this.sectionHandler} receiver={this.oldOrdersHandler} />;
+      basket = null;
+    }
+
+    return (
+      <div className="app-wrapper">
+        <Header title="Delivereat" />
+        <Search />
+        {basket}
+        {currentSection}
+>>>>>>> 3d6587c540fd9b74707fc66cda39c2960d598af1
         <Footer />
       </div>
     )

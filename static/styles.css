@@ -247,6 +247,7 @@ button {
   opacity: .8;
 }
 
+<<<<<<< HEAD
 .basket__checkout-button_wrapper.hidden {
   display: none;
 }
@@ -327,6 +328,11 @@ display: none;
 
 .old-orders__empty.hidden {
   display: none;
+=======
+.basket__options {
+  display: flex;
+  justify-content: space-between;
+>>>>>>> 3d6587c540fd9b74707fc66cda39c2960d598af1
 }
 
 /* Back to menu button */
