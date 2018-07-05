@@ -37,5 +37,8 @@
     "nodemon": "^1.17.5",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
+  },
+  "engines": {
+    "node": "8.11.2"
   }
 }
