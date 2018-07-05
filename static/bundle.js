@@ -20267,7 +20267,7 @@ var Menu = function (_React$Component) {
     value: function fetchMenu() {
       var _this2 = this;
 
-      fetch("http://localhost:8080/api/menu").then(function (response) {
+      fetch("/api/menu").then(function (response) {
         return response.json();
       }).then(function (result) {
         _this2.props.returnMenu(result);
