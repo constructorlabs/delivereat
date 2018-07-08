@@ -35,28 +35,34 @@ class Messages extends React.Component {
       person: this.state.newAuthor
     };
     console.log(result);
-
-    fetch(`/api/messages`, {
-      method: "post",
-      body: JSON.stringify({ result }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(function(response) {
-        return response.json();
+    if (
+      this.state.newMess.length > 0 &&
+      typeof this.state.newMess === "string" &&
+      this.state.newAuthor.length > 0 &&
+      typeof this.state.newAuthor === "string"
+    ) {
+      fetch(`/api/messages`, {
+        method: "post",
+        body: JSON.stringify({ result }),
+        headers: {
+          "Content-Type": "application/json"
+        }
       })
-      .then(function(data) {
-        return fetch(`/api/messages`);
-      })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        this.setState({
-          messages: data
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          return fetch(`/api/messages`);
+        })
+        .then(response => {
+          return response.json();
+        })
+        .then(data => {
+          this.setState({
+            messages: data
+          });
         });
-      });
+    }
   }
 
   quoteChange(event) {

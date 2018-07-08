@@ -25019,24 +25019,25 @@ var Messages = function (_React$Component) {
         person: this.state.newAuthor
       };
       console.log(result);
-
-      fetch("/api/messages", {
-        method: "post",
-        body: JSON.stringify({ result: result }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        return fetch("/api/messages");
-      }).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        _this3.setState({
-          messages: data
+      if (this.state.newMess.length > 0 && typeof this.state.newMess === "string" && this.state.newAuthor.length > 0 && typeof this.state.newAuthor === "string") {
+        fetch("/api/messages", {
+          method: "post",
+          body: JSON.stringify({ result: result }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          return fetch("/api/messages");
+        }).then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          _this3.setState({
+            messages: data
+          });
         });
-      });
+      }
     }
   }, {
     key: "quoteChange",
