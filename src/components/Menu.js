@@ -84,7 +84,8 @@ class Menu extends React.Component {
       });
 
     this.setState({
-      order: {}
+      order: {},
+      showOrder: false
     });
 
     this.props.toggleLogo();

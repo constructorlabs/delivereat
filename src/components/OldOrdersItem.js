@@ -20,8 +20,8 @@ function OlderOrdersItem({
       {Object.keys(previousOrders[prevOrder]).map(singleItem => {
         if (singleItem == "total") return;
         return (
-          <ul>
-            <li key={number} className="display__oldOrders-items">
+          <ul className="display__oldOrders-items">
+            <li key={number}>
               <p>
                 {previousOrders[prevOrder][singleItem].name} x{
                   previousOrders[prevOrder][singleItem].quantity

@@ -24816,7 +24816,8 @@ var Menu = function (_React$Component) {
       });
 
       this.setState({
-        order: {}
+        order: {},
+        showOrder: false
       });
 
       this.props.toggleLogo();
@@ -25254,10 +25255,10 @@ function OlderOrdersItem(_ref) {
       if (singleItem == "total") return;
       return _react2.default.createElement(
         "ul",
-        null,
+        { className: "display__oldOrders-items" },
         _react2.default.createElement(
           "li",
-          { key: number, className: "display__oldOrders-items" },
+          { key: number },
           _react2.default.createElement(
             "p",
             null,
@@ -25332,7 +25333,7 @@ function Order(_ref) {
         }
         return _react2.default.createElement(
           "li",
-          { className: "li__menu" },
+          { key: order.id, className: "li__menu" },
           _react2.default.createElement(
             "p",
             null,

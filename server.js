@@ -105,7 +105,7 @@ let messages = {
 
   2: {
     message:
-      "The hot chocoalte is a real treat, do yourself a favour and order one. Goes fab with the original donut.",
+      "The hot chocolate is a real treat, do yourself a favour and order one. Goes fab with the original donut.",
     person: "Steve Rogers"
   },
 

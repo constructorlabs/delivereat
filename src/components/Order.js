@@ -9,7 +9,7 @@ function Order({ order, showOrder, handleClick, handleClose }) {
             if (id == "total") return;
           }
           return (
-            <li className="li__menu">
+            <li key={order.id} className="li__menu">
               <p>
                 {order[id].name} :<br />£ {order[id].ownTotal.toFixed(2)}
               </p>
