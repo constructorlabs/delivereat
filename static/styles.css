@@ -8,7 +8,7 @@ body {
   margin: 0;
   min-height: 100vh;
 
-  font-family: "Luckiest Guy", cursive;
+  font-family: "Gaegu", cursive;
 }
 
 .app__body {
@@ -23,22 +23,22 @@ body {
 
   text-align: center;
 
-  background-color: yellow;
-  color: rebeccapurple;
+  background-color: #c4e2ed;
+  color: #e482a2;
 
   margin: 0;
 
-  border-bottom-color: green;
-  border-left-color: yellow;
-  border-right-color: yellow;
-  border-top-color: yellow;
+  border-bottom-color: #e482a2;
+  border-left-color: #c4e2ed;
+  border-right-color: #c4e2ed;
+  border-top-color: #c4e2ed;
 }
 
 .header__nav {
   border-style: solid;
-  border-top-color: green;
-  border-right-color: yellow;
-  border-left-color: yellow;
+  border-top-color: #fb8310;
+  border-right-color: #c4e2ed;
+  border-left-color: #c4e2ed;
   border-top-width: 5px;
 }
 
@@ -52,17 +52,21 @@ body {
   border-bottom-style: none;
 }
 
+a {
+  color: #e482a2;
+}
+
 .logo__null {
   display: block;
   top: 10px;
   float: right;
 
   max-width: 70%;
-  border-color: green;
+  border-color: #fb8310;
   border-style: solid;
-  border-radius: 80%;
+  border-radius: 20%;
   width: 120px;
-  height: 110px;
+  height: 100px;
 }
 
 .logo {
@@ -71,14 +75,52 @@ body {
   float: right;
 
   max-width: 70%;
-  border-color: green;
+  border-color: #fb8310;
   border-style: solid;
-  border-radius: 80%;
+  border-radius: 20%;
   width: 120px;
-  height: 110px;
+  height: 100px;
 
-  animation-name: car;
+  animation-name: logo-move;
   animation-duration: 4s;
+}
+
+@keyframes logo-move {
+  0% {
+    transform: translate3d(-4px, 0, 0), rotate(0deg);
+    right: 0px;
+    top: 0px;
+  }
+  25% {
+    transform: translate3d(-8px, 0, 0), rotate(200deg);
+
+    right: 200px;
+    top: 0px;
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+
+  51% {
+    transform: translate3d(-12px, 0, 0);
+
+    right: 400px;
+    top: 600px;
+  }
+  75% {
+    transform: translate3d(-20px, 0, 0);
+
+    right: 400px;
+    top: 600px;
+  }
+  100% {
+    transform: translate3d(-4px, 0, 0);
+
+    position: fixed;
+    float: left;
+    right: 1000px;
+    top: 0px;
+  }
 }
 
 .homepage__display {
@@ -86,50 +128,41 @@ body {
 }
 
 .homepage__nav {
-  width: 300px;
-  overflow: auto;
-
-  font-size: 12px;
-
-  border-style: solid;
-  border-right-color: green;
-  border-right-width: 5px;
-  border-top-width: 0;
-
-  background-color: tomato;
+  display: none;
 }
 
 .homepage__message-container {
   overflow: auto;
 
-  background-color: tomato;
-  color: #003300;
+  background-color: #c4e2ed;
+  color: #c37692;
 }
 
 .homepage__message-title {
-  color: #003300;
+  color: #e481a2;
+
+  padding: 5px;
 }
 
 .homepage__welcome {
-  color: #003300;
+  color: #e481a2;
+
+  padding: 5px;
 }
 
 .homepage__welcome-para {
   font-size: 18px;
+  padding: 5px;
 
-  color: #003300;
+  color: #e481a2;
 }
 
-/* .menu {
-  display: flex;
-} */
-
 .display {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   overflow: auto;
-  background-color: tomato;
-  color: #003300;
-  grid-template-columns: repeat(2, minmax(250px, 1fr));
+  background-color: #c4e2ed;
+  color: #fb8210;
 }
 
 .display__menu {
@@ -140,38 +173,26 @@ body {
 
 .display__menu-title {
   font-size: 20px;
-  color: #003300;
+  color: #e481a2;
 }
 
 .display__title {
   display: flex;
   flex-direction: row;
 
-  background-color: palevioletred;
-  color: #003300;
+  background-color: #fb8310;
+  color: #f6f6f6;
 
   margin: 0;
 
   justify-content: space-evenly;
   align-items: center;
 
-  border-left-color: palevioletred;
-  border-right-color: palevioletred;
-  border-bottom-color: green;
-  border-top-color: green;
+  border-left-color: #fb8310;
+  border-right-color: #fb8310;
+  border-bottom-color: #f6f6f6;
+  border-top-color: #f6f6f6;
   border-style: solid;
-}
-
-.bakers__dozen {
-  display: none;
-
-  background-color: tomato;
-  color: #003300;
-
-  text-align: left;
-
-  padding: 5px;
-  margin: 0;
 }
 
 .showOldOrders {
@@ -188,11 +209,7 @@ li {
 hr {
   border: 0;
   height: 0;
-  box-shadow: 0 0 10px 1px #003300;
-}
-
-.specialTag {
-  color: black;
+  box-shadow: 0 0 10px 1px #fb8210;
 }
 
 .display__menu-images {
@@ -201,7 +218,7 @@ hr {
   display: block;
   width: var(--wh);
   height: var(--wh);
-  border: 3px solid green;
+  border: 3px solid #fb8310;
   border-radius: var(--wh);
   text-align: center;
 }
@@ -210,20 +227,16 @@ hr {
   display: flex;
   flex-direction: column;
   overflow: auto;
-
-  background-color: green;
-  color: gainsboro;
-
+  background-color: #e481a2;
+  color: #f6f6f6;
   text-align: center;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   padding: 10px;
-
   border: 3px;
   border-style: solid;
-  border-color: yellow;
+  border-color: #fb8210;
 }
 
 .delivery__charge {
@@ -237,19 +250,19 @@ hr {
   display: flex;
   flex: 1;
   flex-direction: column;
+
   overflow: auto;
 
   width: 100%;
 
   border-style: solid;
-  border-color: green;
+  border-color: #fb8310;
 
-  background-color: rebeccapurple;
-  color: whitesmoke;
+  background-color: #c4e2ed;
+  color: #e481a2;
 
   justify-content: center;
   align-items: center;
-  justify-content: space-between;
 }
 
 .oldOrders__item-name {
@@ -259,22 +272,27 @@ hr {
 }
 
 .orders__image {
-  display: none;
-
   width: 200px;
   height: 90px;
+
+  border-radius: 40%;
+  border-color: #fb8310;
+  border-style: solid;
+}
+
+.old-orders__total {
+  display: flex;
+  justify-content: center;
 }
 
 .stoner__quote {
-  display: none;
-
   font-size: 18px;
   font-style: italic;
 }
 
 .message__inputs {
-  border-style: groove;
-  border-color: green;
+  border-style: solid;
+  border-color: #fb8310;
 }
 
 .footer {
@@ -285,187 +303,93 @@ hr {
   bottom: 0;
   text-align: center;
 
-  background-color: yellow;
-  color: rebeccapurple;
+  background-color: #fb8310;
+  color: #f6f6f6;
 
-  border-bottom-color: yellow;
-  border-left-color: yellow;
-  border-right-color: yellow;
-  border-top-color: green;
+  border-bottom-color: #fb8310;
+  border-left-color: #fb8310;
+  border-right-color: #fb8310;
+  border-top-color: #f6f6f6;
   border-style: solid;
 
   padding: 10px;
 }
 
 button {
+  text-align: center;
   font-family: "Luckiest Guy", cursive;
 
-  height: 10px;
+  height: 15px;
+  width: 100px;
 
-  background-color: green;
-  color: yellow;
+  background-color: #fb8310;
+  color: #f6f6f6;
 
-  border-color: rebeccapurple;
+  border-color: #f6f6f6;
   border-style: solid;
   border-radius: 21px;
 }
 
 @media (min-width: 768px) {
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    overflow: auto;
-
-    margin: 0;
-    font-family: "Luckiest Guy", cursive;
-  }
-
-  /* .header {
-    offset: static;
-    width: 100%;
-    text-align: center;
-    background-color: yellow;
-    color: rebeccapurple;
-    margin: 0;
-    padding: 10px;
-    border-bottom-color: green;
-    border-left-color: yellow;
-    border-right-color: yellow;
-    border-top-color: yellow;
-    border-style: solid;
-  } */
-
   .logo {
-    display: block;
-    top: 10px;
-    float: right;
-
-    max-width: 70%;
-    border-color: green;
-    border-style: solid;
-    border-radius: 80%;
-    width: 120px;
-    height: 110px;
+    animation: logo-move 10s cubic-bezier(0.36, 0.07, 0.19, 0.97);
   }
 
-  .display__menu {
-    display: block;
-    padding: 20px;
-    margin: 0;
-  }
+  @keyframes logo-move {
+    0% {
+      transform: translate3d(-4px, 0, 0), rotate(0deg);
+      right: 0px;
+      top: 0px;
+    }
+    25% {
+      transform: translate3d(-8px, 0, 0), rotate(200deg);
 
-  .display__menu-title {
-    font-size: 20px;
-    color: #003300;
-  }
+      right: 200px;
+      top: 0px;
+    }
+    50% {
+      transform: rotate(360deg);
+    }
 
-  .display__title {
-    display: flex;
-    flex-direction: row;
+    51% {
+      transform: translate3d(-12px, 0, 0);
 
-    background-color: palevioletred;
-    color: #003300;
+      right: 400px;
+      top: 600px;
+    }
+    75% {
+      transform: translate3d(-20px, 0, 0);
 
-    margin: 0;
+      right: 400px;
+      top: 600px;
+    }
+    100% {
+      transform: translate3d(-4px, 0, 0);
 
-    justify-content: space-evenly;
-    align-items: center;
-
-    border-style: solid;
-  }
-
-  .bakers__dozen {
-    display: block;
-
-    background-color: tomato;
-    color: #003300;
-
-    text-align: left;
-
-    padding: 5px;
-    margin: 0;
-  }
-
-  .showOldOrders {
-    width: 100px;
-  }
-
-  .li__menu {
-    list-style: none;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  .specialTag {
-    color: black;
-  }
-
-  .display__menu-images {
-    --wh: 250px;
+      position: fixed;
+      float: left;
+      right: 1000px;
+      top: 0px;
+    }
   }
 
   .order__display {
     display: flex;
     position: fixed;
     flex-direction: row;
-    overflow: auto;
-
-    background-color: green;
-    color: gainsboro;
 
     text-align: center;
     justify-content: center;
     align-items: center;
 
     right: 0px;
-    bottom: 400px;
+    bottom: 300px;
     width: 300px;
     padding: 10px;
 
     border: 3px;
     border-style: solid;
-    border-color: yellow;
     border-radius: 40%;
-  }
-
-  .delivery__charge {
-    color: rebeccapurple;
-
-    font-style: italic;
-    font-weight: bold;
-  }
-
-  .display__oldOrders {
-    display: flex;
-    flex-direction: column;
-
-    overflow: auto;
-
-    width: 100%;
-
-    border-style: solid;
-    border-color: green;
-
-    background-color: rebeccapurple;
-    color: whitesmoke;
-
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .oldOrders__title {
-    display: block;
-  }
-
-  .oldOrders__item-name {
-    width: 50px;
-
-    text-align: center;
   }
 
   .orders__image {
@@ -476,65 +400,31 @@ button {
 
   .stoner__quote {
     display: block;
-
-    font-size: 18px;
-    font-style: italic;
-  }
-
-  .footer {
-    width: 100%;
-
-    position: relative;
-    left: 0;
-    bottom: 0;
-    text-align: center;
-
-    background-color: yellow;
-    color: rebeccapurple;
-
-    border-bottom-color: yellow;
-    border-left-color: yellow;
-    border-right-color: yellow;
-    border-top-color: green;
-    border-style: solid;
-
-    padding: 20px;
-  }
-
-  button {
-    font-family: "Luckiest Guy", cursive;
-
-    height: 20px;
-
-    background-color: green;
-    color: yellow;
-
-    border-color: rebeccapurple;
-    border-style: solid;
-    border-radius: 40%;
-  }
-
-  .homepage__display {
-    display: flex;
   }
 
   .homepage__nav {
+    display: block;
     width: 300px;
     overflow: auto;
 
     font-size: 12px;
 
     border-style: solid;
-    border-right-color: green;
+    border-top-color: #e481a2;
+    border-right-color: #fb8310;
+    border-bottom-color: #f6f6f6;
+    border-left-color: #c4e2ed;
     border-right-width: 5px;
     border-top-width: 0;
 
-    background-color: tomato;
+    background-color: #c4e2ed;
   }
 
-  .homepage__message-container {
+  .display {
+    display: grid;
     overflow: auto;
-
-    background-color: tomato;
+    background-color: #c4e2ed;
+    color: #fb8210;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
   }
 }

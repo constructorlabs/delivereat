@@ -14,113 +14,105 @@ let messID = 1;
 const menu = {
   1: {
     id: 1,
-    name: "Spacecake",
-    price: 4.2,
-    img: "./static/images/spacecakes.jpeg"
+    name: "Original Doughnut",
+    price: 2,
+    img: "./static/images/original-donut.jpg"
   },
 
   2: {
     id: 2,
-    name: "Happy Pizza",
-    price: 14.2,
-    img: "./static/images/pizza.jpg"
+    name: "Chocolate Twist Doughnut",
+    price: 3.5,
+    img: "./static/images/chocolate-twist.png"
   },
 
   3: {
     id: 3,
-    name: "Burger Joint",
-    price: 14.2,
-    img: "./static/images/burger.jpg"
+    name: "Giant Amsterdam Doughnut",
+    price: 4.2,
+    img: "./static/images/giant-donut.jpg"
   },
 
   4: {
     id: 4,
-    name: "Baked Potato",
-    price: 13.2,
-    img: "./static/images/baked.png"
+    name: "Victoria Sponge Cake",
+    price: 10,
+    img: "./static/images/victoria-sponge.jpg"
   },
 
   5: {
     id: 5,
-    name: "Pineapple Express",
-    price: 8,
-    img: "./static/images/pineapple.jpg"
+    name: "Carrot Cake",
+    price: 12.5,
+    img: "./static/images/carrot-cake.jpg"
   },
 
   6: {
     id: 6,
-    name: "Hash Brownies",
-    price: 8.4,
-    img: "./static//images/hashbrownies.jpg"
+    name: "Chocolate Cake",
+    price: 10,
+    img: "./static//images/choco-cake.jpg"
   },
 
   7: {
     id: 7,
-    name: "Sour Gummybears",
-    price: 10,
-    img: "./static/images/gummybears.jpg"
+    name: "Apple Puffs",
+    price: 2,
+    img: "./static/images/apple-puffs.jpg"
   },
 
   8: {
     id: 8,
-    name: "Chocolate-Trip Ice Cream",
-    price: 6,
-    img: "./static/images/chocotrip.jpg"
+    name: "Belgian Buns",
+    price: 2,
+    img: "./static/images/belgian-buns.jpg"
   },
 
   9: {
     id: 9,
-    name: "Relaxation Mints",
-    price: 3,
-    img: "./static/images/mints.jpg"
+    name: "Pastry Assortment",
+    price: 5.5,
+    img: "./static/images/assorted.jpeg"
   },
 
   10: {
     id: 10,
-    name: "Sweet-Grass Juice",
-    price: 7,
-    img: "./static/images/juice.jpeg"
+    name: "PG Tips Tea",
+    price: 2,
+    img: "./static/images/pg-tips.jpg"
   },
 
   11: {
     id: 11,
-    name: "Keefa Cola",
-    price: 3,
-    img: "./static/images/keefcola.png"
+    name: "Soft Drinks",
+    price: 2,
+    img: "./static/images/soft-drinks.jpg"
   },
 
   12: {
     id: 12,
-    name: "Cannapunch",
-    price: 4,
-    img: "./static/images/cannapunch.jpg"
-  },
-
-  13: {
-    id: 13,
-    name: "Hammy's House Special",
-    tag: "* Not for the faint-hearted *",
-    price: 44.22,
-    img: "./static/images/housespecial.jpg"
+    name: "Hamzah's Hot Chocolate",
+    price: 4.2,
+    img: "./static/images/hot-chocolate.jpg"
   }
 };
 
 let messages = {
   1: {
-    message: "When you smoke herb, it reveals you to yourself",
-    person: "Bob Marley"
+    message: "Baked delivery has been a god send, portions are excellent!",
+    person: "Bob Marvey"
   },
 
   2: {
     message:
-      "I used to smoke marijuana. But only in the evening. Oh, occassionally the late-afternoon but usually the evening - or mid-afternoon. Sometimes the early-mid-late morning. So just the morning, afternoon, and evening. But never at dusk",
-    person: "Steve Martin"
+      "The hot chocoalte is a real treat, do yourself a favour and order one. Goes fab with the original donut.",
+    person: "Steve Rogers"
   },
 
   3: {
     message:
-      "Why is marijuana illegal? It grows naturally from the ground just like flowers. Doesn't the idea of making nature against the law seem to you a bit...unatural?",
-    person: "Bill Hicks"
+      "Delivery was super quick, ordered at 4 and it was on my desk by 4:20. Delivery bloke was super chilled as well.",
+    person: "Clare Kurdi"
   }
 };
 

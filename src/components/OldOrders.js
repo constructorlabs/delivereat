@@ -64,7 +64,10 @@ function OldOrders({ previousOrders, reorderReceiver, receiveReorderNew }) {
         );
       })}
 
-      <img className="orders__image" src="./static/images/coolpizzalogo.png" />
+      <img
+        className="orders__image"
+        src="./static/images/bakery-order-logo.jpg"
+      />
     </div>
   );
 }

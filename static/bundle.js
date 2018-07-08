@@ -24371,7 +24371,7 @@ var App = function (_React$Component) {
         _react2.default.createElement(
           "footer",
           { className: "footer" },
-          "\"High\"-street food delivered straight to your sofa!"
+          "Baked treats delivered straight to your door!"
         )
       );
     }
@@ -24416,7 +24416,7 @@ function Header(_ref) {
     _react2.default.createElement("img", {
       onClick: toggleLogo,
       className: logoActive ? "logo" : "logo__null",
-      src: "./static/images/munchieslogo-1.jpg"
+      src: "./static/images/bakery-logo.jpg"
     }),
     _react2.default.createElement(
       "h1",
@@ -24426,7 +24426,7 @@ function Header(_ref) {
     _react2.default.createElement(
       "p",
       { className: "tagline" },
-      "Never worry about the munchies again"
+      "Treat Yourself and Go Do'NUTS!"
     ),
     _react2.default.createElement(
       "nav",
@@ -24473,11 +24473,11 @@ function Header(_ref) {
       _react2.default.createElement(
         "p",
         { className: "stoner__quote" },
-        "\"People say you can abuse marijuana. Well sh*t, you can abuse cheeseburgers too, you know? ",
+        "\"Baking may be regarded as a science, but it's the chemistry between the ingredients and the cook that gives desserts life. ",
         _react2.default.createElement("br", null),
-        "You don\u2018t go around closing Burger King because you can abuse something.\" ",
+        "Baking is done out of love, to share with family and friends, to see them smile.\"",
         _react2.default.createElement("br", null),
-        "- Joe Rogan, pothead"
+        "- Anna Olsen, Baker"
       )
     )
   );
@@ -24521,19 +24521,19 @@ function HomePage() {
       _react2.default.createElement(
         "h2",
         { className: "homepage__welcome" },
-        "Wassup bro!"
+        "Hello!"
       ),
       " ",
       _react2.default.createElement(
         "p",
         { className: "homepage__welcome-para" },
-        "Welcome to Baked Delivery, the brainchild of munchie connoisseur, Hamzah Kurdi. Never worry about the munchies again, we deliver a variety of budtastic food to meet your needs.",
+        "Welcome to Baked Delivery, the brainchild of bakery connoisseur, Hamzah Kurdi. Feeling peckish? Have a sweet tooth? We deliver a variety of fantastic, wholesome baked goods to meet your every need.",
         _react2.default.createElement("br", null),
         " ",
         _react2.default.createElement("br", null),
         " ",
         _react2.default.createElement("br", null),
-        "Stay Baked, bro."
+        "Go Do'Nuts and enjoy!"
       )
     ),
     _react2.default.createElement(
@@ -24542,7 +24542,11 @@ function HomePage() {
       _react2.default.createElement(
         "h2",
         { className: "homepage__message-title" },
-        "Baked at home? Baked at the beach? Baked on a plane? Let us know your Baked story below, dude!"
+        "Check out our customer reviews below! We cherish your feedback so please leave your own review once we've delivered. And remember,",
+        _react2.default.createElement("br", null),
+        "A bad review is like baking a cake with all the best ingredients and having someone sit on it ",
+        _react2.default.createElement("br", null),
+        "\uD83C\uDF69\uD83D\uDE1C\uD83C\uDF69"
       ),
       _react2.default.createElement(_Messages2.default, null)
     )
@@ -25086,14 +25090,14 @@ var Messages = function (_React$Component) {
             onChange: this.quoteChange,
             type: "text",
             name: "quote",
-            placeholder: "Story here, dude"
+            placeholder: "Review here"
           }),
           _react2.default.createElement("input", {
             className: "message__inputs",
             onChange: this.authorChange,
             type: "text",
             name: "author",
-            placeholder: "Name here, bro"
+            placeholder: "Name here"
           }),
           _react2.default.createElement(
             "button",
@@ -25196,7 +25200,10 @@ function OldOrders(_ref) {
         receiveReorderNew: receiveReorderNew
       });
     }),
-    _react2.default.createElement("img", { className: "orders__image", src: "./static/images/coolpizzalogo.png" })
+    _react2.default.createElement("img", {
+      className: "orders__image",
+      src: "./static/images/bakery-order-logo.jpg"
+    })
   );
 }
 
@@ -25239,12 +25246,12 @@ function OlderOrdersItem(_ref) {
     handleDelete(number);
   }
 
-  return Object.keys(previousOrders[prevOrder]).map(function (singleItem) {
-    if (singleItem == "total") return;
-    return _react2.default.createElement(
-      "div",
-      null,
-      _react2.default.createElement(
+  return _react2.default.createElement(
+    "div",
+    null,
+    Object.keys(previousOrders[prevOrder]).map(function (singleItem) {
+      if (singleItem == "total") return;
+      return _react2.default.createElement(
         "ul",
         null,
         _react2.default.createElement(
@@ -25253,36 +25260,33 @@ function OlderOrdersItem(_ref) {
           _react2.default.createElement(
             "p",
             null,
-            previousOrders[prevOrder][singleItem].name
-          ),
-          _react2.default.createElement(
-            "p",
-            { className: "oldOrders__item-name" },
-            "x",
+            previousOrders[prevOrder][singleItem].name,
+            " x",
             previousOrders[prevOrder][singleItem].quantity
           )
-        ),
-        _react2.default.createElement(
-          "p",
-          null,
-          "Total:",
-          _react2.default.createElement("br", null),
-          " \xA3 ",
-          previousOrders[prevOrder].total
         )
-      ),
-      _react2.default.createElement(
-        "button",
-        { onClick: oldOrderReorder },
-        "Reorder"
-      ),
-      _react2.default.createElement(
-        "button",
-        { onClick: oldOrderDelete },
-        "Delete Order"
-      )
-    );
-  });
+      );
+    }),
+    ";",
+    _react2.default.createElement(
+      "p",
+      { className: "old-orders__total" },
+      "Total:",
+      _react2.default.createElement("br", null),
+      " \xA3 ",
+      previousOrders[prevOrder].total
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: oldOrderReorder },
+      "Reorder"
+    ),
+    _react2.default.createElement(
+      "button",
+      { onClick: oldOrderDelete },
+      "Delete Order"
+    )
+  );
 }
 
 exports.default = OlderOrdersItem;
@@ -25318,11 +25322,6 @@ function Order(_ref) {
   return _react2.default.createElement(
     "div",
     { className: "order__display" },
-    _react2.default.createElement(
-      "h3",
-      { className: "order__title" },
-      "Great choice, dude!"
-    ),
     _react2.default.createElement(
       "ul",
       null,

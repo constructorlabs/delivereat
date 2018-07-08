@@ -91,14 +91,14 @@ class Messages extends React.Component {
             onChange={this.quoteChange}
             type="text"
             name="quote"
-            placeholder="Story here, dude"
+            placeholder="Review here"
           />
           <input
             className="message__inputs"
             onChange={this.authorChange}
             type="text"
             name="author"
-            placeholder="Name here, bro"
+            placeholder="Name here"
           />
           <button>Submit</button>
         </form>

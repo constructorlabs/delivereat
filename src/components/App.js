@@ -30,7 +30,7 @@ class App extends React.Component {
 
         <Main toggleLogo={this.toggleLogo} />
         <footer className="footer">
-          "High"-street food delivered straight to your sofa!
+          Baked treats delivered straight to your door!
         </footer>
       </div>
     );

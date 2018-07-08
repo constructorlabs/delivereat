@@ -15,26 +15,29 @@ function OlderOrdersItem({
     handleDelete(number);
   }
 
-  return Object.keys(previousOrders[prevOrder]).map(singleItem => {
-    if (singleItem == "total") return;
-    return (
-      <div>
-        <ul>
-          <li key={number} className="display__oldOrders-items">
-            <p>{previousOrders[prevOrder][singleItem].name}</p>
-            <p className="oldOrders__item-name">
-              x{previousOrders[prevOrder][singleItem].quantity}
-            </p>
-          </li>
-          <p>
-            Total:<br /> £ {previousOrders[prevOrder].total}
-          </p>
-        </ul>
-        <button onClick={oldOrderReorder}>Reorder</button>
-        <button onClick={oldOrderDelete}>Delete Order</button>
-      </div>
-    );
-  });
+  return (
+    <div>
+      {Object.keys(previousOrders[prevOrder]).map(singleItem => {
+        if (singleItem == "total") return;
+        return (
+          <ul>
+            <li key={number} className="display__oldOrders-items">
+              <p>
+                {previousOrders[prevOrder][singleItem].name} x{
+                  previousOrders[prevOrder][singleItem].quantity
+                }
+              </p>
+            </li>
+          </ul>
+        );
+      })};
+      <p className="old-orders__total">
+        Total:<br /> £ {previousOrders[prevOrder].total}
+      </p>
+      <button onClick={oldOrderReorder}>Reorder</button>
+      <button onClick={oldOrderDelete}>Delete Order</button>
+    </div>
+  );
 }
 
 export default OlderOrdersItem;

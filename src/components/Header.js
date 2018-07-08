@@ -7,11 +7,11 @@ function Header({ toggleLogo, logoActive }) {
       <img
         onClick={toggleLogo}
         className={logoActive ? "logo" : "logo__null"}
-        src="./static/images/munchieslogo-1.jpg"
+        src="./static/images/bakery-logo.jpg"
       />
 
       <h1>Baked Delivery</h1>
-      <p className="tagline">Never worry about the munchies again</p>
+      <p className="tagline">Treat Yourself and Go Do'NUTS!</p>
 
       <nav className="header__nav">
         <ul className="header__links">
@@ -33,9 +33,11 @@ function Header({ toggleLogo, logoActive }) {
       <h2 className="display__title">
         What's Baking?
         <p className="stoner__quote">
-          "People say you can abuse marijuana. Well sh*t, you can abuse
-          cheeseburgers too, you know? <br />You don‘t go around closing Burger
-          King because you can abuse something." <br />- Joe Rogan, pothead
+          "Baking may be regarded as a science, but it's the chemistry between
+          the ingredients and the cook that gives desserts life. <br />Baking is
+          done out of love, to share with family and friends, to see them
+          smile."
+          <br />- Anna Olsen, Baker
         </p>
       </h2>
     </header>

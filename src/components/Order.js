@@ -3,7 +3,6 @@ import React from "react";
 function Order({ order, showOrder, handleClick, handleClose }) {
   return (
     <div className="order__display">
-      <h3 className="order__title">Great choice, dude!</h3>
       <ul>
         {Object.keys(order).map(id => {
           {
