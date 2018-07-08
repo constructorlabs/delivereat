@@ -24416,7 +24416,7 @@ function Header(_ref) {
     _react2.default.createElement("img", {
       onClick: toggleLogo,
       className: logoActive ? "logo" : "logo__null",
-      src: "./static/images/bakery-logo.jpg"
+      src: "./static/images/bakery-logo-edit.png"
     }),
     _react2.default.createElement(
       "h1",

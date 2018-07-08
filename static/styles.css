@@ -62,9 +62,7 @@ a {
   float: right;
 
   max-width: 70%;
-  border-color: #fb8310;
-  border-style: solid;
-  border-radius: 20%;
+
   width: 120px;
   height: 100px;
 }
@@ -76,9 +74,7 @@ a {
   position: relative;
 
   max-width: 70%;
-  border-color: #fb8310;
-  border-style: solid;
-  border-radius: 20%;
+
   width: 120px;
   height: 100px;
 }

@@ -7,7 +7,7 @@ function Header({ toggleLogo, logoActive }) {
       <img
         onClick={toggleLogo}
         className={logoActive ? "logo" : "logo__null"}
-        src="./static/images/bakery-logo.jpg"
+        src="./static/images/bakery-logo-edit.png"
       />
 
       <h1>Baked Delivery</h1>
