@@ -1,3 +1,192 @@
 body {
   margin: 0;
+  background-image: url("./erol-ahmed-296514-unsplash.jpg");
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+  color: #202830;
+}
+
+h2 {
+  padding: none;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+}
+
+/* App content */
+
+.app {
+  height: 100vh;
+  text-align: center;
+}
+
+.header {
+  background: #ddd7c9;
+  opacity: 0.8;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 5px;
+  background: #ddd7c9;
+  opacity: 0.8;
+  font-family: "Luckiest Guy", cursive;
+}
+
+/* Header content */
+
+.navbar {
+  display: flex;
+  justify-content: center;
+}
+
+.titletext {
+  font-size: 60px;
+  font-family: "Luckiest Guy", cursive;
+}
+
+/* Main content */
+
+.form {
+  width: auto;
+  margin: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  text-align: center;
+  font-size: 8px;
+  border: solid;
+  border-color: #202830;
+  background: #e8e8e6;
+}
+
+.orderform__deliverycharge {
+  font-size: 10px;
+  text-align: right;
+}
+
+.orderform__total {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.orderform__button {
+  margin-left: 10px;
+}
+
+.orderformitem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orderform__history {
+  margin-top: 20px;
+  padding: 15px 35px;
+  transition: none;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  outline: none;
+  border: solid;
+  border-color: #202830;
+  border-radius: 60px;
+  color: #202830;
+  background: #ddd7c9;
+  opacity: 0.8;
+}
+
+.orderform-history__closebutton {
+  --badge-wh: 25px;
+  --offset: calc(var(--badge-wh) * -0.5);
+
+  position: absolute;
+  display: block;
+  width: var(--badge-wh);
+  height: var(--badge-wh);
+  margin: var(--offset) 0 0 var(--offset);
+  border-radius: var(--badge-wh);
+  text-align: center;
+  line-height: var(--badge-wh);
+  font-weight: bold;
+  background: white;
+  color: red;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 5px;
+  padding-top: 10px;
+}
+
+.menuitem {
+  /* width: 350px; */
+  width: auto;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+
+  border: solid;
+  border-color: #202830;
+  background: #f0e68ce0;
+}
+
+.menuitem__image {
+  display: none;
+}
+
+.quantitybutton {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Footer content */
+
+.footer__credits {
+  padding: 20px;
+}
+
+@media (min-width: 450px) {
+  .titletext {
+    font-size: 80px;
+  }
+}
+
+@media (min-width: 768px) {
+  .titletext {
+    padding-right: 110px;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .menuitem {
+    width: 350px;
+  }
+
+  .menuitem__image {
+    display: inline-block;
+    width: 300px;
+    height: 200px;
+  }
+
+  .form {
+    width: 350px;
+    font-size: 100%;
+  }
 }
