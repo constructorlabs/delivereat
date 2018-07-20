@@ -18,7 +18,7 @@ A few notes before we get started
 
 **Menu**
 * Design a menu for a restaurant such as food items, prices etc. By providing each item with an id we can refer to it later. The first item has already been created for you. Feel free to amend it.
-* Create an API endpoint that returns a menu of items with prices available to order
+* Create an API endpoint at `/api/menu` that returns a menu of items with prices available to order
 * Create a page that displays the menu to the user using the API
 
 **Order**
@@ -26,7 +26,7 @@ A few notes before we get started
 * Update the menu page to make it an order page
 * It should allow the user to specify quantities of items to order
 * It should add a delivery charge and display the total order cost
-* Create an API to receive and save the submitted order
+* Create an API endpoint at `/api/orders` receive and save the submitted order
 
 **Closures**
 
@@ -57,9 +57,9 @@ A few notes before we get started
 ## Technical notes
 
 * Run `npm install` after cloning to download all dependencies
-* Use `npm run dev -- --watch` to build React
-* Use `node index.js` to run the Node server in another tab
-* Place all static files such as images and CSS in the `static` folder. When requesting those files from the server use `/static` at the beginning of the URL. For example `<link rel="stylesheet" type="text/css" href="/static/styles.css">`
+* Use `npm run dev` to build React
+* Use `npm run server` to run the Node server in another terminal tab
+* Place all static files such as images and CSS in the `static` folder. When requesting those files from the server use `/static` at the beginning of the URL. For example `<link rel="stylesheet" href="/static/styles.css">`
 * `bundle.js` produced by webpack will be output in the `static` folder
 * To send data server using a POST, PUT or PATCH request you can do something the example below, where `order` is an object we want to send to the server and `http://localhost:8080/api/order` is URL we want to send it to.
 
@@ -77,7 +77,7 @@ fetch('http://localhost:8080/api/order', {
   });
 ```
 
-* Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
+* Look at `package.json` to see how [Nodemon](https://nodemon.io/) is being used to automatically rebuild and restart your server when changes are saved.
 
 ## README
 
