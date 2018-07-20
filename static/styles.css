@@ -1,3 +1,417 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
+  overflow: auto;
+
   margin: 0;
+  min-height: 100vh;
+
+  font-family: "Gaegu", cursive;
+}
+
+.app__body {
+  display: flex;
+  flex-direction: column;
+
+  min-height: 100vh;
+}
+
+.header {
+  width: 100%;
+
+  text-align: center;
+
+  background-color: #c4e2ed;
+  color: #e482a2;
+
+  margin: 0;
+
+  border-bottom-color: #fb8310;
+  border-left-color: #c4e2ed;
+  border-right-color: #c4e2ed;
+  border-top-color: #c4e2ed;
+}
+
+.header__nav {
+  border-style: solid;
+  border-top-color: #fb8310;
+  border-right-color: #c4e2ed;
+  border-left-color: #c4e2ed;
+  border-top-width: 5px;
+}
+
+.header__links {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-around;
+  align-items: center;
+
+  border-bottom-style: none;
+}
+
+a {
+  color: #e482a2;
+}
+
+.logo__null {
+  display: block;
+  top: 10px;
+  float: right;
+
+  max-width: 70%;
+
+  width: 120px;
+  height: 100px;
+}
+
+.logo {
+  display: block;
+  top: 10px;
+  float: right;
+  position: relative;
+
+  max-width: 70%;
+
+  width: 120px;
+  height: 100px;
+}
+
+.homepage__display {
+  display: flex;
+}
+
+.homepage__nav {
+  display: none;
+}
+
+.homepage__message-container {
+  overflow: auto;
+
+  background-color: #c4e2ed;
+  color: #c37692;
+}
+
+.homepage__message-title {
+  color: #e481a2;
+
+  padding: 5px;
+}
+
+.homepage__welcome {
+  color: #e481a2;
+
+  padding: 5px;
+}
+
+.homepage__welcome-para {
+  font-size: 18px;
+  padding: 5px;
+
+  color: #e481a2;
+}
+
+.display {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  background-color: #c4e2ed;
+  color: #fb8210;
+}
+
+.display__menu {
+  display: block;
+  padding: 20px;
+  margin: 0;
+}
+
+.display__menu-title {
+  font-size: 20px;
+  color: #e481a2;
+}
+
+.display__title {
+  display: flex;
+  flex-direction: row;
+
+  background-color: #fb8310;
+  color: #f6f6f6;
+
+  margin: 0;
+
+  justify-content: space-evenly;
+  align-items: center;
+
+  border-left-color: #fb8310;
+  border-right-color: #fb8310;
+  border-bottom-color: #f6f6f6;
+  border-top-color: #f6f6f6;
+  border-style: solid;
+}
+
+.showOldOrders {
+  width: 100px;
+}
+
+.li__menu {
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+
+hr {
+  border: 0;
+  height: 0;
+  box-shadow: 0 0 10px 1px #fb8210;
+}
+
+.display__menu-images {
+  --wh: 200px;
+
+  display: block;
+  width: var(--wh);
+  height: var(--wh);
+  border: 3px solid #fb8310;
+  border-radius: var(--wh);
+  text-align: center;
+}
+
+.order__display {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  background-color: #e481a2;
+  color: #f6f6f6;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  border: 3px;
+  border-style: solid;
+  border-color: #fb8210;
+}
+
+.delivery__charge {
+  color: rebeccapurple;
+
+  font-style: italic;
+  font-weight: bold;
+}
+
+.display__oldOrders {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  overflow: auto;
+
+  width: 100%;
+
+  border-style: solid;
+  border-color: #fb8310;
+
+  background-color: #c4e2ed;
+  color: #e481a2;
+
+  justify-content: center;
+  align-items: center;
+}
+
+.oldOrders__item-name {
+  width: 50px;
+
+  text-align: center;
+}
+
+.display__oldOrders-items {
+  border-style: solid;
+  border-color: #fb8210;
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+.orders__image {
+  width: 200px;
+  height: 90px;
+
+  border-radius: 40%;
+  border-color: #fb8310;
+  border-style: solid;
+}
+
+.old-orders__total {
+  display: flex;
+  justify-content: center;
+
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.stoner__quote {
+  display: none;
+}
+
+.message__inputs {
+  border-style: solid;
+  border-color: #fb8310;
+}
+
+.footer {
+  width: 100%;
+
+  position: relative;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+
+  background-color: #fb8310;
+  color: #f6f6f6;
+
+  border-bottom-color: #fb8310;
+  border-left-color: #fb8310;
+  border-right-color: #fb8310;
+  border-top-color: #f6f6f6;
+  border-style: solid;
+
+  padding: 10px;
+}
+
+button {
+  text-align: center;
+  font-family: "Gaegu", cursive;
+
+  height: 15px;
+  width: 100px;
+
+  background-color: #fb8310;
+  color: #f6f6f6;
+
+  border-color: #f6f6f6;
+  border-style: solid;
+  border-radius: 30px;
+
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .logo {
+    animation-name: logo-move;
+    animation-duration: 20s;
+    animation: logo-move 10s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
+  }
+
+  @keyframes logo-move {
+    0% {
+      transform: translate3d(-4px, -10px, -10px), rotate(0deg);
+      right: 0px;
+      top: 0px;
+    }
+    25% {
+      transform: translate3d(-8px, 0, 0), rotate(200deg);
+
+      right: 200px;
+      top: 200px;
+    }
+    50% {
+      transform: rotate(360deg);
+      right: 300px;
+      top: 400px;
+    }
+
+    51% {
+      transform: translate3d(-12px, 0, 0);
+
+      right: 400px;
+      top: 500px;
+    }
+    75% {
+      transform: translate3d(-20px, 0, 0);
+
+      right: 400px;
+      top: 500px;
+    }
+
+    80% {
+      transform: translate3d(-20px, 0, 0);
+
+      right: 600px;
+      top: 200px;
+    }
+
+    90% {
+      transform: translate3d(-20px, 0, 0);
+      right: 800px;
+      top: 100px;
+    }
+    100% {
+      transform: translate3d(-4px, 0, 0);
+
+      right: 980px;
+      top: 0px;
+    }
+  }
+
+  .order__display {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 310px;
+
+    border: 3px;
+    border-style: solid;
+    border-radius: 30%;
+  }
+
+  .orders__image {
+    display: block;
+
+    width: auto;
+  }
+
+  .stoner__quote {
+    display: block;
+  }
+
+  .homepage__nav {
+    display: block;
+    width: 300px;
+    overflow: auto;
+
+    font-size: 12px;
+
+    border-style: solid;
+    border-top-color: #e481a2;
+    border-right-color: #fb8310;
+    border-bottom-color: #f6f6f6;
+    border-left-color: #c4e2ed;
+    border-right-width: 5px;
+    border-top-width: 0;
+
+    background-color: #c4e2ed;
+  }
+
+  .display {
+    display: grid;
+    overflow: auto;
+    background-color: #c4e2ed;
+    color: #fb8210;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+  }
+
+  .stoner__quote {
+    font-size: 18px;
+    font-style: italic;
+  }
 }
