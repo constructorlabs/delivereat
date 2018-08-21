@@ -22,7 +22,8 @@ class Menu extends React.Component {
 
   render() {
     return (
-      <div className="itemMenu"> 
+      <div className="itemMenu">
+        <img className="img" src={this.props.info.img} alt="" />
         <p>{this.props.info.name}</p>
         <div className="buttons">
           <button onClick={this.handleClickminus}>-</button>
