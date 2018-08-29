@@ -81,8 +81,12 @@ fetch('http://localhost:8080/api/order', {
 
 ## README
 
-* Produce a README.md which explains
-  * what the project does
-  * what technologies it uses
-  * how to build it and run it
-  * any unresolved issues the user should be aware of
+Run npm install to install all of the required dependencies.
+
+Make sure the port number within the server.js file is accessible. Change to whatever suits you but make sure to restart the server by running the command node server.js.
+
+Open local host with the matching port number in your browser to access the site.
+
+Features include a reviews section on the home page, the ability to make orders within the menu route, and access to old orders which can be deleted or reorderd.
+
+Technologies include React, react-router, JavaScript, Node.js, Express.js, RESTful API design.
