@@ -1,3 +1,17 @@
+## README
+
+Run npm install to install all of the required dependencies.
+
+Make sure the port number within the server.js file is accessible. Change to whatever suits you but make sure to restart the server by running the command node server.js.
+
+Open local host with the matching port number in your browser to access the site.
+
+Features include a reviews section on the home page, the ability to make orders within the menu route, and access to old orders which can be deleted or reorderd.
+
+Technologies include React, react-router, JavaScript, Node.js, Express.js, RESTful API design.
+
+
+
 # Delivereat
 
 Let's create an app that allows customers to order food online.
@@ -79,14 +93,4 @@ fetch('http://localhost:8080/api/order', {
 
 * Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
 
-## README
 
-Run npm install to install all of the required dependencies.
-
-Make sure the port number within the server.js file is accessible. Change to whatever suits you but make sure to restart the server by running the command node server.js.
-
-Open local host with the matching port number in your browser to access the site.
-
-Features include a reviews section on the home page, the ability to make orders within the menu route, and access to old orders which can be deleted or reorderd.
-
-Technologies include React, react-router, JavaScript, Node.js, Express.js, RESTful API design.
