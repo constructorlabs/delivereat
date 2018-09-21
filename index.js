@@ -48,7 +48,7 @@ const orders = {};
 
 let orderid = 1;
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   res.render('index');
 });
 
@@ -78,6 +78,7 @@ app.post('/menu', function(req, res) {
   res.status(200).json({ ok: 'menu added' });
 });
 
-app.listen(8080, function() {
-  console.log('Listening on port 8080');
+const port = process.env.PORT || 8080;
+app.listen(port, function() {
+  console.log(`Listening on port number ${port}`);
 });
