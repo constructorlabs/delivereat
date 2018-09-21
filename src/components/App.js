@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header';
 import Menu from './Menu';
-// import Basket from './Basket';
 import { METHODS } from 'http';
 import RegistrationForm from './RegistrationForm';
 
@@ -12,7 +11,7 @@ class App extends React.Component {
     this.state = {
       items: {},
       currentOrder: {},
-      completeOrder: {},
+      subTotal: 0,
       customer: {
         name: '',
         lastName: '',
@@ -30,7 +29,6 @@ class App extends React.Component {
     fetch('/menu')
       .then(res => res.json())
       .then(json => {
-        console.log(json);
         this.setState({ items: json });
       })
       .catch(function(error) {
@@ -42,19 +40,25 @@ class App extends React.Component {
     const quantity = this.state.currentOrder[id] || 0;
     const newOrder = { [id]: quantity + 1 };
     const currentOrder = Object.assign({}, this.state.currentOrder, newOrder);
-    this.setState({ currentOrder });
+    const total = this.state.subTotal + this.state.items[id]['price'];
+    this.setState({ currentOrder: currentOrder, subTotal: total });
   }
 
   orderReceiverminus(id) {
     const quantity = this.state.currentOrder[id];
+    const total =
+      this.state.subTotal > 0
+        ? this.state.subTotal - this.state.items[id]['price']
+        : 0;
+
     if (this.state.currentOrder[id] > 1) {
       const newOrder = { [id]: quantity - 1 };
       const currentOrder = Object.assign({}, this.state.currentOrder, newOrder);
-      this.setState({ currentOrder });
+      this.setState({ currentOrder, subTotal: total });
     } else if ((this.state.currentOrder[id] = 1)) {
       const currentOrder = Object.assign({}, this.state.currentOrder);
       delete currentOrder[id];
-      this.setState({ currentOrder });
+      this.setState({ currentOrder: currentOrder, subTotal: total });
     }
   }
 
@@ -69,22 +73,17 @@ class App extends React.Component {
   }
 
   handleClick(event) {
-    // event.preventDefault()
+    event.preventDefault();
     const complete = Object.assign(
       {},
       this.state.currentOrder,
       this.state.customer
     );
 
-    console.log(complete);
-    this.setState({
-      completeOrder: complete
-    });
-
-    fetch('http://localhost:8080/api/order', {
+    fetch('/api/order', {
       method: 'post',
-      body: JSON.stringify(this.state.completeOrder),
-      header: {
+      body: JSON.stringify(complete),
+      headers: {
         'Content-Type': 'application/json'
       }
     })
@@ -95,12 +94,12 @@ class App extends React.Component {
         return console.log('orders sent');
       })
       .catch(function(error) {
-        console.log('post error');
+        console.log('order post error');
       });
   }
 
   render() {
-    console.log(this.state.customer);
+    console.log(this.state.subTotal);
     return (
       <div>
         <Header />
@@ -119,7 +118,7 @@ class App extends React.Component {
 
         <div className="basket">
           <div className="basketitems">
-            <h1>Shopping Basket:</h1>
+            <h3>Shopping Basket:</h3>
             {Object.keys(this.state.currentOrder).map(item => {
               return (
                 <p key={item}>
@@ -130,8 +129,11 @@ class App extends React.Component {
               );
             })}
           </div>
+          <div className="total">
+            <h2> total: £ {this.state.subTotal}</h2>
+          </div>
           <div className="form">
-            <RegistrationForm infoReciever={this.infoReceiver} />
+            <RegistrationForm infoReceiver={this.infoReceiver} />
             <form onSubmit={this.handleSubmit}>
               <button onClick={this.handleClick} type="submit">
                 submit your order

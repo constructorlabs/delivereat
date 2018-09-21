@@ -7,7 +7,8 @@
     "test": "jest",
     "dev": "webpack --mode development --watch",
     "build": "webpack --mode production",
-    "server": "nodemon index.js localhost 8080"
+    "server": "nodemon index.js localhost 8080",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +21,13 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "express-timestamp": "^0.1.4",
     "hbs": "^4.0.1",
     "jest": "^22.3.0",
+    "nodemon": "^1.17.5",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
     "babel-jest": "^22.4.1",

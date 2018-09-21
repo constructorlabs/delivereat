@@ -64,7 +64,7 @@ class RegistrationForm extends React.Component {
       [name]: value
     });
     const { firstName, lastName, email } = this.state;
-    this.props.infoReciever(firstName, lastName, email);
+    this.props.infoReceiver(firstName, lastName, email);
   }
 
   render() {

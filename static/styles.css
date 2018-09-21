@@ -3,11 +3,15 @@ body {
 }
 
 .header {
+  background-image: url('https://images.unsplash.com/photo-1507941097613-9f2157b69235?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=72483d9b40b1ce1ed502440b000f6759&auto=format&fit=crop&w=2013&q=80');
+  background-position: -180px;
+  color: aliceblue;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
   margin: 0px 0px 0px 0px;
   display: flex;
   height: 10vh;
   background-color: brown;
-  /* max-width: 1200px; */
+  justify-content: center;
   text-align: center;
 }
 
@@ -17,42 +21,61 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  overflow: hidden;
 }
 
 .itemMenu {
   display: block;
   text-align: center;
+  border-radius: 10px;
   padding: 10px 10px 10px 10px;
   margin: 10px 10px 10px 10px;
-  background-color: bisque;
+  border: 1px solid black;
   min-width: 20vh;
-  max-height: 20vh;
+  max-height: 35vh;
+  float: left;
 }
 
 .buttons {
   display: flex;
   flex-direction: row;
-
   justify-content: space-evenly;
+  height: inherit;
 }
 
 .basket {
+  background-image: url('https://images.unsplash.com/photo-1507941097613-9f2157b69235?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=72483d9b40b1ce1ed502440b000f6759&auto=format&fit=crop&w=2013&q=80');
+  text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
   display: flex;
   flex: 1;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   background-color: bisque;
 }
 .basketitems {
+  display: block;
+  flex: 1;
   overflow: auto;
-  width: 70vh;
+  /* width: 70vh; */
+}
+.total {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+  align-self: center;
 }
 
-
 .form {
+  display: flex;
+  flex: 1;
   text-align: center;
   align-self: center;
   justify-content: center;
+}
+.img {
+  height: 150px;
+  width: 150px;
 }
 
 @media (min-width: 640px) {
