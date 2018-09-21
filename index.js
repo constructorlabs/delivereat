@@ -48,7 +48,7 @@ const orders = {};
 
 let orderid = 1;
 
-app.get('*', function(req, res) {
+app.get('/', function(req, res) {
   res.render('index');
 });
 
