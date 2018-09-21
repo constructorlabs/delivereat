@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/static', express.static('static'));
+app.use('/static', express.static(__dirname + '/static'));
 app.set('view engine', 'hbs');
 
 const menu = {
