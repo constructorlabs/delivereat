@@ -1,13 +1,13 @@
-const path = require('path');
 const express = require('express');
-
 const bodyParser = require('body-parser');
 const app = express();
 
 app.set('view engine', 'hbs');
 
 app.use(bodyParser.json());
-app.use('/static', express.static(path.join(__dirname, 'static')));
+
+app.use('/static', express.static('static'));
+
 
 const menu = {
   1: {
@@ -54,6 +54,7 @@ let orderid = 1;
 app.get('/', function(req, res) {
   res.render(__dirname + '/views/index.hbs');
 });
+
 
 app.get('/menu', function(req, res) {
   res.json(menu);
