@@ -9,10 +9,6 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.json());
 app.use('/static', express.static(path.join(__dirname, 'static')));
 
-app.get('/', function(req, res) {
-  res.render(__dirname + '/views/index.hbs');
-});
-
 const menu = {
   1: {
     id: 1,
