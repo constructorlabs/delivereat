@@ -49,13 +49,13 @@ const orders = {};
 
 let orderid = 1;
 
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + '/index.html');
+});
+
 // app.get('/', function(req, res) {
 //   res.render(__dirname + '/views/index.hbs');
 // });
-
-app.get('/', function(req, res) {
-  res.render(__dirname + '/views/index.hbs');
-});
 
 app.get('/menu', function(req, res) {
   res.json(menu);
