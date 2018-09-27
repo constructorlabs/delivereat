@@ -17,7 +17,7 @@
 - you can browse items(data pulled from server) add quantity to the shopping basket
 - shopping basket will display current total
 - you can submit order with customer information
-- orders can be viewed <a href="delivereat.herokuapp.com/orders">here</a>
+- orders can be viewed <a href="https://delivereat.herokuapp.com/orders">here</a>
 
 # team
 
