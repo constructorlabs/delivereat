@@ -2,7 +2,7 @@
 
 - app to place order and browse items from database.
 
-<p align="centre"><img src="./screenshot.png"></p>
+<p align="center"><img src="./screenshot.png"></p>
 
 ## Technology used
 
