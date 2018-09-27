@@ -1,18 +1,30 @@
-## README
+# Deliver-Eat app
 
-- Produce a README.md which explains
+- app to place order and browse items from database.
 
-  - what the project does
-  - what technologies it uses
-  - how to build it and run it
-  - any unresolved issues the user should be aware of
+<p align="centre"><img src="./screenshot.png"></p>
 
-## unresolved issues:
+## Technology used
 
-- unable to fetch a post request (App.js line 84)
+- React
+- node.js
+- Javascipt
+- CSS with responsive design
+- HTML
 
-- i recieved error message"Failed to load http://localhost:8080/api/order: No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://127.0.0.1:8080' is therefore not allowed access. If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled."
+# features
 
-- i have to change headers (this README file line 70) to header (App.js line 87) for the fetch to complete a post request.
+- you can browse items(data pulled from server) add quantity to the shopping basket
+- shopping basket will display current total
+- you can submit order with customer information
+- orders can be viewed <a href="delivereat.herokuapp.com/orders">here</a>
 
-- due to Acess control issue above I tested it with postman and i was able to creat a property under Object Orders. when i fetch post request via App.js it comes back blank
+#team
+
+Ethan - ([Twitter](https://twitter.com/Ethanng329)) - ([Github](https://github.com/ethan329))
+
+# to run app
+
+```
+$npm run build
+```
