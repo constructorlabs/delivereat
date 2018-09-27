@@ -19,7 +19,7 @@
 - you can submit order with customer information
 - orders can be viewed <a href="delivereat.herokuapp.com/orders">here</a>
 
-#team
+# team
 
 Ethan - ([Twitter](https://twitter.com/Ethanng329)) - ([Github](https://github.com/ethan329))
 
