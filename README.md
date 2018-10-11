@@ -28,37 +28,21 @@ A few notes before we get started
 * It should add a delivery charge and display the total order cost
 * Create an API to receive and save the submitted order
 
+## Stretch goals
+
 **Closures**
 
 * Rather than storing all data in global scope on the server, try to implement data manipulation and retrieval functionality using closures.
 
-**Order history**
+**Own feature**
 
-* Allow the user to see their order history
-* Allow the user to re-order same items again
-* Allow users to delete items from order history
-
-**Extension**
-
-* Design and implement an extension of your choosing
-
-## Stretch goals
-
-**Admin**
-
-* Create a new page for the restaurant owner to see all orders coming in
-* When an order is ready to ship the restaurant owner needs to be able to mark the order as sent
-* Create an API endpoint to receive and update order status
-
-**Notification**
-
-* Send the user an SMS using [Twilio](https://www.twilio.com/) when their order is ready
+* Design and implement a feature of your choosing
 
 ## Technical notes
 
 * Run `npm install` after cloning to download all dependencies
 * Use `npm run dev -- --watch` to build React
-* Use `node index.js` to run the Node server in another tab
+* Use `node server.js` to run the Node server in another tab
 * Place all static files such as images and CSS in the `static` folder. When requesting those files from the server use `/static` at the beginning of the URL. For example `<link rel="stylesheet" type="text/css" href="/static/styles.css">`
 * `bundle.js` produced by webpack will be output in the `static` folder
 * To send data server using a POST, PUT or PATCH request you can do something the example below, where `order` is an object we want to send to the server and `http://localhost:8080/api/order` is URL we want to send it to.
