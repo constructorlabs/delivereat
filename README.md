@@ -62,6 +62,7 @@ fetch('http://localhost:8080/api/order', {
 ```
 
 * Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
+* Hint: keep menu data and order data separate. Rather than storing prices in orders, refer to the menu data. This prevents unnecessary data duplication and helps ensure we maintain a single source of truth for each data item.
 
 ## Next steps
 
