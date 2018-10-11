@@ -23,6 +23,10 @@ module.exports = {
             loader: "css-loader"
           }, {
             loader: "sass-loader"
+          },{ 
+            loader: 'file-loader', options: {outputPath: 'dist/'} },
+          {
+            loader: 'image-webpack-loader',
           }
         ]
       }

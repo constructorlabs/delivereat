@@ -9,14 +9,49 @@ app.set('view engine', 'hbs');
 const menu = {
   1: {
     id: 1,
-    name: "Strawberry cheesecake",
-    price: 6
+    name: "chilli squid",
+    img: '/static/images/squid.png',
+    price: 6.75
+  },
+  2: {
+    id: 2,
+    name: "pulled pork gyoza",
+    img: '/static/images/gyoza.png',
+    price: 5.95
+  },
+  3:{
+    id: 3,
+    name: "bbq beef steamed hirata",
+    img: '/static/images/hirata.png',
+    price: 5.50
+  },
+  4:{
+    id:4,
+    name: "chicken ramen",
+    img: '/static/images/ramen.png',
+    price: 9.95
+  },
+  5:{
+    id:5,
+    name: "yaki udon",
+    img: '/static/images/udon.png',
+    price: 9.95
+  },
+  6:{
+    id:6,
+    name: "chicken katsu curry",
+    img: '/static/images/curry.png',
+    price: 10.75
   }
 };
 
 app.get('/', function(req, res){
   res.render('index');
 });
+
+app.get('/api/menu', (req,res)=>{
+  res.json(Object.values(menu));
+})
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');
