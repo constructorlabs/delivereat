@@ -56,12 +56,16 @@ fetch('http://localhost:8080/api/order', {
     }
   }).then(function(response) {
     return response.json();
-  }).then(function(data) {
+  }).then(data => {
     // handle response
   });
 ```
 
 * Check out [Nodemon](https://nodemon.io/) to automatically rebuild and restart your server when changes are saved.
+
+## Next steps
+
+* We will continue working on this project the following weekend where we will add database storage using Postgres and implement authentication using passport.
 
 ## README
 
