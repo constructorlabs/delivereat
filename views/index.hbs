@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Let's get some food</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
-  </head>
-  <body>
-    <div id="root">
 
-    </div>
-    <script src="/static/bundle.js"></script>
-  </body>
+<head>
+  <title>Let's get some food</title>
+  <!-- call resources from server ... where app.use('\static') ensures all the resources are returnd from the static folder -->
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+
+<body>
+  <div id="root">
+
+
+  </div>
+  <!-- calls bundle.js to get all the ReactJs components -->
+  <script src="/static/bundle.js"></script>
+</body>
+
 </html>
