@@ -1,12 +1,12 @@
 body {
-  background-color: Cornsilk;
+  background-color: #fff8dc;
   margin: 3rem;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  letter-spacing: 0.05rem;
 }
 
 img {
   width: 100px;
-  // border: 3px solid rgb(255, 188, 151);
   margin: 0 1rem 2rem 0;
 }
 
@@ -32,4 +32,17 @@ input, select, button {
 
 input, select {
   width: 3rem;
+}
+
+hr {
+  border: 0.1rem solid #999;
+}
+
+.basket {
+  line-height: 2rem;
+  padding: 1rem;
+  display: block;
+  border: 0.2rem solid #999;
+  width: 50%;
+  background-color: rgb(255, 252, 241);
 }

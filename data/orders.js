@@ -1,10 +1,14 @@
-const orders = {
-    
-    1: {
-      id: 1,
-      quantity: 0
-    }
+let orders = {};
 
-};
+function addToOrders (newOrder) {
+  const keys = Object.keys(orders);
+  const orderId = keys.length ? Math.max(...keys) + 1 : 1;
+  orders = Object.assign({}, orders, {[orderId]: newOrder});
+}
 
-exports.orders = orders;
+function getOrders () {
+  return orders;
+}
+
+exports.addToOrders = addToOrders;
+exports.getOrders = getOrders;

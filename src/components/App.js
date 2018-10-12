@@ -9,11 +9,16 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.createQuantityMenu = this.createQuantityMenu.bind(this);
-    this.makeOrder = this.makeOrder.bind(this);
+    this.getCurrency = this.getCurrency.bind(this);
+    
+    this.displayOrder = this.displayOrder.bind(this);
+    this.displayAllOrders = this.displayAllOrders.bind(this);
+    this.fetchAllOrders = this.fetchAllOrders.bind(this);
 
     this.state = { 
       menu: {},
-      orders: {}
+      orders: {},
+      currentOrder: null
     }
   }
 
@@ -24,69 +29,137 @@ class App extends React.Component {
       this.setState({ menu })
     })
   }
-
-  makeOrder () { 
+  
+  handleSubmit (event) {
+    event.preventDefault();
     fetch('/api/order', {
       method: 'post',
-      body: JSON.stringify(order),
+      body: JSON.stringify(this.state.currentOrder),
       headers: { 'Content-Type': 'application/json' }
-    }).then(response => response.json()
-    ).then(data => {
-      console.log(data)
+    }
+    ).then(response => response.json()
+    ).then(order => {
+      this.fetchAllOrders();
     });
   }
 
-  handleSubmit (event) {
-    event.preventDefault();
-    let total = 0;
-    Object.values(this.state.menu).forEach(item => {
-      console.log("--- ID: ", item.id, " ---");
-      console.log(item.name);
-      console.log(`${item.quantity} x ${item.price} = £${item.quantity * item.price}`);
-      console.log(`   `);
-      total += item.quantity * item.price;
+  fetchAllOrders () {
+    fetch('/api/order')
+    .then(response => response.json())
+    .then(orders => {
+      this.setState({ 
+        orders: orders,
+        currentOrder: null
+       })
     });
-    console.log("--- Total is: £", total, " ---");
   }
 
   handleChange (id, event) {
-      const keys = Object.keys(this.state.orders);
-      const orderId = keys.length ? Math.max(...keys) : 1;
-      const quantity = event.target.value;
-      const newOrder = Object.assign({}, this.state.orders, { orderId: this.state.menu[id] })
-      this.setState({
-        orders: newOrder
-      })
+    let currentOrder;
+    if (event.target.value === "0") {
+      currentOrder = Object.assign({}, this.state.currentOrder);
+      delete currentOrder[id];
+    } else {
+      currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, quantity: event.target.value }})
     }
+    this.setState({ currentOrder })
+  }
 
   createQuantityMenu (name, id) {
     const array = [];
     for (let i=0; i<=10; i++) array.push(i);
-    return <select onChange={(event) => this.handleChange(id, event)} name={name} id={id}>
-      { array.map(item => <option value={item} key={item}>{item}</option> )}
+    return <select 
+              value={this.state.currentOrder ? this.value : ""}
+              onChange={(event) => this.handleChange(id, event)} 
+              name={name} 
+              id={id}
+            >
+      { array.map(item => {
+          return <option value={item} key={item}>{item}</option> 
+      })}
     </select>
   }
 
   getCourse (course) {
     const values = Object.values(this.state.menu);
-    return <ul className="menu__item"> {values.filter(item => item.type === course)
+    return <ul className="menu__item"> {
+    values.filter(item => item.type === course)
     .map(item => {
-      return <li key={item.id}>
+      return <li key={item.menuId}>
             <div><img src={item.image}></img></div>
-            <div><strong>{item.name}: £{item.price}</strong><br />
-            Quantity: {this.createQuantityMenu(item.name, item.id)}</div>
-            {/* <input type="text" name={item.id}></input> */}
+            <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
+            Quantity: {this.createQuantityMenu(item.name, item.menuId)}</div>
           </li>
     })}
     </ul>
   }
 
+  getCurrency (string) {
+    return string.toLocaleString("en-GB", {
+      style: "currency", currency: "GBP"
+    });
+  }
+
+  displayOrder () {
+    let total = 0;
+    const values = Object.values(this.state.currentOrder);
+    if (values.length === 0) { 
+      this.setState({ currentOrder: null });
+      return;
+    }
+    return <div>
+    { values.map(orderItem => {
+        const menuItem = this.state.menu[orderItem.menuId];
+        total += orderItem.quantity * menuItem.price;
+        return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+      })} 
+      <hr />
+      <div>Total: {this.getCurrency(total)}</div>
+    </div>
+  }
+
+  displayAllOrders () {
+    const keys = Object.keys(this.state.orders);
+    // values.forEach(item => {
+    //   console.log("Order: ", item);
+    // });
+
+    keys.forEach(order => {
+
+      console.log(order)
+      // const orderValues = Object.values(order);
+      // orderValues.forEach(orderItem => {
+      //   const menuItem = this.state.menu[orderItem.menuId];
+      //   console.log("name: " + menuItem.name);
+      //   console.log("price: " + menuItem.price);
+      // });
+    });
+      // const menuItem = this.state.menu[orderItem.menuId];
+      // total += orderItem.quantity * menuItem.price;
+      // return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+    
+  }
+
   render(){
+
+    const allOrders = this.state.orders &&
+      (<React.Fragment>
+      <h2>View all orders</h2>
+      <div className="basket">
+         {this.displayAllOrders()}
+      </div>
+      </React.Fragment>)
+
     return (
       <div>
         <h1>DeliverEat app</h1>
           <form onSubmit={this.handleSubmit} className="menu__form">
-            <button type="submit">Order food</button>
+            <button type="submit">PLACE YOUR ORDER</button>
+            <h2>Your basket</h2>
+            <div className="basket">
+              {this.state.currentOrder ? this.displayOrder() : <div>Your basket is empty</div>}
+            </div>
+            {allOrders}
             <h2>Starters</h2> {this.state.menu && this.getCourse("starter")}
             <hr></hr>
             <h2>Mains</h2> {this.state.menu && this.getCourse("main")}
