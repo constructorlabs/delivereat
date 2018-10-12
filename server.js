@@ -11,9 +11,38 @@ app.set('view engine', 'hbs');
 const menu = {
   1: {
     id: 1,
-    name: 'Cheeseburger',
-    price: 6,
-    img: ''
+    name: 'bacon roll',
+    price: 4
+  },
+  2: {
+    id: 2,
+    name: 'bacon & egg roll',
+    price: 5
+  },
+  3: {
+    id: 3,
+    name: 'sausage sandwich',
+    price: 4
+  },
+  4: {
+    id: 4,
+    name: 'scrambled eggs',
+    price: 4
+  },
+  5: {
+    id: 5,
+    name: 'toast & jam',
+    price: 3
+  },
+  6: {
+    id: 6,
+    name: 'toast (2 slices)',
+    price: 2
+  },
+  7: {
+    id: 7,
+    name: 'avocado & toast',
+    price: 5
   }
 };
 
@@ -27,7 +56,7 @@ app.get('/', function(req, res) {
 
 app.get('/api/menu', function(req, res) {
   res.json(menu);
-});
+})
 
 // Server code is running in the server
 
