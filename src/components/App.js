@@ -15,6 +15,7 @@ class App extends React.Component {
     };
 
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
+    this.addOrderToBasket = this.addOrderToBasket.bind(this);
   }
 
   // React code is running in the browser
@@ -42,6 +43,10 @@ class App extends React.Component {
     });
   }
 
+  addOrderToBasket(name, quantity) {
+    console.log(`${quantity} ${name} added to basket`);
+  }
+
   render() {
     if (this.state.menu.starters) {
       console.log(this.state.menu.starters.name);
@@ -55,7 +60,10 @@ class App extends React.Component {
           handleMenuItemClick={this.handleMenuItemClick}
         />
         {this.state.isOrdering && (
-          <Order currentOrderItem={this.state.currentOrderItem} />
+          <Order
+            currentOrderItem={this.state.currentOrderItem}
+            addOrderToBasket={this.addOrderToBasket}
+          />
         )}
       </div>
     );
