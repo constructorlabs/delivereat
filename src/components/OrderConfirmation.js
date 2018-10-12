@@ -18,6 +18,7 @@ class OrderConfirmation extends React.Component{
   render(){
     return(
       <div>
+        
         <ul>
           {Object.values(this.props.currentOrder.items).map(item => {
             return <OrderItem key={item.menuItem.id} item={item} amendQuantity={this.props.amendQuantity} addToOrder={this.props.addToOrder} removeFromOrder={this.props.removeFromOrder}/>
@@ -28,9 +29,6 @@ class OrderConfirmation extends React.Component{
           <span>Total to pay: {this.props.currentOrder.total}</span>
           <button onClick={this.handlePlaceOrder}>Place Order</button>
         </div>
-
-
-
 
       </div>
 

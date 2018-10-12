@@ -60,10 +60,10 @@ class App extends React.Component {
   }
 
   removeFromOrder(menuItem){
-    const currentOrder = {
-      total: this.state.currentOrder.total - menuItem.price,
-      items: this.state.currentOrder.items.filter(item => item !== menuItem)
-    }
+    const currentOrder = this.state.currentOrder
+    delete currentOrder.items[menuItem.id]
+    currentOrder.total = this.calculateTotal(currentOrder)
+
     this.setState({
       currentOrder
     })
