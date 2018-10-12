@@ -29,7 +29,7 @@ class Order extends React.Component {
   }
 
   render() {
-    const { currentOrderItem, addOrderToBasket } = this.props;
+    const { currentOrderItem, addOrderToBasket, closeOrder } = this.props;
     const { itemName, itemPrice } = currentOrderItem;
 
     return (
@@ -53,16 +53,22 @@ class Order extends React.Component {
           </button>
         </div>
         <div className="order__action">
-          <button className="btn btn__cancel" name="cancel">
+          <button
+            onClick={() => closeOrder()}
+            className="btn btn__cancel"
+            name="cancel"
+          >
             Cancel
           </button>
           <button
             className="btn btn__submit"
-            onClick={() => addOrderToBasket(itemName, this.state.quantity)}
+            onClick={() =>
+              addOrderToBasket(itemName, this.state.quantity, itemPrice)
+            }
             type="submit"
             name="submit"
           >
-            Add To Order for {itemPrice}
+            Add To Order for {itemPrice * this.state.quantity}
           </button>
         </div>
       </div>

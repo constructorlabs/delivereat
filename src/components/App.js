@@ -10,12 +10,14 @@ class App extends React.Component {
 
     this.state = {
       menu: [],
+      activeIndex: 0,
       isOrdering: false,
       currentOrderItem: {}
     };
 
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
     this.addOrderToBasket = this.addOrderToBasket.bind(this);
+    this.closeOrder = this.closeOrder.bind(this);
   }
 
   // React code is running in the browser
@@ -33,9 +35,10 @@ class App extends React.Component {
       });
   }
 
-  handleMenuItemClick(name, price) {
+  handleMenuItemClick(name, price, id) {
     this.setState({
       isOrdering: true,
+      activeIndex: id,
       currentOrderItem: {
         itemName: name,
         itemPrice: price
@@ -43,26 +46,33 @@ class App extends React.Component {
     });
   }
 
-  addOrderToBasket(name, quantity) {
-    console.log(`${quantity} ${name} added to basket`);
+  addOrderToBasket(name, quantity, price) {
+    console.log(`${quantity} ${name} added to basket for £${price * quantity}`);
+  }
+
+  closeOrder() {
+    this.setState({
+      isOrdering: false
+    });
   }
 
   render() {
-    if (this.state.menu.starters) {
-      console.log(this.state.menu.starters.name);
+    const { menu, currentOrderItem, isOrdering, activeIndex } = this.state;
+
+    if (menu.starters) {
+      console.log(menu.starters.name);
     }
 
     return (
       <div>
         <h1>Peng Munch</h1>
-        <Menu
-          menu={this.state.menu}
-          handleMenuItemClick={this.handleMenuItemClick}
-        />
-        {this.state.isOrdering && (
+        <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
+        {isOrdering && (
           <Order
-            currentOrderItem={this.state.currentOrderItem}
+            key={activeIndex}
+            currentOrderItem={currentOrderItem}
             addOrderToBasket={this.addOrderToBasket}
+            closeOrder={this.closeOrder}
           />
         )}
       </div>

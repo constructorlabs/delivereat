@@ -13,6 +13,7 @@ const Menu = ({ menu, handleMenuItemClick }) => {
               key={item.id}
               name={item.name}
               price={item.price}
+              id={item.id}
               handleMenuItemClick={handleMenuItemClick}
             />
           );
