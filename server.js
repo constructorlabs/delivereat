@@ -2,17 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const dataBase = require('./dataBase.js');
+
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
-const menu = {
-  1: {
-    id: 1,
-    name: "Strawberry cheesecake",
-    price: 6
-  }
-};
+
 
 app.get('/', function(req, res){
   res.render('index');
