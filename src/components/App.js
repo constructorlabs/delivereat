@@ -15,6 +15,7 @@ class App extends React.Component {
     this.removeFromOrder = this.removeFromOrder.bind(this)
     this.amendQuantity = this.amendQuantity.bind(this)
     this.changeDisplay = this.changeDisplay.bind(this)
+    this.placeOrder = this.placeOrder.bind(this)
 
     this.state={
       menu: {},
@@ -40,6 +41,21 @@ class App extends React.Component {
           menu: body
         })
       })
+  }
+
+  placeOrder(){
+    const order = this.state.currentOrder
+    fetch('/api/order', {
+      method: 'post',
+      body: JSON.stringify(order),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(body => {
+      console.log(body)
+    })
   }
 
   addToOrder(menuItem, quantity){
@@ -112,6 +128,7 @@ class App extends React.Component {
           ? (<OrderConfirmation currentOrder={this.state.currentOrder}
                                 addToOrder={this.addToOrder}
                                 amendQuantity={this.amendQuantity}
+                                placeOrder={this.placeOrder}
                                removeFromOrder={this.removeFromOrder}/>)
           : null}
 

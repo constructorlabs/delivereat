@@ -26,7 +26,8 @@ const menu = {
 
 };
 
-const orders = []
+const orders = {};
+let nextOrderId = 1;
 
 app.get('/', function(req, res){
   res.render('index');
@@ -36,6 +37,17 @@ app.get('/', function(req, res){
 app.get('/api/menu',(req, res) => {
   return res.json(menu)
 } )
+
+app.post('/api/order', (req, res) => {
+
+  const newOrder = {id:nextOrderId,
+    order: req.body
+  }
+  Object.assign(orders,{ [nextOrderId]:newOrder})
+  console.log(orders)
+  nextOrderId++;
+  return res.json(newOrder)
+})
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');

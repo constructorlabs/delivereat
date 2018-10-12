@@ -11,6 +11,7 @@ class OrderConfirmation extends React.Component{
 
   handlePlaceOrder(event){
     event.preventDefault()
+    this.props.placeOrder()
   }
 
 
@@ -18,7 +19,7 @@ class OrderConfirmation extends React.Component{
   render(){
     return(
       <div>
-        
+
         <ul>
           {Object.values(this.props.currentOrder.items).map(item => {
             return <OrderItem key={item.menuItem.id} item={item} amendQuantity={this.props.amendQuantity} addToOrder={this.props.addToOrder} removeFromOrder={this.props.removeFromOrder}/>
