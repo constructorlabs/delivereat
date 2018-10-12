@@ -32,6 +32,7 @@ class App extends React.Component {
   }
 
   receiveOrderSubmit() {
+
     fetch("/api/order", {
       method: "POST",
       headers: {
@@ -41,7 +42,11 @@ class App extends React.Component {
       body: JSON.stringify(this.state.order)
     })
       .then(response => response.json())
-      .then(body => console.log(body));
+      .then(body => {
+        this.setState({
+          order:[]
+        })
+        return console.log(body)});
   }
 
   receiveAddClick(name) {
