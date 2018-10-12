@@ -76,7 +76,7 @@ const storage = {
 };
 
 function getDishes() {
-    return Object.values(storage.dishes);
+    return storage.dishes;
 }
 
 function getDishById(dishId) {

@@ -8,11 +8,13 @@ class App extends React.Component {
     super();
 
     this.state = {
-      dishes: [],
+      dishes: {},
       basket: {}
     };
 
     this.addToOrder = this.addToOrder.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +38,15 @@ class App extends React.Component {
     }
   }
 
+  decreaseQuantity(event, id) {
+    console.log("decrease" + id);
+
+  }
+
+  increaseQuantity(event, id) {
+    console.log("increase" + id);
+  }
+
   render() {
     return (
       <div>
@@ -43,7 +54,12 @@ class App extends React.Component {
         <Dishes dishes={this.state.dishes} addToOrder={this.addToOrder} />
 
         <h3>My Order</h3>
-        <Basket basket={this.state.basket}/>
+        <Basket
+          basket={this.state.basket}
+          dishes={this.state.dishes}
+          decreaseQuantity={this.decreaseQuantity}
+          increaseQuantity={this.increaseQuantity}
+        />
       </div>
     );
   }

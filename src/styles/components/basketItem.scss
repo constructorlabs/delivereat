@@ -1,0 +1,20 @@
+.basketItem {
+    display: flex;
+    align-items: center;
+
+
+    &__name {
+        flex: 1;
+    }
+
+    &__decrease-btn {
+        height: 100%;
+        padding: 0px;
+    }
+
+    &__increase-btn {
+        height: 100%;
+        padding: 0px;
+    }
+
+}
