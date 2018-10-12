@@ -1,7 +1,13 @@
 import React from "react";
 import "../styles/components/basketItem.scss";
 
-function BasketItem({ basketItem, dishes, decreaseQuantity, increaseQuantity }) {
+function BasketItem({
+  basketItem,
+  dishes,
+  decreaseQuantity,
+  increaseQuantity
+}) {
+  
   return (
     <div className="basketItem">
       <button
@@ -21,7 +27,7 @@ function BasketItem({ basketItem, dishes, decreaseQuantity, increaseQuantity }) 
       <p className="basketItem__name">{basketItem.name}</p>
 
       <p className="basketItem__price">
-        £{dishes[basketItem.id].price.toFixed(2)}
+        £{(dishes[basketItem.id].price * basketItem.quantity).toFixed(2)}
       </p>
     </div>
   );

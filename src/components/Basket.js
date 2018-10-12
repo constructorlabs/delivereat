@@ -9,6 +9,17 @@ function Basket({
   increaseQuantity,
   checkout
 }) {
+
+  let subTotal = 0;
+
+  Object.keys(basket).map(id => {
+    subTotal += dishes[id].price * basket[id].quantity;
+  })
+
+  let deliveryFee = 2.50;
+
+  let total = subTotal + deliveryFee;
+
   return (
     <div className="basket">
       {Object.values(basket).map(basketItem => (
@@ -25,19 +36,19 @@ function Basket({
 
       <div className="basket__subtotal">
         <h4>Subtotal</h4>
-        <p>£20</p>
+        <p>£{subTotal.toFixed(2)}</p>
       </div>
 
       <div className="basket__delivery">
         <h4>Delivery Fee</h4>
-        <p>£2.50</p>
+        <p>{deliveryFee.toFixed(2)}</p>
       </div>
 
       <hr />
 
       <div className="basket__total">
         <h4>Total</h4>
-        <p>£40</p>
+        <p>£{total.toFixed(2)}</p>
       </div>
 
       <button

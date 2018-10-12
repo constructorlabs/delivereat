@@ -40,21 +40,25 @@ class App extends React.Component {
   }
 
   decreaseQuantity(event, id) {
-    console.log("decrease" + id);
     let updatedBasket = Object.assign({}, this.state.basket);
-    updatedBasket[id].quantity--;
+
+    if (this.state.basket[id].quantity === 1) {
+      delete updatedBasket[id];
+    } else {
+      updatedBasket[id].quantity--;
+    }
+
     this.setState({ basket: updatedBasket });
   }
 
   increaseQuantity(event, id) {
-    console.log("increase" + id);
     let updatedBasket = Object.assign({}, this.state.basket);
     updatedBasket[id].quantity++;
     this.setState({ basket: updatedBasket });
   }
 
   checkout(event) {
-    console.log("checkout")
+    console.log("checkout" + this.state.basket[1]);
   }
 
   render() {
