@@ -5,10 +5,31 @@ body {
 }
 
 img {
-  width: 200px;
-  border: 3px solid rgb(255, 188, 151);
+  width: 100px;
+  // border: 3px solid rgb(255, 188, 151);
+  margin: 0 1rem 2rem 0;
+}
+
+.menu__item {
+  margin: 0;
+  padding: 0;
+  & li {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 li {
   list-style: none;
+}
+
+input, select, button {
+  padding: 0.2rem 0.4rem;
+  margin: 0.5rem 0 1rem 0;
+  font-size: 1rem;
+  background: #fff;
+}
+
+input, select {
+  width: 3rem;
 }
