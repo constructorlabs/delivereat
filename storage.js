@@ -1,5 +1,5 @@
 const storage = {
-  menu: {
+  dishes: {
     1: {
       id: 1,
       name: "Chicken Caesar Salad",
@@ -75,44 +75,26 @@ const storage = {
   }
 };
 
-function getMenu() {
-    return Object.values(storage.menu);
+function getDishes() {
+    return Object.values(storage.dishes);
 }
 
-function getMenuById(menuId) {
-    return storage.menu[menuId];
+function getDishById(dishId) {
+    return storage.dishes[dishId];
 }
 
-function createMenuItem(newMenuItem) {
-    const allIds = Object.keys(storage.menu);
+function createDish(newDish) {
+    const allIds = Object.keys(storage.dishes);
     const highestId = Math.max(...allIds);
-    const newMenuId = highestId + 1;
+    const newDishId = highestId + 1;
 
-    const menuItemToSave = Object.assign(newMenuItem, { id: newMenuId })
-    storage.menu[newMenuId] = menuItemToSave;
-    return menuItemToSave;
+    const dishToSave = Object.assign(newDish, { id: newDishId })
+    storage.Dishes[newDishId] = dishToSave;
+    return dishToSave;
 }
 
-// TODO: add replace, patch and delete
-
-// function replaceMenuItem(menuId, replacementMenuItem)  {
-//     storage.menu[menuId] = replacementMenuItem;
-//     return replacementMenuItem;
-// }
-
-// function patchMenuItem() {
-
-// }
-
-// function deleteMenuItem() {
-
-// }
 
 module.exports = {
-    getMenu,
-    getMenuById,
-    createMenuItem,
-    replaceMenuItem,
-    patchMenuItem,
-    deleteMenuItem
+    getDishes,
+    getDishById,
 }

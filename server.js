@@ -1,12 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const {
-  getMenu,
-  getMenuById,
-  createMenuItem,
-  replaceMenuItem,
-  patchMenuItem,
-  deleteMenuItem
+  getDishes,
+  getDishById,
 } = require("./storage");
 const app = express();
 
@@ -18,36 +14,24 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 
-// get Menu
-app.get("/api/menu", function(req, res) {
-  const menu = getMenu();
-  res.json(menu);
+// get dishes
+app.get("/api/dishes", function(req, res) {
+  const dishes = getDishes();
+  res.json(dishes);
 });
 
-// get Menu Item by ID
-app.get("/api/menu/:menuId", function(req, res) {
-  const menu = getMenuById(req.params.menuId);
+// get dish by ID
+app.get("/api/dishes/:dishId", function(req, res) {
+  const dish = getDishById(req.params.dishId);
 
-  if (menu) {
-    res.json(menu);
+  if (dish) {
+    res.json(dish);
   } else {
     res.status(404).json({
-      error: `Menu with ID ${req.params.menuId} not found`
+      error: `Dish with ID ${req.params.dishId} not found`
     });
   }
 });
-
-// create menu item
-app.post("/api/menu", function(req, res) {
-  const newMenuItem = req.body;
-  res.json(createMenuItem(newMenuItem));
-});
-
-// // replace menu item
-// app.put("/api/menu:menuId", function(req, res) {
-//   const replacementMenuItem = req.body;
-//   res.json(replaceMenuItem(req.params.menuId, replacementMenuItem));
-// });
 
 app.listen(8080, function() {
   console.log("Listening on port 8080");
