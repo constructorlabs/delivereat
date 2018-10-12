@@ -12,7 +12,9 @@ class App extends React.Component {
       menu: [],
       activeIndex: 0,
       isOrdering: false,
-      currentOrderItem: {}
+      currentOrderItem: {},
+      hasBasket: false,
+      orderBasket: {}
     };
 
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
@@ -48,6 +50,24 @@ class App extends React.Component {
 
   addOrderToBasket(name, quantity, price) {
     console.log(`${quantity} ${name} added to basket for £${price * quantity}`);
+    let newOrderBasket = {};
+    const order = { name, quantity, price };
+    if (this.state.orderBasket.hasOwnProperty(this.state.activeIndex)) {
+      console.log(this.state.orderBasket[this.state.activeIndex]);
+      const updatedOrder = (this.state.orderBasket[
+        this.state.activeIndex
+      ].quantity +=
+        order.quantity);
+      newOrderBasket = Object.assign({}, this.state.orderBasket, updatedOrder);
+    } else {
+      newOrderBasket = Object.assign({}, this.state.orderBasket, {
+        [this.state.activeIndex]: order
+      });
+    }
+    this.setState({
+      hasBasket: true,
+      orderBasket: newOrderBasket
+    });
   }
 
   closeOrder() {
