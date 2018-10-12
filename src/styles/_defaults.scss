@@ -1,0 +1,17 @@
+$primary-color: #403D39;
+$background-color: white;
+$font-family: 'Roboto';
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  font-family: $font-family;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+}

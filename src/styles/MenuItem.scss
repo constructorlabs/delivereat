@@ -1,0 +1,26 @@
+@import 'defaults';
+
+.menu-item {
+  
+  border-bottom: 1px solid #cccccc;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  &__name {
+    font-size: 1rem;
+    color: black;
+    padding-bottom: 0.2rem;
+  }
+
+  &__description {
+    font-size: 0.8rem;
+    color: $primary-color;
+    padding-bottom: 0.2rem;
+  }
+
+  &__price {
+    font-size: 1rem;
+    color: $primary-color;
+    padding-bottom: 0.2rem;
+  }
+}
