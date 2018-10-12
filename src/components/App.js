@@ -118,26 +118,26 @@ class App extends React.Component {
     </div>
   }
 
+  // getOrderTotal () {
+  // }
+
   displayAllOrders () {
-    const keys = Object.keys(this.state.orders);
+    const values = Object.values(this.state.orders);
     // values.forEach(item => {
     //   console.log("Order: ", item);
     // });
-
-    keys.forEach(order => {
-
-      console.log(order)
-      // const orderValues = Object.values(order);
-      // orderValues.forEach(orderItem => {
-      //   const menuItem = this.state.menu[orderItem.menuId];
-      //   console.log("name: " + menuItem.name);
-      //   console.log("price: " + menuItem.price);
-      // });
+    let total = 0;
+    values.forEach(order => {
+      Object.values(order).forEach(orderItem => {
+        const menuItem = this.state.menu[orderItem.menuId];
+        console.log(orderItem.quantity + " x " + menuItem.name + " @ " + this.getCurrency(menuItem.price));
+        console.log("Cost: " + this.getCurrency(orderItem.quantity * menuItem.price));
+      });
+      // total += (orderItem.quantity * menuItem.price);
     });
-      // const menuItem = this.state.menu[orderItem.menuId];
-      // total += orderItem.quantity * menuItem.price;
-      // return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
-    
+    // console.log("Order Total: " + this.getCurrency(total));
+    // const menuItem = this.state.menu[orderItem.menuId];
+    // return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
   }
 
   render(){
