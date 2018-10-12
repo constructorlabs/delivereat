@@ -11,13 +11,13 @@ class App extends React.Component {
     this.createQuantityMenu = this.createQuantityMenu.bind(this);
     this.getCurrency = this.getCurrency.bind(this);
     
-    this.displayOrder = this.displayOrder.bind(this);
+    this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
 
     this.state = { 
       menu: {},
-      orders: {},
+      orders: null,
       currentOrder: null
     }
   }
@@ -28,6 +28,17 @@ class App extends React.Component {
     .then(menu => {
       this.setState({ menu })
     })
+  }
+
+  fetchAllOrders () {
+    fetch('/api/order')
+    .then(response => response.json())
+    .then(orders => {
+      this.setState({ 
+        orders: orders,
+        currentOrder: null
+       })
+    });
   }
   
   handleSubmit (event) {
@@ -41,17 +52,7 @@ class App extends React.Component {
     ).then(order => {
       this.fetchAllOrders();
     });
-  }
-
-  fetchAllOrders () {
-    fetch('/api/order')
-    .then(response => response.json())
-    .then(orders => {
-      this.setState({ 
-        orders: orders,
-        currentOrder: null
-       })
-    });
+    console.log(event.target[0])
   }
 
   handleChange (id, event) {
@@ -100,7 +101,7 @@ class App extends React.Component {
     });
   }
 
-  displayOrder () {
+  displayCurrentOrder () {
     let total = 0;
     const values = Object.values(this.state.currentOrder);
     if (values.length === 0) { 
@@ -118,48 +119,51 @@ class App extends React.Component {
     </div>
   }
 
-  // getOrderTotal () {
-  // }
-
   displayAllOrders () {
-    const values = Object.values(this.state.orders);
-    // values.forEach(item => {
-    //   console.log("Order: ", item);
-    // });
     let total = 0;
-    values.forEach(order => {
-      Object.values(order).forEach(orderItem => {
+    const values = Object.values(this.state.orders);
+    return <div>
+    { values.map(order => {
+      const summary = Object.values(order).map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
-        console.log(orderItem.quantity + " x " + menuItem.name + " @ " + this.getCurrency(menuItem.price));
-        console.log("Cost: " + this.getCurrency(orderItem.quantity * menuItem.price));
+        total += (orderItem.quantity * menuItem.price);
+        return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
       });
-      // total += (orderItem.quantity * menuItem.price);
-    });
-    // console.log("Order Total: " + this.getCurrency(total));
-    // const menuItem = this.state.menu[orderItem.menuId];
-    // return <div key={orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+      return (<React.Fragment>
+        {summary}
+        <div>Order Total: {this.getCurrency(total)}</div>
+        <hr />
+        </React.Fragment>)
+    })}
+    </div>
   }
 
   render(){
 
-    const allOrders = this.state.orders &&
+    const currentOrder = 
+      (<React.Fragment>
+      <h2>Your basket</h2>
+      <div className="basket">
+        {this.state.currentOrder ? this.displayCurrentOrder() : <div>Your basket is empty</div>}
+      </div>
+      </React.Fragment>)
+
+    const allOrders = 
       (<React.Fragment>
       <h2>View all orders</h2>
-      <div className="basket">
-         {this.displayAllOrders()}
+      <div className="orders">
+        {this.state.orders ? this.displayAllOrders() : null}
       </div>
       </React.Fragment>)
 
     return (
       <div>
         <h1>DeliverEat app</h1>
-          <form onSubmit={this.handleSubmit} className="menu__form">
-            <button type="submit">PLACE YOUR ORDER</button>
-            <h2>Your basket</h2>
-            <div className="basket">
-              {this.state.currentOrder ? this.displayOrder() : <div>Your basket is empty</div>}
-            </div>
-            {allOrders}
+          <form onSubmit={this.handleSubmit} id="form" className="menu__form">
+            <input type="text" placeholder="your name..." id="username" className="username"></input>
+            <button type="submit">Send order</button>
+            { currentOrder }
+            { allOrders }
             <h2>Starters</h2> {this.state.menu && this.getCourse("starter")}
             <hr></hr>
             <h2>Mains</h2> {this.state.menu && this.getCourse("main")}
