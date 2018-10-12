@@ -1,18 +1,15 @@
-import React from 'react';
-
-import '../styles/App.scss';
+import React from "react";
+import Menu from "./Menu";
+import "../styles/App.scss";
 
 class App extends React.Component {
-  constructor(){
+  constructor() {
     super();
+    this.state = {};
   }
 
-  render(){
-    return (
-      <div>
-        Delivereat app
-      </div>
-    )
+  render() {
+    return <Menu menu={this.state.menu} />;
   }
 }
 
