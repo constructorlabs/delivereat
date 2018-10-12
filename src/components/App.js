@@ -1,16 +1,124 @@
 import React from 'react';
+import Menu from './Menu.js'
+import Header from './Header.js'
+import SeeOrder from "./SeeOrder.js"
+import OrderConfirmation from "./OrderConfirmation.js"
 
 import '../styles/App.scss';
 
 class App extends React.Component {
   constructor(){
     super();
+
+    this.getMenu = this.getMenu.bind(this)
+    this.addToOrder = this.addToOrder.bind(this)
+    this.removeFromOrder = this.removeFromOrder.bind(this)
+    this.amendQuantity = this.amendQuantity.bind(this)
+    this.changeDisplay = this.changeDisplay.bind(this)
+
+    this.state={
+      menu: {},
+      currentOrder: {
+        total: 0,
+        items: {}
+                    },
+      display: 'menu'  //'menu' or 'order'
+
+    }
+  }
+
+  componentDidMount(){
+    this.getMenu()
+  }
+
+
+  getMenu(){
+    fetch('/api/menu')
+      .then(response => response.json())
+      .then(body => {
+        this.setState({
+          menu: body
+        })
+      })
+  }
+
+  addToOrder(menuItem, quantity){
+    const foodItem = {
+      [menuItem.id]: {
+        quantity,
+        totalPrice: quantity * menuItem.price,
+        menuItem
+      }
+    }
+    const currentOrder = {
+      total: this.state.currentOrder.total + foodItem[menuItem.id].totalPrice,
+      items: Object.assign(this.state.currentOrder.items, foodItem)
+    }
+    this.setState({
+      currentOrder
+    })
+  }
+
+  removeFromOrder(menuItem){
+    const currentOrder = {
+      total: this.state.currentOrder.total - menuItem.price,
+      items: this.state.currentOrder.items.filter(item => item !== menuItem)
+    }
+    this.setState({
+      currentOrder
+    })
+  }
+
+  calculateTotal(currentOrder){
+    const total = Object.values(currentOrder.items).reduce((acc,item) => {
+      return acc + item.totalPrice
+    }, 0)
+    return total
+  }
+
+  amendQuantity(menuItem, quantity){
+    const currentOrder = this.state.currentOrder
+    currentOrder.items[menuItem.id] = {
+      menuItem,
+      quantity,
+      totalPrice: quantity * menuItem.price
+    }
+    currentOrder.total = this.calculateTotal(currentOrder)
+
+
+    this.setState({
+      currentOrder
+    })
+  }
+
+  changeDisplay(displayType){
+    this.setState({
+      display: displayType
+    })
+
   }
 
   render(){
     return (
       <div>
-        Delivereat app
+        <Header />
+        {this.state.display === 'menu'
+          ? <Menu menu={this.state.menu} addToOrder={this.addToOrder}/>
+          : null}
+
+
+
+        {this.state.display === 'order'
+          ? (<OrderConfirmation currentOrder={this.state.currentOrder}
+                                addToOrder={this.addToOrder}
+                                amendQuantity={this.amendQuantity}
+                               removeFromOrder={this.removeFromOrder}/>)
+          : null}
+
+        {Object.values(this.state.currentOrder.items).length > 0 && this.state.display === 'menu'
+         ? <SeeOrder changeDisplay={this.changeDisplay}/>
+         : null}
+
       </div>
     )
   }
