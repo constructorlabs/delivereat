@@ -1,18 +1,17 @@
 import React from 'react';
+import Item from './Item';
+
+import "../styles/components/menu.scss";
 
 class Menu extends React.Component {
-    constructor(){
-        super();
-    }
+
+
+
     render() { 
         return (
             <ul>
                 {this.props.menuArr.map(item => (
-                    <li key={item.id}>
-                        <p>{item.name}</p>
-                        <p>{item.price}</p>
-                        <img src={item.img} />
-                    </li>
+                    <Item key={item.id} item={item} addToOrder={this.props.addToOrder} removeFromOrder={this.props.removeFromOrder} />
                 ))}
             </ul>
         );
@@ -20,3 +19,4 @@ class Menu extends React.Component {
 }
  
 export default Menu;
+
