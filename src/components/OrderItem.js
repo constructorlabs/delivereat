@@ -14,21 +14,26 @@ class OrderItem extends React.Component {
   }
 
   handleClickPlus(event) {
-    this.props.receiveClickPlus(this.props.order.name);
+    this.props.receiveClickPlus(this.props.eachOrder.name);
   }
 
   handleClickMinus(event) {
-    this.props.receiveClickMinus(this.props.order.name);
+    this.props.receiveClickMinus(this.props.eachOrder.name);
   }
 
   render() {
-    const imageLink = `../../static/${this.props.order.name}.jpg`;
+    const imageLink = `../../static/${this.props.eachOrder.name}.jpg`;
     return (
       <div>
-        <h2>{this.props.order.name}</h2>
+        <h2>{this.props.eachOrder.name}</h2>
         <img src={imageLink} />
+        <p>{this.props.eachOrder.price.toLocaleString("en-UK", {
+          style: "currency",
+          currency: "GBP"
+        })}
+        </p>
         <FontAwesomeIcon icon="minus" onClick={this.handleClickMinus} />
-        {this.props.order.number}
+         {this.props.eachOrder.number} 
         <FontAwesomeIcon icon="plus" onClick={this.handleClickPlus} />
       </div>
     );

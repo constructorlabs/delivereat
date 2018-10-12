@@ -16,6 +16,7 @@ class App extends React.Component {
     this.receiveRemoveClick = this.receiveRemoveClick.bind(this);
     this.receiveClickPlus = this.receiveClickPlus.bind(this);
     this.receiveClickMinus = this.receiveClickMinus.bind(this);
+    this.receiveOrderSubmit = this.receiveOrderSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +31,19 @@ class App extends React.Component {
       });
   }
 
+  receiveOrderSubmit() {
+    fetch("/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8"
+      },
+
+      body: JSON.stringify(this.state.order)
+    })
+      .then(response => response.json())
+      .then(body => console.log(body));
+  }
+
   receiveAddClick(name) {
     this.setState(
       {
@@ -42,6 +56,7 @@ class App extends React.Component {
       () => console.log(this.state.order)
     );
   }
+
   receiveRemoveClick(name) {
     this.setState(
       {
@@ -55,7 +70,11 @@ class App extends React.Component {
       {
         order: this.state.order.map(item => {
           if (item.name == orderName) {
-            return (item = { name: item.name, number: item.number + 1 });
+            return (item = {
+              name: item.name,
+              number: item.number + 1,
+              price: item.price
+            });
           } else {
             return item;
           }
@@ -70,7 +89,11 @@ class App extends React.Component {
         order: this.state.order
           .map(item => {
             if (item.name == orderName && item.number > 0) {
-              return (item = { name: item.name, number: item.number - 1 });
+              return (item = {
+                name: item.name,
+                number: item.number - 1,
+                price: item.price
+              });
             } else {
               return item;
             }
@@ -94,6 +117,7 @@ class App extends React.Component {
           order={this.state.order}
           receiveClickPlus={this.receiveClickPlus}
           receiveClickMinus={this.receiveClickMinus}
+          receiveOrderSubmit={this.receiveOrderSubmit}
         />
       </div>
     );

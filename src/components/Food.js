@@ -21,7 +21,7 @@ class DisplayFood extends React.Component {
 
   handleRemoveClick(event) {
     this.props.receiveRemoveClick(this.props.food.name);
-    
+
   }
 
   render() {
@@ -38,11 +38,11 @@ class DisplayFood extends React.Component {
           })}
         </p>
         {this.props.order.find(item => item.name == this.props.food.name) ? (
-          <p type="buttom" onClick={this.handleRemoveClick}>
+          <p type="button" onClick={this.handleRemoveClick}>
             Remove from chart
           </p>
         ) : (
-          <p type="buttom" onClick={this.handleAddClick}>
+          <p type="button" onClick={this.handleAddClick}>
             Add to chart
           </p>
         )}
