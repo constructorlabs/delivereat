@@ -15,6 +15,7 @@ class App extends React.Component {
     this.addToOrder = this.addToOrder.bind(this);
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.checkout = this.checkout.bind(this);
   }
 
   componentDidMount() {
@@ -40,11 +41,20 @@ class App extends React.Component {
 
   decreaseQuantity(event, id) {
     console.log("decrease" + id);
-
+    let updatedBasket = Object.assign({}, this.state.basket);
+    updatedBasket[id].quantity--;
+    this.setState({ basket: updatedBasket });
   }
 
   increaseQuantity(event, id) {
     console.log("increase" + id);
+    let updatedBasket = Object.assign({}, this.state.basket);
+    updatedBasket[id].quantity++;
+    this.setState({ basket: updatedBasket });
+  }
+
+  checkout(event) {
+    console.log("checkout")
   }
 
   render() {
@@ -59,6 +69,7 @@ class App extends React.Component {
           dishes={this.state.dishes}
           decreaseQuantity={this.decreaseQuantity}
           increaseQuantity={this.increaseQuantity}
+          checkout={this.checkout}
         />
       </div>
     );

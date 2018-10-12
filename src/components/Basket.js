@@ -2,7 +2,13 @@ import React from "react";
 import BasketItem from "./BasketItem.js";
 import "../styles/components/basket.scss";
 
-function Basket({ basket, dishes, decreaseQuantity, increaseQuantity }) {
+function Basket({
+  basket,
+  dishes,
+  decreaseQuantity,
+  increaseQuantity,
+  checkout
+}) {
   return (
     <div className="basket">
       {Object.values(basket).map(basketItem => (
@@ -34,7 +40,12 @@ function Basket({ basket, dishes, decreaseQuantity, increaseQuantity }) {
         <p>£40</p>
       </div>
 
-      <button className="basket__checkout-btn">Checkout</button>
+      <button
+        className="basket__checkout-btn"
+        onClick={event => checkout(event)}
+      >
+        Checkout
+      </button>
     </div>
   );
 }
