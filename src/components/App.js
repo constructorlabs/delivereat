@@ -4,19 +4,36 @@ import '../styles/App.scss';
 class App extends React.Component {
   constructor(){
     super();
+
     this.getCourse = this.getCourse.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.createQuantityMenu = this.createQuantityMenu.bind(this);
-    this.state = { menu: {} }
+    this.makeOrder = this.makeOrder.bind(this);
+
+    this.state = { 
+      menu: {},
+      orders: {}
+    }
   }
 
   componentDidMount () {
-    fetch("/delivereat")
+    fetch("/api/menu")
     .then(response => response.json())
     .then(menu => {
       this.setState({ menu })
     })
+  }
+
+  makeOrder () { 
+    fetch('/api/order', {
+      method: 'post',
+      body: JSON.stringify(order),
+      headers: { 'Content-Type': 'application/json' }
+    }).then(response => response.json()
+    ).then(data => {
+      console.log(data)
+    });
   }
 
   handleSubmit (event) {
@@ -33,9 +50,13 @@ class App extends React.Component {
   }
 
   handleChange (id, event) {
+      const keys = Object.keys(this.state.orders);
+      const orderId = keys.length ? Math.max(...keys) : 1;
+      const quantity = event.target.value;
+      const newOrder = Object.assign({}, this.state.orders, { orderId: this.state.menu[id] })
       this.setState({
-        menu: Object.assign({}, this.state.menu, {[id]: Object.assign(this.state.menu[id], { quantity: event.target.value })})
-      });
+        orders: newOrder
+      })
     }
 
   createQuantityMenu (name, id) {
@@ -63,7 +84,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <h1>Delivereat app</h1>
+        <h1>DeliverEat app</h1>
           <form onSubmit={this.handleSubmit} className="menu__form">
             <button type="submit">Order food</button>
             <h2>Starters</h2> {this.state.menu && this.getCourse("starter")}
