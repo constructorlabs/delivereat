@@ -85,11 +85,9 @@ class App extends React.Component {
 
     switch (e.target.name) {
       case 'increase':
-        console.log('increase');
         updatedOrder = orderToUpdate.quantity++;
         break;
       case 'decrease':
-        console.log('decrease');
         if (orderBasket[id].quantity > 1) {
           updatedOrder = orderToUpdate.quantity--;
         }
@@ -106,7 +104,6 @@ class App extends React.Component {
     this.setState({
       orderBasket: delete this.state.orderBasket[id]
     });
-    console.log('item removed');
   }
 
   submitOrder() {
@@ -125,7 +122,6 @@ class App extends React.Component {
           orderBasket: {},
           hasOrdered: true
         });
-        console.log(data);
       });
   }
 
@@ -138,10 +134,6 @@ class App extends React.Component {
       orderBasket,
       hasOrdered
     } = this.state;
-
-    if (menu.starters) {
-      console.log(menu.starters.name);
-    }
 
     const hasBasket = Object.keys(orderBasket).length > 0;
 

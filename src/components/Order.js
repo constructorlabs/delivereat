@@ -31,6 +31,7 @@ class Order extends React.Component {
   render() {
     const { currentOrderItem, addOrderToBasket, closeOrder } = this.props;
     const { itemName, itemPrice } = currentOrderItem;
+    const { quantity } = this.state;
 
     return (
       <div className="order">
@@ -43,7 +44,7 @@ class Order extends React.Component {
           >
             [-]
           </button>
-          <span className="amount__count">{this.state.quantity}</span>
+          <span className="amount__count">{quantity}</span>
           <button
             onClick={e => this.increaseOrderAmount(e)}
             className="ammount_increase"
@@ -51,6 +52,7 @@ class Order extends React.Component {
           >
             [+]
           </button>
+          <span className="order__cost"> £{quantity * itemPrice}</span>
         </div>
         <div className="order__action">
           <button
@@ -62,13 +64,11 @@ class Order extends React.Component {
           </button>
           <button
             className="btn btn__submit"
-            onClick={() =>
-              addOrderToBasket(itemName, this.state.quantity, itemPrice)
-            }
+            onClick={() => addOrderToBasket(itemName, quantity, itemPrice)}
             type="submit"
             name="submit"
           >
-            Add To Order for {itemPrice * this.state.quantity}
+            Add to order
           </button>
         </div>
       </div>
