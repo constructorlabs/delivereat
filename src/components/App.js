@@ -12,6 +12,9 @@ class App extends React.Component {
     this.receiveGetCurrency = this.receiveGetCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
+    
+    this.handleFormData = this.handleFormData.bind(this);
+    
 
     this.state = { 
       menu: {},
@@ -38,8 +41,8 @@ class App extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
 
-    const currentOrder = Object.assign({}, this.state.currentOrder, { username: event.target.username.value, telephone: event.target.telephone.value });
-    this.setState({ currentOrder });
+    // const currentOrder = Object.assign({}, this.state.currentOrder, { username: event.target.username.value, telephone: event.target.telephone.value });
+    // this.setState({ currentOrder });
 
     fetch('/api/order', {
       method: 'post',
@@ -51,12 +54,17 @@ class App extends React.Component {
       this.fetchAllOrders();
     });
 
-    Object.values(event.target).forEach(item => {
-      if (item.type === "text") { 
-        item.value = ""; 
-      }
-    });
+    // Object.values(event.target).forEach(item => {
+    //   if (item.type === "text") { 
+    //     item.value = ""; 
+    //   }
+    // });
   }
+
+  handleFormData (event) {   
+    const currentOrder = Object.assign({}, this.state.currentOrder, {[event.target.name]: event.target.value});
+    this.setState({ currentOrder });
+  }	
 
 /* get all orders
 ///////////////////////////////////////////*/
@@ -67,8 +75,7 @@ class App extends React.Component {
     .then(orders => {
       this.setState({ 
         orders: orders,
-        currentOrder: null,
-        formData: null
+        currentOrder: null
        })
     });
   }
@@ -103,15 +110,16 @@ class App extends React.Component {
   displayCurrentOrder () {
     let total = 0;
     const values = Object.values(this.state.currentOrder);
+    
     if (values.length === 0) { 
       this.setState({ currentOrder: null });
       return;
     }
-    // console.log("currentOrder: ", this.state.currentOrder)
-    
+
     return <div>
-    { values.map(orderItem => {
-        // console.log(values, orderItem, orderItem.menuId, orderItem.quantity);
+    { values
+      .filter(orderItem => typeof orderItem === "object")
+      .map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += orderItem.quantity * menuItem.price;
         return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
@@ -129,12 +137,15 @@ class App extends React.Component {
     const values = Object.values(this.state.orders);
     return <div>
     { values.map((order, index) => {
-      const summary = Object.values(order).map(orderItem => {
+      const summary = Object.values(order)
+      .filter(orderItem => typeof orderItem === "object")
+      .map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += (orderItem.quantity * menuItem.price);
         return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
       });
       return (<div key={"order-" + index}>
+        {/* <div><strong>Order from: {this.state.currentOrder.username}</strong></div> */}
         {summary}
         <div key={"total-" + index + 1}>Order Total: {this.receiveGetCurrency(total)}</div>
         <hr className="box"></hr>
@@ -157,16 +168,13 @@ class App extends React.Component {
         <div className="orders">{ this.displayAllOrders() }</div>
       </div>)
 
-    const starters = this.state.menu && 
+    const menu = this.state.menu && 
     <Menu 
       receiveHandleChange={(id, event) => this.receiveHandleChange(id, event)} 
       receiveGetCurrency={(string) => this.receiveGetCurrency(string)} 
       menu={this.state.menu} 
       currentOrder={this.state.currentOrder}
     />
-
-    // const mains = this.state.menu && this.displayMenuItems("main", "Mains");
-    // const desserts = this.state.menu && this.displayMenuItems("dessert", "Desserts")
 
     return (
       <div>
@@ -181,9 +189,7 @@ class App extends React.Component {
 
           { currentOrder }
           { allOrders }
-          { starters }
-          {/* { mains }
-          { desserts } */}
+          { menu }
 
         </form>      
       </div>
