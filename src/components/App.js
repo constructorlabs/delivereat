@@ -9,14 +9,12 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
     this.receiveHandleChange = this.receiveHandleChange.bind(this);
-    this.handleFormData = this.handleFormData.bind(this);
     this.receiveGetCurrency = this.receiveGetCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
 
     this.state = { 
       menu: {},
-      formData: null,
       currentOrder: null,
       orders: null
     }
@@ -37,15 +35,10 @@ class App extends React.Component {
 /* post current order from basket
 ///////////////////////////////////////////*/
 
-// Uncaught TypeError: Cannot read property 'price' of undefined
-//     at App.js:160
-//     at Array.map (<anonymous>)
-//     at App.displayCurrentOrder (App.js:158)
-
   handleSubmit (event) {
     event.preventDefault();
 
-    const currentOrder = Object.assign({}, this.state.currentOrder, { name: event.target.username, telephone: event.target.telephone });
+    const currentOrder = Object.assign({}, this.state.currentOrder, { username: event.target.username.value, telephone: event.target.telephone.value });
     this.setState({ currentOrder });
 
     fetch('/api/order', {
@@ -57,6 +50,7 @@ class App extends React.Component {
     ).then(order => {
       this.fetchAllOrders();
     });
+
     Object.values(event.target).forEach(item => {
       if (item.type === "text") { 
         item.value = ""; 
@@ -88,18 +82,9 @@ class App extends React.Component {
       currentOrder = Object.assign({}, this.state.currentOrder);
       delete currentOrder[id];
     } else {
-      currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, quantity: event.target.value }})
+      currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, "quantity": Number(event.target.value) }})
     }
     this.setState({ currentOrder });
-  }
-
-  handleFormData (event) {
-    
-    // const currentOrder = Object.assign({}, this.state.currentOrder, { [event.target.name]: event.target.value });
-    // this.setState({ currentOrder });
-
-    // const formData = Object.assign({}, this.state.formData, {[event.target.name]: event.target.value});
-    // this.setState({ formData });
   }
 
 /* display prices as GBPs
@@ -122,8 +107,11 @@ class App extends React.Component {
       this.setState({ currentOrder: null });
       return;
     }
+    // console.log("currentOrder: ", this.state.currentOrder)
+    
     return <div>
     { values.map(orderItem => {
+        // console.log(values, orderItem, orderItem.menuId, orderItem.quantity);
         const menuItem = this.state.menu[orderItem.menuId];
         total += orderItem.quantity * menuItem.price;
         return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
@@ -175,8 +163,6 @@ class App extends React.Component {
       receiveGetCurrency={(string) => this.receiveGetCurrency(string)} 
       menu={this.state.menu} 
       currentOrder={this.state.currentOrder}
-      course="starter" 
-      title="Starters" 
     />
 
     // const mains = this.state.menu && this.displayMenuItems("main", "Mains");

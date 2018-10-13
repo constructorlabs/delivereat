@@ -11,14 +11,14 @@ class Menu extends React.Component {
 
       }
       
-    displayMenuItems () {
+    displayMenuItems (title, course) {
         const values = Object.values(this.props.menu);
         return <div>
-            <h2>{this.props.title}</h2>
+            <h2>{title}</h2>
             <ul className="menu__item"> {
-            values.filter(item => item.type === this.props.course)
+            values.filter(item => item.type === course)
             .map(item => {
-                return <li key={this.props.course + "-menu-item-" + item.menuId}>
+                return <li key={course + "-menu-item-" + item.menuId}>
                         <div><img src={item.image}></img></div>
                         <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
                         Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
@@ -54,7 +54,9 @@ class Menu extends React.Component {
     render () {
         return (
             <div>
-                {this.displayMenuItems ()}
+                {this.displayMenuItems ("Starters", "starter")}
+                {this.displayMenuItems ("Mains", "main")}
+                {this.displayMenuItems ("Desserts", "dessert")}
             </div>
         )
     }
