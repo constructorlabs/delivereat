@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "classnames": "^2.2.6",
     "express": "^4.16.3",
     "hbs": "^4.0.1",
     "jest": "^22.3.0",
@@ -36,10 +38,10 @@
     "jest": "^22.4.2",
     "jest-fetch-mock": "^1.6.6",
     "node-sass": "^4.9.1",
-    "nodemon": "1.17.5",
+    "nodemon": "^1.17.5",
+    "react-test-renderer": "^16.2.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
-    "react-test-renderer": "^16.2.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }

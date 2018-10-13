@@ -1,3 +1,23 @@
 body {
   margin: 0;
 }
+
+
+img {
+  width: 150px;
+}
+
+.hidden{
+ display: none;
+  
+}
+.closer{
+  text-align:right;
+  margin: 25px;
+  color: white;
+}
+
+.orderInfo{
+display: block;
+margin-left: 600px;
+}
