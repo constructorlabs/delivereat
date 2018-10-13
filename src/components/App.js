@@ -8,12 +8,8 @@ class App extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
     this.receiveHandleChange = this.receiveHandleChange.bind(this);
     this.handleFormData = this.handleFormData.bind(this);
-    // this.createQuantityOptions = this.createQuantityOptions.bind(this);
-    // this.displayMenuItems = this.displayMenuItems.bind(this);
-    // this.getCurrency = this.getCurrency.bind(this);
     this.receiveGetCurrency = this.receiveGetCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
@@ -49,8 +45,8 @@ class App extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
 
-    // const currentOrder = Object.assign({}, this.state.currentOrder, { name: event.target.username, telephone: event.target.telephone });
-    // this.setState({ currentOrder });
+    const currentOrder = Object.assign({}, this.state.currentOrder, { name: event.target.username, telephone: event.target.telephone });
+    this.setState({ currentOrder });
 
     fetch('/api/order', {
       method: 'post',
@@ -106,42 +102,6 @@ class App extends React.Component {
     // this.setState({ formData });
   }
 
-/* <Menu> create quantity options for menu each item
-///////////////////////////////////////////*/
-
-  // createQuantityOptions (name, id) {
-  //   const array = [];
-  //   for (let i=0; i<=10; i++) array.push(i);
-  //   return <select 
-  //             value={this.state.currentOrder ? this.value : ""}
-  //             onChange={(event) => this.handleChange(id, event)} 
-  //             name={name} 
-  //             id={id}>
-  //     { array.map(item => {
-  //         const keyName = name.toLowerCase().split(" ").join("-");
-  //         return <option value={item} key={keyName + "-option-" + item}>{item}</option> 
-  //     })}
-  //   </select>
-  // }
-
-/* <Menu> create quantity options for menu each item
-///////////////////////////////////////////*/
-
-  // displayMenuItems (course, title) {
-  //   const values = Object.values(this.state.menu);
-  //   return <div><h2>{title}</h2><ul className="menu__item"> {
-  //   values.filter(item => item.type === course)
-  //   .map(item => {
-  //     return <li key={course + "-menu-item-" + item.menuId}>
-  //           <div><img src={item.image}></img></div>
-  //           <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
-  //           Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
-  //         </li>
-  //   })}
-  //   </ul>
-  //   </div>
-  // }
-
 /* display prices as GBPs
 ///////////////////////////////////////////*/
 
@@ -166,10 +126,10 @@ class App extends React.Component {
     { values.map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += orderItem.quantity * menuItem.price;
-        return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+        return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
       })} 
       <hr className="box"></hr>
-      <div>Total: {this.getCurrency(total)}</div>
+      <div>Total: {this.receiveGetCurrency(total)}</div>
     </div>
   }
 
@@ -184,11 +144,11 @@ class App extends React.Component {
       const summary = Object.values(order).map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += (orderItem.quantity * menuItem.price);
-        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
       });
       return (<div key={"order-" + index}>
         {summary}
-        <div key={"total-" + index + 1}>Order Total: {this.getCurrency(total)}</div>
+        <div key={"total-" + index + 1}>Order Total: {this.receiveGetCurrency(total)}</div>
         <hr className="box"></hr>
       </div>)
     })}
