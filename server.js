@@ -117,6 +117,7 @@ app.post('/api/order', (req, res) => {
     order: req.body
   }
   Object.assign(orders,{ [nextOrderId]:newOrder})
+  window.localStorage.set("orders", "test")
   nextOrderId++;
   return res.json(newOrder)
 })

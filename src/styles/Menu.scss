@@ -4,6 +4,10 @@
   justify-content: center;
   margin-bottom: 2rem;
 
+  &__restaurant{
+    // background-image: url('../../static/images/burger.jpg')
+  }
+
   &__category{
     display: flex;
     flex-direction: column;
