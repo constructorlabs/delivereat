@@ -1,0 +1,13 @@
+.menu__item {
+  text-transform: capitalize;
+
+  padding: 3rem 1rem;
+  // margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  background: white;
+  .item__price {
+    float: right;
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import BasketItem from './BasketItem';
 
+import '../styles/basket.scss';
+
 const Basket = ({
   basket,
   submitOrder,
@@ -19,7 +21,7 @@ const Basket = ({
   return (
     <div className="basket">
       <h2 className="basket__title">Your order</h2>
-      <ul className="order__list">
+      <ul className="basket__list">
         {Object.values(basket).map(item => {
           return (
             <BasketItem

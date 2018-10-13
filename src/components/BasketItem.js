@@ -4,7 +4,7 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
   const { id, name, price, quantity } = orderItem;
 
   return (
-    <li className="order">
+    <li className="basket__item">
       <button
         onClick={e => handleBasketChange(e, id)}
         className="btn btn__decrease"

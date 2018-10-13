@@ -13,28 +13,31 @@ const menu = {
   menuItems: {
     1: {
       id: 1,
-      name: 'bacon roll',
-      price: 4,
-      description: 'grilled bacon in a soft bap'
+      name: 'The Full Monty',
+      price: 10.95,
+      description:
+        'Bacon, sausage, black pudding, fried potatoes, mushrooms, beans, tomato, eggs & toast '
     },
     2: {
       id: 2,
-      name: 'bacon & egg roll',
-      price: 5,
+      name: 'Butternut bubble',
+      price: 9.5,
       description:
-        'our outdoor-reared bacon with a fried free-range egg in a soft bap'
+        'Butternut squash, potato & spinach bubble with mushrooms,asparagus & avocado hollandaise'
     },
     3: {
       id: 3,
-      name: 'sausage sandwich',
-      price: 4,
-      description: 'two herby pork sausages in a bap'
+      name: 'Huevos Rancheros',
+      price: 10.5,
+      description:
+        'Fried eggs, tortilla, refried beans, chorizo, salsa, cheddar, sour cream & guacamole '
     },
     4: {
       id: 4,
-      name: 'scrambled eggs',
-      price: 4,
-      description: 'three free-range eggs scrambled with butter and cream'
+      name: 'Reggie the Veggie',
+      price: 10.95,
+      description:
+        'Veggie sausage, fried potatoes, egg, mushrooms, tomato, BBQ beans & toast '
     },
     5: {
       id: 5,

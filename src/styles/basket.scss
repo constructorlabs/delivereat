@@ -1,0 +1,36 @@
+.basket {
+  background: white;
+  padding: 0.5rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
+  width: 100%;
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  &__item {
+    padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+  .btn {
+    border: none;
+    background: black;
+    color: white;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 1rem;
+    &__removeItem {
+      width: initial;
+      background: initial;
+      border: 1px solid black;
+      border-radius: 8px;
+      color: initial;
+    }
+  }
+  .amount__count {
+    display: block;
+    margin: 0 0.5rem;
+  }
+}
