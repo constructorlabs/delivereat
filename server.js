@@ -63,7 +63,7 @@ app.get('/api/menu', function(req, res) {
 app.post('/api/order', function(req, res) {
   const order = req.body;
   const ordersKeys = Object.keys(orders);
-  const id = ordersKeys.length > 0 ? Math.max(...ordersKeys) + 1 : 0;
+  const id = ordersKeys.length > 0 ? Math.max(...ordersKeys) + 1 : 1;
   orders = Object.assign({}, orders, { [id]: order });
   // respond with order object that has id attached
   res.json({ [id]: order });
@@ -71,6 +71,10 @@ app.post('/api/order', function(req, res) {
 
 app.get('/orders', (req, res) => {
   res.json(orders);
+});
+
+app.get('/orders/:orderId', (req, res) => {
+  res.json(orders[req.params.orderId]);
 });
 
 // Server code is running in the server

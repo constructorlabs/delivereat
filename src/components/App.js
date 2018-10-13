@@ -15,7 +15,8 @@ class App extends React.Component {
       isOrdering: false,
       currentOrderItem: {},
       orderBasket: {},
-      hasOrdered: false
+      hasOrdered: false,
+      orderRef: 0
     };
 
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
@@ -122,8 +123,10 @@ class App extends React.Component {
       .then(data => {
         this.setState({
           orderBasket: {},
-          hasOrdered: true
+          hasOrdered: true,
+          orderRef: Object.keys(data)[0]
         });
+        console.log(this.state.orderRef);
       });
   }
 
@@ -160,7 +163,10 @@ class App extends React.Component {
           />
         )}
         {hasOrdered && (
-          <h3> Thank you for your order. Enjoy your breakfast!</h3>
+          <div>
+            <h3> Thank you for your order. Enjoy your breakfast!</h3>
+            <a href={`/orders/${this.state.orderRef}`}>Track your order</a>
+          </div>
         )}
       </div>
     );
