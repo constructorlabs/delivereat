@@ -1,6 +1,7 @@
 import React from "react";
 import OrderMenu from "./OrderMenu";
 import Order from "./Order";
+import MenuPage from "./MenuPage";
 
 import "../styles/App.scss";
 
@@ -125,6 +126,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <MenuPage />
         <OrderMenu
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}

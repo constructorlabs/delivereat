@@ -1,5 +1,6 @@
 import React from "react";
 import OrderItem from "./OrderItem";
+import OrderMenu from "./OrderMenu";
 
 function Order({ currentOrder, receiveSubmitOrder, receiveQuanitityIncrease, receiveQuanitityDecrease, formatToMoney }) {
 
