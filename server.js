@@ -2,6 +2,7 @@
 // SERVER:  server.js is running on server with node
 // BROWSER: react is running in the browser
 
+// EXPLANATION AND ORDER OF EVENTS
 // we start with node.js and run the server at port 8080
 // type in URL
 // server.js renders index.hbs file in 'views' folder, as defined in app.get()

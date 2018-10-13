@@ -1,5 +1,5 @@
 body {
-  background-color: #fff8dc;
+  background-color: #fffae8;
   margin: 3rem;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   letter-spacing: 0.05rem;
@@ -8,6 +8,7 @@ body {
 img {
   width: 100px;
   margin: 0 1rem 2rem 0;
+  border: 0.25rem solid #fff;
 }
 
 .menu__item {
@@ -31,28 +32,53 @@ input, select, button {
 button {
   margin: 0.5rem;
   padding: 0.5rem;
+  border: 0.1rem solid #333;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
 }
 
 select {
   width: 3rem;
   margin: 0.5rem;
+  background-color: #fff;
 }
 
 input {
   width: 10rem;
-  margin: 0.5rem;
   padding: 0.5rem;
+  border: 0.1rem solid #999;
 }
 
 hr {
-  border: 0.05rem solid #999;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+hr.title {
+  overflow: visible; 
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+  &:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.7em;
+    font-size: 1em;
+    padding: 0 0.25em;
+    background: #fffae8;
+  }
 }
 
 .basket, .orders {
   line-height: 2rem;
   padding: 1rem;
   display: block;
-  border: 0.2rem solid #999;
+  border: 0.1rem solid #999;
   width: 50%;
-  background-color: rgb(255, 252, 241);
+  background-color: #fff;
 }
