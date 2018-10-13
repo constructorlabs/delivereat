@@ -56,6 +56,12 @@ class App extends React.Component {
     .then(response => response.json())
     .then(body => {
       this.changeDisplay('confirmation')
+      this.setState({
+        currentOrder: {
+        total: 0,
+        items: {}
+      }
+      })
     })
   }
 

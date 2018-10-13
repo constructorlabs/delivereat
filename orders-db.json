@@ -1,0 +1,63 @@
+{
+  "fTwdsVqm4": {
+    "id": "fTwdsVqm4",
+    "order": {
+      "total": 14,
+      "items": {
+        "1": {
+          "quantity": 1,
+          "totalPrice": 10,
+          "menuItem": {
+            "id": 1,
+            "name": "Beefburger",
+            "price": 10
+          }
+        },
+        "5": {
+          "quantity": 1,
+          "totalPrice": 4,
+          "menuItem": {
+            "id": 5,
+            "name": "Chips",
+            "price": 4
+          }
+        }
+      }
+    }
+  },
+  "QCHVTHRbl": {
+    "id": "QCHVTHRbl",
+    "order": {
+      "total": 20,
+      "items": {
+        "4": {
+          "quantity": 1,
+          "totalPrice": 12,
+          "menuItem": {
+            "id": 4,
+            "name": "Lamb burger",
+            "price": 12
+          }
+        },
+        "5": {
+          "quantity": 1,
+          "totalPrice": 4,
+          "menuItem": {
+            "id": 5,
+            "name": "Chips",
+            "price": 4
+          }
+        },
+        "6": {
+          "quantity": 1,
+          "totalPrice": 4,
+          "menuItem": {
+            "id": 6,
+            "name": "Onion rings",
+            "price": 4
+          }
+        }
+      }
+    }
+  }
+}

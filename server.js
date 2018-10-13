@@ -2,6 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
+const shortid = require('shortid')
+
+// import the built-in filesystem module from node.js
+const fs = require('fs')
+
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
@@ -100,7 +105,22 @@ const menu = {
 
 };
 
-const orders = {};
+
+//in lieu of an actual database, Jim helpfully provided the following code such that
+//I can create a mock db. This is required so I can attempt a "most popular orders" function
+let orders = {}
+try {
+  // try to read existing JSON database file
+  orders = JSON.parse(fs.readFileSync('./orders-db.json', 'utf8'))
+} catch (error) {
+  // if the file doesn't exist
+  if (error.code === 'ENOENT') {
+    console.info('No existing orders database');
+  } else {
+    console.warn('While loading orders database:', error.message)
+  }
+}
+
 let nextOrderId = 1;
 
 app.get('/', function(req, res){
@@ -113,12 +133,13 @@ app.get('/api/menu',(req, res) => {
 } )
 
 app.post('/api/order', (req, res) => {
-  const newOrder = {id:nextOrderId,
+  const newOrder = {id: shortid.generate(),
     order: req.body
   }
-  Object.assign(orders,{ [nextOrderId]:newOrder})
-  window.localStorage.set("orders", "test")
-  nextOrderId++;
+  Object.assign(orders,{ [newOrder.id]:newOrder})
+  console.log(orders)
+  fs.writeFileSync('./orders-db.json', JSON.stringify(orders, null, 2), 'utf8')
+
   return res.json(newOrder)
 })
 
