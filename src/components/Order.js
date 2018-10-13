@@ -1,24 +1,32 @@
 import React from "react";
 import OrderItem from "./OrderItem";
 
-function Order({ currentOrder, receiveSubmitOrder }) {
+function Order({ currentOrder, receiveSubmitOrder, receiveQuanitityIncrease, receiveQuanitityDecrease }) {
 
+    function formatToMoney(number){
+        return number.toLocaleString("en-GB", {style: "currency", currency: "GBP"})
+    }
 
-
+    let deliveryCharge = (currentOrder.orderTotal > 20) ? 0 : 2
   return (
-    <div>
-      <h3>Order:</h3>
+    <div className="order__container">
+      <h3 className="order__title">Order:</h3>
       {currentOrder.orderItems.map(order => (
-        <OrderItem order={order} />
+        <OrderItem
+          key={Math.random() * Math.random() * 10}
+          receiveQuanitityIncrease={receiveQuanitityIncrease}
+          receiveQuanitityDecrease={receiveQuanitityDecrease}
+          order={order}
+        />
       ))}
-      <p>
-        Total:{" "}
-        {currentOrder.orderTotal.toLocaleString("en-GB", {
-          style: "currency",
-          currency: "GBP"
-        })}{" "}
+      <p className="order__total">
+        Order Total: {formatToMoney(currentOrder.orderTotal)}<br/>
+        Delivery Charge: {formatToMoney(deliveryCharge)}<br/>
+        Total:{formatToMoney((currentOrder.orderTotal + deliveryCharge))}
       </p>
-      <button>Submit Order</button>
+      <button className="order__receive__button" onClick={receiveSubmitOrder}>
+        Submit Order
+      </button>
     </div>
   );
 }

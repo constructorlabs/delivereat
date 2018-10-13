@@ -10,9 +10,18 @@ class App extends React.Component {
     this.fetchMenu = this.fetchMenu.bind(this);
     this.receiveOrder = this.receiveOrder.bind(this);
     this.receiveSubmitOrder = this.receiveSubmitOrder.bind(this);
+    this.receiveQuanitityIncrease = this.receiveQuanitityIncrease.bind(this);
+    this.receiveQuanitityDecrease = this.receiveQuanitityDecrease.bind(this);
+    this.updateTotalPrice = this.updateTotalPrice.bind(this);
+    this.checkCurrentOrder = this.checkCurrentOrder.bind(this);
     this.state = {
-      menuArray: [],
-      currentOrder: { orderItems: [], orderTotal: 0 }
+      menuObject: {
+        burgers: [],
+        fries: [],
+        extras: []
+      },
+      currentOrder: { orderItems: [], orderTotal: 0 },
+      previousOrders: []
     };
   }
 
@@ -25,53 +34,99 @@ class App extends React.Component {
       .then(response => response.json())
       .then(body =>
         this.setState({
-          menuArray: Object.values(body)
+          menuObject: {
+            burgers: Object.values(body.burgers),
+            fries: Object.values(body.fries),
+            extras: Object.values(body.extras)
+          }
         })
       );
   }
 
+  updateTotalPrice(orderList) {
+    let orderPriceArray = [];
+    orderList.map(order => {
+      orderPriceArray.push(order.price * order.quantity);
+    });
+    return orderPriceArray.reduce((acc, total) => acc + total);
+  }
+
   receiveOrder(order) {
     const incomingOrder = this.state.currentOrder.orderItems.concat(order);
-
-    let orderPriceArray = [];
-    incomingOrder.map(order => {
-      orderPriceArray.push(order.price);
-    });
-    const totalPrice = orderPriceArray.reduce((acc, total) => acc + total);
-
+    const totalPrice = this.updateTotalPrice(incomingOrder);
     this.setState(
       {
         currentOrder: {
           orderItems: incomingOrder,
           orderTotal: totalPrice
         }
-      },
-      () => console.log(this.state.currentOrder)
+      }
     );
   }
 
   receiveSubmitOrder() {
-    fetch('/api/order', {
-      method: 'post',
-      body: JSON.stringify(currentOrder),
+    fetch("/api/order", {
+      method: "post",
+      body: JSON.stringify(this.state.currentOrder),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       }
     })
-    .then(response => response.json())
-    .then(body => console.log(body))
+      .then(response => response.json())
+      .then(body =>
+        this.setState({
+          previousOrders: this.state.previousOrders.concat(body),
+          currentOrder: { orderItems: [], orderTotal: 0 }
+        })
+      );
+  }
+
+  checkCurrentOrder(id) {
+    const ordersToBeUpdated = this.state.currentOrder.orderItems;
+    return ordersToBeUpdated.findIndex(item => item.id === id);
+  }
+
+  receiveQuanitityIncrease(id) {
+    const orderIndex = this.checkCurrentOrder(id);
+    const ordersToBeUpdated = this.state.currentOrder.orderItems;
+    ordersToBeUpdated[orderIndex].quantity =
+      ordersToBeUpdated[orderIndex].quantity + 1;
+    const total = this.updateTotalPrice(ordersToBeUpdated);
+    this.setState({
+      currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
+    });
+  }
+
+  receiveQuanitityDecrease(id) {
+    const orderIndex = this.checkCurrentOrder(id);
+    const ordersToBeUpdated = this.state.currentOrder.orderItems;
+    ordersToBeUpdated[orderIndex].quantity =
+      ordersToBeUpdated[orderIndex].quantity - 1;
+    const total = this.updateTotalPrice(ordersToBeUpdated);
+    if (ordersToBeUpdated[orderIndex].quantity === 0) {
+      ordersToBeUpdated.splice(ordersToBeUpdated[orderIndex], 1);
+      this.setState({
+        currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
+      });
+    } else {
+      this.setState({
+        currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
+      });
+    }
   }
 
   render() {
     return (
-      <div>
+      <div className="App">
         <Menu
-          menuArray={this.state.menuArray}
+          menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}
         />
         <Order
           currentOrder={this.state.currentOrder}
           receiveSubmitOrder={this.receiveSubmitOrder}
+          receiveQuanitityIncrease={this.receiveQuanitityIncrease}
+          receiveQuanitityDecrease={this.receiveQuanitityDecrease}
         />
       </div>
     );
