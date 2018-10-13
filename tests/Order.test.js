@@ -62,4 +62,21 @@ describe('Order', () => {
     instance.decreaseOrderAmount();
     expect(instance.state.quantity).toEqual(1);
   });
+
+  test('clicking cancel order button should call closeOrder method', () => {
+    wrapper.find('.btn__cancel').simulate('click');
+    expect(instance.props.closeOrder).toHaveBeenCalled();
+  });
+
+  test('clicking add to order button should call addOrderToBasket method with name, quantity and price', () => {
+    //simulate click to increase order quantity
+    instance.increaseOrderAmount();
+    // submit order
+    wrapper.find('.btn__submit').simulate('click');
+    expect(instance.props.addOrderToBasket).toHaveBeenCalledWith(
+      'bacon roll',
+      2,
+      4
+    );
+  });
 });
