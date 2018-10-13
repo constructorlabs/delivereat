@@ -1,5 +1,5 @@
 import React from "react";
-import Menu from "./Menu";
+import OrderMenu from "./OrderMenu";
 import Order from "./Order";
 
 import "../styles/App.scss";
@@ -125,7 +125,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Menu
+        <OrderMenu
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}
           formatToMoney={this.formatToMoney}
