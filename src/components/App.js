@@ -1,4 +1,5 @@
 import React from 'react';
+import Menu from './Menu';
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -7,11 +8,13 @@ class App extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
+    this.receiveHandleChange = this.receiveHandleChange.bind(this);
     this.handleFormData = this.handleFormData.bind(this);
-    this.createQuantityOptions = this.createQuantityOptions.bind(this);
-    this.displayMenuItems = this.displayMenuItems.bind(this);
-    this.getCurrency = this.getCurrency.bind(this);
+    // this.createQuantityOptions = this.createQuantityOptions.bind(this);
+    // this.displayMenuItems = this.displayMenuItems.bind(this);
+    // this.getCurrency = this.getCurrency.bind(this);
+    this.receiveGetCurrency = this.receiveGetCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
 
@@ -38,8 +41,17 @@ class App extends React.Component {
 /* post current order from basket
 ///////////////////////////////////////////*/
 
+// Uncaught TypeError: Cannot read property 'price' of undefined
+//     at App.js:160
+//     at Array.map (<anonymous>)
+//     at App.displayCurrentOrder (App.js:158)
+
   handleSubmit (event) {
     event.preventDefault();
+
+    // const currentOrder = Object.assign({}, this.state.currentOrder, { name: event.target.username, telephone: event.target.telephone });
+    // this.setState({ currentOrder });
+
     fetch('/api/order', {
       method: 'post',
       body: JSON.stringify(this.state.currentOrder),
@@ -49,15 +61,11 @@ class App extends React.Component {
     ).then(order => {
       this.fetchAllOrders();
     });
-
-    // const formData = {}
     Object.values(event.target).forEach(item => {
-      if (item.type === "text") {
-        // formData[item.name] = item.value;
-        item.value = "";
+      if (item.type === "text") { 
+        item.value = ""; 
       }
     });
-    // this.setState({ formData })
   }
 
 /* get all orders
@@ -78,7 +86,7 @@ class App extends React.Component {
 /* add item to basket for current order
 ///////////////////////////////////////////*/
 
-  handleChange (id, event) {
+  receiveHandleChange (id, event) {
     let currentOrder;
     if (event.target.value === "0") {
       currentOrder = Object.assign({}, this.state.currentOrder);
@@ -90,50 +98,54 @@ class App extends React.Component {
   }
 
   handleFormData (event) {
-    const formData = Object.assign({}, this.state.formData, {[event.target.name]: event.target.value});
-    this.setState({ formData });
+    
+    // const currentOrder = Object.assign({}, this.state.currentOrder, { [event.target.name]: event.target.value });
+    // this.setState({ currentOrder });
+
+    // const formData = Object.assign({}, this.state.formData, {[event.target.name]: event.target.value});
+    // this.setState({ formData });
   }
 
 /* <Menu> create quantity options for menu each item
 ///////////////////////////////////////////*/
 
-  createQuantityOptions (name, id) {
-    const array = [];
-    for (let i=0; i<=10; i++) array.push(i);
-    return <select 
-              value={this.state.currentOrder ? this.value : ""}
-              onChange={(event) => this.handleChange(id, event)} 
-              name={name} 
-              id={id}>
-      { array.map(item => {
-          const keyName = name.toLowerCase().split(" ").join("-");
-          return <option value={item} key={keyName + "-option-" + item}>{item}</option> 
-      })}
-    </select>
-  }
+  // createQuantityOptions (name, id) {
+  //   const array = [];
+  //   for (let i=0; i<=10; i++) array.push(i);
+  //   return <select 
+  //             value={this.state.currentOrder ? this.value : ""}
+  //             onChange={(event) => this.handleChange(id, event)} 
+  //             name={name} 
+  //             id={id}>
+  //     { array.map(item => {
+  //         const keyName = name.toLowerCase().split(" ").join("-");
+  //         return <option value={item} key={keyName + "-option-" + item}>{item}</option> 
+  //     })}
+  //   </select>
+  // }
 
 /* <Menu> create quantity options for menu each item
 ///////////////////////////////////////////*/
 
-  displayMenuItems (course, title) {
-    const values = Object.values(this.state.menu);
-    return <div><h2>{title}</h2><ul className="menu__item"> {
-    values.filter(item => item.type === course)
-    .map(item => {
-      return <li key={course + "-menu-item-" + item.menuId}>
-            <div><img src={item.image}></img></div>
-            <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
-            Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
-          </li>
-    })}
-    </ul>
-    </div>
-  }
+  // displayMenuItems (course, title) {
+  //   const values = Object.values(this.state.menu);
+  //   return <div><h2>{title}</h2><ul className="menu__item"> {
+  //   values.filter(item => item.type === course)
+  //   .map(item => {
+  //     return <li key={course + "-menu-item-" + item.menuId}>
+  //           <div><img src={item.image}></img></div>
+  //           <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
+  //           Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
+  //         </li>
+  //   })}
+  //   </ul>
+  //   </div>
+  // }
 
 /* display prices as GBPs
 ///////////////////////////////////////////*/
 
-  getCurrency (string) {
+  receiveGetCurrency (string) {
     return string.toLocaleString("en-GB", {
       style: "currency", 
       currency: "GBP"
@@ -197,9 +209,18 @@ class App extends React.Component {
         <div className="orders">{ this.displayAllOrders() }</div>
       </div>)
 
-    const starters = this.state.menu && this.displayMenuItems("starter", "Starters");
-    const mains = this.state.menu && this.displayMenuItems("main", "Mains");
-    const desserts = this.state.menu && this.displayMenuItems("dessert", "Desserts")
+    const starters = this.state.menu && 
+    <Menu 
+      receiveHandleChange={(id, event) => this.receiveHandleChange(id, event)} 
+      receiveGetCurrency={(string) => this.receiveGetCurrency(string)} 
+      menu={this.state.menu} 
+      currentOrder={this.state.currentOrder}
+      course="starter" 
+      title="Starters" 
+    />
+
+    // const mains = this.state.menu && this.displayMenuItems("main", "Mains");
+    // const desserts = this.state.menu && this.displayMenuItems("dessert", "Desserts")
 
     return (
       <div>
@@ -207,15 +228,16 @@ class App extends React.Component {
         <hr className="title"></hr>
         <form onSubmit={this.handleSubmit} className="menu__form">
           <div className="form__wrapper">
-            <input onChange={this.handleFormData} name="username" id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
-            <input onChange={this.handleFormData} name="telephone" id="telephone"  className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
+            <input onChange={this.handleFormData} name="username"  id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
+            <input onChange={this.handleFormData} name="telephone" id="telephone" className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
             <button type="submit">Send order</button>
           </div>
+
           { currentOrder }
           { allOrders }
           { starters }
-          { mains }
-          { desserts }
+          {/* { mains }
+          { desserts } */}
 
         </form>      
       </div>

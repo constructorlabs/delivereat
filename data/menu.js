@@ -1,17 +1,17 @@
 const menu = {
     1: {
       menuId: 1,
-      name: "Fried chicken",
-      price: 4,
-      type: "starter",
-      image: "https://images.unsplash.com/photo-1426869981800-95ebf51ce900?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=63ec77eae2b7b81c8beab9e87bbd3a01&auto=format&fit=crop&w=1500&q=80"
-    },
-    2: {
-      menuId: 2,
       name: "Mixed Salad",
       price: 6,
       type: "starter",
       image: "https://images.unsplash.com/photo-1523986371872-9d3ba2e2a389?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=b6afec6bcb9eeae00384f31cc31c7e58&auto=format&fit=crop&w=1500&q=80"
+    },
+    2: {
+      menuId: 2,
+      name: "Fried chicken",
+      price: 4,
+      type: "starter",
+      image: "https://images.unsplash.com/photo-1426869981800-95ebf51ce900?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=63ec77eae2b7b81c8beab9e87bbd3a01&auto=format&fit=crop&w=1500&q=80"
     },
     3: {
       menuId: 3,
