@@ -3,13 +3,22 @@ import React from "react";
 import "../styles/App.scss";
 import Menu from "./Menu";
 import Order from "./Order";
+import OrderHistory from "./OrderHistory";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart, faHome } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faShoppingCart, faHome);
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       menu: [],
-      order: []
+      order: [],
+      placedOrders: [],
+      displayMenu: true,
+      displayOrderHistory:false,
     };
 
     this.receiveAddClick = this.receiveAddClick.bind(this);
@@ -17,6 +26,8 @@ class App extends React.Component {
     this.receiveClickPlus = this.receiveClickPlus.bind(this);
     this.receiveClickMinus = this.receiveClickMinus.bind(this);
     this.receiveOrderSubmit = this.receiveOrderSubmit.bind(this);
+    this.shoppingCart = this.shoppingCart.bind(this);
+    this.orderHistory = this.orderHistory.bind(this);
   }
 
   componentDidMount() {
@@ -29,10 +40,15 @@ class App extends React.Component {
           menu: menu
         });
       });
+
+    const storageString = window.localStorage.getItem("placedOrders");
+    const localStorage = !storageString ? [] : JSON.parse(storageString);
+    this.setState({
+      placedOrders: localStorage
+    });
   }
 
   receiveOrderSubmit() {
-
     fetch("/api/order", {
       method: "POST",
       headers: {
@@ -44,9 +60,26 @@ class App extends React.Component {
       .then(response => response.json())
       .then(body => {
         this.setState({
-          order:[]
-        })
-        return console.log(body)});
+          order: [],
+          displayMenu:!this.state.displayMenu,
+        });
+        alert("Order has been placed successfully!");
+      });
+
+    fetch("/api/order")
+      .then(response => response.json())
+      .then(body => {
+        this.setState(
+          {
+            placedOrders: body
+          },
+          () =>
+            localStorage.setItem(
+              "placedOrders",
+              JSON.stringify(this.state.placedOrders)
+            )
+        );
+      });
   }
 
   receiveAddClick(name) {
@@ -108,22 +141,49 @@ class App extends React.Component {
       () => console.log(this.state.order)
     );
   }
+
+  shoppingCart() {
+    this.setState({
+      displayMenu: !this.state.displayMenu
+    });
+  }
+
+  orderHistory(){
+    this.setState({
+      displayOrderHistory: !this.state.displayOrderHistory
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Food Heaven</h1>
-        <Menu
-          receiveAddClick={this.receiveAddClick}
-          menu={this.state.menu}
-          order={this.state.order}
-          receiveRemoveClick={this.receiveRemoveClick}
-        />
-        <Order
-          order={this.state.order}
-          receiveClickPlus={this.receiveClickPlus}
-          receiveClickMinus={this.receiveClickMinus}
-          receiveOrderSubmit={this.receiveOrderSubmit}
-        />
+        <p onClick={this.orderHistory}>Order History</p>
+        {this.state.displayOrderHistory?
+        <OrderHistory placedOrders={this.state.placedOrders}/>
+        :null}
+        {this.state.displayMenu ? (
+          <div>
+            <FontAwesomeIcon icon="shopping-cart" onClick={this.shoppingCart} />
+            <Menu
+              receiveAddClick={this.receiveAddClick}
+              menu={this.state.menu}
+              order={this.state.order}
+              receiveRemoveClick={this.receiveRemoveClick}
+            />
+          </div>
+        ) : (
+          <div>
+
+            <FontAwesomeIcon icon="home" onClick={this.shoppingCart} />
+            <Order
+              order={this.state.order}
+              receiveClickPlus={this.receiveClickPlus}
+              receiveClickMinus={this.receiveClickMinus}
+              receiveOrderSubmit={this.receiveOrderSubmit}
+            />
+          </div>
+        )}
       </div>
     );
   }

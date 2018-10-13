@@ -18,7 +18,7 @@ function database() {
     },
     4: {
       id: 4,
-      name: "Sweet & Sour Balsamic Aubergine",
+      name: "Sweet & Sour Balsamic Aubergine (v)",
       price: 7
     },
     5: {
@@ -44,7 +44,7 @@ function database() {
 
     9: {
       id: 9,
-      name: "Strawberry cheesecake",
+      name: "Strawberry Cheesecake",
       price: 6
     },
     10: {
