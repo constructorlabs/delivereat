@@ -1,6 +1,11 @@
 import React from "react";
 
 function ExtrasItem({ extraItem, formatToMoney, item }) {
+
+    function addExtra(extraItem, item) {
+        item.extras.concat(extraItem);
+    }
+
   return (
     <div className="extras__item">
       <label className="extras__item__name">
