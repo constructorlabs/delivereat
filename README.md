@@ -24,7 +24,8 @@ A few notes before we get started
 
 **Order**
 
-- Update the menu page to make it an order page
+<!-- - Update the menu page to make it an order page -->
+
 - It should allow the user to specify quantities of items to order
 - It should add a delivery charge and display the total order cost
 - Create an API to receive and save the submitted order
