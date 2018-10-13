@@ -7,7 +7,7 @@ class Menu extends React.Component {
         this.displayMenuItems = this.displayMenuItems.bind(this);
         this.createQuantityOptions = this.createQuantityOptions.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.getCurrency = this.getCurrency.bind(this);
+        this.getCurrencyString = this.getCurrencyString.bind(this);
 
       }
       
@@ -20,7 +20,7 @@ class Menu extends React.Component {
             .map(item => {
                 return <li key={course + "-menu-item-" + item.menuId}>
                         <div><img src={item.image}></img></div>
-                        <div><strong>{item.name}: {this.getCurrency(item.price)}</strong><br />
+                        <div><strong>{item.name}: {this.getCurrencyString(item.price)}</strong><br />
                         Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
                         </li>
             })}
@@ -47,8 +47,8 @@ class Menu extends React.Component {
         this.props.receiveHandleChange(id, event);
     }
   
-    getCurrency (string) {
-        this.props.receiveGetCurrency(string);
+    getCurrencyString (string) {        
+        return this.props.getCurrency(string);
     }
 
     render () {

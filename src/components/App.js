@@ -9,17 +9,19 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
     this.receiveHandleChange = this.receiveHandleChange.bind(this);
-    this.receiveGetCurrency = this.receiveGetCurrency.bind(this);
+    this.getCurrency = this.getCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
     
     this.handleFormData = this.handleFormData.bind(this);
+    this.toolTipOn = this.toolTipOn.bind(this);
+    this.toolTipOff = this.toolTipOff.bind(this);
     
-
     this.state = { 
       menu: {},
       currentOrder: null,
-      orders: null
+      orders: null,
+      tooltip: null
     }
   }
 
@@ -41,9 +43,6 @@ class App extends React.Component {
   handleSubmit (event) {
     event.preventDefault();
 
-    // const currentOrder = Object.assign({}, this.state.currentOrder, { username: event.target.username.value, telephone: event.target.telephone.value });
-    // this.setState({ currentOrder });
-
     fetch('/api/order', {
       method: 'post',
       body: JSON.stringify(this.state.currentOrder),
@@ -54,11 +53,11 @@ class App extends React.Component {
       this.fetchAllOrders();
     });
 
-    // Object.values(event.target).forEach(item => {
-    //   if (item.type === "text") { 
-    //     item.value = ""; 
-    //   }
-    // });
+    Object.values(event.target).forEach(item => {
+      if (item.type === "text") { 
+        item.value = ""; 
+      }
+    });
   }
 
   handleFormData (event) {   
@@ -97,7 +96,7 @@ class App extends React.Component {
 /* display prices as GBPs
 ///////////////////////////////////////////*/
 
-  receiveGetCurrency (string) {
+  getCurrency (string) {
     return string.toLocaleString("en-GB", {
       style: "currency", 
       currency: "GBP"
@@ -110,7 +109,6 @@ class App extends React.Component {
   displayCurrentOrder () {
     let total = 0;
     const values = Object.values(this.state.currentOrder);
-    
     if (values.length === 0) { 
       this.setState({ currentOrder: null });
       return;
@@ -122,10 +120,10 @@ class App extends React.Component {
       .map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += orderItem.quantity * menuItem.price;
-        return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
+        return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
       })} 
       <hr className="box"></hr>
-      <div>Total: {this.receiveGetCurrency(total)}</div>
+      <div>Total: {this.getCurrency(total)}</div>
     </div>
   }
 
@@ -142,56 +140,88 @@ class App extends React.Component {
       .map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += (orderItem.quantity * menuItem.price);
-        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.receiveGetCurrency(orderItem.quantity * menuItem.price)}</div>
+        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
       });
       return (<div key={"order-" + index}>
-        {/* <div><strong>Order from: {this.state.currentOrder.username}</strong></div> */}
+        <div><strong>Order from: {order.username}</strong></div>
         {summary}
-        <div key={"total-" + index + 1}>Order Total: {this.receiveGetCurrency(total)}</div>
+        <div key={"total-" + index + 1}>Order Total: {this.getCurrency(total)}</div>
         <hr className="box"></hr>
       </div>)
     })}
     </div>
   }
 
+  toolTipOn(event) {
+    // const bx = document.querySelector(".thumb");
+    // const n = event.target
+    // console.log(event.target.outerHTML);
+    
+    // bx.style.left = event.clientX;
+    // bx.style.top = event.clientY;
+    this.setState({
+      tooltip: true
+    })
+  }
+
+  toolTipOff(event) {
+    // console.log(event.clientX);
+    // console.log(event.clientY);
+    this.setState({
+      tooltip: false
+    })
+  }
+
   render(){
 
-    const currentOrder = 
-      (<div>
-        <h2>Your basket</h2>
-        <div className="basket">{this.state.currentOrder ? this.displayCurrentOrder() : <div>Your basket is empty</div>}</div>
+    const currentOrderHasFood = this.state.currentOrder && Object.values(this.state.currentOrder).find(item => typeof item === "object");
+
+    const basket = 
+      (<div className="basket">
+        <h2>Your basket <i className="fas fa-1x fa-shopping-basket"></i></h2>
+        <div>{ currentOrderHasFood ? this.displayCurrentOrder() : <div>Your basket is empty</div>}</div>
+      </div>)
+
+    const formElements = currentOrderHasFood && 
+      (<div className="form__elements">
+        <input onChange={this.handleFormData} name="username" value={this.state.currentOrder.username || ""}  id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
+        <input onChange={this.handleFormData} name="telephone" value={this.state.currentOrder.telephone || ""} id="telephone" className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
+        {this.state.currentOrder.username && this.state.currentOrder.telephone &&
+          <button name="submit" id="submit" className="menu__form__submit" type="submit">Send order</button>
+        } 
       </div>)
 
     const allOrders = this.state.orders &&
-      (<div>
+      (<div className="orders">
         <h2>View all orders</h2>
-        <div className="orders">{ this.displayAllOrders() }</div>
+        <div>{ this.displayAllOrders() }</div>
       </div>)
 
     const menu = this.state.menu && 
     <Menu 
       receiveHandleChange={(id, event) => this.receiveHandleChange(id, event)} 
-      receiveGetCurrency={(string) => this.receiveGetCurrency(string)} 
+      getCurrency={(string) => this.getCurrency(string)} 
       menu={this.state.menu} 
       currentOrder={this.state.currentOrder}
     />
 
     return (
       <div>
-        <h1>DeliverEat</h1>
+        <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
         <hr className="title"></hr>
+        
+        {/* <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Toggle<div className="thumb"></div></a> */}
+        {/* {this.state.tooltip && <div className="thumb"></div>} */}
+        {/* <a href="#" onMouseOver={this.toolTip} className="tooltip"><span title="More">CSS3 Tooltip</span></a> */}
+        
         <form onSubmit={this.handleSubmit} className="menu__form">
           <div className="form__wrapper">
-            <input onChange={this.handleFormData} name="username"  id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
-            <input onChange={this.handleFormData} name="telephone" id="telephone" className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
-            <button type="submit">Send order</button>
+            { basket }
+            { formElements }
           </div>
-
-          { currentOrder }
           { allOrders }
-          { menu }
-
-        </form>      
+          { menu }  
+        </form> 
       </div>
     )
   }
