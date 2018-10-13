@@ -102,9 +102,6 @@ class App extends React.Component {
 
   removeFromBasket(id) {
     const updatedBasket = this.state.orderBasket;
-    console.log(updatedBasket);
-    console.log(id);
-    console.log(updatedBasket[id]);
     delete updatedBasket[id];
     this.setState({
       orderBasket: updatedBasket
