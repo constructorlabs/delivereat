@@ -1,6 +1,8 @@
 import React from 'react';
-import Homepage from './Homepage'
+import WelcomeHeading from './WelcomeHeading'
+import Basket from './Basket'
 import MenuResults from './MenuResults'
+
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -9,7 +11,7 @@ class App extends React.Component {
     this.state = {
       menu: {},
       order: {},
-      orders: ''
+  
     }
     this.fetchMenu = this.fetchMenu.bind(this)
     this.fetchOrder = this.fetchOrder.bind(this)
@@ -50,8 +52,11 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Homepage/>
-        <MenuResults fetchOrder={this.fetchOrder} menu={this.state.menu}/>
+        <div className='welcome-header'>
+          <WelcomeHeading/>
+        </div>
+        <Basket  fetchOrder={this.fetchOrder} order={this.state.order}/>
+        <MenuResults  menu={this.state.menu}/>
       </div>
     )
   }

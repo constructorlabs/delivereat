@@ -19,5 +19,19 @@ img {
 
 .orderInfo{
 display: block;
-margin-left: 600px;
+
+}
+
+.welcome-header{
+  text-align: center;
+}
+
+.menu__items{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+}
+
+h1{
+  text-align: center;
 }
