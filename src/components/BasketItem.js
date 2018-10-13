@@ -5,7 +5,6 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
 
   return (
     <li className="order">
-      {name} £{quantity * price}
       <button
         onClick={e => handleBasketChange(e, id)}
         className="btn btn__decrease"
@@ -21,7 +20,11 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
       >
         [+]
       </button>
-      <button onClick={removeFromBasket} className="btn btn__removeItem">
+      {name} £{quantity * price}
+      <button
+        onClick={e => removeFromBasket(id)}
+        className="btn btn__removeItem"
+      >
         {' '}
         Remove{' '}
       </button>
