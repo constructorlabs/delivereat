@@ -35,23 +35,24 @@ class App extends React.Component {
     fetch('/api/menu')
       .then(response => response.json())
       .then(body => {
-        const menuItems = Object.values(body);
+        // const menuItems = Object.values(body);
         this.setState({
-          menu: menuItems
+          menu: body
         });
       });
   }
 
   handleMenuItemClick(name, price, id) {
-    this.setState({
-      hasOrdered: false,
-      isOrdering: true,
-      activeIndex: id,
-      currentOrderItem: {
-        itemName: name,
-        itemPrice: price
-      }
-    });
+    fetch(`/api/menu/${id}`)
+      .then(response => response.json())
+      .then(body =>
+        this.setState({
+          hasOrdered: false,
+          isOrdering: true,
+          activeIndex: id,
+          currentOrderItem: body
+        })
+      );
   }
 
   addOrderToBasket(name, quantity, price) {
