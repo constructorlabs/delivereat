@@ -3,7 +3,7 @@ const storage = {
     1: {
       dishId: 1,
       name: "Chicken Caesar Salad",
-      type: "Salads",
+      category: "Salads",
       description: "",
       price: 6.55,
       imageUrl: "",
@@ -12,7 +12,7 @@ const storage = {
     2: {
       dishId: 2,
       name: "Grilled Chicken Breast Burger",
-      type: "Burgers",
+      category: "Burgers",
       description: "",
       price: 5.75,
       imageUrl: "",
@@ -21,7 +21,7 @@ const storage = {
     3: {
       dishId: 3,
       name: "Classic 6 oz. Beef Burger",
-      type: "Burgers",
+      category: "Burgers",
       description: "",
       price: 5.75,
       imageUrl: "",
@@ -30,7 +30,7 @@ const storage = {
     4: {
       dishId: 4,
       name: "Beer-Battered Onion Rings (6 Pc.)",
-      type: "Sides",
+      category: "Sides",
       description: "",
       price: 1.4,
       imageUrl: "",
@@ -39,7 +39,7 @@ const storage = {
     5: {
       dishId: 5,
       name: "Bowl of Chips",
-      type: "Sides",
+      category: "Sides",
       description: "",
       price: 2.8,
       imageUrl: "",
@@ -48,7 +48,7 @@ const storage = {
     6: {
       dishId: 6,
       name: "Millionaire Sundae",
-      type: "Desserts",
+      category: "Desserts",
       description: "",
       price: 3.6,
       imageUrl: "",
@@ -57,7 +57,7 @@ const storage = {
     7: {
       dishId: 7,
       name: "Coke",
-      type: "Drinks",
+      category: "Drinks",
       description: "",
       price: 1.2,
       imageUrl: "",
@@ -66,7 +66,7 @@ const storage = {
     8: {
       dishId: 8,
       name: "Fanta",
-      type: "Drinks",
+      category: "Drinks",
       description: "",
       price: 1.2,
       imageUrl: "",
@@ -74,9 +74,7 @@ const storage = {
     }
   },
   orders: {
-    100: {
-
-    }
+    100: {}
   }
 };
 
@@ -86,6 +84,22 @@ function getDishes() {
 
 function getDishById(dishId) {
   return storage.dishes[dishId];
+}
+
+function getDishCategories() {
+  let categories = {};
+
+  for (let item in storage.dishes) {
+    let dish = storage.dishes[item];
+    let category = storage.dishes[item].category;
+
+    if (categories.hasOwnProperty(category)) {
+      categories[category].push(dish);
+    } else {
+      categories[category] = [dish];
+    }
+  }
+  return categories;
 }
 
 function getOrders() {
@@ -101,7 +115,7 @@ function createOrder(newOrder) {
   const highestId = Math.max(...allIds);
   const newOrderId = highestId + 1;
 
-  const orderToSave = Object.assign(newOrder, {id: newOrderId});
+  const orderToSave = Object.assign(newOrder, { id: newOrderId });
   storage.orders[newOrderId] = orderToSave;
   return orderToSave;
 }
@@ -109,6 +123,7 @@ function createOrder(newOrder) {
 module.exports = {
   getDishes,
   getDishById,
+  getDishCategories,
   getOrders,
   getOrderById,
   createOrder

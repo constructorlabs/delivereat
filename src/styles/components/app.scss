@@ -1,3 +1,36 @@
-body {
-  background-color: Cornsilk;
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  background-color: rgb(92, 92, 92);
+  height: 150px;
+}
+
+.main {
+  background-color: rgb(207, 64, 152);
+  display: flex;
+
+  &__aside-left {
+    background-color: rgb(211, 211, 211);
+    order: 1;
+    flex: 2;
+  }
+
+  &__article {
+    background-color: rgb(238, 238, 238);
+    order: 2;
+    flex: 6;
+  }
+
+  &__aside-right {
+    background-color: rgb(212, 212, 212);
+    order: 3;
+    flex: 4;
+  }
+}
+
+.footer {
+  background-color: rgb(99, 99, 99);
+  height: 150px;
 }

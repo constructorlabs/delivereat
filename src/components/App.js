@@ -9,7 +9,8 @@ class App extends React.Component {
 
     this.state = {
       dishes: {},
-      basket: {}
+      categories: [],
+      basket: {},
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -22,6 +23,11 @@ class App extends React.Component {
     fetch("api/dishes")
       .then(response => response.json())
       .then(result => this.setState({ dishes: result }))
+      .catch(error => console.error("Error: ", error));
+
+      fetch("api/categories")
+      .then(response => response.json())
+      .then(result => this.setState({ categories: result }))
       .catch(error => console.error("Error: ", error));
   }
 
@@ -76,17 +82,29 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h3>Menu</h3>
-        <Dishes dishes={this.state.dishes} addToOrder={this.addToOrder} />
+        <header className="header" />
 
-        <h3>My Order</h3>
-        <Basket
-          basket={this.state.basket}
-          dishes={this.state.dishes}
-          decreaseQuantity={this.decreaseQuantity}
-          increaseQuantity={this.increaseQuantity}
-          checkout={this.checkout}
-        />
+        <main className="main">
+          <aside className="main__aside-left" />
+
+          <article className="main__article">
+            <h3>Menu</h3>
+            <Dishes dishes={this.state.dishes} addToOrder={this.addToOrder} />
+          </article>
+
+          <aside className="main__aside-right">
+            <h3>My Order</h3>
+            <Basket
+              basket={this.state.basket}
+              dishes={this.state.dishes}
+              decreaseQuantity={this.decreaseQuantity}
+              increaseQuantity={this.increaseQuantity}
+              checkout={this.checkout}
+            />
+          </aside>
+        </main>
+
+        <footer className="footer" />
       </div>
     );
   }

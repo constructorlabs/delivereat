@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const {
   getDishes,
   getDishById,
+  getDishCategories,
   getOrders,
   getOrderById,
   createOrder
@@ -36,6 +37,12 @@ app.get("/api/dishes/:dishId", function(req, res) {
   }
 });
 
+// get dish categories
+app.get("/api/categories", function(req, res) {
+  const categories = getDishCategories();
+  res.json(categories);
+});
+
 // get orders
 app.get("/api/orders", function(req, res) {
   const orders = getOrders();
@@ -51,15 +58,15 @@ app.get("/api/orders/:orderId", function(req, res) {
   } else {
     res.status(404).json({
       error: `Order with ID ${orderId} not found`
-    })
+    });
   }
-})
+});
 
 // create new order
 app.post("/api/orders", function(req, res) {
   const newOrder = req.body;
   res.json(createOrder(newOrder));
-})
+});
 
 app.listen(8080, function() {
   console.log("Listening on port 8080");
