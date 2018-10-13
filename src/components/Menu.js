@@ -15,29 +15,19 @@ class Menu extends React.Component {
      return <MenuItem 
      menuitem={menuitem} 
      key={menuitem.id} 
-     receiveItemOrder={this.props.receiveItemOrder}/>
+     receiveItemOrder={this.props.receiveItemOrder}
+     removeItemOrder={this.props.removeItemOrder} />
     })
    };
 
 
   render(){
     return (
-      <div className="menu">
-        {/* <ul>
-        {this.props.menu.map(menuitem => {
-          return <MenuItem 
-          menuitem={menuitem} 
-          key={menuitem.id}
-          receiveItemOrder={this.props.receiveItemOrder}/>
-        })}</ul> */}
-
-        <ul>
-          <h2>Starters</h2> {this.getCourse("starter")}
-          <h2>Mains</h2> {this.getCourse("main")}
-          <h2>Desserts</h2> {this.getCourse("pudding")}
+      <ul className="menu menu--settings">
+          <h2>Drinks</h2> {this.getCourse("drinks")}
+          <h2>Cakes</h2> {this.getCourse("cakes")}
+          <h2>Breakfast</h2> {this.getCourse("breakfast")}
         </ul>
-
-      </div>
     )
   }
 }

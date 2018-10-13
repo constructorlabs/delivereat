@@ -4,9 +4,7 @@ import '../styles/App.scss';
 class OrderAdmin extends React.Component {
   constructor(){
     super();
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.makePatchOnApi = this.makePatchOnApi.bind(this)
-    this.orderStatus = this.orderStatus.bind(this)
   }
 
   makePatchOnApi() {
@@ -24,14 +22,14 @@ class OrderAdmin extends React.Component {
             // handle response
         });
   }
-
-  orderStatus() {}
   
   render(){
 
     return (
       <section>
-        <button>Submit your Order</button>
+        <p>Order ID: <span>New Order</span></p>
+        <button>Update order status</button>
+
       </section>
     )
   }
