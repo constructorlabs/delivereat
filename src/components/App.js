@@ -14,6 +14,7 @@ class App extends React.Component {
     this.receiveQuanitityDecrease = this.receiveQuanitityDecrease.bind(this);
     this.updateTotalPrice = this.updateTotalPrice.bind(this);
     this.checkCurrentOrder = this.checkCurrentOrder.bind(this);
+    this.formatToMoney = this.formatToMoney.bind(this);
     this.state = {
       menuObject: {
         burgers: [],
@@ -41,6 +42,10 @@ class App extends React.Component {
           }
         })
       );
+  }
+
+  formatToMoney(number){
+    return number.toLocaleString("en-GB", {style: "currency", currency: "GBP"})
   }
 
   updateTotalPrice(orderList) {
@@ -123,12 +128,14 @@ class App extends React.Component {
         <Menu
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}
+          formatToMoney={this.formatToMoney}
         />
         <Order
           currentOrder={this.state.currentOrder}
           receiveSubmitOrder={this.receiveSubmitOrder}
           receiveQuanitityIncrease={this.receiveQuanitityIncrease}
           receiveQuanitityDecrease={this.receiveQuanitityDecrease}
+          formatToMoney={this.formatToMoney}
         />
       </div>
     );

@@ -1,10 +1,10 @@
 import React from 'react';
 
-function ExtrasItem({}) {
+function ExtrasItem({ extraItem }) {
 
     return (
-        <div>
-            
+        <div className="extras__item">
+            <label className="extras__item__name">{extraItem.name}: </label>
         </div>
     )
 }

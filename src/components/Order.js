@@ -1,11 +1,7 @@
 import React from "react";
 import OrderItem from "./OrderItem";
 
-function Order({ currentOrder, receiveSubmitOrder, receiveQuanitityIncrease, receiveQuanitityDecrease }) {
-
-    function formatToMoney(number){
-        return number.toLocaleString("en-GB", {style: "currency", currency: "GBP"})
-    }
+function Order({ currentOrder, receiveSubmitOrder, receiveQuanitityIncrease, receiveQuanitityDecrease, formatToMoney }) {
 
     let deliveryCharge = (currentOrder.orderTotal > 20) ? 0 : 2
   return (
@@ -17,6 +13,7 @@ function Order({ currentOrder, receiveSubmitOrder, receiveQuanitityIncrease, rec
           receiveQuanitityIncrease={receiveQuanitityIncrease}
           receiveQuanitityDecrease={receiveQuanitityDecrease}
           order={order}
+          formatToMoney={formatToMoney}
         />
       ))}
       <p className="order__total">
