@@ -54,17 +54,16 @@ class App extends React.Component {
   }
 
   addOrderToBasket(name, quantity, price) {
+    const { orderBasket, activeIndex } = this.state;
     let newOrderBasket = {};
-    const order = { id: this.state.activeIndex, name, quantity, price };
-    if (this.state.orderBasket.hasOwnProperty(this.state.activeIndex)) {
-      const updatedOrder = (this.state.orderBasket[
-        this.state.activeIndex
-      ].quantity +=
+    const order = { id: activeIndex, name, quantity, price };
+    if (orderBasket.hasOwnProperty(activeIndex)) {
+      const updatedOrder = (orderBasket[activeIndex].quantity +=
         order.quantity);
-      newOrderBasket = Object.assign({}, this.state.orderBasket, updatedOrder);
+      newOrderBasket = Object.assign({}, orderBasket, updatedOrder);
     } else {
-      newOrderBasket = Object.assign({}, this.state.orderBasket, {
-        [this.state.activeIndex]: order
+      newOrderBasket = Object.assign({}, orderBasket, {
+        [activeIndex]: order
       });
     }
     this.setState({
