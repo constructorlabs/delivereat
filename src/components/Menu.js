@@ -10,7 +10,7 @@ class Menu extends React.Component {
   render() {
     return (
       <div className={'menu'}>
-        {this.props.menu.map(item => <MenuItem key={item.id} addToOrder={this.props.addToOrder} details={item} />)}
+        {this.props.menu.map(item => <MenuItem key={item.id} order={this.props.order} addToOrder={this.props.addToOrder} removeFromOrder={this.props.removeFromOrder} details={item} />)}
       </div>
     );
   }

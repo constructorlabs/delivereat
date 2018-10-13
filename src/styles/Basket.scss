@@ -1,0 +1,30 @@
+@import 'defaults';
+
+.basket {
+  position: sticky;
+  bottom: 5px;
+  
+  &-details {
+    display: none;
+
+    &--visible {
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
+  }
+
+  &-summary {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 3rem;
+    color: white;
+    margin: 10px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 5px;
+    background: $my-green;
+  }
+}
+

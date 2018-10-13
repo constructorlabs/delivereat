@@ -15,7 +15,7 @@ body {
 
 .header {
   position: relative;
-  height: 30vh;
+  height: 27.5vh;
   transform: 
     translateZ(-#{$scroll-factor * 2}px)
     scale(1 + $scroll-factor * 2);
@@ -27,7 +27,7 @@ body {
 
     &__logo {
       position: absolute;
-      bottom: -3rem;
+      bottom: -3.5rem;
       left: 1rem;
       color: white;
       font-size: 3rem;
