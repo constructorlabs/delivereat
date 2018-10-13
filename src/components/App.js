@@ -8,6 +8,7 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.fetchAllOrders = this.fetchAllOrders.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleFormData = this.handleFormData.bind(this);
     this.createQuantityOptions = this.createQuantityOptions.bind(this);
     this.displayMenuItems = this.displayMenuItems.bind(this);
     this.getCurrency = this.getCurrency.bind(this);
@@ -15,8 +16,8 @@ class App extends React.Component {
     this.displayAllOrders = this.displayAllOrders.bind(this);
 
     this.state = { 
-      formData: {},
       menu: {},
+      formData: null,
       currentOrder: null,
       orders: null
     }
@@ -48,6 +49,15 @@ class App extends React.Component {
     ).then(order => {
       this.fetchAllOrders();
     });
+
+    // const formData = {}
+    Object.values(event.target).forEach(item => {
+      if (item.type === "text") {
+        // formData[item.name] = item.value;
+        item.value = "";
+      }
+    });
+    // this.setState({ formData })
   }
 
 /* get all orders
@@ -59,7 +69,8 @@ class App extends React.Component {
     .then(orders => {
       this.setState({ 
         orders: orders,
-        currentOrder: null
+        currentOrder: null,
+        formData: null
        })
     });
   }
@@ -75,14 +86,15 @@ class App extends React.Component {
     } else {
       currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, quantity: event.target.value }})
     }
-    const formData = Object.assign({}, formData, {formData: {[event.target.name]: event.target.value}});
-    this.setState({ 
-      currentOrder,
-      formData
-     });
+    this.setState({ currentOrder });
   }
 
-/* create quantity options for menu each item
+  handleFormData (event) {
+    const formData = Object.assign({}, this.state.formData, {[event.target.name]: event.target.value});
+    this.setState({ formData });
+  }
+
+/* <Menu> create quantity options for menu each item
 ///////////////////////////////////////////*/
 
   createQuantityOptions (name, id) {
@@ -100,7 +112,7 @@ class App extends React.Component {
     </select>
   }
 
-/* create quantity options for menu each item
+/* <Menu> create quantity options for menu each item
 ///////////////////////////////////////////*/
 
   displayMenuItems (course, title) {
@@ -123,7 +135,8 @@ class App extends React.Component {
 
   getCurrency (string) {
     return string.toLocaleString("en-GB", {
-      style: "currency", currency: "GBP"
+      style: "currency", 
+      currency: "GBP"
     });
   }
 
@@ -192,10 +205,12 @@ class App extends React.Component {
       <div>
         <h1>DeliverEat</h1>
         <hr className="title"></hr>
-        <form onSubmit={this.handleSubmit} id="form" className="menu__form">
-          <input type="text" placeholder="your name..." id="username" className="username"></input>
-          <button type="submit">Send order</button>
-          
+        <form onSubmit={this.handleSubmit} className="menu__form">
+          <div className="form__wrapper">
+            <input onChange={this.handleFormData} name="username" id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
+            <input onChange={this.handleFormData} name="telephone" id="telephone"  className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
+            <button type="submit">Send order</button>
+          </div>
           { currentOrder }
           { allOrders }
           { starters }

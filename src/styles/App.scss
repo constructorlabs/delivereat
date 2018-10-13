@@ -26,16 +26,24 @@ li {
 
 input, select, button {
   font-size: 1rem;
+}
+
+input {
+  width: 10rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border: 0.1rem solid #999;
   background: #fff;
 }
 
 button {
-  margin: 0.5rem;
+  width: 10rem;
+  margin: 0.5rem 0;
   padding: 0.5rem;
-  border: 0.1rem solid #333;
-  background-color: #333;
   color: #fff;
   cursor: pointer;
+  border: 0.1rem solid #333;
+  background-color: #333;
 }
 
 select {
@@ -44,10 +52,18 @@ select {
   background-color: #fff;
 }
 
-input {
-  width: 10rem;
-  padding: 0.5rem;
+.basket, .orders {
+  line-height: 2rem;
+  padding: 1rem;
+  display: block;
   border: 0.1rem solid #999;
+  width: 50%;
+  background-color: #fff;
+}
+
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
 hr {
@@ -76,13 +92,4 @@ hr {
       background: #fffae8;
     }
   }
-}
-
-.basket, .orders {
-  line-height: 2rem;
-  padding: 1rem;
-  display: block;
-  border: 0.1rem solid #999;
-  width: 50%;
-  background-color: #fff;
 }
