@@ -1,5 +1,6 @@
 import React from 'react'
 
+import "../styles/menu-item.scss"
 
 class MenuItem extends React.Component{
   constructor(){
@@ -16,7 +17,7 @@ class MenuItem extends React.Component{
 
   handleAdd(event){
     event.preventDefault()
-    this.props.addToOrder(this.props.menuItem, this.state.quantity)
+    this.props.addToOrder(this.props.menuItem, 1)
     console.log("added")
   }
 
@@ -28,11 +29,10 @@ class MenuItem extends React.Component{
 
   render(){
     return(
-      <li>{this.props.menuItem.name} price: £{this.props.menuItem.price}
-        <button onClick={this.handleAdd}>Add to order</button>
-        <form>
-        <input onChange={this.handleChange} type="number" name="quantity" min="1" max="5" />
-      </form>
+      <li className="menu-item">{this.props.menuItem.name}
+         <span className="menu-item__price-add"> <span className="menu-item__price">£{this.props.menuItem.price}.00    </span>  
+          <a href="" onClick={this.handleAdd}><i className="fas fa-plus-circle"></i></a>
+        </span>
       </li>
     )
   }

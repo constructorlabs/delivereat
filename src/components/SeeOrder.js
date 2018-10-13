@@ -18,6 +18,7 @@ class SeeOrder extends React.Component{
   render(){
     return(
       <div className="footer">
+        <span>Current Total: £{this.props.currentTotal}.00 </span>
         <button onClick={this.handleSeeOrder} className="footer__see-order-btn">See Order</button>
       </div>
     )

@@ -138,7 +138,7 @@ class App extends React.Component {
             : null}
 
         {Object.values(this.state.currentOrder.items).length > 0 && this.state.display === 'menu'
-         ? <SeeOrder changeDisplay={this.changeDisplay}/>
+         ? <SeeOrder changeDisplay={this.changeDisplay} currentTotal={this.state.currentOrder.total}/>
          : null}
 
       </div>
