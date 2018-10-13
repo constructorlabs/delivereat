@@ -14,7 +14,6 @@ class App extends React.Component {
       activeIndex: 0,
       isOrdering: false,
       currentOrderItem: {},
-      // hasBasket: false,
       orderBasket: {},
       hasOrdered: false
     };
@@ -70,7 +69,6 @@ class App extends React.Component {
     }
     this.setState({
       isOrdering: false,
-      // hasBasket: true,
       orderBasket: newOrderBasket
     });
   }
@@ -84,30 +82,25 @@ class App extends React.Component {
   handleBasketChange(e, id) {
     const { orderBasket } = this.state;
     const orderToUpdate = orderBasket[id];
-    // const updatedOrder = orderToUpdate.quantity++;
-    // const updatedBasket = Object.assign({}, orderBasket, updatedOrder);
+    let updatedOrder = {};
 
     switch (e.target.name) {
       case 'increase':
         console.log('increase');
-        const updatedOrder = orderToUpdate.quantity++;
-        const updatedBasket = Object.assign({}, orderBasket, updatedOrder);
-        this.setState({
-          orderBasket: updatedBasket
-        });
-        // orderBasket[id].quantity = orderBasket[id].quantity + 1;
+        updatedOrder = orderToUpdate.quantity++;
         break;
       case 'decrease':
         console.log('decrease');
         if (orderBasket[id].quantity > 1) {
-          const updatedOrder = orderToUpdate.quantity--;
-          const updatedBasket = Object.assign({}, orderBasket, updatedOrder);
-          this.setState({
-            orderBasket: updatedBasket
-          });
+          updatedOrder = orderToUpdate.quantity--;
         }
         break;
     }
+
+    const updatedBasket = Object.assign({}, orderBasket, updatedOrder);
+    this.setState({
+      orderBasket: updatedBasket
+    });
   }
 
   removeFromBasket(id) {
@@ -130,7 +123,6 @@ class App extends React.Component {
       })
       .then(data => {
         this.setState({
-          // hasBasket: false,
           orderBasket: {},
           hasOrdered: true
         });
@@ -144,7 +136,6 @@ class App extends React.Component {
       currentOrderItem,
       isOrdering,
       activeIndex,
-      // hasBasket,
       orderBasket,
       hasOrdered
     } = this.state;
