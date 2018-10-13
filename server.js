@@ -15,6 +15,7 @@ const menu = {
       id: 1,
       name: 'The Full Monty',
       price: 10.95,
+      category: 'classic',
       description:
         'Bacon, sausage, black pudding, fried potatoes, mushrooms, beans, tomato, eggs & toast '
     },
@@ -22,6 +23,7 @@ const menu = {
       id: 2,
       name: 'Butternut bubble',
       price: 9.5,
+      category: 'classic',
       description:
         'Butternut squash, potato & spinach bubble with mushrooms,asparagus & avocado hollandaise'
     },
@@ -29,6 +31,7 @@ const menu = {
       id: 3,
       name: 'Huevos Rancheros',
       price: 10.5,
+      category: 'classic',
       description:
         'Fried eggs, tortilla, refried beans, chorizo, salsa, cheddar, sour cream & guacamole '
     },
@@ -36,28 +39,91 @@ const menu = {
       id: 4,
       name: 'Reggie the Veggie',
       price: 10.95,
+      category: 'classic',
       description:
         'Veggie sausage, fried potatoes, egg, mushrooms, tomato, BBQ beans & toast '
     },
     5: {
       id: 5,
-      name: 'toast & jam',
-      price: 3,
+      name: 'The Breakfast Burrito',
+      price: 9.5,
+      category: 'classic',
       description:
-        'two sourdough slices, lightly toasted with a small pot of seasonal jam'
+        'Chorizo, scrambled egg, peppers, guacamole, sour cream, cheddar, jalapeños & spicy pepper sauce '
     },
     6: {
       id: 6,
-      name: 'toast (2 slices)',
-      price: 2,
-      description: 'two sourdough slices, lightly toasted'
+      name: 'Chorizo Hash',
+      price: 9.5,
+      category: 'classic',
+      description:
+        'Chorizo, peppers, mushrooms, caramelised crushed potatoes & poached egg with a lemon & feta sauce '
     },
     7: {
       id: 7,
-      name: 'avocado & toast',
-      price: 5,
+      name: 'Avocado, Egg & Chesse',
+      price: 5.5,
+      category: 'sandwich',
+      description: 'With onions, sun-blushed tomato & sriracha mayo'
+    },
+    8: {
+      id: 8,
+      name: 'Bacon, Egg & Cheese',
+      price: 5.5,
+      category: 'sandwich',
+      description: 'With rocket & Virgin Mary ketchup'
+    },
+    9: {
+      id: 9,
+      name: 'Sausage, Egg & Cheese',
+      price: 5.5,
+      category: 'sandwich',
+      description: 'With red onion chutney'
+    },
+    10: {
+      id: 10,
+      name: 'Eggs Benedict',
+      price: 9.5,
+      category: 'eggs',
+      description: 'With ham hock and butternut squash'
+    },
+    11: {
+      id: 11,
+      name: 'Eggs Florentine',
+      price: 9.5,
+      category: 'eggs',
+      description: 'With spinach and a muffin'
+    },
+    12: {
+      id: 12,
+      name: 'The All American',
+      price: 11.75,
+      category: 'pancakes',
       description:
-        'mashed organic avocado with feta and a touch of chilli plus a slice of lightly toasted sourdough'
+        'Pancakes, eggs, sausage, bacon, fried potatoes & maple syrup'
+    },
+    13: {
+      id: 13,
+      name: 'Beauregarde Pancakes',
+      price: 9.5,
+      category: 'pancakes',
+      description:
+        'Gluten free blueberry pancakes, warm blueberry & lemon compote & maple syrup'
+    },
+    14: {
+      id: 14,
+      name: 'Oatmilk Porridge',
+      price: 3,
+      category: 'cereal',
+      description: 'Rolled oats, slow-cooked in oat milk',
+      toppings: [
+        'mixed berries',
+        'pumpkin seeds',
+        'crushed pecans',
+        'honey',
+        'maple syrup'
+      ],
+      toppingsPrice: 2
     }
   }
 };
@@ -78,7 +144,12 @@ app.get('/', function(req, res) {
 // get minimal menu item details
 app.get('/api/menu', function(req, res) {
   const menuItems = Object.values(menu.menuItems).map(item => {
-    return { id: item.id, name: item.name, price: item.price };
+    return {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      category: item.category
+    };
   });
   if (menuItems.length != 0) {
     res.json(menuItems);
