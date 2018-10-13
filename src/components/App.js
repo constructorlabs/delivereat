@@ -9,8 +9,8 @@ class App extends React.Component {
 
     this.state = {
       dishes: {},
-      categories: [],
-      basket: {},
+      categories: {},
+      basket: {}
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -25,7 +25,7 @@ class App extends React.Component {
       .then(result => this.setState({ dishes: result }))
       .catch(error => console.error("Error: ", error));
 
-      fetch("api/categories")
+    fetch("api/categories")
       .then(response => response.json())
       .then(result => this.setState({ categories: result }))
       .catch(error => console.error("Error: ", error));
@@ -85,11 +85,25 @@ class App extends React.Component {
         <header className="header" />
 
         <main className="main">
-          <aside className="main__aside-left" />
+          <aside className="main__aside-left">
+            <h3>Categories</h3>
+            <nav className="categories">
+              {Object.keys(this.state.categories).map(category => (
+                <a className="categories__category" key={category} href="#">
+                  {category}
+                </a>
+              ))}
+            </nav>
+          </aside>
 
           <article className="main__article">
-            <h3>Menu</h3>
-            <Dishes dishes={this.state.dishes} addToOrder={this.addToOrder} />
+            {Object.values(this.state.categories).map(dishes => (
+              <Dishes
+                key={dishes[0].category}
+                dishes={dishes}
+                addToOrder={this.addToOrder}
+              />
+            ))}
           </article>
 
           <aside className="main__aside-right">

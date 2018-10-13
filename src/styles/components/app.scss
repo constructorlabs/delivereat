@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 .header {
@@ -27,6 +28,22 @@
     background-color: rgb(212, 212, 212);
     order: 3;
     flex: 4;
+  }
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &__category {
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
