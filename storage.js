@@ -1,7 +1,7 @@
 const storage = {
   dishes: {
     1: {
-      id: 1,
+      dishId: 1,
       name: "Chicken Caesar Salad",
       type: "Salads",
       description: "",
@@ -10,7 +10,7 @@ const storage = {
       inStock: true
     },
     2: {
-      id: 2,
+      dishId: 2,
       name: "Grilled Chicken Breast Burger",
       type: "Burgers",
       description: "",
@@ -19,7 +19,7 @@ const storage = {
       inStock: true
     },
     3: {
-      id: 3,
+      dishId: 3,
       name: "Classic 6 oz. Beef Burger",
       type: "Burgers",
       description: "",
@@ -28,7 +28,7 @@ const storage = {
       inStock: true
     },
     4: {
-      id: 4,
+      dishId: 4,
       name: "Beer-Battered Onion Rings (6 Pc.)",
       type: "Sides",
       description: "",
@@ -37,7 +37,7 @@ const storage = {
       inStock: true
     },
     5: {
-      id: 5,
+      dishId: 5,
       name: "Bowl of Chips",
       type: "Sides",
       description: "",
@@ -46,7 +46,7 @@ const storage = {
       inStock: true
     },
     6: {
-      id: 6,
+      dishId: 6,
       name: "Millionaire Sundae",
       type: "Desserts",
       description: "",
@@ -55,7 +55,7 @@ const storage = {
       inStock: true
     },
     7: {
-      id: 7,
+      dishId: 7,
       name: "Coke",
       type: "Drinks",
       description: "",
@@ -64,7 +64,7 @@ const storage = {
       inStock: true
     },
     8: {
-      id: 8,
+      dishId: 8,
       name: "Fanta",
       type: "Drinks",
       description: "",
@@ -72,29 +72,44 @@ const storage = {
       imageUrl: "",
       inStock: true
     }
+  },
+  orders: {
+    100: {
+
+    }
   }
 };
 
 function getDishes() {
-    return storage.dishes;
+  return storage.dishes;
 }
 
 function getDishById(dishId) {
-    return storage.dishes[dishId];
+  return storage.dishes[dishId];
 }
 
-function createDish(newDish) {
-    const allIds = Object.keys(storage.dishes);
-    const highestId = Math.max(...allIds);
-    const newDishId = highestId + 1;
-
-    const dishToSave = Object.assign(newDish, { id: newDishId })
-    storage.Dishes[newDishId] = dishToSave;
-    return dishToSave;
+function getOrders() {
+  return storage.orders;
 }
 
+function getOrderById(orderId) {
+  return storage.orders[orderId];
+}
+
+function createOrder(newOrder) {
+  const allIds = Object.keys(storage.orders);
+  const highestId = Math.max(...allIds);
+  const newOrderId = highestId + 1;
+
+  const orderToSave = Object.assign(newOrder, {id: newOrderId});
+  storage.orders[newOrderId] = orderToSave;
+  return orderToSave;
+}
 
 module.exports = {
-    getDishes,
-    getDishById,
-}
+  getDishes,
+  getDishById,
+  getOrders,
+  getOrderById,
+  createOrder
+};

@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const {
   getDishes,
   getDishById,
+  getOrders,
+  getOrderById,
+  createOrder
 } = require("./storage");
 const app = express();
 
@@ -32,6 +35,31 @@ app.get("/api/dishes/:dishId", function(req, res) {
     });
   }
 });
+
+// get orders
+app.get("/api/orders", function(req, res) {
+  const orders = getOrders();
+  res.json(orders);
+});
+
+// get orders by ID
+app.get("/api/orders/:orderId", function(req, res) {
+  const orderId = getOrderById(req.params.orderId);
+
+  if (orderId) {
+    res.json(dish);
+  } else {
+    res.status(404).json({
+      error: `Order with ID ${orderId} not found`
+    })
+  }
+})
+
+// create new order
+app.post("/api/orders", function(req, res) {
+  const newOrder = req.body;
+  res.json(createOrder(newOrder));
+})
 
 app.listen(8080, function() {
   console.log("Listening on port 8080");

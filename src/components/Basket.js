@@ -9,14 +9,13 @@ function Basket({
   increaseQuantity,
   checkout
 }) {
-
   let subTotal = 0;
 
-  Object.keys(basket).map(id => {
-    subTotal += dishes[id].price * basket[id].quantity;
-  })
+  Object.keys(basket).map(dishId => {
+    subTotal += dishes[dishId].price * basket[dishId].quantity;
+  });
 
-  let deliveryFee = 2.50;
+  let deliveryFee = 2.5;
 
   let total = subTotal + deliveryFee;
 
@@ -24,7 +23,7 @@ function Basket({
     <div className="basket">
       {Object.values(basket).map(basketItem => (
         <BasketItem
-          key={basketItem.id}
+          key={basketItem.dishId}
           basketItem={basketItem}
           dishes={dishes}
           decreaseQuantity={decreaseQuantity}
@@ -41,7 +40,7 @@ function Basket({
 
       <div className="basket__delivery">
         <h4>Delivery Fee</h4>
-        <p>{deliveryFee.toFixed(2)}</p>
+        <p>£{deliveryFee.toFixed(2)}</p>
       </div>
 
       <hr />
@@ -53,7 +52,7 @@ function Basket({
 
       <button
         className="basket__checkout-btn"
-        onClick={event => checkout(event)}
+        onClick={() => checkout()}
       >
         Checkout
       </button>

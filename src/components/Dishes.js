@@ -6,7 +6,7 @@ function Dishes({ dishes, addToOrder }) {
   return (
     <div className="dishes">
       {Object.values(dishes).map(dish => (
-        <Dish key={dish.id} dish={dish} addToOrder={addToOrder}/>
+        <Dish key={dish.dishId} dish={dish} addToOrder={addToOrder}/>
       ))}
     </div>
   );

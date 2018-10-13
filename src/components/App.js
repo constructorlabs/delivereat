@@ -21,44 +21,56 @@ class App extends React.Component {
   componentDidMount() {
     fetch("api/dishes")
       .then(response => response.json())
-      .then(result => {
-        this.setState({ dishes: result });
-      });
+      .then(result => this.setState({ dishes: result }))
+      .catch(error => console.error("Error: ", error));
   }
 
-  addToOrder(event, id, name) {
-    if (this.state.basket[id]) {
+  addToOrder(dishId, name) {
+    if (this.state.basket[dishId]) {
       let updatedBasket = Object.assign({}, this.state.basket);
-      updatedBasket[id].quantity++;
+      updatedBasket[dishId].quantity++;
       this.setState({ basket: updatedBasket });
     } else {
       let updatedBasket = Object.assign({}, this.state.basket, {
-        [id]: { id: id, name: name, quantity: 1 }
+        [dishId]: { dishId: dishId, name: name, quantity: 1 }
       });
       this.setState({ basket: updatedBasket });
     }
   }
 
-  decreaseQuantity(event, id) {
+  decreaseQuantity(dishId) {
     let updatedBasket = Object.assign({}, this.state.basket);
 
-    if (this.state.basket[id].quantity === 1) {
-      delete updatedBasket[id];
+    if (this.state.basket[dishId].quantity === 1) {
+      delete updatedBasket[dishId];
     } else {
-      updatedBasket[id].quantity--;
+      updatedBasket[dishId].quantity--;
     }
 
     this.setState({ basket: updatedBasket });
   }
 
-  increaseQuantity(event, id) {
+  increaseQuantity(dishId) {
     let updatedBasket = Object.assign({}, this.state.basket);
-    updatedBasket[id].quantity++;
+    updatedBasket[dishId].quantity++;
     this.setState({ basket: updatedBasket });
   }
 
-  checkout(event) {
-    console.log("checkout" + this.state.basket[1]);
+  checkout() {
+    fetch("http://localhost:8080/api/orders", {
+      method: "post",
+      body: JSON.stringify(this.state.basket),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => console.log("Order post success: ", JSON.stringify(data)))
+      .catch(error => console.error("Error: ", error));
+
+    this.setState({
+      basket: {}
+    });
   }
 
   render() {
