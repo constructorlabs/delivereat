@@ -1,13 +1,23 @@
 import React from "react"
 
+// import Header from "../styles/Header.scss"
+
 class Header extends React.Component{
   constructor(){
     super()
+
+
+    this.handleDisplay = this.handleDisplay.bind(this)
+  }
+
+  handleDisplay(event){
+    event.preventDefault()
+    this.props.changeDisplay('menu')
   }
 
   render(){
     return (
-      <header><h1>DeliverEat</h1></header>
+      <header onClick={this.handleDisplay} className="header"><h1>DeliverEat</h1></header>
     )
   }
 

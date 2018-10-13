@@ -2,7 +2,7 @@ import React from 'react';
 import Menu from './Menu.js'
 import Header from './Header.js'
 import SeeOrder from "./SeeOrder.js"
-import OrderConfirmation from "./OrderConfirmation.js"
+import OrderReview from "./OrderReview.js"
 
 import '../styles/App.scss';
 
@@ -117,7 +117,7 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        <Header />
+        <Header changeDisplay={this.changeDisplay}/>
         {this.state.display === 'menu'
           ? <Menu menu={this.state.menu} addToOrder={this.addToOrder}/>
           : null}
@@ -125,7 +125,7 @@ class App extends React.Component {
 
 
         {this.state.display === 'order'
-          ? (<OrderConfirmation currentOrder={this.state.currentOrder}
+          ? (<OrderReview currentOrder={this.state.currentOrder}
                                 addToOrder={this.addToOrder}
                                 amendQuantity={this.amendQuantity}
                                 placeOrder={this.placeOrder}
