@@ -40,7 +40,7 @@ class Order extends React.Component {
         <div className="order__amount">
           <button
             onClick={() => this.decreaseOrderAmount()}
-            className="ammount_decrease"
+            className="btn btn__decrease"
             name="decrease"
           >
             [-]
@@ -48,7 +48,7 @@ class Order extends React.Component {
           <span className="amount__count">{quantity}</span>
           <button
             onClick={e => this.increaseOrderAmount(e)}
-            className="ammount_increase"
+            className="btn btn__increase"
             name="increase"
           >
             [+]
