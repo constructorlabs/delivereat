@@ -8,8 +8,8 @@ function MenuItem({ item, receiveOrder, extras, formatToMoney }) {
       <p className="menu__item__price">
         {formatToMoney(item.price)}
       </p>
-      <Extras itemId={item.id} extras={extras} />
-      <button className="menu__item__add" onClick={receiveOrder}>
+      <Extras itemId={item.id} item={item} formatToMoney={formatToMoney} extras={extras} />
+      <button className="menu__item__add" onClick={() => receiveOrder(item)}>
         Add to order
       </button>
     </div>

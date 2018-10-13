@@ -7,25 +7,29 @@ function menu(){
           id: 1,
           name: "Regular Burger",
           price: 8.0,
-          quantity: 1
+          quantity: 1,
+          extras: []
         },
         2: {
           id: 2,
           name: "Irregular Burger",
           price: 9.5,
-          quantity: 1
+          quantity: 1,
+          extras: []
         },
         3: {
           id: 3,
           name: "SuperBurger",
           price: 10.5,
-          quantity: 1
+          quantity: 1,
+          extras: []
         },
         4: {
           id: 4,
           name: "IncrediBurger",
           price: 12.0,
-          quantity: 1
+          quantity: 1,
+          extras: []
         }
       },
   

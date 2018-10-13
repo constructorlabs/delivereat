@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   receiveOrder(order) {
-    if (this.checkCurrentOrder(order.id) === -1) {
+    if (this.state.currentOrder.orderItems.includes(order) === false) {
       const incomingOrder = this.state.currentOrder.orderItems.concat(order);
       const totalPrice = this.updateTotalPrice(incomingOrder);
       this.setState({
@@ -66,7 +66,7 @@ class App extends React.Component {
           orderTotal: totalPrice
         }
       });
-    } else {
+    } else if (this.state.currentOrder.orderItems.includes(order) === true) {
       this.receiveQuanitityIncrease(order.id);
     }
   }

@@ -16,7 +16,13 @@ function Menu({ menuObject, receiveOrder, formatToMoney }) {
       ))}
       <h2 className="menu__title__fries">Fries</h2>
       {menuObject.fries.map(item => (
-        <MenuItem key={item.id} receiveOrder={receiveOrder} item={item} />
+        <MenuItem
+          key={item.id}
+          receiveOrder={receiveOrder}
+          extras={[]}
+          item={item}
+          formatToMoney={formatToMoney}
+        />
       ))}
     </div>
   );
