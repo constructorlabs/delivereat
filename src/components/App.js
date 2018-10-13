@@ -60,6 +60,7 @@ class App extends React.Component {
   }
 
   addToOrder(menuItem, quantity){
+    if (!this.state.currentOrder.items[menuItem.id]){ //if item not already in order, add to currentOrder
     const foodItem = {
       [menuItem.id]: {
         quantity,
@@ -67,6 +68,7 @@ class App extends React.Component {
         menuItem
       }
     }
+
     const currentOrder = {
       total: this.state.currentOrder.total + foodItem[menuItem.id].totalPrice,
       items: Object.assign(this.state.currentOrder.items, foodItem)
@@ -74,6 +76,10 @@ class App extends React.Component {
     this.setState({
       currentOrder
     })
+  }else{ //else increment quantity by one
+      const currentQuantity = this.state.currentOrder.items[menuItem.id].quantity
+      this.amendQuantity(menuItem, currentQuantity + 1)
+    }
   }
 
   removeFromOrder(menuItem){
