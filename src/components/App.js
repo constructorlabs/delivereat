@@ -65,7 +65,7 @@ class App extends React.Component {
           orderItems: incomingOrder,
           orderTotal: totalPrice
         }
-      });
+      }, () => console.log(this.state.currentOrder));
     } else if (this.state.currentOrder.orderItems.includes(order) === true) {
       this.receiveQuanitityIncrease(order.id);
     }
@@ -129,6 +129,7 @@ class App extends React.Component {
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}
           formatToMoney={this.formatToMoney}
+          currentOrder={this.state.currentOrder}
         />
         <Order
           currentOrder={this.state.currentOrder}

@@ -1,7 +1,7 @@
 import React from "react";
 import ExtrasItem from "./ExtrasItem";
 
-function Extras({ extras, itemId, formatToMoney, item }) {
+function Extras({ extras, itemId, formatToMoney, item, currentOrder }) {
   return (
     <div className="extras__container">
       {extras.map(extraItem => (
@@ -10,6 +10,7 @@ function Extras({ extras, itemId, formatToMoney, item }) {
           formatToMoney={formatToMoney}
           extraItem={extraItem}
           item={item}
+          currentOrder={currentOrder}
         />
       ))}
     </div>
