@@ -14,7 +14,7 @@ class Order extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="order">
         {this.props.order.map(eachOrder => {
           return (
             <OrderItem

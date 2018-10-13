@@ -1,0 +1,16 @@
+@import "parameters";
+
+
+.food{
+  padding: $content-padding;
+  background-color: white;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  img{
+    width: 90vw;
+
+  }
+}

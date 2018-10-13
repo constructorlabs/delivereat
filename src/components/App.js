@@ -158,13 +158,18 @@ class App extends React.Component {
     return (
       <div>
         <h1>Food Heaven</h1>
-        <p onClick={this.orderHistory}>Order History</p>
+        <div className="nav">
+        <p className="orderHistory" onClick={this.orderHistory}>Order History</p>
         {this.state.displayOrderHistory?
-        <OrderHistory placedOrders={this.state.placedOrders}/>
-        :null}
+          <OrderHistory placedOrders={this.state.placedOrders}/>
+          :null}
+        {this.state.displayMenu?
+        <FontAwesomeIcon className="icon" icon="shopping-cart" onClick={this.shoppingCart} />
+        :<FontAwesomeIcon className="icon" icon="home" onClick={this.shoppingCart} />
+        }
+        </div>
         {this.state.displayMenu ? (
           <div>
-            <FontAwesomeIcon icon="shopping-cart" onClick={this.shoppingCart} />
             <Menu
               receiveAddClick={this.receiveAddClick}
               menu={this.state.menu}
@@ -174,8 +179,6 @@ class App extends React.Component {
           </div>
         ) : (
           <div>
-
-            <FontAwesomeIcon icon="home" onClick={this.shoppingCart} />
             <Order
               order={this.state.order}
               receiveClickPlus={this.receiveClickPlus}

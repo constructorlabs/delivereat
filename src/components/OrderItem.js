@@ -24,7 +24,7 @@ class OrderItem extends React.Component {
   render() {
     const imageLink = `../../static/${this.props.eachOrder.name}.jpg`;
     return (
-      <div>
+      <div className="order__item">
         <h2>{this.props.eachOrder.name}</h2>
         <img src={imageLink} />
         <p>{this.props.eachOrder.price.toLocaleString("en-UK", {
@@ -33,7 +33,7 @@ class OrderItem extends React.Component {
         })}
         </p>
         <FontAwesomeIcon icon="minus" onClick={this.handleClickMinus} />
-         {this.props.eachOrder.number} 
+         {this.props.eachOrder.number}
         <FontAwesomeIcon icon="plus" onClick={this.handleClickPlus} />
       </div>
     );

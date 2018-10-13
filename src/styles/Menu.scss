@@ -1,0 +1,7 @@
+@import 'parameters';
+
+.menu{
+  display: grid;
+  grid-row-gap: $card-gap;
+  background-color: $background-color;
+}

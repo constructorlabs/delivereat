@@ -4,12 +4,18 @@ import SingleOrderHistory from "./SingleOrderHistory";
 function OrderHistory(props) {
   const placedOrders = Object.values(props.placedOrders);
 
-
   return (
-    placedOrders.map(eachOrder => {
-      return <SingleOrderHistory orderContent={eachOrder.order} orderCost={eachOrder.cost} />
-
-    })
+    <div className="order__history">
+      {placedOrders.map(eachOrder => {
+        return (
+          <SingleOrderHistory
+            orderContent={eachOrder.order}
+            orderCost={eachOrder.cost}
+            orderID={eachOrder.id}
+          />
+        );
+      })}
+    </div>
   );
 }
 

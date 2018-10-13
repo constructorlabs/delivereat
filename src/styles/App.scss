@@ -1,3 +1,18 @@
+@import 'parameters';
+
 body {
   background-color: Cornsilk;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: 'Open Sans', sans-serif;
+
+}
+
+h1{
+  display: flex;
+  justify-content: center;
+}
+
+.nav{
+  padding: $content-padding;
 }
