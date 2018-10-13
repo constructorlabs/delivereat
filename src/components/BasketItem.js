@@ -1,33 +1,6 @@
 import React from 'react';
 
-// class BasketItem extends React.Component {
-//   constructor(props) {
-//     super(props);
-
-// this.state = {
-//   quantity: 1;
-// }
-
-// this.increaseOrderAmount = this.increaseOrderAmount.bind(this);
-// this.decreaseOrderAmount = this.decreaseOrderAmount.bind(this);
-// }
-
 const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
-  // increaseOrderAmount() {
-  //   this.setState({
-  //     // quantity: this.state.quantity + 1
-  //   });
-  // }
-
-  // decreaseOrderAmount() {
-  //   if (this.state.quantity > 0) {
-  //     this.setState({
-  //       // quantity: this.state.quantity - 1
-  //     });
-  //   }
-  // }
-
-  // render() {
   const { id, name, price, quantity } = orderItem;
 
   return (
@@ -54,6 +27,5 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
       </button>
     </li>
   );
-  // }
 };
 export default BasketItem;
