@@ -52,16 +52,18 @@ class App extends React.Component {
   }
 
   receiveOrder(order) {
-    const incomingOrder = this.state.currentOrder.orderItems.concat(order);
-    const totalPrice = this.updateTotalPrice(incomingOrder);
-    this.setState(
-      {
+    if (this.checkCurrentOrder(order.id) === -1) {
+      const incomingOrder = this.state.currentOrder.orderItems.concat(order);
+      const totalPrice = this.updateTotalPrice(incomingOrder);
+      this.setState({
         currentOrder: {
           orderItems: incomingOrder,
           orderTotal: totalPrice
         }
-      }
-    );
+      });
+    } else {
+      this.receiveQuanitityIncrease(order.id);
+    }
   }
 
   receiveSubmitOrder() {
