@@ -46,6 +46,8 @@ const menu = {
   }
 };
 
+let orders = {};
+
 // create a new object / array to store orders
 
 // handles first request from the user to localhost:8080 and call the index.hbs view to return an html page to the useri
@@ -56,7 +58,20 @@ app.get('/', function(req, res) {
 
 app.get('/api/menu', function(req, res) {
   res.json(menu);
-})
+});
+
+app.post('/api/order', function(req, res) {
+  const order = req.body;
+  const ordersKeys = Object.keys(orders);
+  const id = ordersKeys.length > 0 ? Math.max(...ordersKeys) + 1 : 0;
+  orders = Object.assign({}, orders, { [id]: order });
+  // respond with order object that has id attached
+  res.json({ [id]: order });
+});
+
+app.get('/orders', (req, res) => {
+  res.json(orders);
+});
 
 // Server code is running in the server
 

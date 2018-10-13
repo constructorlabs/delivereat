@@ -1,6 +1,7 @@
 import React from 'react';
 import Menu from './Menu';
 import Order from './Order';
+import Basket from './Basket';
 
 import '../styles/app.scss';
 
@@ -20,6 +21,7 @@ class App extends React.Component {
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
     this.addOrderToBasket = this.addOrderToBasket.bind(this);
     this.closeOrder = this.closeOrder.bind(this);
+    this.submitOrder = this.submitOrder.bind(this);
   }
 
   // React code is running in the browser
@@ -49,11 +51,9 @@ class App extends React.Component {
   }
 
   addOrderToBasket(name, quantity, price) {
-    console.log(`${quantity} ${name} added to basket for £${price * quantity}`);
     let newOrderBasket = {};
-    const order = { name, quantity, price };
+    const order = { id: this.state.activeIndex, name, quantity, price };
     if (this.state.orderBasket.hasOwnProperty(this.state.activeIndex)) {
-      console.log(this.state.orderBasket[this.state.activeIndex]);
       const updatedOrder = (this.state.orderBasket[
         this.state.activeIndex
       ].quantity +=
@@ -76,8 +76,31 @@ class App extends React.Component {
     });
   }
 
+  submitOrder() {
+    fetch('/api/order', {
+      method: 'post',
+      body: JSON.stringify(this.state.orderBasket),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
+  }
+
   render() {
-    const { menu, currentOrderItem, isOrdering, activeIndex } = this.state;
+    const {
+      menu,
+      currentOrderItem,
+      isOrdering,
+      activeIndex,
+      hasBasket,
+      orderBasket
+    } = this.state;
 
     if (menu.starters) {
       console.log(menu.starters.name);
@@ -94,6 +117,9 @@ class App extends React.Component {
             addOrderToBasket={this.addOrderToBasket}
             closeOrder={this.closeOrder}
           />
+        )}
+        {hasBasket && (
+          <Basket basket={orderBasket} submitOrder={this.submitOrder} />
         )}
       </div>
     );
