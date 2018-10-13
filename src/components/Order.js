@@ -34,43 +34,53 @@ class Order extends React.Component {
     const { quantity } = this.state;
 
     return (
-      <div className="order">
-        <h3 className="order__item">{name}</h3>
-        <p>{description}</p>
-        <div className="order__amount">
-          <button
-            onClick={() => this.decreaseOrderAmount()}
-            className="btn btn__decrease"
-            name="decrease"
-          >
-            [-]
-          </button>
-          <span className="amount__count">{quantity}</span>
-          <button
-            onClick={e => this.increaseOrderAmount(e)}
-            className="btn btn__increase"
-            name="increase"
-          >
-            [+]
-          </button>
-          <span className="order__cost"> £{quantity * price}</span>
-        </div>
-        <div className="order__action">
-          <button
-            onClick={() => closeOrder()}
-            className="btn btn__cancel"
-            name="cancel"
-          >
-            Cancel
-          </button>
-          <button
-            className="btn btn__submit"
-            onClick={() => addOrderToBasket(name, quantity, price)}
-            type="submit"
-            name="submit"
-          >
-            Add to order
-          </button>
+      <div className="order__wrapper">
+        <div className="order">
+          <h3 className="order__item">{name}</h3>
+          <img
+            className="order__image"
+            src="https://loremflickr.com/320/240"
+            alt=""
+          />
+          <p className="order__description">{description}</p>
+          <div className="order__meta">
+            <button
+              onClick={() => this.decreaseOrderAmount()}
+              className="btn btn__decrease"
+              name="decrease"
+            >
+              -
+            </button>
+
+            <span className="amount__count">{quantity}</span>
+
+            <button
+              onClick={e => this.increaseOrderAmount(e)}
+              className="btn btn__increase"
+              name="increase"
+            >
+              +
+            </button>
+
+            <span className="order__cost"> £{quantity * price}</span>
+          </div>
+          <div className="order__action">
+            <button
+              onClick={() => closeOrder()}
+              className="btn btn__cancel"
+              name="cancel"
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn__submit"
+              onClick={() => addOrderToBasket(name, quantity, price)}
+              type="submit"
+              name="submit"
+            >
+              Add to order
+            </button>
+          </div>
         </div>
       </div>
     );

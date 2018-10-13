@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Order from '../src/components/Order';
+import Order from '../../src/components/Order';
 
 describe('Order', () => {
   let wrapper;
@@ -27,6 +27,10 @@ describe('Order', () => {
 
   afterEach(() => {
     instance.state.quantity = 1;
+  });
+
+  test('Initial state.quantity should be 1', () => {
+    expect(instance.state.quantity).toEqual(1);
   });
 
   test('Clicking increase button should call the increaseOrderAmount method', () => {
@@ -63,12 +67,12 @@ describe('Order', () => {
     expect(instance.state.quantity).toEqual(1);
   });
 
-  test('clicking cancel order button should call closeOrder method', () => {
+  test('Clicking cancel order button should call closeOrder method', () => {
     wrapper.find('.btn__cancel').simulate('click');
     expect(instance.props.closeOrder).toHaveBeenCalled();
   });
 
-  test('clicking add to order button should call addOrderToBasket method with name, quantity and price', () => {
+  test('Clicking add to order button should call addOrderToBasket method with name, quantity and price', () => {
     //simulate click to increase order quantity
     instance.increaseOrderAmount();
     // submit order

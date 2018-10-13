@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import MenuItem from '../src/components/MenuItem';
+import MenuItem from '../../src/components/MenuItem';
 
 describe('MenuItem', () => {
   test('When item is clicked, handleClick should be called with name, price and id', () => {

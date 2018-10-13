@@ -1,7 +1,73 @@
 .order {
   width: 80%;
   margin: 0 auto;
-  padding: 0.5rem;
+  // padding: 0.5rem;
   border: 1px solid black;
-  text-align: center;
+  // text-align: center;
+  background: white;
+  &__wrapper {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__item {
+    text-align: center;
+  }
+  &__image {
+    display: block;
+    width: 90%;
+    margin: 0 auto 1rem auto;
+    border: 3px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
+  }
+  &__description {
+    width: 90%;
+    margin: auto;
+  }
+  &__meta,
+  &__action {
+    display: flex;
+    width: 90%;
+    margin: 1rem auto 0.5rem auto;
+    padding: 0.75rem 2rem;
+    justify-content: center;
+    align-content: center;
+    > * {
+      align-self: center;
+    }
+    .btn {
+      border: none;
+      background: black;
+      color: white;
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 1rem;
+      &__cancel,
+      &__submit {
+        width: initial;
+        background: initial;
+        border: 1px solid black;
+        border-radius: 8px;
+        color: initial;
+      }
+    }
+    .amount__count {
+      display: block;
+      margin: 0 0.5rem;
+    }
+    .order__cost {
+      display: block;
+      flex: 3;
+      text-align: right;
+    }
+  }
+  &__action {
+    justify-content: space-around;
+  }
 }
