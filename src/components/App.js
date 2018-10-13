@@ -15,7 +15,8 @@ class App extends React.Component {
       isOrdering: false,
       currentOrderItem: {},
       hasBasket: false,
-      orderBasket: {}
+      orderBasket: {},
+      hasOrdered: false
     };
 
     this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
@@ -65,6 +66,7 @@ class App extends React.Component {
       });
     }
     this.setState({
+      isOrdering: false,
       hasBasket: true,
       orderBasket: newOrderBasket
     });
@@ -88,6 +90,10 @@ class App extends React.Component {
         return response.json();
       })
       .then(data => {
+        this.setState({
+          hasBasket: false,
+          hasOrdered: true
+        });
         console.log(data);
       });
   }
@@ -99,7 +105,8 @@ class App extends React.Component {
       isOrdering,
       activeIndex,
       hasBasket,
-      orderBasket
+      orderBasket,
+      hasOrdered
     } = this.state;
 
     if (menu.starters) {
@@ -120,6 +127,9 @@ class App extends React.Component {
         )}
         {hasBasket && (
           <Basket basket={orderBasket} submitOrder={this.submitOrder} />
+        )}
+        {hasOrdered && (
+          <h3> Thank you for your order. Enjoy your breakfast!</h3>
         )}
       </div>
     );
