@@ -9,10 +9,17 @@ class MenuComponent extends React.Component {
   render() {
     return (
       <div>
+        <ul>
         {this.props.menu.map( item => {
           return (
-            <MenuItem key={item.id} item={item} addOrder={this.props.addOrder}/>);
+            <li key={item.id}>
+              <MenuItem
+              item={item}
+              addOrder={this.props.addOrder} />
+            </li>
+          );
         })}
+      </ul>
       </div>
     );
   }

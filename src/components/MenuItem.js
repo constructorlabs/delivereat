@@ -7,7 +7,9 @@ function handleSubmit(event) {
 
   const order = {
     id : item.id,
-    quantity : 1
+    quantity : 1,
+    price : item.price,
+    name : item.name
   }
 
   addOrder(order);
@@ -16,6 +18,7 @@ function handleSubmit(event) {
   return (
     <form onSubmit={handleSubmit}>
       <h2>{item.name}</h2>
+      <img src={item.image}/>
       <p>£{item.price}</p>
       <button>Press Me!</button>
     </form>
