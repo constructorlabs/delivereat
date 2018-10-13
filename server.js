@@ -61,7 +61,7 @@ const menu = {
 
 let orders = {
   totalOrders: 0,
-  customerOrders: []
+  customerOrders: {}
 };
 
 // create a new object / array to store orders
@@ -72,16 +72,21 @@ app.get('/', function(req, res) {
   res.render('index');
 });
 
+// get minimal menu item details
 app.get('/api/menu', function(req, res) {
   const menuItems = Object.values(menu.menuItems).map(item => {
     return { id: item.id, name: item.name, price: item.price };
   });
-  res.json(menuItems);
+  if (menuItems.length != 0) {
+    res.json(menuItems);
+  } else {
+    res.status(404).json({ error: 'Sorry, there are no items on the menu' });
+  }
 });
 
+// get individual item details
 app.get('/api/menu/:itemId', function(req, res) {
   const itemDetails = menu.menuItems[req.params.itemId];
-
   if (itemDetails) {
     res.json(itemDetails);
   } else {
@@ -91,27 +96,26 @@ app.get('/api/menu/:itemId', function(req, res) {
 
 app.post('/api/order', function(req, res) {
   const order = req.body;
-  const ordersKeys = Object.keys(orders);
+  const ordersKeys = Object.keys(orders.customerOrders);
   const id = ordersKeys.length > 0 ? Math.max(...ordersKeys) + 1 : 1;
-  orders = Object.assign({}, orders, { [id]: order });
+  orders.customerOrders = Object.assign({}, orders.customerOrders, {
+    [id]: order
+  });
   // respond with order object with id attached
   res.json({ [id]: order });
 });
 
 //get all orders for admin
-
 app.get('/orders', (req, res) => {
   res.json(orders);
 });
 
 // get order by id for customer order tracking
-
 app.get('/orders/:orderId', (req, res) => {
-  res.json(orders[req.params.orderId]);
+  res.json(orders.customerOrders[req.params.orderId]);
 });
 
 // Server code is running in the server
-
 app.listen(8080, function() {
   console.log('Listening on port 8080');
 });

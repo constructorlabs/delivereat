@@ -11,7 +11,6 @@ class App extends React.Component {
 
     this.state = {
       menu: [],
-      activeIndex: 0,
       isOrdering: false,
       currentOrderItem: {},
       orderBasket: {},
@@ -39,6 +38,9 @@ class App extends React.Component {
         this.setState({
           menu: body
         });
+      })
+      .catch(error => {
+        alert('error');
       });
   }
 
@@ -49,23 +51,25 @@ class App extends React.Component {
         this.setState({
           hasOrdered: false,
           isOrdering: true,
-          activeIndex: id,
           currentOrderItem: body
         })
-      );
+      )
+      .catch(error => {
+        alert('error');
+      });
   }
 
   addOrderToBasket(name, quantity, price) {
-    const { orderBasket, activeIndex } = this.state;
+    const { orderBasket, currentOrderItem } = this.state;
     let newOrderBasket = {};
-    const order = { id: activeIndex, name, quantity, price };
-    if (orderBasket.hasOwnProperty(activeIndex)) {
-      const updatedOrder = (orderBasket[activeIndex].quantity +=
+    const order = { id: currentOrderItem.id, name, quantity, price };
+    if (orderBasket.hasOwnProperty(currentOrderItem.id)) {
+      const updatedOrder = (orderBasket[currentOrderItem.id].quantity +=
         order.quantity);
       newOrderBasket = Object.assign({}, orderBasket, updatedOrder);
     } else {
       newOrderBasket = Object.assign({}, orderBasket, {
-        [activeIndex]: order
+        [currentOrderItem.id]: order
       });
     }
     this.setState({
@@ -123,11 +127,12 @@ class App extends React.Component {
       })
       .then(data => {
         this.setState({
+          currentOrderItem: {},
           orderBasket: {},
           hasOrdered: true,
           orderRef: Object.keys(data)[0]
         });
-        console.log(this.state.orderRef);
+        console.log(data);
       });
   }
 
@@ -136,7 +141,6 @@ class App extends React.Component {
       menu,
       currentOrderItem,
       isOrdering,
-      activeIndex,
       orderBasket,
       hasOrdered
     } = this.state;
@@ -146,10 +150,14 @@ class App extends React.Component {
     return (
       <div>
         <h1>Peng Munch</h1>
-        <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
+        {menu.length > 0 ? (
+          <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
+        ) : (
+          <p>{menu.error}</p>
+        )}
         {isOrdering && (
           <Order
-            key={activeIndex}
+            key={currentOrderItem.id}
             currentOrderItem={currentOrderItem}
             addOrderToBasket={this.addOrderToBasket}
             closeOrder={this.closeOrder}
