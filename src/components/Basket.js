@@ -37,7 +37,7 @@ const Basket = ({
         Delivery Charge <span>£{delivery.toFixed(2)}</span>
       </p>
       <p>
-        Order total <span>£{total + delivery}</span>
+        Order total <span>£{(total + delivery).toFixed(2)}</span>
       </p>
       <button onClick={() => submitOrder()} className="btn btn__submitOrder">
         Place Order

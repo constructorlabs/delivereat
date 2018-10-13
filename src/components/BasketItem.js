@@ -20,7 +20,7 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
       >
         [+]
       </button>
-      {name} £{quantity * price}
+      {name} £{(quantity * price).toFixed(2)}
       <button
         onClick={e => removeFromBasket(id)}
         className="btn btn__removeItem"

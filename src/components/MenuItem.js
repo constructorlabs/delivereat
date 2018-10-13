@@ -8,7 +8,7 @@ const MenuItem = ({ name, price, id, handleMenuItemClick }) => {
       onClick={() => handleMenuItemClick(name, price, id)}
     >
       {name}
-      <span className="item__price">£{price}</span>
+      <span className="item__price">£{price.toFixed(2)}</span>
     </li>
   );
 };

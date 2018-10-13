@@ -62,7 +62,10 @@ class Order extends React.Component {
               +
             </button>
 
-            <span className="order__cost"> £{quantity * price}</span>
+            <span className="order__cost">
+              {' '}
+              £{(quantity * price).toFixed(2)}
+            </span>
           </div>
           <div className="order__action">
             <button
