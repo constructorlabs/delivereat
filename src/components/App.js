@@ -14,13 +14,11 @@ class App extends React.Component {
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
 
-
-
     this.state = { 
       formData: {},
       menu: {},
-      orders: null,
       currentOrder: null,
+      orders: null
     }
   }
 
@@ -145,7 +143,7 @@ class App extends React.Component {
         total += orderItem.quantity * menuItem.price;
         return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
       })} 
-      <hr />
+      <hr className="box"></hr>
       <div>Total: {this.getCurrency(total)}</div>
     </div>
   }
@@ -161,12 +159,12 @@ class App extends React.Component {
       const summary = Object.values(order).map(orderItem => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += (orderItem.quantity * menuItem.price);
-        return <div key={"order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
       });
-      return (<div>
+      return (<div key={"order-" + index}>
         {summary}
-        <div key={"total-" + index}>Order Total: {this.getCurrency(total)}</div>
-        <hr />
+        <div key={"total-" + index + 1}>Order Total: {this.getCurrency(total)}</div>
+        <hr className="box"></hr>
       </div>)
     })}
     </div>

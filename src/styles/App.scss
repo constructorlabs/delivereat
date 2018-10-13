@@ -51,26 +51,30 @@ input {
 }
 
 hr {
-  border: 0;
-  height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
-}
-
-hr.title {
   overflow: visible; 
   padding: 0;
-  border: none;
-  border-top: medium double #333;
   color: #333;
+  border: 1px;
   text-align: center;
-  &:after {
-    content: "§";
-    display: inline-block;
-    position: relative;
-    top: -0.7em;
-    font-size: 1em;
-    padding: 0 0.25em;
-    background: #fffae8;
+  &.box {
+    height: 1px;
+    background-image: linear-gradient(to right, 
+      rgba(51, 51, 51, 0), 
+      rgba(51, 51, 51, 0.75), 
+      rgba(51, 51, 51, 0)
+    );
+  }
+  &.title {
+    border-top: medium double #333;
+    &:after {
+      content: "§";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1em;
+      padding: 0 0.25em;
+      background: #fffae8;
+    }
   }
 }
 
