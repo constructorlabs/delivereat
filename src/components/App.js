@@ -3,6 +3,7 @@ import Menu from './Menu.js'
 import Header from './Header.js'
 import SeeOrder from "./SeeOrder.js"
 import OrderReview from "./OrderReview.js"
+import OrderConfirmation from "./OrderConfirmation.js"
 
 import '../styles/App.scss';
 
@@ -23,7 +24,7 @@ class App extends React.Component {
         total: 0,
         items: {}
                     },
-      display: 'menu'  //'menu' or 'order'
+      display: 'menu'  //'menu' or 'order' or 'confirmation'
 
     }
   }
@@ -54,7 +55,7 @@ class App extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
-      console.log(body)
+      this.changeDisplay('confirmation')
     })
   }
 
@@ -131,6 +132,10 @@ class App extends React.Component {
                                 placeOrder={this.placeOrder}
                                removeFromOrder={this.removeFromOrder}/>)
           : null}
+
+          {this.state.display === 'confirmation'
+            ? <OrderConfirmation />
+            : null}
 
         {Object.values(this.state.currentOrder.items).length > 0 && this.state.display === 'menu'
          ? <SeeOrder changeDisplay={this.changeDisplay}/>
