@@ -73,7 +73,7 @@
 
 @media (min-width: 768px) {
   .menu {
-    max-width: 968px;
+    // max-width: 968px;
     padding: 0 0.5rem 2rem 0.5rem;
   }
   dl {
@@ -150,6 +150,17 @@
     }
     &__sandwiches__items {
       margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    grid-area: c;
+    margin: 0;
+    padding: 0 1rem;
+    &__title {
+      grid-area: b;
     }
   }
 }

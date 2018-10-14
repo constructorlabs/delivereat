@@ -154,8 +154,9 @@ class App extends React.Component {
     const hasBasket = Object.keys(orderBasket).length > 0;
 
     return (
-      <div>
+      <div className="page">
         <h1>Tiffany’s</h1>
+        {/* <h2 className="menu__title">All-day Breakfast</h2> */}
         {menu.length > 0 ? (
           <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
         ) : (

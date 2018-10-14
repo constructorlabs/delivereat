@@ -69,3 +69,10 @@
     }
   }
 }
+
+@media (min-width: 1024px) {
+  .order {
+    max-width: 475px;
+    margin: 0 auto 0 23%;
+  }
+}

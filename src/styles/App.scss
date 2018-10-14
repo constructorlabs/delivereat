@@ -61,3 +61,19 @@ h1 {
     justify-content: center;
   }
 }
+
+@media (min-width: 1024px) {
+  .page {
+    padding-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 4fr 2fr 1fr;
+    // grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      '. a b . '
+      '. c d .'
+      '. e f .';
+  }
+  h1 {
+    grid-area: a;
+  }
+}

@@ -13,7 +13,6 @@ const Menu = ({ menu, handleMenuItemClick }) => {
 
   return (
     <div className="menu">
-      <h2 className="menu__title">All-day Breakfast</h2>
       <dl>
         {categories.map(menuCategory => {
           return (
