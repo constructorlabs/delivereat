@@ -37,6 +37,7 @@
   .checkout {
 
     &__image {
+      left: 0;
       width: 100%;
       height: auto;
       max-height: auto;
@@ -44,12 +45,12 @@
 
     &__logo {
       font-size: 5rem;
-      bottom: 13rem;
+      bottom: 11rem;
     }
 
     &__text {
       font-size: 1.5rem;
-      bottom: 10rem;
+      bottom: 6rem;
     }
   }
 }
