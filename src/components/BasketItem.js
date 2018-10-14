@@ -11,7 +11,7 @@ class BasketItem extends React.Component {
   handleAdd(event) {
     this.props.addToOrder(this.props.data[0]);
   }
-  
+
   handleRemove(event) {
     this.props.removeFromOrder(this.props.data[0]);
   }
@@ -26,6 +26,7 @@ class BasketItem extends React.Component {
             <button className={'basket-item__remove-button'} onClick={this.handleRemove}><i className="fas fa-minus-circle"></i></button>
             <div className={'basket-item__count'}>{this.props.data[1]}</div>
             <button className={'basket-item__add-button'} onClick={this.handleAdd}><i className="fas fa-plus-circle"></i></button>
+            <div className={'basket-item__line-total'}>{`£${(this.props.data[0].price*this.props.data[1]).toFixed(2)}`}</div>
           </div>
         </div>
       </div>

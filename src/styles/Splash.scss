@@ -1,0 +1,28 @@
+@import 'defaults';
+
+.splash {
+  position: relative;
+
+  &__image {
+    height: 100vh;
+  }
+
+  &__logo {
+    position: absolute;
+    bottom: 9rem;
+    left: 4rem;
+    color: white;
+    font-size: 3rem;
+    margin: 0;
+    font-family: 'Sedgwick Ave Display', cursive;
+  }
+
+  &__text {
+    font-family: 'Roboto';
+    font-size: 1rem;
+    position: absolute;
+    bottom: 7rem;
+    left: 4rem;
+    color: white;
+  }
+}

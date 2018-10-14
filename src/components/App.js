@@ -1,13 +1,15 @@
 import React from 'react';
 import Menu from './Menu';
 import Basket from './Basket';
+import Splash from './Splash';
 
 import '../styles/App.scss';
 
 class App extends React.Component {
   constructor(){
     super();
-    this.state = {menu: '',
+    this.state = {stage: 'splash',
+                  menu: '',
                   beans: '',
                   order: {
                     contents: [],
@@ -15,6 +17,7 @@ class App extends React.Component {
     this.addToOrder = this.addToOrder.bind(this); 
     this.removeFromOrder = this.removeFromOrder.bind(this);
     this.submitOrder = this.submitOrder.bind(this);
+    this.changeStage = this.changeStage.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +30,10 @@ class App extends React.Component {
     .then(response => response.json())
     .then(beans => this.setState({beans}));
 
+  }
+
+  changeStage(stage) {
+    this.setState({stage});
   }
 
   addToOrder(coffee) {
@@ -86,19 +93,24 @@ class App extends React.Component {
                       total: 0} });
   }
 
-  render(){
+  render() {
+
     return (
-      <div className='main'>
-        <div className='header'>
-          <img className='header__image' src="/static/assets/header.jpg"></img>
-          <p className='header__logo'>Zing</p>
-        </div>
-        <div className='content'>
-          {(this.state.menu) && <Menu order={this.state.order.contents} menu={this.state.menu} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder}/>}
-          {(this.state.order.contents.length) && <Basket order={this.state.order} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder} submitOrder={this.submitOrder}/>}
+      <div className='app'>
+        {(this.state.stage === 'splash') && <Splash changeStage={this.changeStage}/>}
+        <div className='main'>
+          <div className='header'>
+            <img className='header__image' src="/static/assets/header.jpg"></img>
+            <p className='header__logo'>Zing</p>
+          </div>
+          <div className='content'>
+            {(this.state.menu) && <Menu order={this.state.order.contents} menu={this.state.menu} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder}/>}
+            {(this.state.order.contents.length) && <Basket order={this.state.order} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder} submitOrder={this.submitOrder}/>}
+          </div>
         </div>
       </div>
-    )}
+    );
+  }
 }
 
 export default App;
