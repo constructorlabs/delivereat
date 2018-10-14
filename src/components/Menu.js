@@ -18,8 +18,8 @@ const Menu = ({ menu, handleMenuItemClick }) => {
         {categories.map(menuCategory => {
           return (
             <React.Fragment key={menuCategory}>
-              <dt>{menuCategory}</dt>
-              <dd>
+              <dt className={`menu__${menuCategory}`}>{menuCategory}</dt>
+              <dd className={`menu__${menuCategory}__items`}>
                 <ul className="menu__list">
                   {menu
                     .filter(item => {
