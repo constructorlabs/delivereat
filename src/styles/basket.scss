@@ -44,6 +44,11 @@
     font-size: 0.9rem;
     color: #888888;
   }
+  &__discount {
+    &--hidden {
+      display: none;
+    }
+  }
   &__total span {
     font-weight: bold;
   }

@@ -29,17 +29,25 @@ class Basket extends React.Component {
       removeFromBasket
     } = this.props;
 
-    const delivery = 7.5;
     let total = Object.values(basket)
       .map(item => {
         return item.price * item.quantity;
       })
       .reduce((acc, item) => acc + item);
-    const discount = 0.1;
-    total > 30 ? (total = total - total * discount) : (total = total);
+
+    let discountPercentage = 0;
+
+    let deliveryCharge = 4.75;
+
+    total > 40 ? (deliveryCharge = 0) : deliveryCharge;
+    total > 30 ? (discountPercentage = 0.1) : discountPercentage;
 
     const basketClass = cx('basket__wrapper', {
       'basket__wrapper--hidden': this.state.basketHidden
+    });
+
+    const discount = cx('basket__discount', {
+      'basket__discount--hidden': discountPercentage === 0
     });
 
     return (
@@ -65,10 +73,18 @@ class Basket extends React.Component {
             })}
           </ul>
           <p className="basket__delivery">
-            Delivery Charge <span>£{delivery.toFixed(2)}</span>
+            Delivery Charge <span>£{deliveryCharge.toFixed(2)}</span>
+          </p>
+          <p className={discount}>
+            Discount <span>{discountPercentage * 100}%</span>
           </p>
           <p className="basket__total">
-            Order total <span>£{(total + delivery).toFixed(2)}</span>
+            Order total{' '}
+            <span>
+              £{(total - total * discountPercentage + deliveryCharge).toFixed(
+                2
+              )}
+            </span>
           </p>
           <button onClick={() => submitOrder()} className="btn btn__submit">
             Place Order

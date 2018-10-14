@@ -59,5 +59,8 @@
 @media (min-width: 768px) {
   .order {
     width: 60%;
+    &__meta {
+      font-size: 1.1rem;
+    }
   }
 }
