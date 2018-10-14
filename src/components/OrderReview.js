@@ -27,7 +27,7 @@ class OrderReview extends React.Component{
         </ul>
         <div className="order-confirmation__total">
           <span>Delivery: £5.00 </span>
-          <span>Total to pay: {this.props.currentOrder.total}</span>
+          <span>Total to pay: £{this.props.currentOrder.total + 5}.00</span>
           <button onClick={this.handlePlaceOrder}>Place Order</button>
         </div>
 

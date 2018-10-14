@@ -24,6 +24,7 @@ class App extends React.Component {
         total: 0,
         items: {}
                     },
+      recentOrder: {},
       display: 'menu'  //'menu' or 'order' or 'confirmation'
 
     }
@@ -55,11 +56,13 @@ class App extends React.Component {
     })
     .then(response => response.json())
     .then(body => {
+      console.log(body)
       this.changeDisplay('confirmation')
       this.setState({
+        recentOrder: body,
         currentOrder: {
         total: 0,
-        items: {}
+        items: {},
       }
       })
     })
@@ -146,7 +149,7 @@ class App extends React.Component {
           : null}
 
           {this.state.display === 'confirmation'
-            ? <OrderConfirmation />
+            ? <OrderConfirmation recentOrder={this.state.recentOrder}/>
             : null}
 
         {Object.values(this.state.currentOrder.items).length > 0 && this.state.display === 'menu'

@@ -14,8 +14,6 @@ app.set('view engine', 'hbs');
 
 const menu = {
 
-
-
   burgers: {
     1: {
       id: 1,

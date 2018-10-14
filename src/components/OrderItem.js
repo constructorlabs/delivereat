@@ -25,7 +25,7 @@ class OrderItem extends React.Component{
       <div>
         <span>{this.props.item.menuItem.name}</span>
         <input onChange={this.handleChange} type="number" name="quantity" placeholder={this.props.item.quantity} min="1" max="5" />
-        <span>{this.props.item.totalPrice}</span>
+        <span>£{this.props.item.totalPrice}.00</span>
         <button onClick={this.handleRemove}>Remove</button>
       </div>
 
