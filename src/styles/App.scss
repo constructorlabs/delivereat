@@ -1,3 +1,25 @@
-body {
-  background-color: Cornsilk;
+html {
+  box-sizing: border-box;
 }
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  padding: 0;
+  background-color: #C4C4C4;
+  margin: 0;
+}
+
+.wrapper {
+  height: 100vh; /* fill the screen */
+  max-width: 960px;
+  margin: auto;
+  background-color: #C4C4C4;
+  text-align:center;
+}
+
+
