@@ -16,6 +16,37 @@
     font-weight: 300;
     position: sticky;
     top: 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 8rem;
+    font-size: 1.5rem;
+  }
+  dt.menu {
+    &__classics {
+      background: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
+      background-position-y: 55%;
+      background-size: cover;
+    }
+    &__sandwiches {
+      background-image: url('/static/assets/images/jimi-filipovski-189721-unsplash.jpg');
+      background-position-y: 85%;
+      background-size: cover;
+    }
+    &__eggs {
+      background-image: url('/static/assets/images/ben-kolde-652852-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+    }
+    &__pancakes {
+      background-image: url('/static/assets/images/nikldn-693527-unsplash.jpg');
+      background-position-y: 60%;
+      background-size: cover;
+    }
+    &__cereal {
+      background-image: url('/static/assets/images/arek-adeoye-221899-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+    }
   }
   dd {
     margin-left: 0;
@@ -37,15 +68,18 @@
   }
 }
 
+/********************/
+/** media queries **/
+
 @media (min-width: 768px) {
   .menu {
     max-width: 968px;
-    padding-bottom: 2rem;
+    padding: 0 0.5rem 2rem 0.5rem;
   }
   dl {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-column-gap: 1rem;
+    grid-column-gap: 0.5rem;
     grid-template-rows: repeat(8, minmax(1rem, mincontent));
     grid-template-areas:
       'a a'
@@ -55,56 +89,47 @@
       'g h'
       'i j';
   }
+  dt {
+    height: 10rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    color: white;
+  }
   dt.menu {
     &__classics {
       position: initial;
       grid-area: a;
-      background-image: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
+      background: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
       background-position-y: 50%;
       background-size: cover;
       height: 20rem;
       font-size: 3rem;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-      color: white;
     }
     &__sandwiches {
       background-image: url('/static/assets/images/jimi-filipovski-189721-unsplash.jpg');
       background-position-y: 70%;
       background-size: cover;
-      height: 10rem;
       font-size: 2rem;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: c;
     }
     &__eggs {
       background-image: url('/static/assets/images/ben-kolde-652852-unsplash.jpg');
       background-position-y: 40%;
       background-size: cover;
-      height: 10rem;
       font-size: 2rem;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: d;
     }
     &__pancakes {
       background-image: url('/static/assets/images/nikldn-693527-unsplash.jpg');
       background-position-y: 65%;
       background-size: cover;
-      height: 10rem;
       font-size: 2rem;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: h;
     }
     &__cereal {
       background-image: url('/static/assets/images/arek-adeoye-221899-unsplash.jpg');
       background-position-y: 40%;
       background-size: cover;
-      height: 10rem;
       font-size: 2rem;
-      color: white;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: g;
     }
   }
@@ -112,10 +137,9 @@
   dd.menu {
     &__classics__items {
       grid-area: b;
-      margin-bottom: 1rem;
+      margin-bottom: 0.25rem;
       .menu__list {
         background: #eeeeee;
-        // padding: 0.5rem;
         display: grid;
         grid-column-gap: 1px;
         grid-template-columns: repeat(2, 1fr);

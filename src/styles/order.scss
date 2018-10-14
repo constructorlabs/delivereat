@@ -21,18 +21,12 @@
   &__item {
     text-align: center;
   }
-  &__image {
-    display: block;
-    width: 90%;
-    margin: 0 auto 1rem auto;
-    border: 3px solid white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    object-fit: cover;
-  }
+
   &__description {
     width: 90%;
     margin: auto;
   }
+
   &__meta,
   &__action {
     display: flex;
@@ -53,6 +47,17 @@
   }
   &__action {
     justify-content: space-around;
+  }
+
+  form {
+    padding-left: 1rem;
+    h4 {
+      margin-bottom: 0;
+      padding-left: 0.5rem;
+    }
+    input {
+      margin-right: 0.5rem;
+    }
   }
 }
 

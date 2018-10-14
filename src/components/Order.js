@@ -8,10 +8,12 @@ class Order extends React.Component {
 
     this.state = {
       quantity: 1
+      // extras: []
     };
 
     this.increaseOrderAmount = this.increaseOrderAmount.bind(this);
     this.decreaseOrderAmount = this.decreaseOrderAmount.bind(this);
+    // this.handleCheckbox = this.handleCheckbox.bind(this);
   }
 
   increaseOrderAmount() {
@@ -28,21 +30,64 @@ class Order extends React.Component {
     }
   }
 
+  //TODO: match the selected checkbox to the extras stored in state
+
+  // handleCheckbox(addOn) {
+  //   if (!this.state.extras.includes(addOn)) {
+  //     const updatedExtras = this.state.extras.concat(addOn);
+  //     this.setState(
+  //       {
+  //         extras: updatedExtras
+  //       },
+  //       () => {
+  //         console.log(this.state.extras.indexOf(addOn.extra));
+  //       }
+  //     );
+  //   } else {
+  //     console.log(this.state.extras.indexOf(addOn));
+  //     const updatedExtras = this.state.extras.filter(item => {
+  //       return item.extra != addOn.extra;
+  //     });
+  //     this.setState({
+  //       extras: updatedExtras
+  //     });
+  //   }
+  // }
+
   render() {
     const { currentOrderItem, addOrderToBasket, closeOrder } = this.props;
-    const { name, price, description } = currentOrderItem;
+    const { name, price, description, extras, extrasPrice } = currentOrderItem;
     const { quantity } = this.state;
 
     return (
       <div className="order__wrapper">
         <div className="order">
           <h3 className="order__item">{name}</h3>
-          {/* <img
-            className="order__image"
-            src="https://loremflickr.com/320/240"
-            alt=""
-          /> */}
           <p className="order__description">{description}</p>
+
+          {!!extras && (
+            <form>
+              <h4>Add extras</h4>
+              {extras.map(extra => {
+                return (
+                  <div key={extra}>
+                    <input
+                      type="checkbox"
+                      id={extra}
+                      name="extras"
+                      value={extra}
+                      // onChange={e => this.handleCheckbox({ extra })}
+                    />
+                    <label>
+                      {extra}
+                      {/* £{extrasPrice.toFixed(2)} */}
+                    </label>
+                  </div>
+                );
+              })}
+            </form>
+          )}
+
           <div className="order__meta">
             <button
               onClick={() => this.decreaseOrderAmount()}
@@ -67,6 +112,7 @@ class Order extends React.Component {
               £{(quantity * price).toFixed(2)}
             </span>
           </div>
+          {/* Order action controls */}
           <div className="order__action">
             <button
               onClick={() => closeOrder()}

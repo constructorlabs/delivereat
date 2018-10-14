@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/menuitem.scss';
 
 const MenuItem = ({ name, price, id, handleMenuItemClick }) => {
   return (

@@ -85,14 +85,17 @@ const menu = {
       name: 'Eggs Benedict',
       price: 9.5,
       category: 'eggs',
-      description: 'With ham hock and butternut squash'
+      description: 'With ham hock and butternut squash',
+      options: ['muffin', 'butternut squash']
     },
     11: {
       id: 11,
       name: 'Eggs Florentine',
       price: 9.5,
       category: 'eggs',
-      description: 'With spinach and a muffin'
+      description: 'With spinach and a muffin',
+      extras: ['smoked salmon'],
+      extrasPrice: 4
     },
     12: {
       id: 12,
@@ -116,14 +119,24 @@ const menu = {
       price: 3,
       category: 'cereal',
       description: 'Rolled oats, slow-cooked in oat milk',
-      toppings: [
+      extras: [
         'mixed berries',
         'pumpkin seeds',
         'crushed pecans',
         'honey',
         'maple syrup'
       ],
-      toppingsPrice: 2
+      extrasPrice: 2
+    },
+    15: {
+      id: 15,
+      name: 'Huevos Al Joe',
+      price: 10.5,
+      category: 'eggs',
+      description:
+        'Poached eggs, peppers, avocado, chillies & hollandaise on English muffin with a choice of fried chicken or chorizo',
+      extras: ['fried chicken', 'chorizo'],
+      extrasPrice: 0
     }
   }
 };
