@@ -1,0 +1,19 @@
+@import "parameters";
+
+@media(min-width:768px){
+
+  .order{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background: $background-color;
+
+  }
+}
+
+// @media(min-width:960px){
+//
+//   .order{
+//     display:grid;
+//     grid-template-columns: 1fr 1fr 1fr;
+//   }
+// }

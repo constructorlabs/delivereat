@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faMinus } from "@fortawesome/free-solid-svg-icons";
 import OrderItem from "./OrderItem";
 import OrderCalc from './OrderCalc';
+import "../styles/Order.scss";
 
 library.add(faPlus, faMinus);
 

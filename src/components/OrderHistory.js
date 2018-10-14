@@ -1,5 +1,6 @@
 import React from "react";
 import SingleOrderHistory from "./SingleOrderHistory";
+import "../styles/OrderHistory.scss";
 
 function OrderHistory(props) {
   const placedOrders = Object.values(props.placedOrders);

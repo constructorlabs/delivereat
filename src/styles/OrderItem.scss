@@ -1,0 +1,54 @@
+@import "parameters";
+
+.order__item{
+  padding: $content-padding;
+  background-color: white;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  h2{
+    padding: $content-padding;
+  
+  }
+
+  .order__number{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  img{
+    width: 90vw;
+
+  }
+
+  p{
+    color: $sub-font-color;
+    margin: $margin;
+  }
+}
+
+@media(min-width:768px) {
+
+  .order__item{
+
+    img{
+      width:45vw;
+      height: 40vh;
+    }
+  }
+}
+
+@media(min-width:960px) {
+
+  .order__item{
+    img{
+      width:30vw;
+      height: 30vh;
+
+    }
+  }
+}

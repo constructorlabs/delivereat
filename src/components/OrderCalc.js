@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/OrderCalc.scss"
 
 class OrderCalc extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class OrderCalc extends React.Component {
     const totalCost = totalFoodCost * 1.1;
 
     return (
-      <div>
+      <div className="order__calc">
         <p>
           Food cost:
           {totalFoodCost.toLocaleString("en-UK", {
@@ -44,7 +45,7 @@ class OrderCalc extends React.Component {
             currency: "GBP"
           })}
         </p>
-        <p type="button" onClick={this.handleSubmit}>
+        <p className="button" type="button" onClick={this.handleSubmit}>
           Submit order
         </p>
       </div>

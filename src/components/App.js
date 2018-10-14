@@ -61,7 +61,7 @@ class App extends React.Component {
       .then(body => {
         this.setState({
           order: [],
-          displayMenu:!this.state.displayMenu,
+          displayMenu:true,
         });
         alert("Order has been placed successfully!");
       });
@@ -156,7 +156,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
         <h1>Food Heaven</h1>
         <div className="nav">
         <p className="orderHistory" onClick={this.orderHistory}>Order History</p>
@@ -169,13 +169,17 @@ class App extends React.Component {
         }
         </div>
         {this.state.displayMenu ? (
-          <div>
+          <div >
             <Menu
               receiveAddClick={this.receiveAddClick}
               menu={this.state.menu}
               order={this.state.order}
+              receiveClickPlus={this.receiveClickPlus}
+              receiveClickMinus={this.receiveClickMinus}
+              receiveOrderSubmit={this.receiveOrderSubmit}
               receiveRemoveClick={this.receiveRemoveClick}
             />
+
           </div>
         ) : (
           <div>

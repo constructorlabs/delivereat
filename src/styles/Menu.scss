@@ -2,6 +2,50 @@
 
 .menu{
   display: grid;
-  grid-row-gap: $card-gap;
+  grid-gap: $card-gap;
   background-color: $background-color;
+
+
+  .orders{
+    display: none;
+  }
+
+}
+
+@media(min-width:768px){
+  .menu{
+
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+  }
+  .orders{
+    display: none;
+  }
+}
+
+@media(min-width:960px) {
+  .menu{
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    grid-template-rows: auto;
+
+    grid-template-areas:
+     'm m a'
+     'm m a'
+     'm m a'
+     'm m a'
+     'm m a';
+
+  .orders{
+
+
+      display: grid;
+      grid-template-columns: 1fr;
+
+    grid-area: a;
+  }
+
+
+
+  }
 }

@@ -1,18 +1,22 @@
-@import 'parameters';
+@import "parameters";
 
-body {
-  background-color: Cornsilk;
+.wrapper {
+  background: "../../static/environment.jpg";
   display: flex;
   flex-flow: column wrap;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 
-}
 
-h1{
-  display: flex;
-  justify-content: center;
-}
+  h1 {
+    color: $header-font-color;
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+  }
 
-.nav{
-  padding: $content-padding;
+  .nav {
+    color: $button-color;
+
+    padding: $content-padding;
+  }
 }
