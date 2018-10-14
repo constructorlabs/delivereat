@@ -2,7 +2,8 @@ import React from "react";
 import OrderMenu from "./OrderMenu";
 import Order from "./Order";
 import MenuPage from "./MenuPage";
-import Navigation from "./Navigation"
+import Navigation from "./Navigation";
+import cx from "classnames";
 
 import "../styles/App.scss";
 
@@ -17,6 +18,7 @@ class App extends React.Component {
     this.updateTotalPrice = this.updateTotalPrice.bind(this);
     this.checkCurrentOrder = this.checkCurrentOrder.bind(this);
     this.formatToMoney = this.formatToMoney.bind(this);
+    this.receivePageChange = this.receivePageChange.bind(this);
     this.state = {
       menuObject: {
         burgers: [],
@@ -24,8 +26,21 @@ class App extends React.Component {
         extras: []
       },
       currentOrder: { orderItems: [], orderTotal: 0 },
-      previousOrders: []
+      previousOrders: [],
+      currentPage: "menu"
     };
+  }
+
+  receivePageChange(id) {
+    if (id === "menu") {
+      this.setState({
+        currentPage: "menu"
+      });
+    } else if (id === "order") {
+      this.setState({
+        currentPage: "order"
+      });
+    }
   }
 
   componentDidMount() {
@@ -46,8 +61,11 @@ class App extends React.Component {
       );
   }
 
-  formatToMoney(number){
-    return number.toLocaleString("en-GB", {style: "currency", currency: "GBP"})
+  formatToMoney(number) {
+    return number.toLocaleString("en-GB", {
+      style: "currency",
+      currency: "GBP"
+    });
   }
 
   updateTotalPrice(orderList) {
@@ -62,12 +80,15 @@ class App extends React.Component {
     if (this.state.currentOrder.orderItems.includes(order) === false) {
       const incomingOrder = this.state.currentOrder.orderItems.concat(order);
       const totalPrice = this.updateTotalPrice(incomingOrder);
-      this.setState({
-        currentOrder: {
-          orderItems: incomingOrder,
-          orderTotal: totalPrice
-        }
-      }, () => console.log(this.state.currentOrder));
+      this.setState(
+        {
+          currentOrder: {
+            orderItems: incomingOrder,
+            orderTotal: totalPrice
+          }
+        },
+        () => console.log(this.state.currentOrder)
+      );
     } else if (this.state.currentOrder.orderItems.includes(order) === true) {
       this.receiveQuanitityIncrease(order.id);
     }
@@ -125,15 +146,31 @@ class App extends React.Component {
   }
 
   render() {
+    const menuClasses = cx("menu__page__container", {
+      "menu__page__container--visible": this.state.currentPage === "menu",
+      "menu__page__container--notVisible": this.state.currentPage === "order"
+    });
+
+    const orderMenuClasses = cx("order__menu__container", {
+      "order__menu__container--visible": this.state.currentPage === "order",
+      "order__menu__container--notVisible": this.state.currentPage === "menu"
+    });
+
+    const orderClasses = cx("order__container", {
+      "order__container--visible": this.state.currentPage === "order",
+      "order__container--notVisible": this.state.currentPage === "menu"
+    });
+
     return (
       <div className="App">
-        <Navigation />
-        <MenuPage />
+        <Navigation receivePageChange={this.receivePageChange} />
+        <MenuPage menuClasses={menuClasses} />
         <OrderMenu
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}
           formatToMoney={this.formatToMoney}
           currentOrder={this.state.currentOrder}
+          orderMenuClasses={orderMenuClasses}
         />
         <Order
           currentOrder={this.state.currentOrder}
@@ -141,6 +178,7 @@ class App extends React.Component {
           receiveQuanitityIncrease={this.receiveQuanitityIncrease}
           receiveQuanitityDecrease={this.receiveQuanitityDecrease}
           formatToMoney={this.formatToMoney}
+          orderClasses={orderClasses}
         />
       </div>
     );

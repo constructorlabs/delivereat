@@ -1,19 +1,37 @@
+body, html, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+ul, li {
+  list-style: none;
+}
+
 body {
   background-color: whitesmoke;
 }
 
-.extras__add__extra--visible{
+.menu__page__container--visible{
   display: inline;
 }
 
-.extras__add__extra--notVisible {
+.menu__page__container--notVisible{
   display: none;
 }
 
-.extras__remove__extra--visible{
+.order__menu__container--visible{
   display: inline;
 }
 
-.extras__remove__extra--notVisible {
+.order__menu__container--notVisible{
   display: none;
 }
+
+.order__container--visible{
+  display: inline;
+}
+
+.order__container--notVisible{
+  display: none;
+}
+
