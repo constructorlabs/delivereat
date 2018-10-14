@@ -13,6 +13,7 @@ function OrderItem({
       <p className="order__item__price">
         {formatToMoney(order.price * order.quantity)}
       </p>
+      <div className="order__quantity__container">
       <button
         onClick={() => receiveQuanitityDecrease(order.id)}
         className="order__item__decrease"
@@ -26,6 +27,7 @@ function OrderItem({
       >
         +
       </button>
+      </div>
     </div>
   );
 }

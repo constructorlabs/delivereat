@@ -196,6 +196,31 @@ body {
   }
 }
 
+.order__item__price {
+  margin-bottom: 10px;
+}
+
+.order__quantity__container {
+  display: flex;
+  align-items: center;
+
+  height: 30px;
+
+  .order__item__decrease {
+    @extend %button-theme;
+    border: 1px solid $red-theme;
+    height: 60%;
+    margin-right: 5px;
+  }
+
+  .order__item__increase {
+    @extend %button-theme;
+    border: 1px solid $red-theme;
+    height: 60%;
+    margin-left: 5px;
+  }
+}
+
 .order__container--notVisible {
   display: none;
 }
