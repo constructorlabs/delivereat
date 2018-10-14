@@ -14,12 +14,13 @@ class App extends React.Component {
     this.state = {
       menu: [],
       currentOrder: [],
-      // orders: {}
+      orders: {}
     }
     this.receiveItemOrder = this.receiveItemOrder.bind(this)
     this.removeItemOrder = this.removeItemOrder.bind(this)
     this.fetchMenu = this.fetchMenu.bind(this)
-    // this.receiveOrderAdmin - this.receiveOrderAdmin.bind(this)
+    this.receiveOrderAdmin = this.receiveOrderAdmin.bind(this)
+    this.fetchOrders = this.fetchOrders.bind(this)
   }
 
   fetchMenu() {
@@ -30,9 +31,19 @@ class App extends React.Component {
       this.setState({menu: content})
     })
   }
+  fetchOrders() {
+    const api = "/api/orders/"
+    fetch(api)
+      .then(response => response.json())
+      .then(content => {
+        this.setState({orders: content}, () => console.log(this.state.orders))
+      })
+  }
+
   componentDidMount() {
    this.fetchMenu();
-  }
+   this.fetchOrders();
+}
   receiveItemOrder(order) {
     const updatedOrder = Object.assign({}, this.state.currentOrder, {[order.id]: order } )
     this.setState({currentOrder: updatedOrder})
@@ -43,10 +54,9 @@ class App extends React.Component {
     array.splice(index, 1);
     this.setState({currentOrder: array});
   }  
-
-  // receiveOrderAdmin() {
-  //   this.setState({orders : orders}
-  // } 
+  receiveOrderAdmin() {
+    this.setState({orders : orders})
+  } 
 
   render(){
     return (
@@ -71,8 +81,8 @@ class App extends React.Component {
           />
 
           <OrderAdmin 
-          // orders={this.state.orders}
-          // receiveOrderAdmin={this.receiveOrderAdmin}
+          orders={this.state.orders}
+          receiveOrderAdmin={this.receiveOrderAdmin}
           />        
 
         </main>

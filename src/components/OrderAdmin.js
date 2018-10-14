@@ -4,24 +4,7 @@ import OrderAdminItem from './OrderAdminItem';
 class OrderAdmin extends React.Component {
   constructor(){
     super();
-    this.state = {
-      orders: {}
-    }
     // this.makePatchOnApi = this.makePatchOnApi.bind(this)
-    this.fetchOrders = this.fetchOrders.bind(this)
-  }
-
-  fetchOrders() {
-    const api = "/api/orders/"
-    fetch(api)
-      .then(response => response.json())
-      .then(content => {
-        this.setState({orders: content}, () => console.log(this.state.orders))
-      })
-  }
-
-  componentDidMount() {
-    this.fetchOrders();
   }
 
   // makePatchOnApi() {
@@ -42,15 +25,16 @@ class OrderAdmin extends React.Component {
     return (
       <section>
          <h2>Order Admin</h2>
-          {Object.keys(this.props.orders).map(order => {
-          return (
-            <OrderAdminItem
-              orders={order}
-              key={order.orderid}
+         <ul className="menu--settings">
+         {Object.keys(this.props.orders).map(order => {
+          return <OrderAdminItem
+              order={order}
+              // key={this.props.orders[orderid]}
             />
-          );
-        })}
+         })}
+      </ul>
       </section>
+      
     )
   }
 }

@@ -129,7 +129,6 @@ function addOrder(order){
   }});
 
   return storage.orders[orderId]
-
 }
 
 function getOrders() {
