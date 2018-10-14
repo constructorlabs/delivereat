@@ -1,3 +1,143 @@
+button {
+  background-color: #a790a5;
+}
+
+button:hover {
+  background-color: #54414e;
+}
 body {
   margin: 0;
+  text-align: center;
+  color: white;
+  font-family: "Fahkwang", sans-serif;
+}
+
+.dish {
+  background-color: #b7c8b5;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-columns: 100px;
+  border-bottom: solid;
+  border-bottom-color: black;
+  border-bottom-width: 3px;
+}
+
+.dish:hover {
+  background-color: #c5ebc3;
+}
+
+.dish--highlight {
+  background-color: lightskyblue;
+}
+
+.dish-name {
+  grid-column: 1/2;
+  grid-row: 1;
+}
+
+.dish-price {
+  grid-column: 3/4;
+  grid-row: 1;
+}
+
+.dish-quantity {
+  grid-column: 2/3;
+  grid-row: 1;
+}
+
+.nutrition-button {
+  grid-column: 2/3;
+  grid-row: 2;
+}
+
+.add-to-order-button {
+  grid-row: 3;
+  grid-column: 2/3;
+  height: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.header {
+  grid-column: 2/3;
+  text-align: center;
+  border: solid;
+  border-color: black;
+  border-width: 3px;
+  background-color: #875c74;
+}
+
+.menu {
+  grid-column: 2/3;
+  background-color: #a790a5;
+  border: solid;
+  border-color: black;
+  border-width: 3px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.confirmation-order-complete {
+  grid-column: 2/3;
+  text-align: center;
+}
+
+.confirmation-order-number {
+  grid-column: 2/3;
+  grid-row: 2;
+}
+
+.confirmation-order-list {
+  grid-column: 2/3;
+}
+
+.confirmation-order-total {
+  grid-column: 2/3;
+}
+
+.confirmation-close-modal {
+  grid-column: 1/4;
+  height: 20px;
+}
+.modal {
+  text-align: center;
+  display: grid;
+  grid-auto-rows: auto;
+
+  grid-template-columns: 1fr 2fr 1fr;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: #54414e;
+  border: solid;
+  border-color: gray;
+  border-width: 4px;
+  border-radius: 12px;
+}
+
+.nutrition {
+  display: none;
+}
+
+.nutrition--on {
+  display: block;
+  background-color: #a790a5;
 }

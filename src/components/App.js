@@ -9,7 +9,19 @@ class App extends React.Component {
   }
 
   render() {
-    return <Menu menu={this.state.menu} />;
+    return (
+      <div className="grid">
+        <div className="header">
+          <h1>Deliver-Eat</h1>
+        </div>
+        <div className="menu">
+          <h2 className="menu-text">
+            <u>Menu</u>
+          </h2>
+          <Menu />
+        </div>
+      </div>
+    );
   }
 }
 
