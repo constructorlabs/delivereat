@@ -18,6 +18,10 @@ app.get("/", function(req, res) {
   res.render("index");
 });
 
+app.get("/portal", function(req, res) {
+  res.render("portal");
+})
+
 // get dishes
 app.get("/api/dishes", function(req, res) {
   const dishes = getDishes();

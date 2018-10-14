@@ -1,21 +1,19 @@
+@import '../base/color';
+
 .dish {
     display: flex;
     align-items: center;
-
-    padding: 10px;
-    // background-color: rgb(247, 247, 247);
 
     &__name {
         flex: 1;
     }
 
     &__price {
-
+        margin-right: 0.5em;
     }
 
     &__btn {
-    margin-left: 10px;
-    height: 100%;
-    padding: 0px;
+        font-size: 18px;
     }
+
 }

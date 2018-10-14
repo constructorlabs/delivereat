@@ -1,6 +1,12 @@
+@import '../base/color';
+
 .dishes {
 
-    &__category {
-        padding: 0 10px;
-    }
+    // border-bottom: 1px solid $line-color-dark;
+
+  &__category {
+    font-weight: 700;
+    font-size: 1.5em;
+  }
+
 }

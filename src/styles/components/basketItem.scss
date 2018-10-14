@@ -1,20 +1,29 @@
 .basketItem {
-    display: flex;
+  display: flex;
+  align-items: center;
+
+  &__name {
+    flex: 1;
+    padding: 0 0.5em;
+  }
+}
+
+.quantity {
+    display: flex; 
+    justify-content: center;
     align-items: center;
 
+  &__decrease {
+    padding: 0px;
+    font-size: 16px;
+  }
 
-    &__name {
-        flex: 1;
-    }
+  &__amount {
+      padding: 0 0.5em;
+  }
 
-    &__decrease-btn {
-        height: 100%;
-        padding: 0px;
-    }
-
-    &__increase-btn {
-        height: 100%;
-        padding: 0px;
-    }
-
+  &__increase {
+    padding: 0px;
+    font-size: 14px;
+  }
 }

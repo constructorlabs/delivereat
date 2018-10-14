@@ -4,10 +4,10 @@ import "../styles/components/dish.scss";
 function Dish({ dish, addToOrder }) {
   return (
     <div className="dish">
-      <p className="dish__name">{dish.name}</p>
-      <p className="dish__price">£{dish.price.toFixed(2)}</p>
+      <h4 className="dish__name">{dish.name}</h4>
+      <h4 className="dish__price">£{dish.price.toFixed(2)}</h4>
       <button
-        className="dish__btn"
+        className="dish__btn button-quantity"
         onClick={() => addToOrder(dish.dishId, dish.name)}>
         +
       </button>

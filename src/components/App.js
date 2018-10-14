@@ -171,13 +171,20 @@ class App extends React.Component {
     }
 
     return (
-      <div>
-        <header className="header" />
+      <div className="container">
+        <header className="header">
+        
+        <div className="header__top-bar"></div>
+        <div className="header__container">
+          <img className="header__container__image" src="../static/images/header.jpg"></img>
+        </div>
+        
+        </header>
 
         <main className="main">
           <aside className="main__aside-left">
             <div className="sticky">
-              <h3>Categories</h3>
+              <h3 className="category-title">Categories</h3>
               <nav className="categories">
                 {Object.keys(this.state.categories).map((category, index) => (
                   <a
@@ -204,8 +211,8 @@ class App extends React.Component {
           </article>
 
           <aside className="main__aside-right">
-            <div className="sticky">
-              <h3>My Order</h3>
+            <div className="sticky-basket">
+              {/* <h3>My Order</h3> */}
               <Basket
                 basket={this.state.basket}
                 dishes={this.state.dishes}

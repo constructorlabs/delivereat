@@ -1,11 +1,18 @@
+@import "../base/color";
+
 .basket {
-  background-color: rgb(247, 247, 247);
-  border: 1px solid rgb(141, 141, 141);
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid $line-color-light;
+  box-shadow: 0px 8px 16px 0px rgba(124, 124, 124, 0.2);
   padding: 0 10px;
+  // margin-left: 20px;
 
   &__checkout-btn {
     width: 100%;
-    height: 20px;
+    margin: 10px 0;
+    order: 1;
   }
 
   &__subtotal {
@@ -21,5 +28,46 @@
   &__total {
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.basket-expanded {
+  display: none;
+}
+
+.basket__expand {
+  display: unset;
+}
+
+/* Tablet Layout */
+@media (min-width: 768px) {
+  .basket-expanded {
+    display: unset;
+    order: 2;
+  }
+
+  .basket-view {
+    display: none;
+  }
+
+  &__checkout-btn {
+    order: 1;
+  }
+
+}
+
+/* Desktop Layout */
+@media (min-width: 960px) {
+  .basket-expanded {
+    display: unset;
+    order: 2;
+  }
+
+  .basket-view {
+    display: none;
+  }
+
+  &__checkout-btn {
+    order: unset;
   }
 }

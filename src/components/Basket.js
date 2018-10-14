@@ -21,41 +21,50 @@ function Basket({
 
   return (
     <div className="basket">
-      {Object.values(basket).map(basketItem => (
-        <BasketItem
-          key={basketItem.dishId}
-          basketItem={basketItem}
-          dishes={dishes}
-          decreaseQuantity={decreaseQuantity}
-          increaseQuantity={increaseQuantity}
-        />
-      ))}
-
-      <hr />
-
-      <div className="basket__subtotal">
-        <h4>Subtotal</h4>
-        <p>£{subTotal.toFixed(2)}</p>
-      </div>
-
-      <div className="basket__delivery">
-        <h4>Delivery Fee</h4>
-        <p>£{deliveryFee.toFixed(2)}</p>
-      </div>
-
-      <hr />
-
-      <div className="basket__total">
-        <h4>Total</h4>
-        <p>£{total.toFixed(2)}</p>
+      <div className="basket-view">
+        <a className="basket__expand__btn" href="#">
+          View Basket
+        </a>
       </div>
 
       <button
-        className="basket__checkout-btn"
+        className="basket__checkout-btn button"
         onClick={() => checkout()}
       >
         Checkout
       </button>
+
+      <div className="basket-expanded">
+        {Object.values(basket).map(basketItem => (
+          <BasketItem
+            key={basketItem.dishId}
+            basketItem={basketItem}
+            dishes={dishes}
+            decreaseQuantity={decreaseQuantity}
+            increaseQuantity={increaseQuantity}
+          />
+        ))}
+
+        <hr />
+        <div className="line" />
+
+        <div className="basket__subtotal">
+          <p>Subtotal</p>
+          <p>£{subTotal.toFixed(2)}</p>
+        </div>
+
+        <div className="basket__delivery">
+          <p>Delivery Fee</p>
+          <p>£{deliveryFee.toFixed(2)}</p>
+        </div>
+
+        <hr />
+
+        <div className="basket__total">
+          <p>Total</p>
+          <p>£{total.toFixed(2)}</p>
+        </div>
+      </div>
     </div>
   );
 }

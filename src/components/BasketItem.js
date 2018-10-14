@@ -7,23 +7,23 @@ function BasketItem({
   decreaseQuantity,
   increaseQuantity
 }) {
-  
   return (
     <div className="basketItem">
-      <button
-        className="basketItem__decrease-btn"
-        onClick={() => decreaseQuantity(basketItem.dishId)}
-      >
-        -
-      </button>
-      <p className="basketItem__quantity">{basketItem.quantity}</p>
-      <button
-        className="basketItem__increase-btn"
-        onClick={() => increaseQuantity(basketItem.dishId)}
-      >
-        +
-      </button>
-
+      <div className="quantity">
+        <button
+          className="quantity__decrease button-quantity"
+          onClick={() => decreaseQuantity(basketItem.dishId)}
+        >
+          -
+        </button>
+        <p className="quantity__amount">{basketItem.quantity}</p>
+        <button
+          className="quantity__increase button-quantity"
+          onClick={() => increaseQuantity(basketItem.dishId)}
+        >
+          +
+        </button>
+      </div>
       <p className="basketItem__name">{basketItem.name}</p>
 
       <p className="basketItem__price">
