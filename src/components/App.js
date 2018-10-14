@@ -24,6 +24,7 @@ class App extends React.Component {
     this.handleBasketChange = this.handleBasketChange.bind(this);
     this.removeFromBasket = this.removeFromBasket.bind(this);
     this.submitOrder = this.submitOrder.bind(this);
+    this.exit = this.exit.bind(this);
   }
 
   // React code is running in the browser
@@ -132,8 +133,13 @@ class App extends React.Component {
           hasOrdered: true,
           orderRef: Object.keys(data)[0]
         });
-        console.log(data);
       });
+  }
+
+  exit() {
+    this.setState({
+      hasOrdered: false
+    });
   }
 
   render() {
@@ -172,9 +178,13 @@ class App extends React.Component {
           />
         )}
         {hasOrdered && (
-          <div>
-            <h3> Thank you for your order. Enjoy your breakfast!</h3>
-            <a href={`/orders/${this.state.orderRef}`}>Track your order</a>
+          <div className="acknowledge__wrapper">
+            <div className="acknowledge">
+              <h3> Thank you for your order. Enjoy your breakfast!</h3>
+              <button onClick={() => this.exit()} className="btn btn__submit">
+                Close
+              </button>
+            </div>
           </div>
         )}
       </div>

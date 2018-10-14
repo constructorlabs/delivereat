@@ -11,34 +11,11 @@ const Menu = ({ menu, handleMenuItemClick }) => {
       return !(i > array.indexOf(item));
     });
 
-  console.log(categories);
-
-  categories.forEach(menuCategory => {
-    console.log(
-      menu.filter(menuItem => {
-        return menuItem.category == menuCategory;
-      })
-    );
-  });
-
-  // console.log(
-  //   categories.forEach(category => {
-  //     return categories[i];
-  //   })
-  // );
-
-  // console.log(
-  //   menu.filter(item => {
-  //     return item.category == categories[0];
-  //   })
-  // );
-
   return (
     <div className="menu">
       <h2 className="menu__title">All-day Breakfast</h2>
       <dl>
         {categories.map(menuCategory => {
-          // console.log(menuCategory);
           return (
             <React.Fragment key={menuCategory}>
               <dt>{menuCategory}</dt>
