@@ -19,7 +19,7 @@ function ExtrasItem({ extraItem, formatToMoney, item, currentOrder }) {
       : "extras__add__extra--notVisible";
 
   const removeClasses =
-    clicked.status === true
+    clicked.status === false
       ? "extras__remove__extra--visible"
       : "extras__remove__extra--notVisible";
 
