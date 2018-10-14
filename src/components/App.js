@@ -164,7 +164,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Navigation receivePageChange={this.receivePageChange} />
-        <MenuPage menuClasses={menuClasses} />
+        <MenuPage
+          menuClasses={menuClasses}
+          menuObject={this.state.menuObject}
+          formatToMoney={this.formatToMoney}
+        />
         <OrderMenu
           menuObject={this.state.menuObject}
           receiveOrder={this.receiveOrder}

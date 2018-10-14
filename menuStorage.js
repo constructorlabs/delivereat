@@ -8,6 +8,7 @@ function menu(){
           name: "Regular Burger",
           price: 8.0,
           quantity: 1,
+          description: "Bun, Signature Patty, Tomato, Lettuce, Pickle, Signature Sauce",
           extras: []
         },
         2: {
@@ -15,6 +16,7 @@ function menu(){
           name: "Irregular Burger",
           price: 9.5,
           quantity: 1,
+          description: "Bun, Signature Patty, Peppers, Cheese, Tomato, Lettuce, Pickle, Signature Sauce",
           extras: []
         },
         3: {
@@ -22,6 +24,7 @@ function menu(){
           name: "SuperBurger",
           price: 10.5,
           quantity: 1,
+          description: "Bun, Signature Patty, Fried Plantain, Avocado, Peanut Butter",
           extras: []
         },
         4: {
@@ -29,6 +32,7 @@ function menu(){
           name: "IncrediBurger",
           price: 12.0,
           quantity: 1,
+          description: "Bun, Signature Patty, Hash Brown, Cheese, Avocado Tomato, Lettuce, Pickle, Signature Sauce",
           extras: []
         }
       },
@@ -38,18 +42,21 @@ function menu(){
           id: 5,
           name: "Regular Fries",
           price: 2.5,
+          description: "Hand cut, triple-cooked fries",
           quantity: 1
         },
         6:{
           id: 6,
           name: "Spicy Fries",
           price: 3.5,
+          description: "Hand cut, triple-cooked fries with house seasoning and garlic mayo",
           quantity: 1
         },
         7:{
           id: 7,
           name: "Cheese Fries",
           price: 4.5,
+          description: "Hand cut, triple-cooked Halloumi slices",
           quantity: 1
         },
       },
