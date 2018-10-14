@@ -1,7 +1,7 @@
 import React from 'react';
+import Splash from './Splash';
 import Menu from './Menu';
 import Basket from './Basket';
-import Splash from './Splash';
 
 import '../styles/App.scss';
 
@@ -16,7 +16,7 @@ class App extends React.Component {
                     total: 0 }};
     this.addToOrder = this.addToOrder.bind(this); 
     this.removeFromOrder = this.removeFromOrder.bind(this);
-    this.submitOrder = this.submitOrder.bind(this);
+    this.checkout = this.checkout.bind(this);
     this.changeStage = this.changeStage.bind(this);
   }
 
@@ -79,7 +79,7 @@ class App extends React.Component {
 //NEW ORDER:
 //[{"drinkId": 1, "extraShot": false, "nonDairy": "none"},{"drinkId": 2, "extraShot": true, "nonDairy": "none"}]
 
-  submitOrder() {
+  checkout() {
     fetch('http://localhost:8080/API/order', {
       method: 'POST',
       body: JSON.stringify(this.state.order.contents),
@@ -98,16 +98,17 @@ class App extends React.Component {
     return (
       <div className='app'>
         {(this.state.stage === 'splash') && <Splash changeStage={this.changeStage}/>}
+        {(this.state.stage === 'menu' || this.state.stage === 'basket') &&
         <div className='main'>
           <div className='header'>
             <img className='header__image' src="/static/assets/header.jpg"></img>
             <p className='header__logo'>Zing</p>
           </div>
           <div className='content'>
-            {(this.state.menu) && <Menu order={this.state.order.contents} menu={this.state.menu} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder}/>}
-            {(this.state.order.contents.length) && <Basket order={this.state.order} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder} submitOrder={this.submitOrder}/>}
+            {(this.state.menu) && <Menu stage={this.state.stage} order={this.state.order.contents} menu={this.state.menu} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder}/>}
+            {(!!this.state.order.contents.length) && <Basket changeStage={this.changeStage} order={this.state.order} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder} checkout={this.checkout}/>}
           </div>
-        </div>
+        </div>}
       </div>
     );
   }

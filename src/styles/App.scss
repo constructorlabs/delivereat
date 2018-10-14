@@ -3,6 +3,7 @@ $scroll-factor : .6;
 
 body {
   background-color: white;
+  height: 100%;
 }
 
 .main {
@@ -34,7 +35,7 @@ body {
       font-size: 3rem;
       margin: 0;
       font-family: 'Sedgwick Ave Display', cursive;
-  }
+    }
 
   .content {
     display: block;

@@ -26,7 +26,7 @@ class MenuItem extends React.Component {
 
     const inBasket = this.props.order.length && this.props.order.map(item => item[0].id).includes(this.props.details.id);
     const count = inBasket ? this.props.order.filter(item => item[0].id === this.props.details.id)[0][1] : 0;
-    const classesWrapper = cx('menu-item', {'menu-item--in-basket': inBasket});
+    const classesWrapper = cx('menu-item', {'menu-item--in-basket': inBasket, 'menu-item--greyed-out': this.props.stage === 'basket'});
     const classesRemove = cx('menu-item__remove-button', {'menu-item__remove-button--in-basket': inBasket});
     const classesCount = cx('menu-item__count', {'menu-item__count--in-basket': inBasket});
 

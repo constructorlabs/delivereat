@@ -52,18 +52,6 @@ const menu = [
     name: "Mocha",
     description: "60ml espresso + 60ml chocolate + 30ml steamed milk",
     price: 2.90
-  },
-  {
-    id: 10,
-    name: "Extra Shot",
-    description: "",
-    price: 0.50
-  },
-  {
-    id: 11,
-    name: "Non-dairy Milk",
-    description: "Oat, almond or coconut",
-    price: 0.50
   }
 ];
 
@@ -150,9 +138,3 @@ function getOpenOrders() {
 }
 
 module.exports = {getMenu, getBeans, postOrder, patchOrder, getOpenOrders};
-
-//NEW ORDER:
-//[{"drinkId": 1, "extraShot": false, "nonDairy": "none"},{"drinkId": 2, "extraShot": true, "nonDairy": "none"}]
-
-//STATUS UPDATE:
-//{"orderStatus": "completed"}

@@ -1,16 +1,22 @@
 @import 'defaults';
 
 .splash {
-  position: relative;
 
   &__image {
-    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
   }
 
   &__logo {
     position: absolute;
     bottom: 9rem;
-    left: 4rem;
+    left: 2rem;
     color: white;
     font-size: 3rem;
     margin: 0;
@@ -22,7 +28,7 @@
     font-size: 1rem;
     position: absolute;
     bottom: 7rem;
-    left: 4rem;
+    left: 2rem;
     color: white;
   }
 }

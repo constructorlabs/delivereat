@@ -15,18 +15,17 @@ class Basket extends React.Component {
 
   handleClose(event) {
     this.setState({basketDetailsVisible: false});
+    this.props.changeStage('menu');
   }
 
   handleCheckout(event) {
-    this.props.submitOrder();
+    this.props.checkout();
+    this.props.changeStage('menu');
   }
 
   handleClickOnBasket(event) {
-    if (this.state.basketDetailsVisible) {
-      this.setState({basketDetailsVisible: false});
-    } else {
-      this.setState({basketDetailsVisible: true});
-    }
+    this.setState({basketDetailsVisible: true});
+    this.props.changeStage('basket');
   }
 
   render() {
