@@ -16,7 +16,8 @@ class App extends React.Component {
     this.handleFormData = this.handleFormData.bind(this);
     this.toolTipOn = this.toolTipOn.bind(this);
     this.toolTipOff = this.toolTipOff.bind(this);
-    
+    this.formattedDate = this.formattedDate.bind(this);
+
     this.state = { 
       menu: {},
       currentOrder: null,
@@ -103,6 +104,12 @@ class App extends React.Component {
     });
   }
 
+  formattedDate (){
+      const date = new Date();
+      const addZero = n => n < 10 ? `0${n}` : n;
+      return `${addZero(date.getDate())}-${addZero(date.getMonth()+1)}-${date.getFullYear()}`;
+  }
+
 /* display current order in basket
 ///////////////////////////////////////////*/
 
@@ -153,23 +160,15 @@ class App extends React.Component {
   }
 
   toolTipOn(event) {
-    // const bx = document.querySelector(".thumb");
-    // const n = event.target
-    // console.log(event.target.outerHTML);
-    
-    // bx.style.left = event.clientX;
-    // bx.style.top = event.clientY;
-    this.setState({
-      tooltip: true
-    })
+    const div = event.target.children[0] // console.log(div);
+    this.setState({ tooltip: true })
+    /* {this.state.tooltip && <div className="thumb"></div>} */
+    /* <a href="#" onMouseOver={this.toolTip} className="tooltip"><span title="More">CSS3 Tooltip</span></a> */
+    /* <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Toggle<div className="thumb"></div></a> */
   }
 
   toolTipOff(event) {
-    // console.log(event.clientX);
-    // console.log(event.clientY);
-    this.setState({
-      tooltip: false
-    })
+    this.setState({ tooltip: false })
   }
 
   render(){
@@ -210,17 +209,17 @@ class App extends React.Component {
         <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
         <hr className="title"></hr>
         
-        {/* <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Toggle<div className="thumb"></div></a> */}
-        {/* {this.state.tooltip && <div className="thumb"></div>} */}
-        {/* <a href="#" onMouseOver={this.toolTip} className="tooltip"><span title="More">CSS3 Tooltip</span></a> */}
-        
         <form onSubmit={this.handleSubmit} className="menu__form">
           <div className="form__wrapper">
+
             { basket }
             { formElements }
+
           </div>
+
           { allOrders }
           { menu }  
+
         </form> 
       </div>
     )

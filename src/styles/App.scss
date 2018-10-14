@@ -27,7 +27,7 @@ body {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
   letter-spacing: 0.05rem;
   font-size: 1rem;
-  line-height: 2rem;  
+  line-height: 1.7rem;  
 }
 
 #root {
@@ -35,7 +35,8 @@ body {
 }
 
 img {
-  width: 150px;
+  width: 20%;
+  height: 20%;
   margin: 0 1rem 2rem 0;
   border: 0.25rem solid #fff;
 }
@@ -57,11 +58,6 @@ input {
   margin-bottom: 0.7rem;
   background: #fff;
   width: 100%;
-}
-
-select {
-  margin-bottom: 0.7rem;
-  background-color: #fff;
 }
 
 .form__elements {
@@ -97,10 +93,25 @@ button {
 .menu__item {
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: row;
+  & ul {
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    flex-wrap: nowrap;
+  }
   & li {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
   }
+  select {
+    margin-bottom: 0.7rem;
+    background-color: #fff;
+    width: 3rem;
+  }  
 }
 
 .basket, .orders {

@@ -9,22 +9,23 @@ class Menu extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.getCurrencyString = this.getCurrencyString.bind(this);
 
-      }
+    }
       
     displayMenuItems (title, course) {
-        const values = Object.values(this.props.menu);
         return <div>
             <h2>{title}</h2>
-            <ul className="menu__item"> {
-            values.filter(item => item.type === course)
+            { Object.values(this.props.menu)
+            .filter(item => item.type === course)
             .map(item => {
-                return <li key={course + "-menu-item-" + item.menuId}>
-                        <div><img src={item.image}></img></div>
-                        <div><strong>{item.name}: {this.getCurrencyString(item.price)}</strong><br />
-                        Quantity: {this.createQuantityOptions(item.name, item.menuId)}</div>
-                        </li>
+                return  <div className="menu__item" key={course + "-menu-item-" + item.menuId}> 
+                            <img src={item.image}></img>
+                            <ul>
+                                <li><strong>{item.name}</strong></li>
+                                <li>Price: {this.getCurrencyString(item.price)}</li>
+                                <li>Quantity: {this.createQuantityOptions(item.name, item.menuId)}</li>
+                            </ul>
+                        </div>
             })}
-            </ul>
         </div>
     }
 
