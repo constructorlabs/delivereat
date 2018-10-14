@@ -27,9 +27,7 @@
     .menu__item {
       text-transform: capitalize;
       padding: 0.75rem 0.5rem;
-      // margin-bottom: 0.5rem;
       border-bottom: 1px solid rgb(240, 240, 240);
-      // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
       width: 100%;
       background: white;
       .item__price {
@@ -39,9 +37,10 @@
   }
 }
 
-@media (min-width: 1064px) {
+@media (min-width: 768px) {
   .menu {
     max-width: 968px;
+    padding-bottom: 2rem;
   }
   dl {
     display: grid;
@@ -57,32 +56,75 @@
       'i j';
   }
   dt.menu {
-    &__classic {
+    &__classics {
+      position: initial;
       grid-area: a;
+      background-image: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
+      background-position-y: 50%;
+      background-size: cover;
+      height: 20rem;
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+      color: white;
     }
-    &__sandwich {
+    &__sandwiches {
+      background-image: url('/static/assets/images/jimi-filipovski-189721-unsplash.jpg');
+      background-position-y: 70%;
+      background-size: cover;
+      height: 10rem;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: c;
     }
     &__eggs {
+      background-image: url('/static/assets/images/ben-kolde-652852-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+      height: 10rem;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: d;
     }
     &__pancakes {
+      background-image: url('/static/assets/images/nikldn-693527-unsplash.jpg');
+      background-position-y: 65%;
+      background-size: cover;
+      height: 10rem;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: h;
     }
     &__cereal {
+      background-image: url('/static/assets/images/arek-adeoye-221899-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+      height: 10rem;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
       grid-area: g;
     }
   }
 
   dd.menu {
-    &__classic__items {
+    &__classics__items {
       grid-area: b;
       margin-bottom: 1rem;
+      .menu__list {
+        background: #eeeeee;
+        // padding: 0.5rem;
+        display: grid;
+        grid-column-gap: 1px;
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
     &__pancakes__items {
       grid-area: j;
     }
-    &__sandwich__items {
+    &__sandwiches__items {
       margin-bottom: 1rem;
     }
   }

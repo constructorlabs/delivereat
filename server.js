@@ -15,7 +15,7 @@ const menu = {
       id: 1,
       name: 'The Full Monty',
       price: 10.95,
-      category: 'classic',
+      category: 'classics',
       description:
         'Bacon, sausage, black pudding, fried potatoes, mushrooms, beans, tomato, eggs & toast '
     },
@@ -23,7 +23,7 @@ const menu = {
       id: 2,
       name: 'Butternut bubble',
       price: 9.5,
-      category: 'classic',
+      category: 'classics',
       description:
         'Butternut squash, potato & spinach bubble with mushrooms,asparagus & avocado hollandaise'
     },
@@ -31,7 +31,7 @@ const menu = {
       id: 3,
       name: 'Huevos Rancheros',
       price: 10.5,
-      category: 'classic',
+      category: 'classics',
       description:
         'Fried eggs, tortilla, refried beans, chorizo, salsa, cheddar, sour cream & guacamole '
     },
@@ -39,7 +39,7 @@ const menu = {
       id: 4,
       name: 'Reggie the Veggie',
       price: 10.95,
-      category: 'classic',
+      category: 'classics',
       description:
         'Veggie sausage, fried potatoes, egg, mushrooms, tomato, BBQ beans & toast '
     },
@@ -47,7 +47,7 @@ const menu = {
       id: 5,
       name: 'The Breakfast Burrito',
       price: 9.5,
-      category: 'classic',
+      category: 'classics',
       description:
         'Chorizo, scrambled egg, peppers, guacamole, sour cream, cheddar, jalapeños & spicy pepper sauce '
     },
@@ -55,7 +55,7 @@ const menu = {
       id: 6,
       name: 'Chorizo Hash',
       price: 9.5,
-      category: 'classic',
+      category: 'classics',
       description:
         'Chorizo, peppers, mushrooms, caramelised crushed potatoes & poached egg with a lemon & feta sauce '
     },
@@ -63,21 +63,21 @@ const menu = {
       id: 7,
       name: 'Avocado, Egg & Chesse',
       price: 5.5,
-      category: 'sandwich',
+      category: 'sandwiches',
       description: 'With onions, sun-blushed tomato & sriracha mayo'
     },
     8: {
       id: 8,
       name: 'Bacon, Egg & Cheese',
       price: 5.5,
-      category: 'sandwich',
+      category: 'sandwiches',
       description: 'With rocket & Virgin Mary ketchup'
     },
     9: {
       id: 9,
       name: 'Sausage, Egg & Cheese',
       price: 5.5,
-      category: 'sandwich',
+      category: 'sandwiches',
       description: 'With red onion chutney'
     },
     10: {
