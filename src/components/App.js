@@ -46,6 +46,12 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchMenu();
+    this.setState({
+      currentOrder: 
+      localStorage.getItem("currentOrder") === null
+            ? { orderItems: [], orderTotal: 0 }
+            : JSON.parse(localStorage.getItem("currentOrder"))
+    })
   }
 
   fetchMenu() {
@@ -88,7 +94,7 @@ class App extends React.Component {
             orderTotal: totalPrice
           }
         },
-        () => console.log(this.state.currentOrder)
+        () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder))
       );
     } else if (this.state.currentOrder.orderItems.includes(order) === true) {
       this.receiveQuanitityIncrease(order.id);
@@ -108,7 +114,7 @@ class App extends React.Component {
         this.setState({
           previousOrders: this.state.previousOrders.concat(body),
           currentOrder: { orderItems: [], orderTotal: 0 }
-        })
+        }, () => localStorage.clear() )
       );
   }
 
@@ -125,7 +131,7 @@ class App extends React.Component {
     const total = this.updateTotalPrice(ordersToBeUpdated);
     this.setState({
       currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
-    });
+    }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)))
   }
 
   receiveQuanitityDecrease(id) {
@@ -138,11 +144,11 @@ class App extends React.Component {
       ordersToBeUpdated.splice(ordersToBeUpdated[orderIndex], 1);
       this.setState({
         currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
-      });
+      }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)));
     } else {
       this.setState({
         currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
-      });
+      }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)));
     }
   }
 
