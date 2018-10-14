@@ -14,6 +14,8 @@ app.set('view engine', 'hbs');
 
 const menu = {
 
+
+
   burgers: {
     1: {
       id: 1,
@@ -121,7 +123,43 @@ try {
   }
 }
 
-let nextOrderId = 1;
+
+
+// This is very messy
+function getMostPopularOrders(){
+  let popOrders = {}
+  let orderIdArray = Object.values(orders)
+    .map(item => {
+      return Object.keys(orders[item.id].order.items)
+    })
+    .reduce((acc,item) => acc.concat(item))
+
+
+  //remove categories (burgers, sides, etc.) for easier operation
+  const flatMenu = Object.assign({}, ...Object.values(menu))
+
+
+//helper function to count occurances of item in order list
+  function countOccurances(array, element){
+    return array.filter(item => item === element).length
+  }
+
+  const mostPopArray = orderIdArray.filter(item => countOccurances(orderIdArray, item) > 1)
+  const mostPopularOrders = mostPopArray
+    .map(item => {
+      return (flatMenu[item])
+    })
+    .reduce((acc,item)=> {
+      popOrders[item.id] = item
+      return popOrders
+    }, {})
+
+  return popOrders
+
+
+}
+
+
 
 app.get('/', function(req, res){
   res.render('index');
@@ -129,7 +167,9 @@ app.get('/', function(req, res){
 
 
 app.get('/api/menu',(req, res) => {
-  return res.json(menu)
+  const popular = getMostPopularOrders()
+  const menuWithPopular = {popular, ...menu}
+  return res.json(menuWithPopular)
 } )
 
 app.post('/api/order', (req, res) => {
