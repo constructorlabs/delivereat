@@ -2,6 +2,7 @@ import React from "react";
 import OrderMenu from "./OrderMenu";
 import Order from "./Order";
 import MenuPage from "./MenuPage";
+import Navigation from "./Navigation"
 
 import "../styles/App.scss";
 
@@ -126,6 +127,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <Navigation />
         <MenuPage />
         <OrderMenu
           menuObject={this.state.menuObject}
