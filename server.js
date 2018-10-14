@@ -49,7 +49,7 @@ const menu = {
     price: 15
   },
   7: {
-    id: 6,
+    id: 7,
     name: "Pistaccio",
     ingredients: "White sauce, mortadella, fior di latte, parmesan, basil pistachio pesto",
     price: 13

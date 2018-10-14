@@ -19,7 +19,33 @@ body {
   max-width: 960px;
   margin: auto;
   background-color: #C4C4C4;
-  text-align:center;
+  display: grid;
+  grid-template-columns: 1fr 320px 1fr;
+  grid-template-rows: 75px auto auto;
+  grid-gap: 5px;
+  grid-template-areas:
+    'header header  header'
+    'x menu y'
+    'x order y'
 }
 
+
+@media (min-width: 768px) {
+  .wrapper {
+    height:auto;
+    grid-template-columns: 1fr 320px 50px 320px 1fr;
+    grid-template-rows: 75px auto 1fr;
+    grid-gap: 5px;
+    grid-template-areas:
+      'header header header  header header'
+      'x menu z order y'
+      'x menu z w     y'
+  }
+
+}
+
+@media (min-width: 960px) {
+
+
+}
 

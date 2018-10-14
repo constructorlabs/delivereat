@@ -1,7 +1,10 @@
 import React from 'react';
 import Header from './Header'
+import Confirmation from './Confirmation';
+
 import Menu from './Menu';
 import Order from './Order';
+
 import {orderTotals} from '../../common/orderTotals'
 
 import '../styles/App.scss';
@@ -14,7 +17,8 @@ class App extends React.Component {
       menu:{},
       userId:1,
       orderHistory:{},
-      newOrder:{}
+      newOrder:{},
+      whichScreen: 'ordering'
     }
 
     this.fetchMenu = this.fetchMenu.bind(this)
@@ -55,6 +59,9 @@ class App extends React.Component {
       return response.json();
     }).then(data => {
       console.log(data)
+      this.setState ({
+        whichScreen:'confirmation'
+      })
     });
   }
 
@@ -71,6 +78,11 @@ class App extends React.Component {
           quantity: item.quantity,
         }
       }
+
+      if(order[item.id].quantity < 1) {
+        delete order[item.id]
+      }
+
       this.setState({
         newOrder:order
       },()=>console.log(this.state.newOrder))
@@ -88,8 +100,19 @@ class App extends React.Component {
     return (
       <div className="wrapper">
         <Header />
+
+        {this.state.whichScreen==='ordering' && (      
         <Menu menu={this.state.menu} receiverAddToOrder={this.receiverAddToOrder} newOrder={this.state.newOrder} />
-        <Order sendOrder={this.sendOrder} orderTotals={orderTotals(this.state.newOrder, this.state.menu)} newOrder={this.state.newOrder} menu={this.state.menu}/>
+        )}
+
+        {this.state.whichScreen==='confirmation' && (      
+        <Confirmation menu={this.state.menu} receiverAddToOrder={this.receiverAddToOrder} newOrder={this.state.newOrder} />
+        )}
+
+        
+        {this.state.whichScreen==='ordering' && (
+         <Order sendOrder={this.sendOrder} orderTotals={orderTotals(this.state.newOrder, this.state.menu)} newOrder={this.state.newOrder} menu={this.state.menu}/>
+        )}
       </div>
     )
   }

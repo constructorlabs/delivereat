@@ -9,13 +9,10 @@ class OrderItem extends React.Component {
 
   }
 
-
-
     render(){
       return (
-        <li>
-          {this.props.orderItem.id} {this.props.orderItem.quantity}
-          {this.props.menuItem.name}
+        <li className="order__item">
+          <strong>{this.props.orderItem.quantity} X {this.props.menuItem.name}</strong>
         </li>
       )
     }  
