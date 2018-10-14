@@ -9,6 +9,24 @@ ul, li {
 
 body {
   background-color: whitesmoke;
+  font-family: 'Roboto Slab', serif;
+}
+
+.nav__bar {
+
+  .nav__bar__list {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+
+    .nav__bar__item {
+      display: flex;
+    }
+
+    .nav__bar__item__dummy {
+      display: none;
+    }
+  }
 }
 
 .menu__page__container--visible{
@@ -35,3 +53,28 @@ body {
   display: none;
 }
 
+@media (min-width: 768px) {
+
+
+  .nav__bar {
+
+  .nav__bar__list {
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+
+    .nav__bar__item {
+      display: flex;
+    }
+
+    .nav__bar__item__dummy {
+      display: flex;
+    }
+  }
+}
+
+}
+
+@media (min-width: 960px) {
+  
+}
