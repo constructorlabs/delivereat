@@ -1,40 +1,32 @@
 import React from 'react';
 
-class Menu extends React.Component {
-    constructor(){
-      super();
-    
-        this.displayMenuItems = this.displayMenuItems.bind(this);
-        this.createQuantityOptions = this.createQuantityOptions.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.getCurrencyString = this.getCurrencyString.bind(this);
-
-    }
-      
-    displayMenuItems (title, course) {
+function Menu ({menu, currentOrder, receiveHandleChange, getCurrency}) {
+       
+    function displayMenuItems (title, course) {
         return <div>
             <h2>{title}</h2>
-            { Object.values(this.props.menu)
+            { Object.values(menu)
             .filter(item => item.type === course)
             .map(item => {
                 return  <div className="menu__item" key={course + "-menu-item-" + item.menuId}> 
                             <img src={item.image}></img>
                             <ul>
                                 <li><strong>{item.name}</strong></li>
-                                <li>Price: {this.getCurrencyString(item.price)}</li>
-                                <li>Quantity: {this.createQuantityOptions(item.name, item.menuId)}</li>
+                                <li>Price: {getCurrencyString(item.price)}</li>
+                                <li>Quantity: {createQuantityOptions(item.name, item.menuId)}</li>
                             </ul>
                         </div>
             })}
         </div>
     }
 
-    createQuantityOptions (name, id) {
+    function createQuantityOptions (name, id) {
         const array = [];
         for (let i=0; i<=10; i++) array.push(i);
+        const currentOrderId = currentOrder && currentOrder[id] ? currentOrder[id].quantity : 0;
         return <select 
-                  value={this.props.currentOrder ? this.value : ""}
-                  onChange={(event) => this.handleChange(id, event)} 
+                  value={currentOrderId}
+                  onChange={(event) => handleChange(id, event)} 
                   name={name}
                   id={id}>
           { array.map(item => {
@@ -44,23 +36,21 @@ class Menu extends React.Component {
         </select>
     }
 
-    handleChange (id, event) {
-        this.props.receiveHandleChange(id, event);
+    function handleChange (id, event) {
+        receiveHandleChange(id, event);
     }
   
-    getCurrencyString (string) {        
-        return this.props.getCurrency(string);
+    function getCurrencyString (string) {        
+        return getCurrency(string);
     }
 
-    render () {
-        return (
-            <div>
-                {this.displayMenuItems ("Starters", "starter")}
-                {this.displayMenuItems ("Mains", "main")}
-                {this.displayMenuItems ("Desserts", "dessert")}
-            </div>
-        )
-    }
+    return (
+        <div>
+            {displayMenuItems ("Starters", "starter")}
+            {displayMenuItems ("Mains", "main")}
+            {displayMenuItems ("Desserts", "dessert")}
+        </div>
+    )
 }
 
 export default Menu;
