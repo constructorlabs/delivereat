@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/App.scss';
-import OrderItem from './OrderItem';
+import '../styles/components/makeorder.scss';
+import MakeOrderItem from './MakeOrderItem';
 
 class MakeOrder extends React.Component {
   constructor(){
@@ -12,7 +12,7 @@ class MakeOrder extends React.Component {
 
   renderOrder() {
     return Object.values(this.props.currentOrder).map(currentorderitem => {
-      return <OrderItem
+      return <MakeOrderItem
       currentorderitem={currentorderitem} 
       key={currentorderitem.id} 
       />
@@ -46,21 +46,21 @@ class MakeOrder extends React.Component {
     orderKeys.forEach(key => {
       orderPrices.push(this.props.currentOrder[key].price)
     })
-    console.log(`arrPrices ${orderPrices}`)
-
-    // reducer for total
+   
+   // reducer for total
     let totalPrice = orderPrices.reduce((acc, item) => {
       return acc = acc + item; 
     }, 0); 
     let orderPlusDelivery = totalPrice + 2.95;
-
+    
     return (
-      <section>
-        <h2>Submit your Order</h2>
-        <ul>{this.renderOrder()}</ul>
-        <p>Delivery charge: £2.95</p>
-        <p>Total: £{orderPlusDelivery}</p>
-        <button onClick={this.handleSubmit} type="submit">Go</button>
+      <section className="customerOrder">
+        <h2 className="customerOrder__title">Your Order</h2>
+        <ul className="customerOrder__order menu--settings">{this.renderOrder()}
+        <li>Delivery charge &pound;2.95</li>
+        <li>Total: &pound;{orderPlusDelivery}</li>
+        </ul>
+        <button className="customerOrder__submit" onClick={this.handleSubmit} type="submit">Place order</button>
       </section>
     )
   }

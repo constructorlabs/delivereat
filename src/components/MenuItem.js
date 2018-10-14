@@ -7,8 +7,9 @@ class MenuItem extends React.Component {
     super();
 
     this.state = {
-      menuitemQuantity: 1,
-      added: false
+      menuitemQuantity: 0,
+      added: false, 
+      error: false
     };
 
     this.handleClick = this.handleClick.bind(this)
@@ -18,22 +19,27 @@ class MenuItem extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    if (this.state.added === false) {
-    this.itemOrder();
-    this.setState({
-      added: !this.state.added
-     });
-    } else {
-      this.props.removeItemOrder(this.props.menuitem.id);
+    if (this.state.menuitemQuantity <= 0) {
       this.setState({
-        added: !this.state.added
-       });
+        error: !this.state.error
+      });
+    } else {
+      if (this.state.added === false) {
+        this.itemOrder();
+        this.setState({
+          added: !this.state.added
+        });
+      } else {
+          this.props.removeItemOrder(this.props.menuitem.id);
+          this.setState({
+            added: !this.state.added
+          });
+      }
     }
   }
 
-
   handleClick(event) {
-    if (event.target.value === "-" && this.state.menuitemQuantity > 0) {
+   if (event.target.value === "-" && this.state.menuitemQuantity > 0) {
       this.setState({
         menuitemQuantity: this.state.menuitemQuantity - 1
       });
@@ -41,6 +47,11 @@ class MenuItem extends React.Component {
       this.setState({
         menuitemQuantity: this.state.menuitemQuantity + 1
       });
+      if (this.state.error === true) {
+        this.setState({
+          error: false
+        });
+      }
     }
   }
 
@@ -61,25 +72,35 @@ class MenuItem extends React.Component {
       'added': this.state.added,
       '': !this.state.added
     });
+    const errorclasses = cx('menuitem__error', {
+      'show--error': this.state.error,
+      '': this.state.error
+    });    
     
     const pricedisplay = this.props.menuitem.price.toFixed(2);
 
     return (
       <li className="menuitem">
           <form className="menuitem__form" onSubmit={this.handleSubmit}>
-            <div className="menuitem__details">
-              <div className="menuitem__select">
-                <label className="menuitem__item">{this.props.menuitem.name}</label>
-                <button type="submit" className={buttonclasses}></button>
-              </div>  
-              <div className="menuitem__price">£{pricedisplay}</div>
-            </div>
 
             <div className="quantity">
               <input className="quantity__change" onClick={this.handleClick} value="-" type="button"/>
               <input className="quantity__display" type="text" size='1' value={this.state.menuitemQuantity} readOnly/>
               <input className="quantity__change" onClick={this.handleClick} value="+" type="button"/>
             </div>
+
+            <div className="menuitem__details">
+              <div className="menuitem__select">
+                <label className="menuitem__item">{this.props.menuitem.name} 
+                <span className="menuitem__price">&nbsp;&pound;{pricedisplay}</span>
+                </label>
+                <button type="submit" className={buttonclasses}></button>
+                <span className={errorclasses}>Please select quantity</span>
+              </div>  
+
+            </div>
+
+
         </form>
       </li>
     )

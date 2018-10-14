@@ -3,15 +3,15 @@ const storage = {
     menu : {
       1: {
         id: 1,
-        name: "Cappucino",
-        price: 2.30,
+        name: "Cappuccino",
+        price: 2.50,
         category: "drinks",
 
       },
       2: {
         id: 2,
         name: "Latte",
-        price: 2.30,
+        price: 2.50,
         category: "drinks",
 
       }, 
@@ -31,7 +31,7 @@ const storage = {
       }, 
       5: {
         id: 5,
-        name: "Babycino",
+        name: "Macchiato",
         price: 1.80,
         category: "drinks",
 
@@ -52,7 +52,7 @@ const storage = {
       },
       8: {
         id: 8,
-        name: "Millionnaire's shortbread",
+        name: "Scone",
         price: 1.80,
         category: "cakes",
 
@@ -66,7 +66,7 @@ const storage = {
       },
       10: {
         id: 10,
-        name: "Apple and almond cake",
+        name: "Apple & almond cake",
         price: 2.50,
         category: "cakes",
 

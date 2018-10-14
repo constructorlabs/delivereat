@@ -13,11 +13,13 @@ class App extends React.Component {
 
     this.state = {
       menu: [],
-      currentOrder: []
+      currentOrder: [],
+      // orders: {}
     }
     this.receiveItemOrder = this.receiveItemOrder.bind(this)
     this.removeItemOrder = this.removeItemOrder.bind(this)
     this.fetchMenu = this.fetchMenu.bind(this)
+    // this.receiveOrderAdmin - this.receiveOrderAdmin.bind(this)
   }
 
   fetchMenu() {
@@ -28,22 +30,23 @@ class App extends React.Component {
       this.setState({menu: content})
     })
   }
-  
   componentDidMount() {
    this.fetchMenu();
   }
-
   receiveItemOrder(order) {
     const updatedOrder = Object.assign({}, this.state.currentOrder, {[order.id]: order } )
-    this.setState({currentOrder: updatedOrder}, () => console.log(this.state.currentOrder) )
+    this.setState({currentOrder: updatedOrder})
   } 
-  
   removeItemOrder(id) {
     const array = [...this.state.currentOrder];
     let index = array.indexOf(id);
     array.splice(index, 1);
     this.setState({currentOrder: array});
   }  
+
+  // receiveOrderAdmin() {
+  //   this.setState({orders : orders}
+  // } 
 
   render(){
     return (
@@ -56,9 +59,7 @@ class App extends React.Component {
         </header>
 
         <main className="maincontent">
-          {/* <OrderAdmin 
-          currentOrder={this.state.currentOrder}
-          />         */}
+
           <Menu 
           menu={this.state.menu}
           receiveItemOrder={this.receiveItemOrder} 
@@ -68,6 +69,12 @@ class App extends React.Component {
           <MakeOrder 
           currentOrder={this.state.currentOrder}
           />
+
+          <OrderAdmin 
+          // orders={this.state.orders}
+          // receiveOrderAdmin={this.receiveOrderAdmin}
+          />        
+
         </main>
       </div>
     )
