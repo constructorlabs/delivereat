@@ -7,7 +7,7 @@ const storage = {
       description: "",
       price: 6.55,
       imageUrl: "",
-      inStock: true
+      inStock: true,
     },
     2: {
       dishId: 2,
@@ -115,7 +115,22 @@ function createOrder(newOrder) {
   const highestId = Math.max(...allIds);
   const newOrderId = highestId + 1;
 
-  const orderToSave = Object.assign(newOrder, { id: newOrderId });
+  let total = 0;
+
+  Object.keys(newOrder).map(dish => {
+    let subTotal = newOrder[dish].price * newOrder[dish].quantity;
+
+    newOrder[dish].subTotal = Number(subTotal);
+
+    total += Number(subTotal);
+  });
+
+  const orderToSave = Object.assign(
+    { dishes: newOrder },
+    { orderId: newOrderId },
+    { deliveryFee: Number(2.5) },
+    { total: Number(total) }
+  );
   storage.orders[newOrderId] = orderToSave;
   return orderToSave;
 }

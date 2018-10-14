@@ -54,7 +54,7 @@ app.get("/api/orders/:orderId", function(req, res) {
   const orderId = getOrderById(req.params.orderId);
 
   if (orderId) {
-    res.json(dish);
+    res.json(orderId);
   } else {
     res.status(404).json({
       error: `Order with ID ${orderId} not found`

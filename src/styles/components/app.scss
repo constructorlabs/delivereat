@@ -1,6 +1,10 @@
 * {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .header {
@@ -9,13 +13,15 @@
 }
 
 .main {
-  background-color: rgb(207, 64, 152);
+  background-color: rgb(255, 255, 255);
   display: flex;
+  justify-content: center;
 
   &__aside-left {
     background-color: rgb(211, 211, 211);
     order: 1;
     flex: 2;
+    padding: 15px;
   }
 
   &__article {
@@ -31,13 +37,19 @@
   }
 }
 
+.sticky {
+  position: sticky;
+  top: 0;
+  position: -webkit-sticky;
+}
+
 .categories {
   display: flex;
   flex-direction: column;
   height: 100%;
 
   &__category {
-    padding: 10px;
+    padding: 10px 0;
     text-decoration: none;
     color: black;
 
