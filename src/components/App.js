@@ -35,7 +35,6 @@ class App extends React.Component {
     fetch('/api/menu')
       .then(response => response.json())
       .then(body => {
-        // const menuItems = Object.values(body);
         this.setState({
           menu: body
         });
@@ -45,7 +44,7 @@ class App extends React.Component {
       });
   }
 
-  handleMenuItemClick(name, price, id) {
+  handleMenuItemClick(id) {
     fetch(`/api/menu/${id}`)
       .then(response => response.json())
       .then(body =>
@@ -156,7 +155,6 @@ class App extends React.Component {
     return (
       <div className="page">
         <h1>Tiffany’s</h1>
-        {/* <h2 className="menu__title">All-day Breakfast</h2> */}
         {menu.length > 0 ? (
           <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
         ) : (

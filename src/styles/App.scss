@@ -12,7 +12,11 @@ body {
   font-family: 'Merriweather', serif;
 }
 h1 {
-  text-align: center;
+  font-family: 'Gilda Display', serif;
+  color: white;
+  text-transform: uppercase;
+  margin: 1rem 0 1rem 0.75rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .btn {
@@ -62,6 +66,15 @@ h1 {
   }
 }
 
+@media (min-width: 768px) {
+  h1 {
+    text-align: left;
+    font-size: 3rem;
+    margin-left: 1rem;
+    color: white;
+  }
+}
+
 @media (min-width: 1024px) {
   .page {
     padding-bottom: 2rem;
@@ -75,5 +88,8 @@ h1 {
   }
   h1 {
     grid-area: a;
+    font-size: 3rem;
+    margin: 1rem 0 1rem 1rem;
+    text-align: left;
   }
 }
