@@ -1,9 +1,8 @@
 @import 'defaults';
-$scroll-factor : .6;
+$scroll-factor : .7;
 
 body {
   background-color: white;
-  height: 100%;
 }
 
 .main {
@@ -29,7 +28,7 @@ body {
 
     &__logo {
       position: absolute;
-      bottom: -3.5rem;
+      bottom: -4rem;
       left: 1rem;
       color: white;
       font-size: 3rem;
@@ -43,8 +42,37 @@ body {
     background-color: white;
     z-index: -10;
   }
-
 }
 
+@media screen and (min-width: 768px) {
 
+  .header {
+    height: 38vh;
+  
+    &__logo {
+      top: 25rem;
+      font-size: 5rem;
+    }
+  }
+}
 
+@media screen and (min-width: 960px) {
+
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    &__image {
+      display: none;
+    }
+
+    &__logo {
+      color: $primary-color;
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      bottom: auto;
+    }
+  }
+}

@@ -32,3 +32,45 @@
     color: white;
   }
 }
+
+@media screen and (min-width: 768px) {
+
+  .splash {
+
+    &__image {
+      width: 100%;
+      height: auto;
+      max-height: auto;
+    }
+
+    &__logo {
+      font-size: 5rem;
+      bottom: 13rem;
+    }
+
+    &__text {
+      font-size: 1.5rem;
+      bottom: 10rem;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+
+  .splash {
+    width: 100vw;
+    height: 100vh;
+
+    &__image {
+      display: none;
+    }
+
+    &__logo {
+      color: $primary-color;
+    }
+
+    &__text {
+      color: $primary-color;
+    }
+  }
+}

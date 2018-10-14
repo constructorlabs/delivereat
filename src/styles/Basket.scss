@@ -83,3 +83,21 @@
   }
 }
 
+@media screen and (min-width: 768px) {
+
+  .basket-summary {
+
+    &--visible {
+      margin-top: 7.3rem;
+      justify-content: space-between;
+    }
+
+    &__count {
+      padding-left: 2rem;
+    }
+
+    &__total {
+      padding-right: 2rem;
+    }
+  }
+}

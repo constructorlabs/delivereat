@@ -76,9 +76,6 @@ class App extends React.Component {
                     total }});
   }
 
-//NEW ORDER:
-//[{"drinkId": 1, "extraShot": false, "nonDairy": "none"},{"drinkId": 2, "extraShot": true, "nonDairy": "none"}]
-
   checkout() {
     fetch('http://localhost:8080/API/order', {
       method: 'POST',

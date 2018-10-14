@@ -28,7 +28,7 @@
 
   &__description {
     padding-left: 1rem;
-    width: 60%;
+    width: 70%;
     font-size: 0.8rem;
     color: $primary-color;
     padding-bottom: 0.2rem;
@@ -70,4 +70,12 @@
 
 .fas {
   font-size: 1rem;
+}
+
+
+@media screen and (min-width: 768px) {
+
+  .menu-item {
+    width: 50%;
+  }
 }
