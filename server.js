@@ -18,6 +18,13 @@ app.get('/api/menu', function(req, res){
     res.json(menu);
   });
 
+  app.post('/api/order', function(req, res){
+    const order = order(req.body);
+    createOrder(order);
+    res.json(order)
+    console.log(req.body)
+    });
+
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });
