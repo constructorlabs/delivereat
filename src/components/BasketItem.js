@@ -1,37 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/BasketItem.scss';
 
-class BasketItem extends React.Component {
-  constructor() {
-    super();
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleAdd = this.handleAdd.bind(this);
-  }
+function BasketItem({addToOrder,removeFromOrder,basketItem}) {
 
-  handleAdd(event) {
-    this.props.addToOrder(this.props.data[0]);
-  }
-
-  handleRemove(event) {
-    this.props.removeFromOrder(this.props.data[0]);
-  }
-
-  render() {
-    
-    return (
-      <div className={'basket-item'}>
-        <div className={'basket-item__title'}>
-          <div className={'basket-item__name'}>{`${this.props.data[0].name}`}</div>
-          <div className={'basket-item__buttons'}>
-            <button className={'basket-item__remove-button'} onClick={this.handleRemove}><i className="fas fa-minus-circle"></i></button>
-            <div className={'basket-item__count'}>{this.props.data[1]}</div>
-            <button className={'basket-item__add-button'} onClick={this.handleAdd}><i className="fas fa-plus-circle"></i></button>
-            <div className={'basket-item__line-total'}>{`£${(this.props.data[0].price*this.props.data[1]).toFixed(2)}`}</div>
-          </div>
+  return (
+    <div className={'basket-item'}>
+      <div className={'basket-item__title'}>
+        <div className={'basket-item__name'}>{`${basketItem[0].name}`}</div>
+        <div className={'basket-item__buttons'}>
+          <button className={'basket-item__remove-button'} onClick={()=>removeFromOrder(basketItem[0])}><i className="fas fa-minus-circle"></i></button>
+          <div className={'basket-item__count'}>{basketItem[1]}</div>
+          <button className={'basket-item__add-button'} onClick={()=>addToOrder(basketItem[0])}><i className="fas fa-plus-circle"></i></button>
+          <div className={'basket-item__line-total'}>{`£${(basketItem[0].price*basketItem[1]).toFixed(2)}`}</div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+BasketItem.propTypes = {
+  basketItem: PropTypes.array.isRequired,
+  addToOrder: PropTypes.func.isRequired,
+  removeFromOrder: PropTypes.func.isRequired
+};
 
 export default BasketItem;
