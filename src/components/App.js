@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from './Header'
-import Confirmation from './Confirmation';
+import ConfirmationMessage from './ConfirmationMessage';
+import ConfirmationOrder from './ConfirmationOrder';
+
 
 import Menu from './Menu';
 import Order from './Order';
@@ -18,7 +20,8 @@ class App extends React.Component {
       userId:1,
       orderHistory:{},
       newOrder:{},
-      whichScreen: 'ordering'
+      whichScreen: 'ordering',
+      orderConfirmation: {}
     }
 
     this.fetchMenu = this.fetchMenu.bind(this)
@@ -60,6 +63,7 @@ class App extends React.Component {
     }).then(data => {
       console.log(data)
       this.setState ({
+        orderConfirmation:data,
         whichScreen:'confirmation'
       })
     });
@@ -106,7 +110,11 @@ class App extends React.Component {
         )}
 
         {this.state.whichScreen==='confirmation' && (      
-        <Confirmation menu={this.state.menu} receiverAddToOrder={this.receiverAddToOrder} newOrder={this.state.newOrder} />
+        <ConfirmationMessage />
+        )}
+
+        {this.state.whichScreen==='confirmation' && (      
+        <ConfirmationOrder orderConfirmation={this.state.orderConfirmation} menu={this.state.menu}  />
         )}
 
         
