@@ -4,6 +4,7 @@ import OrderMenuItem from "./OrderMenuItem";
 function OrderMenu({ menuObject, receiveOrder, formatToMoney, currentOrder, orderMenuClasses }) {
   return (
     <div className={orderMenuClasses}>
+      <h1 className="order__menu__title">Order</h1>
       <h2 className="order__menu__title__burger">Burgers</h2>
       {menuObject.burgers.map(item => (
         <OrderMenuItem

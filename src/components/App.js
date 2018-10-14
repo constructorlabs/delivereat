@@ -3,6 +3,7 @@ import OrderMenu from "./OrderMenu";
 import Order from "./Order";
 import MenuPage from "./MenuPage";
 import Navigation from "./Navigation";
+import Header from "./Header";
 import cx from "classnames";
 
 import "../styles/App.scss";
@@ -163,6 +164,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <Header />
         <Navigation receivePageChange={this.receivePageChange} />
         <MenuPage
           menuClasses={menuClasses}
