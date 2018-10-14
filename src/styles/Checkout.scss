@@ -1,0 +1,75 @@
+@import 'defaults';
+
+.checkout {
+
+  &__image {
+    position: fixed;
+    top: 0;
+    left: -25px;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+  }
+
+  &__logo {
+    position: absolute;
+    bottom: 7rem;
+    left: 2rem;
+    color: white;
+    font-size: 3rem;
+    margin: 0;
+    font-family: 'Sedgwick Ave Display', cursive;
+  }
+
+  &__text {
+    font-family: 'Roboto';
+    font-size: 1rem;
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    color: white;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .checkout {
+
+    &__image {
+      width: 100%;
+      height: auto;
+      max-height: auto;
+    }
+
+    &__logo {
+      font-size: 5rem;
+      bottom: 13rem;
+    }
+
+    &__text {
+      font-size: 1.5rem;
+      bottom: 10rem;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+
+  .checkout {
+    width: 100vw;
+    height: 100vh;
+
+    &__image {
+      display: none;
+    }
+
+    &__logo {
+      color: $primary-color;
+    }
+
+    &__text {
+      color: $primary-color;
+    }
+  }
+}

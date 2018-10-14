@@ -2,6 +2,7 @@ import React from 'react';
 import Splash from './Splash';
 import Menu from './Menu';
 import Basket from './Basket';
+import Checkout from './Checkout';
 import '../styles/App.scss';
 
 class App extends React.Component {
@@ -77,7 +78,7 @@ class App extends React.Component {
     .then(response => console.log('Success:', JSON.stringify(response)))
     .catch(error => console.error('Error:', error));
 
-    this.setState({ stage: 'menu',
+    this.setState({ stage: 'checkout',
                     order: {
                       contents: [],
                       total: 0} });
@@ -100,6 +101,7 @@ class App extends React.Component {
             {(!!this.state.order.contents.length) && <Basket stage={stage} changeStage={this.changeStage} order={this.state.order} addToOrder={this.addToOrder} removeFromOrder={this.removeFromOrder} checkout={this.checkout}/>}
           </div>
         </div>}
+        {(stage === 'checkout') && <Checkout changeStage={this.changeStage}/>}
       </div>
     );
   }

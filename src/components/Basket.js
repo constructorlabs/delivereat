@@ -31,7 +31,7 @@ function Basket({changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
         <div className={'basket-summary__text'}>View Basket</div>
         <div className={'basket-summary__total'}>{`£${total}`}</div>
       </div>
-      <div className={checkoutClasses} onClick={()=>checkout()}>Checkout!</div>
+      <div className={checkoutClasses} onClick={()=>checkout()}>Checkout</div>
     </div>
   );
 }
