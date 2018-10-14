@@ -1,36 +1,75 @@
 .basket {
-  background: white;
-  padding: 0.5rem;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.4);
+  position: fixed;
+  bottom: 0px;
+  border-top: 3px solid orange;
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
   width: 100%;
+  &__wrapper {
+    padding: 1rem 0.5rem 0.75rem 0.75rem;
+    background: white;
+    height: initial;
+    transition: height 4s;
+    &--hidden {
+      display: none;
+    }
+  }
+  &__title {
+    margin: 0 0 0 0.5rem;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    background: orange;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    position: absolute;
+    top: -30px;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.4);
+  }
   &__list {
-    margin: 0;
+    margin: 0 0 1rem 0;
     padding: 0;
     list-style-type: none;
   }
   &__item {
-    padding: 0.5rem;
-    display: flex;
-    justify-content: center;
     align-content: center;
-  }
-  .btn {
-    border: none;
-    background: black;
-    color: white;
-    height: 1.5rem;
-    width: 1.5rem;
-    border-radius: 1rem;
-    &__removeItem {
-      width: initial;
-      background: initial;
-      border: 1px solid black;
-      border-radius: 8px;
-      color: initial;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    &__name {
+      margin: 0 0.5rem 0 1.5rem;
+    }
+    &__price {
+      float: right;
     }
   }
-  .amount__count {
-    display: block;
-    margin: 0 0.5rem;
+  &__delivery {
+    font-size: 0.9rem;
+    color: #888888;
+  }
+  &__total span {
+    font-weight: bold;
+  }
+  // .btn {
+  //   background: none;
+  //   font-size: 1rem;
+  //   border: none;
+  //   padding: 0;
+  //   &__removeItem {
+  //     font-size: 0.8rem;
+  //   }
+  //   &__submitOrder {
+  //     background: orange;
+  //     padding: 0.25rem 0.5rem;
+  //     border-radius: 4px;
+  //     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  //   }
+  // }
+  // .amount__count {
+  //   margin: 0 0.5rem;
+  // }
+  p {
+    margin: 0 0 0.25rem 0;
+    text-align: right;
+    span {
+      margin-left: 1rem;
+    }
   }
 }

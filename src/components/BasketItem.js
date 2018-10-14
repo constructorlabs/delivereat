@@ -10,7 +10,7 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
         className="btn btn__decrease"
         name="decrease"
       >
-        [-]
+        <i className="fas fa-minus-circle" />
       </button>
       <span className="amount__count">{quantity}</span>
       <button
@@ -18,16 +18,18 @@ const BasketItem = ({ orderItem, handleBasketChange, removeFromBasket }) => {
         className="btn btn__increase"
         name="increase"
       >
-        [+]
+        <i className="fas fa-plus-circle" />
       </button>
-      {name} £{(quantity * price).toFixed(2)}
+      <span className="basket__item__name">{name}</span>
       <button
         onClick={e => removeFromBasket(id)}
         className="btn btn__removeItem"
       >
-        {' '}
-        Remove{' '}
+        <i className="far fa-trash-alt" />
       </button>
+      <span className="basket__item__price">
+        £{(quantity * price).toFixed(2)}
+      </span>
     </li>
   );
 };

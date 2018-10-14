@@ -149,7 +149,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1>Breakfast @ Tiffany’s</h1>
+        <h1>Tiffany’s</h1>
         {menu.length > 0 ? (
           <Menu menu={menu} handleMenuItemClick={this.handleMenuItemClick} />
         ) : (

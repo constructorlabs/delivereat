@@ -2,15 +2,39 @@
   margin: 0 auto;
   padding: 0;
   &__title {
-    padding-left: 1rem;
+    text-align: center;
   }
-  // width: 80%;
+  dl {
+    margin: 0;
+  }
+  dt {
+    background: gainsboro;
+    border-top: 3px solid #0abab5;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    text-transform: capitalize;
+    font-weight: 300;
+    position: sticky;
+    top: 0;
+  }
+  dd {
+    margin-left: 0;
+  }
   &__list {
     margin: 0;
     padding: 0;
     list-style-type: none;
     .menu__item {
-      // padding: 0.25rem 0;
+      text-transform: capitalize;
+      padding: 0.75rem 0.5rem;
+      // margin-bottom: 0.5rem;
+      border-bottom: 1px solid rgb(240, 240, 240);
+      // box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      background: white;
+      .item__price {
+        float: right;
+      }
     }
   }
 }

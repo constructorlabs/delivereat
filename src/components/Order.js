@@ -37,11 +37,11 @@ class Order extends React.Component {
       <div className="order__wrapper">
         <div className="order">
           <h3 className="order__item">{name}</h3>
-          <img
+          {/* <img
             className="order__image"
             src="https://loremflickr.com/320/240"
             alt=""
-          />
+          /> */}
           <p className="order__description">{description}</p>
           <div className="order__meta">
             <button
@@ -49,7 +49,7 @@ class Order extends React.Component {
               className="btn btn__decrease"
               name="decrease"
             >
-              -
+              <i className="fas fa-minus-circle" />
             </button>
 
             <span className="amount__count">{quantity}</span>
@@ -59,7 +59,7 @@ class Order extends React.Component {
               className="btn btn__increase"
               name="increase"
             >
-              +
+              <i className="fas fa-plus-circle" />
             </button>
 
             <span className="order__cost">
