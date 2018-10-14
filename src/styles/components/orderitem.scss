@@ -1,0 +1,25 @@
+@import '../base/colours';
+
+.item{
+    grid-area: i;
+
+}
+
+.quantity{
+    grid-area: q;
+
+}
+
+.price{
+    grid-area: p;
+
+}
+
+.order-breakdown{
+    font-style: italic;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-areas: 
+    'i q p';
+}

@@ -23,7 +23,7 @@ const menu = {
     id: 3,
     name: "bbq beef steamed hirata",
     img: '/static/images/hirata.png',
-    price: 5.50
+    price: 5.55
   },
   4:{
     id:4,
@@ -45,12 +45,24 @@ const menu = {
   }
 };
 
+const orders = {
+
+}
+
 app.get('/', function(req, res){
   res.render('index');
 });
 
 app.get('/api/menu', (req,res)=>{
   res.json(Object.values(menu));
+})
+
+app.post('/api/order', (req,res)=>{
+  const keys = Object.keys(orders);
+  const newKey = Math.max([...keys]) + 1;
+  console.log(newKey);
+  orders[newKey] = req.body;
+  res.json(newKey);
 })
 
 app.listen(8080, function(){
