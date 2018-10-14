@@ -55,3 +55,9 @@
     justify-content: space-around;
   }
 }
+
+@media (min-width: 768px) {
+  .order {
+    width: 60%;
+  }
+}
