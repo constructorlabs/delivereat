@@ -2,7 +2,8 @@
 
 * {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  // font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 html {
@@ -13,10 +14,13 @@ html {
 
 h3 {
   color: $text-color-dark;
+  font-size: 1.5em;
+  font-weight: 900;
 }
 
 h4 {
   color: $text-color-dark;
+  font-size: 1em;
   font-weight: 300;
 }
 
@@ -90,24 +94,47 @@ hr {
 }
 
 .header {
-  background-color: rgb(92, 92, 92);
+  // background-color: rgb(92, 92, 92);
   width: 100vw;
+  position: relative;
+  background-color: white;
 
-  &__top-bar {
-    background-color: white;
-    height: 60px;
-  }
+  // &__top-bar {
+  //   background-color: white;
+  //   padding: 0;
+  // }
 
   &__container {
-    background-color: hotpink;
+    background-color: black;
     height: 280px;
     max-height: 20vh;
+    position: relative;
+    text-align: center;
 
     &__image {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      opacity: 0.8;
     }
+  }
+}
+
+.header-title {
+  margin: 0;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+  font-size: 5vw;
+  font-family: "Lobster", cursive;
+  font-weight: 100;
+
+  & hr {
+    margin: 10px;
   }
 }
 

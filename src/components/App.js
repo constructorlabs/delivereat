@@ -173,12 +173,18 @@ class App extends React.Component {
     return (
       <div className="container">
         <header className="header">
-        
-        <div className="header__top-bar"></div>
-        <div className="header__container">
-          <img className="header__container__image" src="../static/images/header.jpg"></img>
-        </div>
-        
+          {/* <div className="header__top-bar">
+            <h2>Deliver. Eat. </h2>
+          </div> */}
+          <div className="header__container">
+            <img
+              className="header__container__image"
+              src="../static/images/header.jpg"
+            />
+            <h1 className="header-title">
+              Tony's Steak House <hr />
+            </h1>
+          </div>
         </header>
 
         <main className="main">

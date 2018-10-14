@@ -61,7 +61,7 @@ function Basket({
         <hr />
 
         <div className="basket__total">
-          <p>Total</p>
+          <h4>Total</h4>
           <p>£{total.toFixed(2)}</p>
         </div>
       </div>
