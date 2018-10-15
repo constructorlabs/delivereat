@@ -1,0 +1,26 @@
+.menu-item{
+  list-style: none;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+
+  &__price-add{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+
+  }
+
+  &__price{
+    margin-right: 1rem;
+  }
+}
+
+
+.fa-plus-circle{
+
+}

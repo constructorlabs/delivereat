@@ -1,0 +1,19 @@
+.menu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 2rem;
+
+  &__restaurant{
+    // background-image: url('../../static/images/burger.jpg')
+  }
+
+  &__category{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem;
+  }
+}
