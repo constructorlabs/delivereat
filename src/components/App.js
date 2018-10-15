@@ -6,19 +6,20 @@ class App extends React.Component {
   constructor(){
     super();
 
+    // this.toolTipOn = this.toolTipOn.bind(this); 
+    // this.toolTipOff = this.toolTipOff.bind(this); 
+    // this.fetchAllOrders = this.fetchAllOrders.bind(this); 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.receiveHandleChange = this.receiveHandleChange.bind(this);
     this.getCurrency = this.getCurrency.bind(this);
-    // this.fetchAllOrders = this.fetchAllOrders.bind(this); // no need to bind
-    // this.displayCurrentOrder = this.displayCurrentOrder.bind(this); // no need to bind yet
-    // this.displayAllOrders = this.displayAllOrders.bind(this); // no need to bind yet
-    // this.emptyBasket = this.emptyBasket.bind(this); // no need to bind yet
-    // this.toggleBasket =this.toggleBasket.bind(this); // no need to bind yet
-    // this.filterOrders = this.filterOrders.bind(this); // no need to bind yet
-    // this.handleFormData = this.handleFormData.bind(this); // no need to bind yet
-    // this.toolTipOn = this.toolTipOn.bind(this); // no need to bind yet
-    // this.toolTipOff = this.toolTipOff.bind(this); // no need to bind yet
-    // this.formatDate = this.formatDate.bind(this); // no need to bind yet
+
+    this.displayCurrentOrder = this.displayCurrentOrder.bind(this); 
+    this.displayAllOrders = this.displayAllOrders.bind(this); 
+    this.emptyBasket = this.emptyBasket.bind(this); 
+    this.toggleBasket =this.toggleBasket.bind(this); 
+    this.filterOrders = this.filterOrders.bind(this); 
+    this.handleFormData = this.handleFormData.bind(this); 
+    this.formatDate = this.formatDate.bind(this);
 
     this.state = { 
       menu: {},
@@ -41,13 +42,11 @@ class App extends React.Component {
     })
   }
 
-
 /* post current order from basket
 ///////////////////////////////////////////*/
 
   handleSubmit (event) {
     event.preventDefault();
-
     fetch('/api/order', {
       method: 'post',
       body: JSON.stringify(this.state.currentOrder),
@@ -114,7 +113,6 @@ class App extends React.Component {
   displayCurrentOrder () {
     let total = 0;
     const values = Object.values(this.state.currentOrder);
-    console.log(values)
     if (values.length === 0) { 
       this.setState({ currentOrder: null });
       return;

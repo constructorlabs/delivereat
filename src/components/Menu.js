@@ -1,4 +1,5 @@
 import React from 'react';
+import MenuItem from './MenuItem.js'
 
 function Menu ({menu, currentOrder, receiveHandleChange, getCurrency}) {
        
@@ -8,16 +9,14 @@ function Menu ({menu, currentOrder, receiveHandleChange, getCurrency}) {
             { Object.values(menu)
             .filter(item => item.type === course)
             .map(item => {
-                return  <div className="menu__item" key={course + "-menu-item-" + item.menuId}> 
-                            <img src={item.image}></img>
-                            <ul>
-                                <li><strong>{item.name}</strong></li>
-                                <li>Price: {getCurrencyString(item.price)}</li>
-                                <li>Quantity: {createQuantityOptions(item.name, item.menuId)}</li>
-                            </ul>
-                        </div>
+                return <MenuItem
+                            key={course + "-menu-item-" + item.menuId} 
+                            item={item}
+                            getCurrencyString={getCurrencyString} 
+                            createQuantityOptions={createQuantityOptions}
+                        />
             })}
-            {course !== "dessert" && <hr class="title"></hr>}
+            {course !== "dessert" && <hr className="title"></hr>}
         </div>
     }
 
