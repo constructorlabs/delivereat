@@ -27,6 +27,7 @@
   }
 
   &__description {
+    font-size: 0.9rem;
     padding-left: 1rem;
     width: 70%;
     font-size: 0.8rem;
@@ -72,10 +73,29 @@
   font-size: 1rem;
 }
 
-
 @media screen and (min-width: 768px) {
 
   .menu-item {
     width: 50%;
+
+    &__name {
+      font-size: 1.1rem;
+    }
+
+    &__description {
+      font-size: 1rem;
+    }
+
+    &__price {
+      font-size: 1.1rem;
+    }
+
+    &__count {
+      font-size: 1.1rem;
+    }
+  }
+
+  .fas {
+    font-size: 1.2rem;
   }
 }

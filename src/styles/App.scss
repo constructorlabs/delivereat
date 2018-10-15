@@ -1,8 +1,13 @@
 @import 'defaults';
-$scroll-factor : .7;
+$scroll-factor : 0.4;
 
 body {
   background-color: white;
+  margin: 0;
+}
+
+#root { 
+  width: 100%;
 }
 
 .main {
@@ -15,30 +20,31 @@ body {
 }
 
 .header {
+  height: 30vh;
+  background-image: url('/static/assets/header-small.jpg');
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
   position: relative;
-  height: 27.5vh;
   transform: 
-    translateZ(-#{$scroll-factor * 2}px)
+    translateZ(-#{$scroll-factor}px)
     scale(1 + $scroll-factor * 2);
   z-index: 10;
 
-    &__image {
-      width: 100%;
-    }
-
     &__logo {
       position: absolute;
-      bottom: -4rem;
-      left: 1rem;
+      bottom: 0;
+      left: 3.5rem;
       color: white;
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin: 0;
       font-family: 'Sedgwick Ave Display', cursive;
     }
 
   .content {
     display: block;
-    position: relative;
+    position: absolute;
+    top: 0;
     background-color: white;
     z-index: -10;
   }
@@ -47,34 +53,18 @@ body {
 @media screen and (min-width: 768px) {
 
   .header {
-    height: 38vh;
-  
+    height: 30vh;
+    background-image: url('/static/assets/header-medium.jpg');
+
     &__logo {
-      top: 25rem;
-      font-size: 5rem;
+      font-size: 3rem;
+      bottom: 0;
+      left: 6rem;
     }
   }
 }
 
 @media screen and (min-width: 960px) {
-
-  .header {
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    &__image {
-      display: none;
-    }
-
-    &__logo {
-      color: $primary-color;
-      position: fixed;
-      top: 100px;
-      left: 20px;
-      bottom: auto;
-    }
-  }
 
   .app {
     display: none;

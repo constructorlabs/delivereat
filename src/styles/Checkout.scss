@@ -1,20 +1,16 @@
 @import 'defaults';
 
 .checkout {
-
-  &__image {
-    position: fixed;
-    top: 0;
-    left: -25px;
-    max-height: 100%;
-    margin: auto;
-    overflow: auto;
-  }
+  height: 100vh;
+  background-image: url('/static/assets/checkout-small.jpg');
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
 
   &__logo {
     position: absolute;
-    bottom: 7rem;
-    left: 2rem;
+    bottom: 6rem;
+    left: 1.6rem;
     color: white;
     font-size: 3rem;
     margin: 0;
@@ -25,8 +21,8 @@
     font-family: 'Roboto';
     font-size: 1rem;
     position: absolute;
-    bottom: 2rem;
-    left: 2rem;
+    bottom: 1.5rem;
+    left: 1.6rem;
     color: white;
     width: 80%;
   }
@@ -35,42 +31,22 @@
 @media screen and (min-width: 768px) {
 
   .checkout {
-
-    &__image {
-      left: 0;
-      width: 100%;
-      height: auto;
-      max-height: auto;
-    }
+    background-image: url('/static/assets/checkout-medium.jpg');
 
     &__logo {
       font-size: 5rem;
-      bottom: 11rem;
+      bottom: 10rem;
+      left: 3rem;
     }
 
     &__text {
-      font-size: 1.5rem;
-      bottom: 6rem;
+      font-size: 1.4rem;
+      bottom: 5rem;
+      left: 3rem;
     }
   }
 }
 
 @media screen and (min-width: 960px) {
 
-  .checkout {
-    width: 100vw;
-    height: 100vh;
-
-    &__image {
-      display: none;
-    }
-
-    &__logo {
-      color: $primary-color;
-    }
-
-    &__text {
-      color: $primary-color;
-    }
-  }
 }

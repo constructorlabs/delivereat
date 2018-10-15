@@ -93,7 +93,6 @@ class App extends React.Component {
         {(stage === 'menu' || stage === 'basket') &&
         <div className='main'>
           <div className='header'>
-            <img className='header__image' src="/static/assets/header.jpg"></img>
             <p className='header__logo'>Zing</p>
           </div>
           <div className='content'>
