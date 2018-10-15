@@ -9,6 +9,8 @@ class Menu extends React.Component {
   }
 
   getCourse(course) {
+    // values = Object.values(this.props.menu);
+    // values.map();
     return this.props.menu.filter(menuitem => menuitem.category === course)
     .map(menuitem => {
      return <MenuItem 

@@ -6,12 +6,13 @@ class OrderAdminItem extends React.Component {
   }
 
   render(){
-    const orderarr = Object.keys(this.props.order);
-    
+    const test = this.props;
+    console.log("props", {test})
+    // console.log(this.props.order["15"])
     return (
         <li>
           <h3>Order</h3>
-          {this.props.order[0]["menuitems"]}
+          {this.props.order[0]}
         </li>
     )
     

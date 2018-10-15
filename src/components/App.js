@@ -28,7 +28,7 @@ class App extends React.Component {
     fetch(api)
     .then(response => response.json())
     .then(content => {
-      this.setState({menu: content})
+      this.setState({menu: content});
     })
   }
   fetchOrders() {
@@ -36,14 +36,14 @@ class App extends React.Component {
     fetch(api)
       .then(response => response.json())
       .then(content => {
-        this.setState({orders: content}, () => console.log(this.state.orders))
+        this.setState({orders: content})
       })
   }
 
   componentDidMount() {
    this.fetchMenu();
    this.fetchOrders();
-}
+   }
   receiveItemOrder(order) {
     const updatedOrder = Object.assign({}, this.state.currentOrder, {[order.id]: order } )
     this.setState({currentOrder: updatedOrder})
@@ -66,6 +66,7 @@ class App extends React.Component {
           <div className="masthead__description">
             <p>Where good coffee and grub meets geordie banter, run by brummie Matt. Down-to-earth fare, NOW any time, any where (in the North East).</p>
           </div>
+  
         </header>
 
         <main className="maincontent">
@@ -79,11 +80,11 @@ class App extends React.Component {
           <MakeOrder 
           currentOrder={this.state.currentOrder}
           />
-
+  
           <OrderAdmin 
           orders={this.state.orders}
           receiveOrderAdmin={this.receiveOrderAdmin}
-          />        
+          />  
 
         </main>
       </div>
