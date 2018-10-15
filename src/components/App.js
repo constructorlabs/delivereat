@@ -9,68 +9,9 @@ class App extends React.Component {
     super();
 
     this.state = {
-      dishes: {
-        1: {
-          dishId: 1,
-          name: "Chicken Caesar Salad",
-          category: "Salads",
-          description: "",
-          price: 6.55,
-          imageUrl: "",
-          inStock: true
-        },
-        2: {
-          dishId: 2,
-          name: "Grilled Chicken Breast Burger",
-          category: "Burgers",
-          description: "",
-          price: 5.75,
-          imageUrl: "",
-          inStock: true
-        },
-        3: {
-          dishId: 3,
-          name: "Classic 6 oz. Beef Burger",
-          category: "Burgers",
-          description: "",
-          price: 5.75,
-          imageUrl: "",
-          inStock: true
-        }
-      },
+      dishes: {},
       categories: {},
-      basket: {
-        1: {
-          dishId: 1,
-          name: "Chicken Caesar Salad",
-          category: "Salads",
-          description: "",
-          price: 6.55,
-          imageUrl: "",
-          inStock: true,
-          quantity: 2
-        },
-        2: {
-          dishId: 2,
-          name: "Grilled Chicken Breast Burger",
-          category: "Burgers",
-          description: "",
-          price: 5.75,
-          imageUrl: "",
-          inStock: true,
-          quantity: 1
-        },
-        3: {
-          dishId: 3,
-          name: "Classic 6 oz. Beef Burger",
-          category: "Burgers",
-          description: "",
-          price: 5.75,
-          imageUrl: "",
-          inStock: true,
-          quantity: 3
-        }
-      },
+      basket: {},
       renderCheckout: false,
       orderPlaced: false,
       orderId: ""
@@ -95,15 +36,17 @@ class App extends React.Component {
       .catch(error => console.error("Error: ", error));
   }
 
-  addToOrder(dishId, name) {
-    if (this.state.basket[dishId]) {
+  addToOrder(dishId, name, dish) {
+    if (this.state.basket[dish.dishId]) {
       let updatedBasket = Object.assign({}, this.state.basket);
-      updatedBasket[dishId].quantity++;
+      updatedBasket[dish.dishId].quantity++;
       this.setState({ basket: updatedBasket });
     } else {
+      dish.quantity = 1;
       let updatedBasket = Object.assign({}, this.state.basket, {
-        [dishId]: { dishId: dishId, name: name, quantity: 1 }
+        [dishId]: dish
       });
+
       this.setState({ basket: updatedBasket });
     }
   }

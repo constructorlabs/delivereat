@@ -8,7 +8,7 @@ function Dish({ dish, addToOrder }) {
       <h4 className="dish__price">£{dish.price.toFixed(2)}</h4>
       <button
         className="dish__btn button-quantity"
-        onClick={() => addToOrder(dish.dishId, dish.name)}>
+        onClick={() => addToOrder(dish.dishId, dish.name, dish)}>
         +
       </button>
     </div>

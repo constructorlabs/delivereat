@@ -27,7 +27,7 @@ function BasketItem({
       <p className="basketItem__name">{basketItem.name}</p>
 
       <p className="basketItem__price">
-        £{(dishes[basketItem.dishId].price * basketItem.quantity).toFixed(2)}
+        {/* £{(dishes[basketItem.dishId].price * basketItem.quantity).toFixed(2)} */}
       </p>
     </div>
   );

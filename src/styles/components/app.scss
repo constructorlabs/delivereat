@@ -138,12 +138,17 @@ hr {
   }
 }
 
+#root {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+
   align-items: center;
+  justify-items: center;
 }
 
 .main {
