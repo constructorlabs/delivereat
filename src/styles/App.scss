@@ -50,6 +50,24 @@ body {
   }
 }
 
+.app-appear {
+  opacity: 0.01;
+}
+
+.app-appear.app-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.app-leave {
+  opacity: 1;
+}
+
+.app-leave.app-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+
 @media screen and (min-width: 768px) {
 
   .header {

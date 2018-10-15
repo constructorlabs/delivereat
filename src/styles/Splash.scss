@@ -27,6 +27,24 @@
   }
 }
 
+.splash-appear {
+  opacity: 0.01;
+}
+
+.splash-appear.splash-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.splash-leave {
+  opacity: 1;
+}
+
+.splash-leave.splash-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+
 @media screen and (min-width: 768px) {
 
   .splash {
@@ -50,5 +68,5 @@
   .splash {
     background-image: url('/static/assets/splash-medium.jpg');  
   }
-  
+
 }
