@@ -17,6 +17,7 @@ function Menu ({menu, currentOrder, receiveHandleChange, getCurrency}) {
                             </ul>
                         </div>
             })}
+            {course !== "dessert" && <hr class="title"></hr>}
         </div>
     }
 

@@ -132,7 +132,7 @@ class App extends React.Component {
        <hr className="box"></hr>
       <div>Date: {this.state.currentOrder.date}</div>
       <div>Total: {this.getCurrency(total)}</div>
-      <button onClick={this.emptyBasket} type="button" className="basket-empty">Empty basket</button>
+      <button onClick={this.emptyBasket} type="button" className="basket__state-empty">Empty basket</button>
     </div>
   }
 
@@ -168,6 +168,13 @@ class App extends React.Component {
     </div>
   }
 
+  filterOrders (event) {
+    this.setState({ filterInput: event.target.value });
+  }
+
+/* control basket
+///////////////////////////////////////////*/
+
   emptyBasket (event) {
     event.preventDefault();
     this.setState({ currentOrder: null });
@@ -176,12 +183,6 @@ class App extends React.Component {
   toggleBasket (event) {
     event.preventDefault();
     this.setState({ basketVisible: !this.state.basketVisible });
-  }
-
-  filterOrders (event) {
-    this.setState({
-      filterInput: event.target.value
-    });
   }
 
   toolTipOn(event) {
@@ -233,7 +234,7 @@ class App extends React.Component {
 
         <div className="header">
           <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
-          <h1>{basketCount} <a href="#" onClick={this.toggleBasket} className="basket__toggle"><i className="fas fa-1x fa-shopping-basket"></i></a></h1>
+          <div className="basket__menu"><h1 className="basket__items-count">{basketCount}</h1><h1><a href="#" onClick={this.toggleBasket}><i className="fas fa-1x fa-shopping-basket basket__display-toggle"></i></a></h1></div>
         </div>
         <div className="content">
           <form onSubmit={this.handleSubmit} className="menu__form">
