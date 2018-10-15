@@ -1,3 +1,43 @@
 body {
   margin: 0;
+  background: url('/static/cake-images.js/cake-backround.jpg');
+  display:flex;
+  flex-direction: column;
+}
+
+.app_basket {
+ background: rgb(255,240,245);
+}
+
+.menucomponent_ul {
+ list-style: none;
+}
+
+.menucomponent_li {
+  /* list-style: none; */
+}
+
+.menuitem_form {
+  background: rgba(240,255,240,0.4);
+  border: 2px solid rgb(255,240,245)
+}
+
+.menuitem_image {
+  background: rgba(255,218,185,0.8);
+  border: 2px solid rgb(255,240,245);
+  margin: 0 auto;
+  align-content: center;
+}
+
+.menuitem_addbutton {
+  border: 2px solid red;
+}
+
+.app_shoptitle{
+  background: rgb(255,240,245);
+  text-align: center;
+
+
+img {
+  align-self: center;
 }
