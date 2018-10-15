@@ -69,6 +69,9 @@ class App extends React.Component {
         return item;
       }})
     .filter(item => item[1] !== 0);
+    if (!contents.length) {
+      this.setState({stage: 'menu'});
+    }
     const total = this.calculateTotal(contents);
     this.setState({order: {
                     contents,
