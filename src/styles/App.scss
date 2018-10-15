@@ -1,7 +1,7 @@
 $border-thickness: 0.05rem;
 $light-colour: #fffae8;
 $header-colour: #ede2bb;
-$mid-grey: #ede2bb; // #999;
+$mid-grey: #d2c69e; // #999;
 $dark-colour: #2d2211;
 
 * {
@@ -51,8 +51,9 @@ h1 {
 }
 
 img {
-  width: 40%;
-  height: 40%;
+  width: 60%;
+  height: 60%;
+  min-width: 180px;
   margin: 0 1rem 2rem 0;
   border: 0.25rem solid #fff;
 }
