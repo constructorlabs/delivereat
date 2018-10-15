@@ -28,9 +28,13 @@ function MenuItem({menuItem,addToOrder,removeFromOrder,order,stage}) {
       <div className={'menu-item__title'}>
         <div className={'menu-item__name'}>{menuItem.name}</div>
         <div className={'menu-item__buttons'}>
-          <button className={classesRemove} onClick={handleRemove}><i className="fas fa-minus-circle"></i></button>
+          <button className={classesRemove} onClick={handleRemove}>
+            <i className="fas fa-minus-circle"></i>
+          </button>
           <div className={classesCount}>{count}</div>
-          <button className={'menu-item__add-button'} onClick={handleAdd}><i className="fas fa-plus-circle"></i></button>
+          <button className={'menu-item__add-button'} onClick={handleAdd}>
+            <i className="fas fa-plus-circle"></i>
+          </button>
         </div>
       </div>
       <div className={'menu-item__description'}>{menuItem.description}</div>

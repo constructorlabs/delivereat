@@ -1,22 +1,30 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const {getMenu, getBeans, postOrder, patchOrder, getOpenOrders} = require('./storage.js');
+const {getAllMenuItems, getMenuItemById} = require('./menu.js');
+const {postOrder, patchOrder, getOpenOrders} = require('./orders.js');
 
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => res.render('index'));
-//menu route: get coffee menu
-app.get('/API/menu', (req,res) => res.json(getMenu()));
-//beans route: get beans list
-app.get('/API/beans', (req,res) => res.json(getBeans()));
+//menu route: get all menu items
+app.get('/menu', (req,res) => res.json(getAllMenuItems()));
+//menu route: get individual menu item by id
+app.get('/menu/:menuItemId', (req,res) => {
+  const menuItem = getMenuItemById(req.params.menuItemId);
+  if (menuItem) {
+    res.json(menuItem);
+  } else {
+    res.status(404).json(`Error: Menu item with id ${req.params.menuItemId} does not exist!`);
+  }
+});
 //order route: get open orders
-app.get('/API/order', (req,res) => res.json(getOpenOrders()));
+app.get('/order', (req,res) => res.json(getOpenOrders()));
 //order route: post new order
-app.post('/API/order', (req,res) => res.json(postOrder(req.body)));
+app.post('/order', (req,res) => res.json(postOrder(req.body)));
 //order route: patch order status
-app.patch('/API/order/:orderId', (req,res) => res.json(patchOrder(req.params.orderId, req.body)));
+app.patch('/order/:orderId', (req,res) => res.json(patchOrder(req.params.orderId, req.body)));
 
 app.listen(8080, () => console.log('Listening on port 8080'));

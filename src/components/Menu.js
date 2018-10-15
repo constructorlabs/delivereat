@@ -7,7 +7,14 @@ function Menu({stage,menu,order,addToOrder,removeFromOrder}) {
 
   return (
     <div className={'menu'}>
-      {menu.map(item => <MenuItem stage={stage} key={item.id} order={order} addToOrder={addToOrder} removeFromOrder={removeFromOrder} menuItem={item} />)}
+      {menu.map(item => 
+      <MenuItem 
+        stage={stage} 
+        key={item.id} 
+        order={order} 
+        addToOrder={addToOrder} 
+        removeFromOrder={removeFromOrder} 
+        menuItem={item} />)}
     </div>
   );
 }

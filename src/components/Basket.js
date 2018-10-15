@@ -16,7 +16,12 @@ function Basket({changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
     <div className={'basket'}>
       <div className={basketDetailsClasses}>
         <div className='basket-details__close' onClick={()=>changeStage('menu')}>&times;</div>
-        {order.contents.map(item => <BasketItem key={item[0].timestamp} basketItem={item} addToOrder={addToOrder} removeFromOrder={removeFromOrder} />)}
+        {order.contents.map(item => 
+        <BasketItem 
+          key={item[0].timestamp} 
+          basketItem={item} 
+          addToOrder={addToOrder} 
+          removeFromOrder={removeFromOrder} />)}
         <div className='basket-details__delivery'>
           <div className='basket-details__delivery-text'>Delivery charge</div>
           <div className='basket-details__delivery-price'>£2.00</div>

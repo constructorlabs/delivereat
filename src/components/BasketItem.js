@@ -9,10 +9,16 @@ function BasketItem({addToOrder,removeFromOrder,basketItem}) {
       <div className={'basket-item__title'}>
         <div className={'basket-item__name'}>{`${basketItem[0].name}`}</div>
         <div className={'basket-item__buttons'}>
-          <button className={'basket-item__remove-button'} onClick={()=>removeFromOrder(basketItem[0])}><i className="fas fa-minus-circle"></i></button>
+          <button className={'basket-item__remove-button'} onClick={()=>removeFromOrder(basketItem[0])}>
+            <i className="fas fa-minus-circle"></i>
+          </button>
           <div className={'basket-item__count'}>{basketItem[1]}</div>
-          <button className={'basket-item__add-button'} onClick={()=>addToOrder(basketItem[0])}><i className="fas fa-plus-circle"></i></button>
-          <div className={'basket-item__line-total'}>{`£${(basketItem[0].price*basketItem[1]).toFixed(2)}`}</div>
+          <button className={'basket-item__add-button'} onClick={()=>addToOrder(basketItem[0])}>
+            <i className="fas fa-plus-circle"></i>
+          </button>
+          <div className={'basket-item__line-total'}>
+            {`£${(basketItem[0].price*basketItem[1]).toFixed(2)}`}
+          </div>
         </div>
       </div>
     </div>
