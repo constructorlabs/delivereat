@@ -21,10 +21,10 @@ app.get('/menu/:menuItemId', (req,res) => {
   }
 });
 //order route: get open orders
-app.get('/order', (req,res) => res.json(getOpenOrders()));
+app.get('/orders', (req,res) => res.json(getOpenOrders()));
 //order route: post new order
-app.post('/order', (req,res) => res.json(postOrder(req.body)));
+app.post('/orders', (req,res) => res.json(postOrder(req.body)));
 //order route: patch order status
-app.patch('/order/:orderId', (req,res) => res.json(patchOrder(req.params.orderId, req.body)));
+app.patch('/orders/:orderId', (req,res) => res.json(patchOrder(req.params.orderId, req.body)));
 
 app.listen(8080, () => console.log('Listening on port 8080'));

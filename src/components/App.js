@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   checkout() {
-    fetch('http://localhost:8080/API/order', {
+    fetch('/orders', {
       method: 'POST',
       body: JSON.stringify(this.state.order.contents),
       headers: {'Content-Type': 'application/json'}})

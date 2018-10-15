@@ -5,7 +5,6 @@ function postOrder(order) {
   const date = new Date();
   const orderData = {'orderId': newId, 'orderStatus': 'new', 'placedAt': date.toLocaleString(), 'order': order};
   orders[newId] = orderData;
-  console.log('new order received!');
   return orderData;
 }
 
