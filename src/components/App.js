@@ -12,17 +12,23 @@ class App extends React.Component {
     this.getCurrency = this.getCurrency.bind(this);
     this.displayCurrentOrder = this.displayCurrentOrder.bind(this);
     this.displayAllOrders = this.displayAllOrders.bind(this);
-    
+    this.emptyBasket = this.emptyBasket.bind(this);
+    this.toggleBasket =this.toggleBasket.bind(this);
+    this.filterOrders = this.filterOrders.bind(this);
+
+
     this.handleFormData = this.handleFormData.bind(this);
     this.toolTipOn = this.toolTipOn.bind(this);
     this.toolTipOff = this.toolTipOff.bind(this);
-    this.formattedDate = this.formattedDate.bind(this);
+    this.formatDate = this.formatDate.bind(this);
 
     this.state = { 
       menu: {},
       currentOrder: null,
       orders: null,
-      tooltip: null
+      basketVisible: null,
+      filterInput: null,
+      tooltip: "thumb"
     }
   }
 
@@ -52,12 +58,6 @@ class App extends React.Component {
     ).then(response => response.json()
     ).then(order => {
       this.fetchAllOrders();
-    });
-
-    Object.values(event.target).forEach(item => {
-      if (item.type === "text") { 
-        item.value = ""; 
-      }
     });
   }
 
@@ -89,7 +89,7 @@ class App extends React.Component {
       currentOrder = Object.assign({}, this.state.currentOrder);
       delete currentOrder[id];
     } else {
-      currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, "quantity": Number(event.target.value) }})
+      currentOrder = Object.assign({}, this.state.currentOrder, { [id]: {"menuId": id, "quantity": Number(event.target.value) }, "date": this.formatDate()})
     }
     this.setState({ currentOrder });
   }
@@ -104,7 +104,7 @@ class App extends React.Component {
     });
   }
 
-  formattedDate (){
+  formatDate (){
       const date = new Date();
       const addZero = n => n < 10 ? `0${n}` : n;
       return `${addZero(date.getDate())}-${addZero(date.getMonth()+1)}-${date.getFullYear()}`;
@@ -116,21 +116,23 @@ class App extends React.Component {
   displayCurrentOrder () {
     let total = 0;
     const values = Object.values(this.state.currentOrder);
+    console.log(values)
     if (values.length === 0) { 
       this.setState({ currentOrder: null });
       return;
     }
-
     return <div>
     { values
       .filter(orderItem => typeof orderItem === "object")
-      .map(orderItem => {
+      .map((orderItem) => {
         const menuItem = this.state.menu[orderItem.menuId];
         total += orderItem.quantity * menuItem.price;
         return <div key={"current-order-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
-      })} 
-      <hr className="box"></hr>
+      })}
+       <hr className="box"></hr>
+      <div>Date: {this.state.currentOrder.date}</div>
       <div>Total: {this.getCurrency(total)}</div>
+      <button onClick={this.emptyBasket} type="button" className="basket-empty">Empty basket</button>
     </div>
   }
 
@@ -139,49 +141,70 @@ class App extends React.Component {
 
   displayAllOrders () {
     let total = 0;
+    const input = this.state.filterInput || null;
     const values = Object.values(this.state.orders);
     return <div>
-    { values.map((order, index) => {
-      const summary = Object.values(order)
-      .filter(orderItem => typeof orderItem === "object")
-      .map(orderItem => {
-        const menuItem = this.state.menu[orderItem.menuId];
-        total += (orderItem.quantity * menuItem.price);
-        return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
-      });
-      return (<div key={"order-" + index}>
-        <div><strong>Order from: {order.username}</strong></div>
-        {summary}
-        <div key={"total-" + index + 1}>Order Total: {this.getCurrency(total)}</div>
-        <hr className="box"></hr>
-      </div>)
-    })}
+    { values
+      .filter(order => input ? order.username.includes(input) : true)
+      .map((order, index) => {
+        const summary = Object.values(order)
+        .filter(orderItem => typeof orderItem === "object")
+        .map(orderItem => {
+          const menuItem = this.state.menu[orderItem.menuId];
+          total += (orderItem.quantity * menuItem.price);
+          return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
+        });
+        return (<div key={"order-" + index}>
+          <div><strong>Order name: {order.username}</strong></div>
+
+          {summary}
+
+          <div>Date: {order.date}</div>
+          <div key={"total-" + index + 1}>Total: {this.getCurrency(total)} + { total < 30 ? (this.getCurrency(3) + " delivery charge") : `free delivery` }</div>
+          {index < values.length-1 && <hr className="box"></hr>}
+        </div>)
+      })
+    }
     </div>
   }
 
+  emptyBasket (event) {
+    event.preventDefault();
+    this.setState({ currentOrder: null });
+  }
+
+  toggleBasket (event) {
+    event.preventDefault();
+    this.setState({ basketVisible: !this.state.basketVisible });
+  }
+
+  filterOrders (event) {
+    this.setState({
+      filterInput: event.target.value
+    });
+  }
+
   toolTipOn(event) {
-    const div = event.target.children[0] // console.log(div);
-    this.setState({ tooltip: true })
-    /* {this.state.tooltip && <div className="thumb"></div>} */
-    /* <a href="#" onMouseOver={this.toolTip} className="tooltip"><span title="More">CSS3 Tooltip</span></a> */
-    /* <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Toggle<div className="thumb"></div></a> */
+    this.setState({ tooltip: "thumb.visible" })
   }
 
   toolTipOff(event) {
-    this.setState({ tooltip: false })
+    this.setState({ tooltip: "thumb" })
   }
 
   render(){
 
     const currentOrderHasFood = this.state.currentOrder && Object.values(this.state.currentOrder).find(item => typeof item === "object");
 
-    const basket = 
+    const basket = this.state.basketVisible &&
       (<div className="basket">
         <h2>Your basket <i className="fas fa-1x fa-shopping-basket"></i></h2>
         <div>{ currentOrderHasFood ? this.displayCurrentOrder() : <div>Your basket is empty</div>}</div>
       </div>)
 
-    const formElements = currentOrderHasFood && 
+    const basketCount = this.state.currentOrder && (Object.values(this.state.currentOrder).filter(item => typeof item === "object").length || null);
+
+    const formElements = currentOrderHasFood && this.state.basketVisible &&
       (<div className="form__elements">
         <input onChange={this.handleFormData} name="username" value={this.state.currentOrder.username || ""}  id="username" className="menu__form__username" type="text" placeholder="Full name"></input>
         <input onChange={this.handleFormData} name="telephone" value={this.state.currentOrder.telephone || ""} id="telephone" className="menu__form__telephone" type="text" placeholder="Telephone number"></input>
@@ -192,8 +215,9 @@ class App extends React.Component {
 
     const allOrders = this.state.orders &&
       (<div className="orders">
-        <h2>View all orders</h2>
+        <h2>View all orders <i className="fas fa-1x fa-pound-sign"></i></h2>
         <div>{ this.displayAllOrders() }</div>
+        <div><input type="text" onChange={this.filterOrders} className="orders__filter" placeholder="&#128269; Search orders..."></input></div>
       </div>)
 
     const menu = this.state.menu && 
@@ -205,23 +229,30 @@ class App extends React.Component {
     />
 
     return (
-      <div>
-        <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
-        <hr className="title"></hr>
-        
-        <form onSubmit={this.handleSubmit} className="menu__form">
-          <div className="form__wrapper">
+        <React.Fragment>
 
-            { basket }
-            { formElements }
+        <div className="header">
+          <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
+          <h1>{basketCount} <a href="#" onClick={this.toggleBasket} className="basket__toggle"><i className="fas fa-1x fa-shopping-basket"></i></a></h1>
+        </div>
+        <div className="content">
+          <form onSubmit={this.handleSubmit} className="menu__form">
+            <div className="form__wrapper">
 
-          </div>
+              {/* <div className={this.state.tooltip}><img src="https://images.unsplash.com/photo-1523986371872-9d3ba2e2a389"></img></div>
+              <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Tooltip</a>  */}
+              
+              { basket }
+              { formElements }
 
-          { allOrders }
-          { menu }  
+            </div>
 
-        </form> 
-      </div>
+            { allOrders }
+            { menu }  
+
+          </form> 
+        </div>
+      </React.Fragment>
     )
   }
 }
