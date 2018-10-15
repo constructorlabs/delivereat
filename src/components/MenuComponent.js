@@ -7,13 +7,15 @@ class MenuComponent extends React.Component {
   }
 
   render() {
+
     return (
       <div>
-        <ul>
+        <ul className="menucomponent_ul">
         {this.props.menu.map( item => {
           return (
-            <li key={item.id}>
+            <li className="menucomponent_li">
               <MenuItem
+              key={item.id}
               item={item}
               addOrder={this.props.addOrder} />
             </li>

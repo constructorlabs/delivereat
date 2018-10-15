@@ -1,28 +1,36 @@
 import React from 'react';
+import BasketRemove from './BasketRemove';
 
 class Basket extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
-    this.props.removeOrder = this.props.removeOrder.bind(this);
-  }
+    this.state = {
 
-  handleClick(event) {
-   const itemRemove = event.target;
-   this.props.removeOrder(itemRemove);
+    }
   }
 
 
   render() {
+
     return(
       <div>
-       <h2>Your Current Basket</h2>
-        {/* {this.props.totalOrder.name}{this.props.totalOrder.price}{this.props.totalOrder.quantity} */}
-       <button onClick={this.handleClick}>Remove An Item</button>
-      </div>
-
-    );
-  }
+        {this.props.totalOrder.map( item => {
+          return (
+            <div>
+             <BasketRemove
+              key={item.id}
+              item={item}
+              removeOrder={this.props.removeOrder}
+              totalOrder={this.props.totalOrder}
+              totalPrice={this.props.totalPrice} />
+            </div>
+            );
+          }
+        )
+      }
+    </div>
+  );
+}
 }
 export default Basket;
