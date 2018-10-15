@@ -16,21 +16,21 @@ describe('App', () => {
     description: 'Pancakes, eggs, sausage, bacon, fried potatoes & maple syrup'
   };
 
+  // wrap all tests that rely on mock fetch with the before
   beforeEach(() => {
     fetch.resetMocks();
   });
   test('Menu click should load current item into state', () => {
-    fetch.mockResponseOnce(JSON.stringify(menuItem));
+    fetch.mockResponse(JSON.stringify(menuItem));
 
     wrapper = shallow(<App />);
     instance = wrapper.instance();
-    console.log(instance.state);
 
     //TODO: does not recognise handleMenuItemClick method
-    instance.handleMenuItemClick(12);
-    // // // .then(
-    // // //   expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/menu/12')
-    // // // );
-    expect(instance.state.isOrdering).toEqual(true);
+
+    instance
+      .handleMenuItemClick(12)
+      .then(expect(fetch).toHaveBeenCalledWith('/api/menu/12'));
+    // expect(instance.state.isOrdering).toEqual(true);
   });
 });

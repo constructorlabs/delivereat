@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   handleMenuItemClick(id) {
-    fetch(`/api/menu/${id}`)
+    return fetch(`/api/menu/${id}`)
       .then(response => response.json())
       .then(body =>
         this.setState({
@@ -115,8 +115,8 @@ class App extends React.Component {
   }
 
   submitOrder() {
-    fetch('/api/order', {
-      method: 'post',
+    fetch('/orders', {
+      method: 'POST',
       body: JSON.stringify(this.state.orderBasket),
       headers: {
         'Content-Type': 'application/json'

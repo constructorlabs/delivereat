@@ -5,10 +5,12 @@ import Order from '../../src/components/Order';
 describe('Order', () => {
   let wrapper;
   let instance;
+  let mockAddToBasket = jest.fn();
+  let mockCloseOrder = jest.fn();
 
   beforeEach(() => {
-    const mockAddToBasket = jest.fn();
-    const mockCloseOrder = jest.fn();
+    mockAddToBasket = jest.fn();
+    mockCloseOrder = jest.fn();
     wrapper = shallow(
       <Order
         key={'2'}

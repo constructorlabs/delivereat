@@ -59,6 +59,16 @@
     }
   }
 }
+.modal-appear {
+  opacity: 0.01;
+  filter: grayscale(100%);
+}
+
+.modal-appear.modal-appear-active {
+  opacity: 1;
+  filter: grayscale(0%);
+  transition: opacity 0.75s ease-in, filter 2s ease-in;
+}
 
 @media (min-width: 768px) {
   .order {

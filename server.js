@@ -8,6 +8,8 @@ app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
+//TODO: put menu in a separate file with exported functions to create closures and protect data
+
 const menu = {
   totalItems: 7,
   menuItems: {
@@ -141,15 +143,14 @@ const menu = {
   }
 };
 
+// create a new object / array to store orders
+
 let orders = {
   totalOrders: 0,
   customerOrders: {}
 };
 
-// create a new object / array to store orders
-
-// handles first request from the user to localhost:8080 and call the index.hbs view to return an html page to the useri
-
+// handles first request from the user to localhost:8080 and call the index.hbs view to return an HTML page to the user
 app.get('/', function(req, res) {
   res.render('index');
 });
@@ -181,7 +182,11 @@ app.get('/api/menu/:itemId', function(req, res) {
   }
 });
 
-app.post('/api/order', function(req, res) {
+// TODO: rework this to not use user submitted price to calculate the cost - get the cost from the menu data object ont he server side. Only send data back to the server that is needed and cannot be derived / calculated
+
+// post to /orders endpoint
+
+app.post('/api/orders', function(req, res) {
   const order = req.body;
   const ordersKeys = Object.keys(orders.customerOrders);
   const id = ordersKeys.length > 0 ? Math.max(...ordersKeys) + 1 : 1;
@@ -193,12 +198,12 @@ app.post('/api/order', function(req, res) {
 });
 
 //get all orders for admin
-app.get('/orders', (req, res) => {
+app.get('/api/orders', (req, res) => {
   res.json(orders);
 });
 
 // get order by id for customer order tracking
-app.get('/orders/:orderId', (req, res) => {
+app.get('/api/orders/:orderId', (req, res) => {
   res.json(orders.customerOrders[req.params.orderId]);
 });
 
