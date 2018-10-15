@@ -64,4 +64,17 @@ const menu = {
     }
 };
 
+// function getMenuItems () {
+//   return Object.values(menu);
+// }
+// function getMenuItembyId (id) {
+//   return menu[id];
+// }
+
+// module.exports = {
+//     getMenuItems, 
+//     getMenuItembyId
+// }
+
+
 exports.menu = menu;

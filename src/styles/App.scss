@@ -180,6 +180,7 @@ button {
   }
   &__items-count {
     font-size: 120%;
+    opacity: 0.7;
   }
 }
 
@@ -200,7 +201,7 @@ hr {
   }
   &.title {
     border-top: medium double $dark-colour;
-    height: 1rem;
+    height: 1rem; 
     &:after {
       content: "§";
       border-radius: 20px;
