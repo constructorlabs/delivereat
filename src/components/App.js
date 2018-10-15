@@ -140,7 +140,7 @@ class App extends React.Component {
     ordersToBeUpdated[orderIndex].quantity =
       ordersToBeUpdated[orderIndex].quantity - 1;
     const total = this.updateTotalPrice(ordersToBeUpdated);
-    if (ordersToBeUpdated[orderIndex].quantity === 0) {
+    if (ordersToBeUpdated[orderIndex].quantity < 1) {
       ordersToBeUpdated.splice(ordersToBeUpdated[orderIndex], 1);
       this.setState({
         currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
