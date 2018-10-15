@@ -156,7 +156,7 @@ class App extends React.Component {
   }
 
   render() {
-    const classes = cx(".modal", {
+    const classes = cx("modal", {
       "modal--active": this.state.on
     });
 
@@ -183,6 +183,7 @@ class App extends React.Component {
             </span>
             <p className='confirmation'>{this.state.confirmation}</p>
         </div>
+
       </div>
     );
   }
