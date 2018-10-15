@@ -140,6 +140,13 @@ class Menu extends React.Component {
           })}
         </ul>
         <p>Order price: £{this.state.orderTotal.toFixed(2)} </p>
+        <p>Any requests?</p>
+        <input
+          className="request"
+          type="text"
+          placeholder="e.g. Call when outside"
+        />
+        <br />
         <button onClick={this.submitOrderHandle}>Complete Order</button>
       </div>
     );
