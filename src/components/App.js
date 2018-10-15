@@ -143,6 +143,7 @@ class App extends React.Component {
     { values
       .filter(order => input ? order.username.includes(input) : true)
       .map((order, index) => {
+
         const summary = Object.values(order)
         .filter(orderItem => typeof orderItem === "object")
         .map(orderItem => {
@@ -150,6 +151,7 @@ class App extends React.Component {
           total += (orderItem.quantity * menuItem.price);
           return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menuItem.name} = {this.getCurrency(orderItem.quantity * menuItem.price)}</div>
         });
+
         return (<div key={"order-" + index}>
           <div><strong>Order name: {order.username}</strong></div>
 
@@ -213,7 +215,12 @@ class App extends React.Component {
     const allOrders = this.state.orders &&
       (<div className="orders">
         <h2>View all orders <i className="fas fa-1x fa-pound-sign"></i></h2>
-        <div>{ this.displayAllOrders() }</div>
+        <div>{ 
+          
+          this.displayAllOrders() 
+          
+          
+          }</div>
         <div><input type="text" onChange={this.filterOrders} className="orders__filter" placeholder="&#128269; Search orders..."></input></div>
       </div>)
 
