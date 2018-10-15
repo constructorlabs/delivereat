@@ -179,7 +179,7 @@ class App extends React.Component {
 
         <div id="confirmationModal" className={classes}>
             <span onClick={this.closeModal} className='close'>
-            <i className="fas fa-window-close"></i>
+            &times;
             </span>
             <p className='confirmation'>{this.state.confirmation}</p>
         </div>
