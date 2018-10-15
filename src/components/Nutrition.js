@@ -11,7 +11,7 @@ class Nutrition extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
-
+  //Displays nutritional info
   handleClick(event) {
     event.preventDefault();
 

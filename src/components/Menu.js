@@ -19,30 +19,6 @@ class Menu extends React.Component {
     this.submitOrderHandle = this.submitOrderHandle.bind(this);
     this.closeModal = this.closeModal.bind(this);
   }
-  //Recieves the order information from Dish and displays in basket. Also sets the 'orderObject' state.
-  recieveOrderTotal(price, dishName, quantity, id) {
-    this.state.order.push([
-      `${quantity} x ${dishName} - £${price.toFixed(2)} `
-    ]);
-    this.state.orderObject.push(
-      (id = {
-        id: id,
-        name: dishName,
-        quantity: quantity,
-        price: price
-      })
-    );
-    this.setState({
-      orderTotal: (this.state.orderTotal += price)
-    });
-  }
-
-  // addQuantity(dishId, quantity){
-  //  this.state.orderObject.map(function(dish){
-  //    if (dish.id == dishId) {
-  //      dish.quantity += quantity
-  //  }
-  // })}
 
   //fetches menu
   menuFetch() {
@@ -61,6 +37,25 @@ class Menu extends React.Component {
   componentDidMount() {
     this.menuFetch();
   }
+
+  //Recieves the order information from Dish and displays in basket. Also sets the 'orderObject' state.
+  recieveOrderTotal(price, dishName, quantity, id) {
+    this.state.order.push([
+      `${quantity} x ${dishName} - £${price.toFixed(2)} `
+    ]);
+    this.state.orderObject.push(
+      (id = {
+        id: id,
+        name: dishName,
+        quantity: quantity,
+        price: price
+      })
+    );
+    this.setState({
+      orderTotal: (this.state.orderTotal += price)
+    });
+  }
+
   //Sends the order to the server and recieves an order number
   submitOrderHandle(event) {
     if (this.state.orderObject.length !== 0) {
@@ -89,7 +84,7 @@ class Menu extends React.Component {
       alert("Cannot submit an empty basket!");
     }
   }
-  //Closes the confirmration modal
+  //Closes the confirmation modal
   closeModal() {
     this.setState({
       displayModal: !this.state.displayModal,

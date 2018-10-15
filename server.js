@@ -110,12 +110,8 @@ function getMenu() {
 }
 
 function addDish(id, dishName, dishPrice, dishType) {
-  newDish = { id: id, name: dishName, price: dishPrice, type: dishType };
-  return menu.push(newDish);
-}
-
-function deleteDish(id) {
-  return delete menu.id;
+  [dishName] = { id: id, name: dishName, price: dishPrice, type: dishType };
+  return menu.push([dishName]);
 }
 
 app.get("/", function(req, res) {

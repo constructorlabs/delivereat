@@ -16,7 +16,7 @@ class Dish extends React.Component {
   addQuantity(event) {
     this.state.quantity = event.target.value;
   }
-  resetQuantity() {}
+
   //Passes the order info up to Menu
   addToOrder(event) {
     event.preventDefault;
