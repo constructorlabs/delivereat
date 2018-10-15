@@ -4,7 +4,7 @@ Zing is an online coffee delivery app that is developed using React.js for the f
 
 <img src="./static/assets/readme-splash.jpg?raw=true" alt="Splash Page" width=200px height=400px>
 <img src="./static/assets/readme-menu.jpg?raw=true" alt="Menu on mobile" width=200px height=400px>
-<img src="./static/assets/readme-menu-ipad.jpg?raw=true" alt="Menu on tablet" width=200px height=400px>
+<img src="./static/assets/readme-menu-ipad.jpg?raw=true" alt="Menu on tablet" width=300px height=400px>
 <img src="./static/assets/readme-basket.jpg?raw=true" alt="Basket" width=200px height=400px>
 <img src="./static/assets/readme-checkout.jpg?raw=true" alt="Checkout" width=200px height=400px>
 
