@@ -28,7 +28,6 @@ class Order extends React.Component {
         {this.props.order.length>0?
         <OrderCalc order={this.props.order} receiveOrderSubmit={this.props.receiveOrderSubmit}/>
         : null}
-
       </div>
     );
   }

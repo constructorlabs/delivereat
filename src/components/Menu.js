@@ -1,6 +1,7 @@
 import React from 'react';
 import Food from './Food';
 import Order from './Order';
+import OrderBasket from './OrderBasket';
 import "../styles/Menu.scss";
 
 class Menu extends React.Component{
@@ -26,15 +27,13 @@ class Menu extends React.Component{
             )
           })
           }
-
           <div className="orders">
-            <Order
-              order={this.props.order}
-              receiveClickPlus={this.props.receiveClickPlus}
-              receiveClickMinus={this.props.receiveClickMinus}
-              receiveOrderSubmit={this.props.receiveOrderSubmit}
-            />
+            <OrderBasket order={this.props.order}
+            receiveClickPlus={this.props.receiveClickPlus}
+            receiveClickMinus={this.props.receiveClickMinus}
+            receiveOrderSubmit={this.props.receiveOrderSubmit}/>
           </div>
+
         </div>
       )}
 }
