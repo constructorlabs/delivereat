@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import '../styles/Basket.scss';
 
-function Basket({changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
+function Basket({menu,changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
 
   const countItems = order.contents.map(item => item[1]).reduce((a,b)=>(a+b));
   const total = order.total.toFixed(2);
@@ -18,7 +18,8 @@ function Basket({changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
         <div className='basket-details__close' onClick={()=>changeStage('menu')}>&times;</div>
         {order.contents.map(item => 
         <BasketItem 
-          key={item[0].timestamp} 
+          key={item[0]} 
+          menu={menu}
           basketItem={item} 
           addToOrder={addToOrder} 
           removeFromOrder={removeFromOrder} />)}
@@ -43,6 +44,7 @@ function Basket({changeStage,checkout,order,stage,addToOrder,removeFromOrder}) {
 
 Basket.propTypes = {
   stage: PropTypes.string.isRequired,
+  menu: PropTypes.array.isRequired,
   changeStage: PropTypes.func.isRequired,
   checkout: PropTypes.func.isRequired,
   order: PropTypes.object.isRequired,

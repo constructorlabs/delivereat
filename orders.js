@@ -3,7 +3,7 @@ const orders = {};
 function postOrder(order) {
   const newId = (Object.keys(orders).length) ? Math.max(...Object.keys(orders)) + 1 : 1;
   const date = new Date();
-  const orderData = {'orderId': newId, 'orderStatus': 'new', 'placedAt': date.toLocaleString(), 'order': order};
+  const orderData = {'orderId': newId, 'orderStatus': 'new', 'placedAt': date.toLocaleString(), 'orderContents': order};
   orders[newId] = orderData;
   return orderData;
 }

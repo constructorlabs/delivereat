@@ -33,39 +33,43 @@ class App extends React.Component {
     this.setState({stage});
   }
 
-  addToOrder(coffee) {
+  calculateTotal(order) {
+    const menu = this.state.menu;
+    const total = (order.length) ? order
+    .map(orderItem => menu.find(menuItem => menuItem.id === orderItem[0]).price * orderItem[1])
+    .reduce((a,b) => (a+b)) : 0;
+    return total;
+  }
+
+  addToOrder(menuItemId) {
     let contents = this.state.order.contents;
     if (contents.length === 0) {
-      contents = [[coffee, 1]];
-    } else if (!contents.map(item => item[0].id).includes(coffee.id)) {
-      contents.push([coffee,1]);
+      contents = [[menuItemId, 1]];
+    } else if (!contents.map(item => item[0]).includes(menuItemId)) {
+      contents.push([menuItemId,1]);
     } else {
       contents = contents.map(item => {
-        if (item[0].id === coffee.id) {
+        if (item[0] === menuItemId) {
           return [item[0],item[1] + 1];
         } else {
           return item;
         }})}
-
-    const total = contents.map(item => item[0].price * item[1]).reduce((a,b)=>(a+b));
+    const total = this.calculateTotal(contents);
     this.setState({order: {
                     contents,
                     total }});
   }
 
-  removeFromOrder(coffee) {
+  removeFromOrder(menuItemId) {
     const contents = this.state.order.contents
     .map(item => {
-      if (item[0].id === coffee.id) {
+      if (item[0] === menuItemId) {
         return [item[0], item[1] - 1];
       } else {
         return item;
       }})
     .filter(item => item[1] !== 0);
-    const total = (contents.length) ? 
-      contents
-        .map(item => item[0].price * item[1])
-        .reduce((a,b)=>(a+b)) : 0;
+    const total = this.calculateTotal(contents);
     this.setState({order: {
                     contents,
                     total }});
@@ -109,7 +113,8 @@ class App extends React.Component {
               removeFromOrder={this.removeFromOrder}/>}
             {(!!this.state.order.contents.length) && 
             <Basket 
-              stage={stage} 
+              stage={stage}
+              menu={this.state.menu} 
               changeStage={this.changeStage} 
               order={this.state.order} 
               addToOrder={this.addToOrder} 
