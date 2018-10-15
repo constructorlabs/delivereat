@@ -17,8 +17,9 @@ class App extends React.Component {
       menu: [],
       order: [],
       placedOrders: [],
+      orderBasket: [],
       displayMenu: true,
-      displayOrderHistory:false,
+      displayOrderHistory: false
     };
 
     this.receiveAddClick = this.receiveAddClick.bind(this);
@@ -42,9 +43,12 @@ class App extends React.Component {
       });
 
     const storageString = window.localStorage.getItem("placedOrders");
-    const localStorage = !storageString ? [] : JSON.parse(storageString);
+    const storage = !storageString ? [] : JSON.parse(storageString);
+    const orderString = window.localStorage.getItem("order");
+    const orderStorage = !orderString ? [] : JSON.parse(orderString);
     this.setState({
-      placedOrders: localStorage
+      placedOrders: storage,
+      order: orderStorage
     });
   }
 
@@ -61,7 +65,7 @@ class App extends React.Component {
       .then(body => {
         this.setState({
           order: [],
-          displayMenu:true,
+          displayMenu: true
         });
         alert("Order has been placed successfully!");
       });
@@ -91,7 +95,7 @@ class App extends React.Component {
           price: this.state.menu.find(item => item.name == name).price
         })
       },
-      () => console.log(this.state.order)
+      () => localStorage.setItem("order", JSON.stringify(this.state.order))
     );
   }
 
@@ -100,7 +104,7 @@ class App extends React.Component {
       {
         order: this.state.order.filter(item => item.name !== name)
       },
-      () => console.log(this.state.order)
+      () => localStorage.setItem("order", JSON.stringify(this.state.order))
     );
   }
   receiveClickPlus(orderName) {
@@ -148,10 +152,10 @@ class App extends React.Component {
     });
   }
 
-  orderHistory(){
+  orderHistory() {
     this.setState({
       displayOrderHistory: !this.state.displayOrderHistory
-    })
+    });
   }
 
   render() {
@@ -159,17 +163,28 @@ class App extends React.Component {
       <div className="wrapper">
         <h1>Food Heaven</h1>
         <div className="nav">
-        <p className="orderHistory" onClick={this.orderHistory}>Order History</p>
-        {this.state.displayOrderHistory?
-          <OrderHistory placedOrders={this.state.placedOrders}/>
-          :null}
-        {this.state.displayMenu?
-        <FontAwesomeIcon className="icon" icon="shopping-cart" onClick={this.shoppingCart} />
-        :<FontAwesomeIcon className="icon" icon="home" onClick={this.shoppingCart} />
-        }
+          <p className="orderHistory" onClick={this.orderHistory}>
+            Order History
+          </p>
+          {this.state.displayOrderHistory ? (
+            <OrderHistory placedOrders={this.state.placedOrders} />
+          ) : null}
+          {this.state.displayMenu ? (
+            <FontAwesomeIcon
+              className="icon"
+              icon="shopping-cart"
+              onClick={this.shoppingCart}
+            />
+          ) : (
+            <FontAwesomeIcon
+              className="icon"
+              icon="home"
+              onClick={this.shoppingCart}
+            />
+          )}
         </div>
         {this.state.displayMenu ? (
-          <div >
+          <div>
             <Menu
               receiveAddClick={this.receiveAddClick}
               menu={this.state.menu}
@@ -179,7 +194,6 @@ class App extends React.Component {
               receiveOrderSubmit={this.receiveOrderSubmit}
               receiveRemoveClick={this.receiveRemoveClick}
             />
-
           </div>
         ) : (
           <div>
