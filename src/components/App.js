@@ -14,13 +14,14 @@ class App extends React.Component {
     this.state = {
       menu: [],
       currentOrder: [],
-      orders: {}
+      orders: []
     }
     this.receiveItemOrder = this.receiveItemOrder.bind(this)
     this.removeItemOrder = this.removeItemOrder.bind(this)
     this.fetchMenu = this.fetchMenu.bind(this)
     this.receiveOrderAdmin = this.receiveOrderAdmin.bind(this)
     this.fetchOrders = this.fetchOrders.bind(this)
+    this.sendOrderToApi = this.sendOrderToApi.bind(this)
   }
 
   fetchMenu() {
@@ -40,12 +41,27 @@ class App extends React.Component {
       })
   }
 
+  sendOrderToApi() {
+    fetch("/api/orders", {
+      method: "POST",
+      body: JSON.stringify(this.state.currentOrder),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(order => {
+        alert(`We are making stuff for you! Your order ID is ${order.orderid}`)
+      });
+  }
+
   componentDidMount() {
    this.fetchMenu();
    this.fetchOrders();
    }
+
   receiveItemOrder(order) {
-    const updatedOrder = Object.assign({}, this.state.currentOrder, {[order.id]: order } )
+    const updatedOrder = Object.assign({}, this.state.currentOrder, { [order.id]: order } )
     this.setState({currentOrder: updatedOrder})
   } 
   removeItemOrder(id) {
@@ -78,7 +94,9 @@ class App extends React.Component {
           />
           
           <MakeOrder 
+          menu={this.state.menu}
           currentOrder={this.state.currentOrder}
+          sendOrderToApi={this.sendOrderToApi}
           />
   
           <OrderAdmin 

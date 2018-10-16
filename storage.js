@@ -121,19 +121,20 @@ function getMenu(){
 function addOrder(order){
   
   const currentOrders = Object.keys(storage.orders);
-  let orderId = currentOrders.length ? Math.max(...currentOrders) + 1: 1;
+  const highestorderId = currentOrders.length ? Math.max(...currentOrders): 0;
+  const orderId = highestorderId + 1;
 
-  storage.orders = Object.assign({}, storage.orders, { [orderId]: {
+  storage.orders[orderId] = {
     orderid: orderId,
     menuitems: order
-  }});
-
+    }
   return storage.orders[orderId]
 }
 
 function getOrders() {
   return storage.orders;
 }
+
 
 // function amendOrders(orderId, orderStatus) {
 //   return storage.orders.status
