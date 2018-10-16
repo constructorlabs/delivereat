@@ -1,0 +1,103 @@
+@import 'defaults';
+
+.basket {
+  position: sticky;
+  bottom: 5px;
+  background: white;
+  
+  &-details {
+    display: none;
+
+    &--visible {
+      display: flex;
+      flex-direction: column;
+      background: white;
+    }
+
+    &__close {
+      text-align: right;
+      padding-right: 1rem;
+      font-size: 1.5rem;
+      border-top: 2px solid black;
+    }
+
+    &__delivery {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #cccccc;
+      padding: 0.5rem 1rem 0.5rem 0;
+      border-left: 6px solid white; 
+      
+      &-text {
+        padding-left: 1rem;
+      }
+    }
+
+    &__total {
+      color:black;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #cccccc;
+      padding: 0.5rem 1rem 0.5rem 0;
+      border-left: 6px solid white; 
+      
+      &-text {
+        padding-left: 1rem;
+      }
+    }
+  }
+
+  &-summary {
+    display: none;
+
+    &--visible { 
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 3rem;
+      color: white;
+      margin: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 5px;
+      background: $my-green;
+    }
+  }
+
+  &-checkout {
+    display: none;
+
+    &--visible {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 3rem;
+      color: white;
+      margin: 10px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      border-radius: 5px;
+      background: rgb(194, 131, 30);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .basket-summary {
+
+    &--visible {
+      margin-top: 12rem;
+      justify-content: space-between;
+    }
+
+    &__count {
+      padding-left: 2rem;
+    }
+
+    &__total {
+      padding-right: 2rem;
+    }
+  }
+}

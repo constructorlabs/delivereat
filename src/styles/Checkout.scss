@@ -1,0 +1,52 @@
+@import 'defaults';
+
+.checkout {
+  height: 100vh;
+  background-image: url('/static/assets/checkout-small.jpg');
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+
+  &__logo {
+    position: absolute;
+    bottom: 6rem;
+    left: 1.6rem;
+    color: white;
+    font-size: 3rem;
+    margin: 0;
+    font-family: 'Sedgwick Ave Display', cursive;
+  }
+
+  &__text {
+    font-family: 'Roboto';
+    font-size: 1rem;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.6rem;
+    color: white;
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .checkout {
+    background-image: url('/static/assets/checkout-medium.jpg');
+
+    &__logo {
+      font-size: 5rem;
+      bottom: 10rem;
+      left: 3rem;
+    }
+
+    &__text {
+      font-size: 1.4rem;
+      bottom: 5rem;
+      left: 3rem;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+
+}

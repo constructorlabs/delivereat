@@ -1,0 +1,18 @@
+$primary-color: #403D39;
+$background-color: white;
+$my-green:  rgb(128, 156, 36);
+$font-family: 'Roboto';
+
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color;
+  font-family: $font-family;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+}

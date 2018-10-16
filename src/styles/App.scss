@@ -1,3 +1,90 @@
+@import 'defaults';
+$scroll-factor : 0.4;
+
 body {
-  background-color: Cornsilk;
+  background-color: white;
+  margin: 0;
+}
+
+#root { 
+  width: 100%;
+}
+
+.main {
+  perspective: 1px;
+  perspective-origin: center top;
+  transform-style: preserve-3d;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.header {
+  height: 30vh;
+  background-image: url('/static/assets/header-small.jpg');
+  background-position: center;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  position: relative;
+  transform: 
+    translateZ(-#{$scroll-factor}px)
+    scale(1 + $scroll-factor * 2);
+  z-index: 10;
+
+    &__logo {
+      position: absolute;
+      bottom: 0;
+      left: 3.5rem;
+      color: white;
+      font-size: 2.5rem;
+      margin: 0;
+      font-family: 'Sedgwick Ave Display', cursive;
+    }
+
+  .content {
+    display: block;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    z-index: -10;
+  }
+}
+
+.app-appear {
+  opacity: 0.01;
+}
+
+.app-appear.app-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.app-leave {
+  opacity: 1;
+}
+
+.app-leave.app-leave-active {
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
+}
+
+@media screen and (min-width: 768px) {
+
+  .header {
+    height: 30vh;
+    background-image: url('/static/assets/header-medium.jpg');
+
+    &__logo {
+      font-size: 3rem;
+      bottom: 0;
+      left: 6rem;
+    }
+  }
+}
+
+@media screen and (min-width: 960px) {
+
+  .app {
+    display: none;
+  }
 }
