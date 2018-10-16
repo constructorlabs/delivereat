@@ -1,16 +1,21 @@
 import React from 'react';
+import cx from 'classnames'
 
-import cx from 'classnames';
+
 
 
 class DisplayResults extends React.Component {
   constructor(){
     super()
     this.state = {
-       quantity: 0 ,//has to start with 0 quantity
-       itemPrice: '',
+       quantity: 0 ,//has to start with 0 
+       itemPrice: ''
+       
+       
+       
        
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.adjustQuantity = this.adjustQuantity.bind(this)
   }
 
@@ -20,19 +25,36 @@ class DisplayResults extends React.Component {
       }
 
 
-      sendOrderInfo(){ // to basket
-
-      }
-
 
       handleSubmit(event){
         event.preventDefault()
-        
+        this.state.quantity <= 0 ? alert("Select qauntity") : this.MakeOrder() && 
+        this.setState({quantity: 0,
+          showOrder: true
+        })
       }
 
+      MakeOrder(){
+        let price = this.props.menuItems.price * this.state.quantity;
+        const order = {
+          item: this.props.menuItems.title,
+          id: this.props.menuItems.id,
+          price: price,
+          quantity: this.state.quantity,
+        };
+        
+        this.props.getOrder(order);
+        }
+      
+     
+
+
+    
   render(){
+   
     return (
       <div>
+        
         <h3>{this.props.menuItems.title}</h3>
         <p>{this.props.menuItems.category}</p>
         <img src={`./static/images/${this.props.menuItems.image}`} alt={this.props.menuItems.description}/>      
@@ -41,8 +63,9 @@ class DisplayResults extends React.Component {
            <input type='text' value={this.state.quantity}/>
            <input onClick={this.adjustQuantity}type="button" value="-" />
            <input onClick={this.adjustQuantity} type="button" value="+" />
-           <input  onClick={this.handleSubmit}type='submit' value='Add To Basket'/>
-        </form>
+           <button onClick={this.handleSubmit}>Add</button>
+        </form>        
+
       </div>
     );
   }

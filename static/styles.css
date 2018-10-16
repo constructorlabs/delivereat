@@ -1,37 +1,52 @@
 body {
   margin: 0;
+  font-size: 10px;
+  background: white;
 }
 
 
-img {
-  width: 150px;
-}
+
 
 .hidden{
  display: none;
   
 }
-.closer{
-  text-align:right;
-  margin: 25px;
-  color: white;
-}
+
 
 .orderInfo{
 display: block;
-
-}
-
-.welcome-header{
-  text-align: center;
-}
-
-.menu__items{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  text-align: center;
 }
 
 h1{
   text-align: center;
+}
+
+.homepage-header{
+  text-align: center;
+}
+
+img {
+  width: 150px;
+}
+.menu__items{
+  display: grid;
+  grid-template-columns: 1fr 1fr ;
+  text-align: center;
+}
+
+.basket{
+  text-align:center;
+}
+.order{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+@media screen and (min-width: 600px) {
+  .menu__items{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+    text-align: center;
+  }
+
 }

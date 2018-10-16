@@ -1,5 +1,5 @@
 import React from 'react';
-import WelcomeHeading from './WelcomeHeading'
+import Homepage from './Homepage'
 import Basket from './Basket'
 import MenuResults from './MenuResults'
 
@@ -10,11 +10,14 @@ class App extends React.Component {
     super();
     this.state = {
       menu: {},
-      order: {},
+      order: {},  //to add empty history of order
+      
   
     }
-    this.fetchMenu = this.fetchMenu.bind(this)
-    this.fetchOrder = this.fetchOrder.bind(this)
+    this.getOrder = this.getOrder.bind(this);
+    // this.fetchMenu = this.fetchMenu.bind(this)
+    this.sendOrder = this.sendOrder.bind(this)
+    
   }
 
   componentDidMount(){
@@ -27,36 +30,60 @@ class App extends React.Component {
     .then(body => {
       console.log(body)
       this.setState({
-        menu: body
+        menu: body,
       })
   })
 }
 
-  fetchOrder(order){
-    fetch('/order', {
-    method: 'post',
-    body: JSON.stringify(order),
-    headers: {
-      'Content-Type': 'application/json'
-    }})
-  .then(response => response.json())
-  .then(data => {
-    this.setState({
-      order: {},
-      orders: data
-    })
-  });
+sendOrder(){
+  this.setState({
+    order: {}
+  })
+}
+
+
+  getOrder(order) {
+    const matchingOrders = Array.from(this.state.order).find(newOrder => {
+      return order.id === newOrder.id;
+    });
+
+    if (matchingOrders) {
+      matchingOrders.quantity += order.quantity;
+      matchingOrders.price += order.price;
+
+      const ordersWithoutCurrentOrder = this.state.order.filter(
+        newOrder => {
+          return newOrder.id !== order.id;
+        }
+      );
+
+      this.setState({
+        order: ordersWithoutCurrentOrder.concat(matchingOrders)
+      });
+    } else {
+      this.setState({
+        order: [...this.state.order, order]
+      });
+    }
   }
+
+
+
+  
+
+
+
+
 
 
   render(){
     return (
       <div>
-        <div className='welcome-header'>
-          <WelcomeHeading/>
+        <div className='homepage-header'>
+          <Homepage/>
         </div>
-        <Basket  fetchOrder={this.fetchOrder} order={this.state.order}/>
-        <MenuResults  menu={this.state.menu}/>
+          <Basket   sendOrder={this.sendOrder} order={this.state.order}/>
+        <MenuResults  getOrder={this.getOrder} menu={this.state.menu}/>
       </div>
     )
   }
