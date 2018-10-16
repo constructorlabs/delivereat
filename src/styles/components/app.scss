@@ -1,4 +1,4 @@
-@import "../base/color";
+@import "../main.scss";
 
 * {
   box-sizing: border-box;
@@ -49,23 +49,11 @@ a {
   display: inline-block;
   font-size: 16px;
 
-  .button-quantity {
-    background-color: $primary-color;
-    cursor: pointer;
-    border: none;
-    color: white;
-    height: 10px;
-    width: 10px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-  }
-
   &:hover {
     background-color: $primary-color-light;
   }
 }
+
 .button-quantity {
   background-color: #eaeaea;
   cursor: pointer;
@@ -128,11 +116,6 @@ hr {
   & hr {
     margin: 10px;
   }
-}
-
-#root {
-  display: flex;
-  justify-content: center;
 }
 
 .container {
@@ -245,6 +228,7 @@ hr {
   .main {
     padding: 0 30px;
     flex-direction: row;
+
 
     &__aside-left {
       display: unset;

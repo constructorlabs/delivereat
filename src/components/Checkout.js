@@ -11,8 +11,8 @@ class Checkout extends React.Component {
       order: {}
     };
 
-    this.placeOrder = this.placeOrder.bind(this);
-    this.checkout = this.checkout.bind(this);
+    // this.placeOrder = this.placeOrder.bind(this);
+    // this.checkout = this.checkout.bind(this);
   }
 
   getTotals() {

@@ -1,9 +1,9 @@
-@import "../base/color";
+@import "../main.scss";
 
 .basket {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: $foreground-color;
   border: 1px solid $line-color-light;
   box-shadow: 0px 8px 16px 0px rgba(124, 124, 124, 0.2);
   padding: 0 10px;
