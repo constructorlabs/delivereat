@@ -6,7 +6,6 @@ function OrderItem({
   receiveQuanitityDecrease,
   formatToMoney
 }) {
-
   return (
     <div className="order__item">
       <p className="order__item__title">{order.name}</p>

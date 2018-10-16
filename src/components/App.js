@@ -84,6 +84,7 @@ class App extends React.Component {
   }
 
   receiveOrder(order) {
+    order.quantity = 1;
     if (this.state.currentOrder.orderItems.includes(order) === false) {
       const incomingOrder = this.state.currentOrder.orderItems.concat(order);
       const totalPrice = this.updateTotalPrice(incomingOrder);
@@ -125,7 +126,7 @@ class App extends React.Component {
 
   receiveQuanitityIncrease(id) {
     const orderIndex = this.checkCurrentOrder(id);
-    const ordersToBeUpdated = this.state.currentOrder.orderItems;
+    const ordersToBeUpdated = [...this.state.currentOrder.orderItems];
     ordersToBeUpdated[orderIndex].quantity =
       ordersToBeUpdated[orderIndex].quantity + 1;
     const total = this.updateTotalPrice(ordersToBeUpdated);
@@ -136,21 +137,20 @@ class App extends React.Component {
 
   receiveQuanitityDecrease(id) {
     const orderIndex = this.checkCurrentOrder(id);
-    const ordersToBeUpdated = this.state.currentOrder.orderItems;
+    const ordersToBeUpdated = [...this.state.currentOrder.orderItems];
+    console.log('first', ordersToBeUpdated);
     ordersToBeUpdated[orderIndex].quantity =
       ordersToBeUpdated[orderIndex].quantity - 1;
+    console.log('second', ordersToBeUpdated);
     const total = this.updateTotalPrice(ordersToBeUpdated);
     if (ordersToBeUpdated[orderIndex].quantity < 1) {
       ordersToBeUpdated.splice(ordersToBeUpdated[orderIndex], 1);
-      this.setState({
-        currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
-      }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)));
-    } else {
-      this.setState({
-        currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
-      }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)));
     }
-  }
+    this.setState({
+      currentOrder: { orderItems: ordersToBeUpdated, orderTotal: total }
+      }, () => localStorage.setItem("currentOrder", JSON.stringify(this.state.currentOrder)));
+  } 
+  
 
   render() {
     const menuClasses = cx("menu__page__container", {
