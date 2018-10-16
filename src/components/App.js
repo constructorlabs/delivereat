@@ -1,4 +1,5 @@
 import React from 'react';
+import Menu from './Menu.js'
 
 import '../styles/App.scss';
 
@@ -10,7 +11,8 @@ class App extends React.Component {
   render(){
     return (
       <div>
-        Delivereat app
+        <h1 className="mainHeading">Diabetes</h1>
+        <Menu />
       </div>
     )
   }
