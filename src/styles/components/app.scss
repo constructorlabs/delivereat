@@ -2,7 +2,6 @@
 
 * {
   box-sizing: border-box;
-  // font-family: "Roboto", sans-serif;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -89,20 +88,13 @@ a {
 hr {
   border: 0;
   height: 1px;
-  // background-image: linear-gradient(to right, rgba(80, 80, 80, 0), rgba(80, 80, 80, 0.75), rgba(80, 80, 80, 0));
   background-color: $line-color-light;
 }
 
 .header {
-  // background-color: rgb(92, 92, 92);
   width: 100vw;
   position: relative;
   background-color: white;
-
-  // &__top-bar {
-  //   background-color: white;
-  //   padding: 0;
-  // }
 
   &__container {
     background-color: black;

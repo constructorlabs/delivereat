@@ -76,8 +76,6 @@ class App extends React.Component {
   }
 
   placeOrder() {
-    console.log("place order");
-
     fetch("http://localhost:8080/api/orders", {
       method: "post",
       body: JSON.stringify(this.state.basket),
@@ -98,7 +96,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("render");
     if (this.state.renderCheckout) {
       return (
         <main className="main">
@@ -116,9 +113,6 @@ class App extends React.Component {
     return (
       <div className="container">
         <header className="header">
-          {/* <div className="header__top-bar">
-            <h2>Deliver. Eat. </h2>
-          </div> */}
           <div className="header__container">
             <img
               className="header__container__image"

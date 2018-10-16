@@ -1,21 +1,18 @@
-@import '../base/color';
+@import "../base/color";
 
 .dish {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 
+  &__name {
+    flex: 1;
+  }
 
-    &__name {
-        flex: 1;
+  &__price {
+    margin-right: 0.5em;
+  }
 
-    }
-
-    &__price {
-        margin-right: 0.5em;
-    }
-
-    &__btn {
-        font-size: 18px;
-    }
-
+  &__btn {
+    font-size: 18px;
+  }
 }
