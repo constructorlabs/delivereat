@@ -66,7 +66,7 @@ return {
 
 function orders(){
   const orderClosure = {} // order will start as empty since orders need to be placed
-  //think I will need an order id
+    let orderId =''//think I will need an order id
   return {
     getAllOrders(){
     return orderClosure;
