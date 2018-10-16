@@ -85,7 +85,6 @@ input {
   display: flex;
   flex-direction: column;
   width: 100%;
-  // position: relative;
 }
 
 .form__wrapper {
@@ -113,28 +112,6 @@ button {
   &.basket__state-empty {
     margin-top: 0.7rem;
   }
-}
-
-/* menu
-////////////////////////////////*/
-
-.menu__item {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  & ul {
-    margin: 0;
-    padding: 0;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-  }
-  select {
-    margin-bottom: 0.7rem;
-    background-color: #fff;
-  }  
 }
 
 /* orders
@@ -193,11 +170,6 @@ hr {
   &.box {
     height: 1px;
     background: $mid-colour;
-    // background-image: linear-gradient(to right, 
-    //   rgba(51, 51, 51, 0), 
-    //   rgba(51, 51, 51, 0.75), 
-    //   rgba(51, 51, 51, 0)
-    // );
   }
   &.title {
     border-top: medium double $dark-colour;
@@ -215,77 +187,34 @@ hr {
   }
 }
 
-.thumb {
-  display: none;
+.tooltip {
   position: relative;
-  left: 10px;
-  top: 10px;
-  z-index: 10;
-  &.visible {
-    display:initial;
+  display: inline-block;
+  cursor: pointer;
+  & .tooltip-content {
+    visibility: hidden;
+    margin: 0 0 -45px 2rem;
+    bottom: 1rem;
+    padding: 0;
     position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s;
+    & img {
+      padding: 0;
+      margin: 0;
+      width: 100px;
+      min-width: 100px;
+    }
+    cursor: auto;
   }
 }
 
-.thumbTest {
-  display: none;
-  position: relative;
-  background-color: red;
-  &.visible {
-    display:initial;
-    position: absolute;
-  }
-  &:hover:after{
-    background: #333;
-    background: rgba(0,0,0,0.8);
-    bottom: 26px;
-    color: #fff;
-    left: 20%;
-    position: absolute;
-    z-index: 98;
-    width: 220px;
-    border-radius: 5px;
-  }
-
-  &:hover:before{
-    border: solid;
-    border-color: #333 transparent;
-    border-width: 6px 6px 0 6px;
-    bottom: 20px;
-    content: "";
-    left: 50%;
-    position: absolute;
-    z-index: 99;
-  }
+.tooltip:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
 }
 
-
-.tooltip{
-  display: inline;
-  position: relative;
-
-  &:hover:after{
-    background: #333;
-    background: rgba(0,0,0,0.8);
-    bottom: 26px;
-    color: #fff;
-    zoom: 2%;
-    object-fit: cover;
-    left: 20%;
-    position: absolute;
-    z-index: 98;
-    width: 220px;
-    border-radius: 5px;
-  }
-
-  &:hover:before{
-    border: solid;
-    border-color: #333 transparent;
-    border-width: 6px 6px 0 6px;
-    bottom: 20px;
-    content: "";
-    left: 50%;
-    position: absolute;
-    z-index: 99;
-  }
+.fa-icon-style {
+  margin: 0 0 0 0.5rem;
 }

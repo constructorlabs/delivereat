@@ -14,15 +14,11 @@ function Menu ({menu, getCurrency, currentOrder, receiveHandleChange}) {
                             item={item}
                             receiveHandleChange={(id, event) => receiveHandleChange(item.menuId, event)} 
                             currentOrder={currentOrder}
-                            getCurrencyString={getCurrencyString} 
+                            getCurrency={(string) => getCurrency(string)} 
                         />
             })}
             {course !== "dessert" && <hr className="title"></hr>}
         </div>
-    }
-  
-    function getCurrencyString (string) {        
-        return getCurrency(string);
     }
 
     return (

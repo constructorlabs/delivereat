@@ -8,8 +8,6 @@ class App extends React.Component {
   constructor(){
     super();
 
-    // this.toolTipOn = this.toolTipOn.bind(this); 
-    // this.toolTipOff = this.toolTipOff.bind(this); 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.receiveHandleChange = this.receiveHandleChange.bind(this);
     this.getCurrency = this.getCurrency.bind(this);
@@ -122,14 +120,6 @@ class App extends React.Component {
     this.setState({ basketVisible: !this.state.basketVisible });
   }
 
-  toolTipOn(event) {
-    this.setState({ tooltip: "thumb.visible" })
-  }
-
-  toolTipOff(event) {
-    this.setState({ tooltip: "thumb" })
-  }
-
   render(){
 
     const currentOrderHasFood = this.state.currentOrder && Object.values(this.state.currentOrder).find(item => typeof item === "object");
@@ -187,9 +177,6 @@ class App extends React.Component {
           <form onSubmit={this.handleSubmit} className="menu__form">
             <div className="form__wrapper">
 
-              {/* <div className={this.state.tooltip}><img src="https://images.unsplash.com/photo-1523986371872-9d3ba2e2a389"></img></div>
-              <a href="#" onMouseEnter={this.toolTipOn} onMouseLeave={this.toolTipOff}>Tooltip</a>  */}
-              
               { basket }
               { formElements }
 

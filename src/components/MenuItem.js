@@ -1,6 +1,7 @@
 import React from 'react';
+import '../styles/Menu.scss';
 
-function MenuItem ({item, currentOrder, getCurrencyString, receiveHandleChange}) {
+function MenuItem ({item, currentOrder, getCurrency, receiveHandleChange}) {
     
     function createQuantityOptions (name, id) {
         const array = [];
@@ -25,7 +26,7 @@ function MenuItem ({item, currentOrder, getCurrencyString, receiveHandleChange})
                 <img src={item.image}></img>
                 <ul>
                     <li><strong>{item.name}</strong></li>
-                    <li>Price: {getCurrencyString(item.price)}</li>
+                    <li>Price: {getCurrency(item.price)}</li>
                     <li>Quantity: {createQuantityOptions(item.name, item.menuId)}</li>
                 </ul>
             </div>)

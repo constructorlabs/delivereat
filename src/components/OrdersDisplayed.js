@@ -15,7 +15,14 @@ function OrdersDisplayed ({filterInput, orders, menu, getCurrency, filterOrders}
         .filter(orderItem => typeof orderItem === "object")
         .map(orderItem => {
           total += (orderItem.quantity * menu[orderItem.menuId].price);
-          return <div key={"item-" + orderItem.menuId}>{orderItem.quantity} x {menu[orderItem.menuId].name} = {getCurrency(orderItem.quantity * menu[orderItem.menuId].price)}</div>
+          return <div key={"item-" + orderItem.menuId}>
+            {orderItem.quantity} x {menu[orderItem.menuId].name} = {getCurrency(orderItem.quantity * menu[orderItem.menuId].price)}
+            <div className="tooltip"><i className="fas fa-1x fa-image fa-icon-style"></i>
+              <div className="tooltip-content">
+                <img src={menu[orderItem.menuId].image}></img>
+              </div>
+            </div>
+          </div>
         });
         return (<div key={"order-" + index}>
           <div><strong>Order name: {order.username}</strong></div>
