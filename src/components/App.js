@@ -115,7 +115,7 @@ class App extends React.Component {
   }
 
   submitOrder() {
-    fetch('/orders', {
+    fetch('/api/orders', {
       method: 'POST',
       body: JSON.stringify(this.state.orderBasket),
       headers: {
@@ -179,7 +179,11 @@ class App extends React.Component {
         {hasOrdered && (
           <div className="acknowledge__wrapper">
             <div className="acknowledge">
-              <h3> Thank you for your order. Enjoy your breakfast!</h3>
+              <h3>
+                {' '}
+                Thank you for your order (REF: {this.state.orderRef}) Enjoy your
+                breakfast!
+              </h3>
               <button onClick={() => this.exit()} className="btn btn__submit">
                 Close
               </button>
