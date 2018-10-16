@@ -1,0 +1,106 @@
+@import '../base/_variables.scss';
+
+.menuitem {
+    border-bottom: 2px dotted lighten($background-color, 30% );
+    padding-top: $main-padding *1;
+    padding-bottom: $main-padding *1;
+
+    &__form {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__details {
+        text-align: right;
+    }
+
+    &__item {
+        text-transform: uppercase;
+    }
+
+    &__price {
+        color: lighten($background-color, 30% );
+    }
+
+}
+h2 + li.menuitem {
+    border-top: 2px dotted lighten($background-color, 30% );
+}
+
+
+// quantity changer
+.quantity {
+    &__label {
+        display: block;
+        color: lighten($background-color, 30% );
+        text-transform: uppercase;
+    }
+
+    &__change, &__display {
+        border: none;
+        width: 25px;
+        padding: 5px 0;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+    }
+    &__display {
+        background-color: lighten($background-color, 30% );
+    }
+    &__change {
+        background-color: lighten($background-color, 10% );
+        color: white;
+    }
+}
+// submit button
+.menuitem__submit {
+    color:  $primary-color;
+    display: inline-block;
+    border: none;
+    margin: 0;
+    text-decoration: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+    transition: color 250ms ease-in-out, 
+                transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    &::before {
+        font-size: 1.33em;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: "\f055";
+        margin-left: 5px;
+    }
+    &.added{
+        color:  green;
+        &::before {
+            content: "\f058";
+        }
+    }
+}
+.menuitem__error {
+    transition: color 250ms ease-in-out, 
+        transform 150ms ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;  
+    display: none; 
+    &.show--error {
+        color: red;
+        display: block;
+    }
+}
+
+// MEDIA QUERIES
+@media (min-width: 768px) {
+    .menuitem__submit:hover {
+        color:  $text-color;
+    }
+}

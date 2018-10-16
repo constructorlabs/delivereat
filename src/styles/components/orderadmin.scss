@@ -1,0 +1,7 @@
+@import '../base/_variables.scss';
+
+.orderadmin {
+    border: 2px dotted lighten($background-color, 30% );
+    padding: 0 $main-padding *1 $main-padding *1;
+    margin-bottom: $main-padding *3;
+}
