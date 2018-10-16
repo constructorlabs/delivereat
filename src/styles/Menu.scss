@@ -11,6 +11,9 @@
     flex-direction: column;
     flex-wrap: nowrap;
   }
+  img {
+    border: 0.25rem solid #fff;
+  }
   select {
     margin-bottom: 0.7rem;
     background-color: #fff;

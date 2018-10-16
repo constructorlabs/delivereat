@@ -1,0 +1,52 @@
+$border-thickness: 0.05rem;
+$mid-colour: #d2c69e;
+$dark-colour: #2d2211;
+
+input, select, button {
+  font-size: 1rem;
+}
+
+input {
+  padding: 0.7rem;
+  border: $border-thickness solid $mid-colour;
+  margin-bottom: 0.7rem;
+  background: #fff;
+  width: 100%;
+  &.orders__filter {
+    margin-bottom: 0.2rem;
+    margin-top: 0.7rem;
+  }
+}
+
+.form__elements {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form__wrapper {
+  display: flex;
+  flex-direction: column;
+
+}
+
+button {
+  &.menu__form__submit, &.basket__state-empty,  {
+    width: 100%;
+    padding: 0.7rem;
+    color: #fff;
+    cursor: pointer;
+    border: $border-thickness solid $dark-colour;
+    background-color: $dark-colour;
+    opacity: 0.8;
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &.menu__form__submit {
+    margin-bottom: 0.7rem;
+  }
+  &.basket__state-empty {
+    margin-top: 0.7rem;
+  }
+}

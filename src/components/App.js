@@ -3,6 +3,8 @@ import Menu from './Menu';
 import OrdersDisplayed from './OrdersDisplayed';
 import OrderCurrent from './OrderCurrent';
 import '../styles/App.scss';
+import '../styles/Form.scss';
+import '../styles/Tooltip.scss';
 
 class App extends React.Component {
   constructor(){
@@ -175,11 +177,10 @@ class App extends React.Component {
         </div>
         <div className="content">
           <form onSubmit={this.handleSubmit} className="menu__form">
+            
             <div className="form__wrapper">
-
               { basket }
               { formElements }
-
             </div>
 
             { allOrders }

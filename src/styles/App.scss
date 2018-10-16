@@ -1,8 +1,8 @@
 $border-thickness: 0.05rem;
+$mid-colour: #d2c69e; 
+$dark-colour: #2d2211;
 $light-colour: #fffae8;
 $header-colour: #ede2bb;
-$mid-colour: #d2c69e; // #999;
-$dark-colour: #2d2211;
 
 * {
   box-sizing: border-box;
@@ -55,63 +55,10 @@ img {
   height: 60%;
   min-width: 180px;
   margin: 0 1rem 2rem 0;
-  border: 0.25rem solid #fff;
 }
 
 li {
   list-style: none;
-}
-
-/* form elements
-////////////////////////////////*/
-
-input, select, button {
-  font-size: 1rem;
-}
-
-input {
-  padding: 0.7rem;
-  border: $border-thickness solid $mid-colour;
-  margin-bottom: 0.7rem;
-  background: #fff;
-  width: 100%;
-  &.orders__filter {
-    margin-bottom: 0.2rem;
-    margin-top: 0.7rem;
-  }
-}
-
-.form__elements {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.form__wrapper {
-  display: flex;
-  flex-direction: column;
-
-}
-
-button {
-  &.menu__form__submit, &.basket__state-empty,  {
-    width: 100%;
-    padding: 0.7rem;
-    color: #fff;
-    cursor: pointer;
-    border: $border-thickness solid $dark-colour;
-    background-color: $dark-colour;
-    opacity: 0.8;
-    &:hover {
-      opacity: 1;
-    }
-  }
-  &.menu__form__submit {
-    margin-bottom: 0.7rem;
-  }
-  &.basket__state-empty {
-    margin-top: 0.7rem;
-  }
 }
 
 /* orders
@@ -127,6 +74,12 @@ button {
     margin-top: 0;
   }
   margin: 1rem 0 0 0;
+}
+
+.order_item {
+  display: flex;
+  flex-direction: row;
+  vertical-align: middle;
 }
 
 /* basket
@@ -187,34 +140,16 @@ hr {
   }
 }
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-  & .tooltip-content {
-    visibility: hidden;
-    margin: 0 0 -45px 2rem;
-    bottom: 1rem;
-    padding: 0;
-    position: absolute;
-    z-index: 1;
-    opacity: 0;
-    transition: opacity 1s;
-    & img {
-      padding: 0;
-      margin: 0;
-      width: 100px;
-      min-width: 100px;
-    }
-    cursor: auto;
-  }
-}
-
-.tooltip:hover .tooltip-content {
-  visibility: visible;
+.fadein {
   opacity: 1;
-}
-
-.fa-icon-style {
-  margin: 0 0 0 0.5rem;
+  @-webkit-keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @-moz-keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @-ms-keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @-o-keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+  -webkit-animation: fadein 0.7s;
+  -moz-animation: fadein 0.7s; 
+  -ms-animation: fadein 0.7s;
+  -o-animation: fadein 0.7s;
+  animation: fadein 0.7s;
 }
