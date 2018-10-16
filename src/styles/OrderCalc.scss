@@ -1,0 +1,33 @@
+@import "parameters";
+
+.order__calc{
+  // color: $header-font-color;
+  padding: $content-padding;
+
+  opacity: 0.8;
+
+  p{
+    display: flex;
+    justify-content: center;
+    color: black;
+  }
+
+  .button{
+    background-color: $button-color;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media(min-width:768px) {
+  .order__calc{
+    grid-column: 1/3;
+  }
+}
+
+@media(min-width:960px) {
+  .order__calc{
+    grid-column: 1/4;
+  }
+}
