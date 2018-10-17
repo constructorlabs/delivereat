@@ -1,0 +1,25 @@
+.menu__item {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  & ul {
+    margin: 0;
+    padding: 0;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+  }
+  img {
+    border: 0.25rem solid #fff;
+    width: 60%;
+    height: 60%;
+    min-width: 180px;
+    margin: 0 1rem 2rem 0;
+  }
+  select {
+    margin-bottom: 0.7rem;
+    background-color: #fff;
+  }  
+}

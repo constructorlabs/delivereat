@@ -1,0 +1,43 @@
+$dark-colour: #2d2211;
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  & .tooltip-content {
+    visibility: hidden;
+    top: -18px; 
+    left: 40px;
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s;
+    cursor: auto;
+    & img {
+      padding: 0;
+      margin: 0;
+      width: 92px; 
+      min-width: 92px;
+      border-radius: 4px;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -10px;
+      border: 7px solid $dark-colour;
+      border-color: transparent $dark-colour transparent transparent;
+    }
+  }
+}
+
+.tooltip:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+.fa-icon-style {
+  margin: 0.3rem 0 0 0.5rem;
+  font-size: 130%;
+}
