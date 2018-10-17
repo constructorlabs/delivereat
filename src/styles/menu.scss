@@ -1,0 +1,166 @@
+.menu {
+  margin: 0 auto;
+  padding: 0;
+  &__title {
+    text-align: center;
+  }
+  dl {
+    margin: 0;
+  }
+  dt {
+    background: gainsboro;
+    border-top: 3px solid #0abab5;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    text-transform: capitalize;
+    font-weight: 300;
+    position: sticky;
+    top: 0;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    color: white;
+    height: 8rem;
+    font-size: 1.5rem;
+  }
+  dt.menu {
+    &__classics {
+      background: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
+      background-position-y: 55%;
+      background-size: cover;
+    }
+    &__sandwiches {
+      background-image: url('/static/assets/images/jimi-filipovski-189721-unsplash.jpg');
+      background-position-y: 85%;
+      background-size: cover;
+    }
+    &__eggs {
+      background-image: url('/static/assets/images/ben-kolde-652852-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+    }
+    &__pancakes {
+      background-image: url('/static/assets/images/nikldn-693527-unsplash.jpg');
+      background-position-y: 60%;
+      background-size: cover;
+    }
+    &__cereal {
+      background-image: url('/static/assets/images/arek-adeoye-221899-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+    }
+  }
+  dd {
+    margin-left: 0;
+  }
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    .menu__item {
+      text-transform: capitalize;
+      padding: 0.75rem 0.75rem 0.75rem 0.5rem;
+      border-bottom: 1px solid rgb(240, 240, 240);
+      width: 100%;
+      background: white;
+      .item__price {
+        float: right;
+      }
+    }
+  }
+}
+
+/********************/
+/** media queries **/
+
+@media (min-width: 768px) {
+  .menu {
+    // max-width: 968px;
+    padding: 0 0.5rem 2rem 0.5rem;
+  }
+  dl {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0.5rem;
+    grid-template-rows: repeat(8, minmax(1rem, mincontent));
+    grid-template-areas:
+      'a a'
+      'b b'
+      'c d'
+      'e f'
+      'g h'
+      'i j';
+  }
+  dt {
+    height: 10rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    color: white;
+  }
+  dt.menu {
+    &__classics {
+      position: initial;
+      grid-area: a;
+      background: url('/static/assets/images/melissa-walker-horn-637094-unsplash.jpg');
+      background-position-y: 50%;
+      background-size: cover;
+      height: 20rem;
+      font-size: 3rem;
+    }
+    &__sandwiches {
+      background-image: url('/static/assets/images/jimi-filipovski-189721-unsplash.jpg');
+      background-position-y: 70%;
+      background-size: cover;
+      font-size: 2rem;
+      grid-area: c;
+    }
+    &__eggs {
+      background-image: url('/static/assets/images/ben-kolde-652852-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+      font-size: 2rem;
+      grid-area: d;
+    }
+    &__pancakes {
+      background-image: url('/static/assets/images/nikldn-693527-unsplash.jpg');
+      background-position-y: 65%;
+      background-size: cover;
+      font-size: 2rem;
+      grid-area: h;
+    }
+    &__cereal {
+      background-image: url('/static/assets/images/arek-adeoye-221899-unsplash.jpg');
+      background-position-y: 40%;
+      background-size: cover;
+      font-size: 2rem;
+      grid-area: g;
+    }
+  }
+
+  dd.menu {
+    &__classics__items {
+      grid-area: b;
+      margin-bottom: 0.25rem;
+      .menu__list {
+        background: #eeeeee;
+        display: grid;
+        grid-column-gap: 1px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    &__pancakes__items {
+      grid-area: j;
+    }
+    &__sandwiches__items {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu {
+    grid-area: c;
+    margin: 0;
+    padding: 0 1rem;
+    &__title {
+      grid-area: b;
+    }
+  }
+}

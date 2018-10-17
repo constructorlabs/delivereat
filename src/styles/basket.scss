@@ -1,0 +1,91 @@
+.basket {
+  position: fixed;
+  // bottom: initial;
+  top: -3px;
+  width: 100%;
+  right: 0;
+  border-bottom: 3px solid orange;
+  border-top: none;
+  &__wrapper {
+    padding: 1rem 0.5rem 0.75rem 0.75rem;
+    background: white;
+    height: initial;
+    transition: height 4s;
+    &--hidden {
+      display: none;
+    }
+  }
+  &__title {
+    background: orange;
+    margin: 0 0 0 0.5rem;
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    position: absolute;
+    bottom: -30px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    right: 1rem;
+  }
+
+  &__list {
+    margin: 0 0 1rem 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  &__item {
+    align-content: center;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    &__name {
+      margin: 0 0.5rem 0 1.5rem;
+    }
+    &__price {
+      float: right;
+    }
+  }
+  &__delivery {
+    font-size: 0.9rem;
+    color: #888888;
+  }
+  &__discount {
+    &--hidden {
+      display: none;
+    }
+  }
+  &__total span {
+    font-weight: bold;
+  }
+  p {
+    margin: 0 0 0.25rem 0;
+    text-align: right;
+    span {
+      margin-left: 1rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .basket {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .basket {
+    position: static;
+    margin-top: 2.9rem;
+    width: 100%;
+    grid-area: d;
+
+    &__wrapper {
+      border-top: 3px solid orange;
+      &--hidden {
+        display: block;
+      }
+    }
+    &__title {
+      position: static;
+      border-radius: 0;
+    }
+  }
+}

@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Let's get some food</title>
-    <link rel="stylesheet" type="text/css" href="/static/styles.css">
-  </head>
-  <body>
-    <div id="root">
 
-    </div>
-    <script src="/static/bundle.js"></script>
-  </body>
+<head>
+  <title>Let's get some food</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Gilda+Display" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+    crossorigin="anonymous">
+  <!-- call resources from server ... where app.use('\static') ensures all the resources are returnd from the static folder -->
+  <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+
+<body>
+  <div id="root">
+
+
+  </div>
+  <!-- calls bundle.js to get all the ReactJs components -->
+  <script src="/static/bundle.js"></script>
+</body>
+
 </html>
