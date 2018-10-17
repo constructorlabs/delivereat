@@ -178,6 +178,7 @@ class App extends React.Component {
 
         <div className="content">
           <form onSubmit={this.handleSubmit} className="menu__form">
+            {/* <img src="./assets/picture-icon.png" /> */}
             
             <div className="form__wrapper">
               { basket }
