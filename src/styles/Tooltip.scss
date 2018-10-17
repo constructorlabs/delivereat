@@ -6,7 +6,7 @@ $dark-colour: #2d2211;
   cursor: pointer;
   & .tooltip-content {
     visibility: hidden;
-    top: -20px; 
+    top: -18px; 
     left: 40px;
     position: absolute;
     z-index: 1;
@@ -38,6 +38,6 @@ $dark-colour: #2d2211;
 }
 
 .fa-icon-style {
-  margin: 0 0 0 0.5rem;
-  font-size: 120%;
+  margin: 0.25rem 0 0 0.5rem;
+  font-size: 130%;
 }

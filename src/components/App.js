@@ -175,6 +175,7 @@ class App extends React.Component {
           <h1>DeliverEat <i className="fas fa-1x fa-utensils"></i></h1>
           <div className="basket__menu"><h1 className="basket__items-count">{basketCount}</h1><h1><a href="#" onClick={this.toggleBasket}><i className="fas fa-1x fa-shopping-basket basket__display-toggle"></i></a></h1></div>
         </div>
+
         <div className="content">
           <form onSubmit={this.handleSubmit} className="menu__form">
             
