@@ -1,8 +1,22 @@
+require('dotenv').config();
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const pgp = require('pg-promise')();
+const app = express();
+const db = pgp({
+    host: 'localhost',
+    port: 5432,
+    database: process.env.DB_NAME,
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD
+});
+
+
 const {orderTotals} = require('./common/orderTotals.js')
 
-const app = express();
+
 
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
@@ -65,29 +79,60 @@ const users = {
   }
 }
 
+// const receiveOrder = (orderObject) => {
+//   console.log(orderObject)
+//   const totals = orderTotals(orderObject.items,menu)
+//   if (Object.keys(orders).length === 0) {
+//     orderId = 1
+//   } else {
+//     orderId = Math.max(...Object.keys(orders)) + 1
+//   }
+//   orders[parseInt(orderId)] = {
+//     orderId : parseInt(orderId),
+//     userId : orderObject.userId,
+//     items: orderObject.items,
+//     dateTime : new Date(),
+//     itemsCost: totals.itemsCost,
+//     deliveryCost: totals.deliveryCost,
+//     discount: totals.discount,
+//     totalCost: totals.itemsCost + totals.deliveryCost - totals.discount
+//   }
+//   return(orders[orderId])
+// }
+
+
+/// Need to turn orderObject.items into an array!!!
+
 const receiveOrder = (orderObject) => {
-  console.log(menu)
-  const totals = orderTotals(orderObject.items,menu)
-  if (Object.keys(orders).length === 0) {
-    orderId = 1
-  } else {
-    orderId = Math.max(...Object.keys(orders)) + 1
-  }
-  orders[parseInt(orderId)] = {
-    orderId : parseInt(orderId),
-    userId : orderObject.userId,
-    items: orderObject.items,
-    dateTime : new Date(),
-    itemsCost: totals.itemsCost,
-    deliveryCost: totals.deliveryCost,
-    discount: totals.discount,
-    totalCost: totals.itemsCost + totals.deliveryCost - totals.discount
-  }
-  console.log(orders)
-  return(orders[orderId])
+  const customerId = 1;
+  const dateTime = new Date();
+  const status = 'Pending';
+  const newTransaction = 0;
+  db.one('INSERT INTO transaction (customer_id, date_time, status) VALUES ($1,$2,$3) RETURNING id',[customerId, dateTime,status])
+    // .then(data => console.log(orderObject))
+    .then(data => {
+      Object.values(orderObject.items).forEach(item=> {
+      console.log(item)
+      db.one('INSERT INTO transaction_item (transaction_id, menu_id, quantity) VALUES ($1, $2, $3)', [data.id, item.id, item.quantity])
+      })
+    }
+    )
+    .catch(error => {
+      res.json({
+        error: error.message
+      });
+    });
 }
 
-
+// turn the array of objects that comes out of the database into an object of objects with keys
+const menuObject = (menuArray) => {
+  const arrayToObject = (array, keyField) =>
+  array.reduce((obj, item) => {
+    obj[item[keyField]] = item
+    return obj
+  }, {})
+  return arrayToObject(menuArray, "id")
+}
 
 app.get('/', function(req, res){
   res.render('index');
@@ -95,12 +140,34 @@ app.get('/', function(req, res){
 
 app.get('/api/menu', function (req, res) {
   console.log(orderTotals)
-  res.json(menu);
-});
+  db.any('SELECT * FROM menu')
+    .then(function(data){
+    res.json(menuObject(data))
+  })})
+
 
 app.post('/api/order', function (req, res) {
-  res.json(receiveOrder(req.body))
-});
+  const customerId = 1;
+  const dateTime = new Date();
+  const status = 'Testing';
+  const newTransaction = 0
+  const transaction = Object.values(req.body.items)
+  console.log(req.body)
+  db.one('INSERT INTO transaction (customer_id, date_time, status) VALUES ($1,$2,$3) RETURNING id',[customerId, dateTime,status])
+  .then(data => db.tx(t => {
+    const queries = transaction.map(l => {
+      console.log(l.id)
+      return t.none('INSERT INTO transaction_item (transaction_id, menu_id, quantity) VALUES ($1, $2, $3)', [data.id, l.id, l.quantity])
+    })
+    console.log(68787)
+   return t.batch(queries).then(() => data)
+  })
+  .then(data => res.json(data))
+  .catch(error => {
+    console.log('errordddd')
+  }))
+})
+    
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');

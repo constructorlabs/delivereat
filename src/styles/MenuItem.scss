@@ -4,7 +4,7 @@
     background: #FBECEC;
     border:solid 1px black;
     padding:5px;
-    margin:10px;
+    margin:10px 0;
     display: grid;
     grid-template-columns: 6fr 2fr 1fr 1fr 1fr;
     grid-template-rows: 30px 1fr;
@@ -41,6 +41,7 @@
   }
   
   .menu__price {
-    font-size:1.2em;
-    grid-area: price
+    grid-area: price;
+    font-size: 0.9em;
+    font-weight: bold
   }
