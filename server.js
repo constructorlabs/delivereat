@@ -79,26 +79,6 @@ const users = {
   }
 }
 
-// const receiveOrder = (orderObject) => {
-//   console.log(orderObject)
-//   const totals = orderTotals(orderObject.items,menu)
-//   if (Object.keys(orders).length === 0) {
-//     orderId = 1
-//   } else {
-//     orderId = Math.max(...Object.keys(orders)) + 1
-//   }
-//   orders[parseInt(orderId)] = {
-//     orderId : parseInt(orderId),
-//     userId : orderObject.userId,
-//     items: orderObject.items,
-//     dateTime : new Date(),
-//     itemsCost: totals.itemsCost,
-//     deliveryCost: totals.deliveryCost,
-//     discount: totals.discount,
-//     totalCost: totals.itemsCost + totals.deliveryCost - totals.discount
-//   }
-//   return(orders[orderId])
-// }
 
 
 /// Need to turn orderObject.items into an array!!!
@@ -139,11 +119,25 @@ app.get('/', function(req, res){
 });
 
 app.get('/api/menu', function (req, res) {
-  console.log(orderTotals)
   db.any('SELECT * FROM menu')
     .then(function(data){
     res.json(menuObject(data))
   })})
+
+app.get('/api/order/:id/', function (req, res) {
+  console.log('server 149')
+  const transactionId = req.params.id;
+  db.any('SELECT * FROM transaction_item WHERE transaction_id = $1', [transactionId])
+    .then(function(data){
+    res.json((data))
+})})
+
+app.get('/api/customer/:customerId/orders', function (req, res) {
+  const customerId = req.body.id;
+  db.any('SELECT * FROM transaction WHERE customer_id = $1', [customerId])
+    .then(function(data){
+    res.json((data))
+})})
 
 
 app.post('/api/order', function (req, res) {
@@ -162,7 +156,7 @@ app.post('/api/order', function (req, res) {
     console.log(68787)
    return t.batch(queries).then(() => data)
   })
-  .then(data => res.json(data))
+  .then(data => res.json(Object.assign({dateTime: new Date()},data,)))
   .catch(error => {
     console.log('errordddd')
   }))
