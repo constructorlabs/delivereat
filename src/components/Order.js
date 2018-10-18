@@ -24,6 +24,18 @@ class Order extends React.Component {
         <p>Delivery : £{this.props.orderTotals.deliveryCost} </p>
         <p></p>
         <p><strong>Total :£{this.props.orderTotals.itemsCost?this.props.orderTotals.itemsCost + this.props.orderTotals.deliveryCost - this.props.orderTotals.discount:0} </strong></p>
+        {!!this.props.customer.name === true && (
+          <p>Logged in as {this.props.customer.name} <button onClick={this.props.handleClickLogout}>Logout</button></p>
+        )}
+        {!this.props.customer.name === true && (
+          <p><button onClick={this.props.handleClickLogin}>Login / Register</button></p>
+        )}
+        
+        
+        
+
+
+
         {this.props.orderTotals.itemsCost > 1 && (      
           <button onClick={this.props.sendOrder}>ORDER ME PIZZA!!!</button>
         )}

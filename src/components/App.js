@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header'
 import ConfirmationMessage from './ConfirmationMessage';
 import ConfirmationOrder from './ConfirmationOrder';
+import Login from './Login';
 
 
 import Menu from './Menu';
@@ -18,20 +19,29 @@ class App extends React.Component {
     this.state = {
       menu:{},
       userId:1,
+      customer:{},
       orderHistory:{},
       newOrder:{},
       whichScreen: 'ordering',
-      orderConfirmation: {}
+      orderConfirmation: {},
+      loginInput:''
     }
 
     this.fetchMenu = this.fetchMenu.bind(this)
     this.receiverAddToOrder = this.receiverAddToOrder.bind(this)
     this.sendOrder = this.sendOrder.bind(this)
     this.calculateTotals = this.calculateTotals.bind(this)
+    this.login = this.login.bind(this)
+    this.handleClickLogout = this.handleClickLogout.bind(this)
+    this.handleClickLogin = this.handleClickLogin.bind(this)
+    this.handleChangeLogin = this.handleChangeLogin.bind(this)
+    this.handleSubmitLogin = this.handleSubmitLogin.bind(this)
+
   }
 
   componentWillMount() {
     this.fetchMenu()
+    this.login('phil@berryman.org.uk')
   }
 
   fetchMenu() {
@@ -41,6 +51,17 @@ class App extends React.Component {
         this.setState({
           menu:body
         })
+      })
+  }
+
+  login(email) {
+    fetch(`/api/login/${email}`).
+    then(response => response.json()).
+      then(body => {
+        this.setState({
+          customer:body
+        })
+        console.log(body)
       })
   }
 
@@ -93,6 +114,38 @@ class App extends React.Component {
       },()=>console.log(this.state.newOrder))
     }
 
+    handleClickLogout(event) {
+      this.setState({
+        customer:{}
+      })
+    }
+
+    handleClickLogin(event) {
+      this.setState({
+        whichScreen:'login'
+      })
+    }
+
+    handleChangeLogin(event) {
+        this.setState({
+            loginInput: event.target.value
+        },()=> console.log(this.state.loginInput)
+        )
+    }
+
+    handleSubmitLogin(event){
+      event.preventDefault();
+      const customer = this.login(this.state.loginInput)
+      console.log(customer)
+      if (!!customer) {
+        this.setState({
+          customer:customer,
+          whichScreen:'ordering'
+        })
+      } 
+    }
+    
+
   calculateTotals() {
     return orderTotals(this.state.newOrder, this.state.menu)
   }
@@ -104,7 +157,7 @@ class App extends React.Component {
   render(){
     return (
       <div className="wrapper">
-        <Header />
+        <Header user={this.state.user}/>
 
         {this.state.whichScreen==='ordering' && (      
         <Menu menu={this.state.menu} receiverAddToOrder={this.receiverAddToOrder} newOrder={this.state.newOrder} />
@@ -120,8 +173,14 @@ class App extends React.Component {
 
         
         {this.state.whichScreen==='ordering' && (
-         <Order sendOrder={this.sendOrder} orderTotals={orderTotals(this.state.newOrder, this.state.menu)} newOrder={this.state.newOrder} menu={this.state.menu}/>
+         <Order sendOrder={this.sendOrder} orderTotals={orderTotals(this.state.newOrder, this.state.menu)} newOrder={this.state.newOrder} menu={this.state.menu} customer={this.state.customer} handleClickLogout={this.handleClickLogout} handleClickLogin={this.handleClickLogin}  />
         )}
+
+        {this.state.whichScreen==='login' && (
+         <Login handleChangeLogin={this.handleChangeLogin} handleSubmitLogin={this.handleSubmitLogin} />
+        )}
+
+
       </div>
     )
   }
