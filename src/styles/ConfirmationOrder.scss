@@ -1,15 +1,10 @@
-.orders {
+.confirmation__order {
     width: 320px;
     height: auto;
     background: #FBECEC;
     border:solid 1px black;
     padding:5px;
-    margin:10px 0;
+    margin:10px;
     grid-area: order;
   }
   
-  .order__item {
-    list-style:none;
-    margin:0px;
-    padding:0px;
-  }

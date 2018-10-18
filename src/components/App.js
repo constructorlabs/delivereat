@@ -52,7 +52,7 @@ class App extends React.Component {
     }
     console.log(orderObject)
     
-    fetch('http://localhost:8080/api/order', {
+    fetch('/api/order', {
       method: 'post',
       body: JSON.stringify(orderObject),
       headers: {
@@ -61,11 +61,12 @@ class App extends React.Component {
     }).then(function(response) {
       return response.json();
     }).then(data => {
+      console.log('sendOrder response')
       console.log(data)
       this.setState ({
         orderConfirmation:data,
         whichScreen:'confirmation'
-      })
+       })
     });
   }
 
@@ -114,7 +115,7 @@ class App extends React.Component {
         )}
 
         {this.state.whichScreen==='confirmation' && (      
-        <ConfirmationOrder orderConfirmation={this.state.orderConfirmation} menu={this.state.menu}  />
+        <ConfirmationOrder orderConfirmation={this.state.orderConfirmation} menu={this.state.menu} newOrder={this.state.newOrder} />
         )}
 
         
