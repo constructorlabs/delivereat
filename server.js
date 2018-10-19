@@ -105,7 +105,7 @@ app.get('/api/login/:customerEmail', function (req, res) {
 
 
 app.post('/api/order', function (req, res) {
-  const customerId = 1;
+  const customerId = req.body.userId;
   const dateTime = new Date();
   const status = 'Testing';
   const transaction = Object.values(req.body.items)
@@ -120,7 +120,7 @@ app.post('/api/order', function (req, res) {
    return t.batch(queries).then(() => data)
   })
   .then(data => {
-    sendSMS(1, 'Your pizza is being made')
+    sendSMS(1, 'Your pizza is being made! Get ready to get unhungry.')
     res.json(Object.assign({dateTime: new Date()},data,))
   })
   .catch(error => {

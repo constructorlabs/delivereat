@@ -67,7 +67,7 @@ class App extends React.Component {
   sendOrder() {
     const orderObject = {
       items: this.state.newOrder,
-      userId: this.state.userId
+      userId: this.state.customer.id
     };
     console.log(orderObject);
 
