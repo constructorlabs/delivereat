@@ -120,7 +120,8 @@ app.post('/api/order', function (req, res) {
    return t.batch(queries).then(() => data)
   })
   .then(data => {
-    sendSMS(1, 'Your pizza is being made! Get ready to get unhungry.')
+//Not waiting for result from Twilio promise because I don't care.
+    sendSMS(customerId, `Your pizza is being made! Get ready to get unhungry. Order #${data.id}`)
     res.json(Object.assign({dateTime: new Date()},data,))
   })
   .catch(error => {

@@ -11,6 +11,7 @@ class Order extends React.Component {
 
 
     render(){
+
       return (
         <div className="orders">
         <ul className="order__items">
@@ -28,16 +29,13 @@ class Order extends React.Component {
           <p>Logged in as {this.props.customer.name} <button onClick={this.props.handleClickLogout}>Logout</button></p>
         )}
         {!this.props.customer.name === true && (
-          <p><button onClick={this.props.handleClickLogin}>Login / Register</button></p>
+          <p><button id="login" onClick={this.props.handleClickLogin}>Login / Register</button></p>
         )}
         
-        
-        
-
 
 
         {this.props.orderTotals.itemsCost > 1 && (      
-          <button onClick={this.props.sendOrder}>ORDER ME PIZZA!!!</button>
+          <button id="order" onClick={this.props.sendOrder}>ORDER ME PIZZA!!!</button>
         )}
 
         </div>

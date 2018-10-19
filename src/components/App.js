@@ -3,12 +3,10 @@ import Header from "./Header";
 import ConfirmationMessage from "./ConfirmationMessage";
 import ConfirmationOrder from "./ConfirmationOrder";
 import Login from "./Login";
-
 import Menu from "./Menu";
 import Order from "./Order";
 
 import { orderTotals } from "../../common/orderTotals";
-
 import "../styles/App.scss";
 
 class App extends React.Component {
