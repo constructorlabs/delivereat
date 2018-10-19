@@ -32,26 +32,27 @@ class App extends React.Component {
   componentDidMount() {
     fetch("api/menu")
       .then(response => response.json())
-      .then(body => this.setState({ menuArr: body }));
+      .then(body => {this.setState({ menuArr: Object.values(body) }, ()=> console.log(this.state.menuArr))});
   }
 
   addToOrder(item) {
     let orderItem;
-
     if (this.state.order[item.id]) {
       orderItem = Object.assign({}, this.state.order[item.id]);
       const itemsQuantity = orderItem.quantity + 1;
-      const itemsPrice = (orderItem.price * itemsQuantity).toFixed(2);
+      const itemsPrice = parseFloat(orderItem.price) * itemsQuantity;
+      console.log(itemsPrice)
       orderItem.quantity = itemsQuantity;
-      orderItem.orderPrice = Number(itemsPrice);
+      orderItem.orderPrice = parseFloat(itemsPrice).toFixed(2);
     } else {
       orderItem = {
         id: item.id,
-        name: item.name,
-        price: item.price,
+        name: item.item_name,
+        price: parseFloat(item.item_price),
         quantity: 1,
-        orderPrice: Number(item.price).toFixed(2)
+        orderPrice: Number(item.item_price).toFixed(2)
       };
+      console.log(orderItem);
     }
     const newOrder = Object.assign({}, this.state.order);
     newOrder[item.id] = orderItem;
@@ -59,8 +60,8 @@ class App extends React.Component {
       {
         order: newOrder
       },
-      () => {console.log(this.state.order);
-      this.calculateFoodTotal(this.state.order)}
+      () => 
+      this.calculateFoodTotal(this.state.order)
     );
   }
 
@@ -84,7 +85,7 @@ class App extends React.Component {
       {
         order: newOrder
       },
-      () => {console.log(this.state.order); this.calculateFoodTotal(this.state.total)}
+      () => this.calculateFoodTotal(this.state.total)
     );
   }
 
@@ -116,13 +117,17 @@ class App extends React.Component {
   }
 
   submitOrder(customer) {
-    const finalOrder = Object.assign({}, this.state.order, customer);
+    console.log(this.state.order)
+    let finalOrder = [];
+    Object.values(this.state.order).map(value=> finalOrder.push({menuItemId: value.id, quantity: value.quantity}))
+    console.log(finalOrder);
+    const items = {finalOrder}
     this.setState({
       order: {}
     })
     fetch("http://localhost:8080/api/order", {
       method: "post",
-      body: JSON.stringify(finalOrder),
+      body: JSON.stringify(items),
       headers: {
         "Content-Type": "application/json"
       }
@@ -135,9 +140,9 @@ class App extends React.Component {
           totalFoodPrice : '',
           finalPrice: '',
           deliveryCharge: '',
-          confirmation: `Thank you for your order. Your reference number is: ${data}`,
+          confirmation: `Thank you for your order. Your reference number is: ${data.orderId}`,
 
-        }, () => this.displayModal(data))
+        }, () => {this.displayModal(data); console.log(data)})
       });
   }
 

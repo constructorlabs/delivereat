@@ -15,21 +15,25 @@ module.exports = {
         loader: require.resolve('babel-loader')
       },
       {
-        test: /\.scss$/,
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: "style-loader"
-          }, {
-            loader: "css-loader"
-          }, {
-            loader: "sass-loader"
-          },{ 
-            loader: 'file-loader', options: {outputPath: 'dist/'} },
-          {
-            loader: 'image-webpack-loader',
-          }
-        ]
-      }
+            loader: 'file-loader',
+            options: {}
+          },
+        ]},
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: "style-loader"
+            }, {
+              loader: "css-loader"
+            }, {
+              loader: "sass-loader"
+            }
+          ]
+        }
     ]
   }
 };

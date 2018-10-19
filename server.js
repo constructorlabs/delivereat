@@ -1,70 +1,56 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const pgp = require('pg-promise')();
 const app = express();
+const db = pgp({
+  host: 'localhost',
+  port: 5432,
+  database: process.env.DB_NAME,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD
+});
 
 app.use(bodyParser.json());
 app.use('/static', express.static('static'));
 app.set('view engine', 'hbs');
 
-const menu = {
-  1: {
-    id: 1,
-    name: "chilli squid",
-    img: '/static/images/squid.png',
-    price: 6.75
-  },
-  2: {
-    id: 2,
-    name: "pulled pork gyoza",
-    img: '/static/images/gyoza.png',
-    price: 5.95
-  },
-  3:{
-    id: 3,
-    name: "bbq beef steamed hirata",
-    img: '/static/images/hirata.png',
-    price: 5.55
-  },
-  4:{
-    id:4,
-    name: "chicken ramen",
-    img: '/static/images/ramen.png',
-    price: 9.95
-  },
-  5:{
-    id:5,
-    name: "yaki udon",
-    img: '/static/images/udon.png',
-    price: 9.95
-  },
-  6:{
-    id:6,
-    name: "chicken katsu curry",
-    img: '/static/images/curry.png',
-    price: 10.75
-  }
-};
-
-const orders = {
-
-}
 
 app.get('/', function(req, res){
   res.render('index');
 });
 
+
 app.get('/api/menu', (req,res)=>{
-  res.json(Object.values(menu));
+  db.any(`select * from menu`)
+  .then(data => res.json(data))
+  .catch(error => res.json ({error: error.message}))
 })
 
 app.post('/api/order', (req,res)=>{
-  const keys = Object.keys(orders);
-  const newKey = Math.max([...keys]) + 1;
-  console.log(newKey);
-  orders[newKey] = req.body;
-  res.json(newKey);
+  db.one("INSERT INTO transaction (id, order_time) VALUES (DEFAULT, clock_timestamp()) RETURNING id")
+  .then(result => {
+      const orderId = result.id;
+      const { finalOrder } = req.body;
+      return Promise.all(finalOrder.map(item => {
+        return db.none(
+          "INSERT INTO basket (menu_id, transaction_id, quantity) VALUES ($1, $2, $3)",
+          [item.menuItemId, orderId, item.quantity]
+        );
+      })).then(() => orderId);
+    })
+  .then(orderId => res.json({ orderId: orderId }))
+  .catch(error => res.json({ error: error.message }));
 })
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });
+
+
+// const keys = Object.keys(orders);
+// const newKey = Math.max([...keys]) + 1;
+// console.log(newKey);
+// orders[newKey] = req.body;
+// res.json(newKey);
