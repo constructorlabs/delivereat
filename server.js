@@ -52,6 +52,25 @@ const menuObject = (menuArray) => {
   return arrayToObject(menuArray, "id")
 }
 
+// Takes customerId and message content. Looks up customer phone number. Sends SMS through Twilio. 
+const sendSMS = (customerId, content) => {
+  const accountSid = process.env.twilio_accountSid;
+  const authToken = process.env.twilio_authToken;
+  const client = require('twilio')(accountSid, authToken);
+  console.log('sendSMS')
+    db.one('SELECT * FROM customer WHERE id = $1', [customerId])
+      .then(function(data){
+        client.messages
+        .create({
+          body: content,
+          from: '+447447980842',
+          to: data.telephone
+        })
+        .then(message => console.log(message.sid))
+        .done();
+      })
+  }
+
 app.get('/', function(req, res){
   res.render('index');
 });
@@ -100,7 +119,10 @@ app.post('/api/order', function (req, res) {
     console.log(68787)
    return t.batch(queries).then(() => data)
   })
-  .then(data => res.json(Object.assign({dateTime: new Date()},data,)))
+  .then(data => {
+    sendSMS(1, 'Your pizza is being made')
+    res.json(Object.assign({dateTime: new Date()},data,))
+  })
   .catch(error => {
     console.log('errordddd')
   }))
