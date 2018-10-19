@@ -167,7 +167,6 @@ class App extends React.Component {
               loginInput: ""
             });
           }
-          console.log('app')
         });
       });
   }
