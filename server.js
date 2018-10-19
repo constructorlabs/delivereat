@@ -40,17 +40,31 @@ app.post('/api/order', (req,res)=>{
         );
       })).then(() => orderId);
     })
-  .then(orderId => res.json({ orderId: orderId }))
+  .then(orderId => {
+
+    sendSMS(req.body.customer.mobile, orderId);
+    
+    res.json({ orderId: orderId })})
   .catch(error => res.json({ error: error.message }));
 })
+
+function sendSMS(mobile, orderId){
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+    const authToken = process.env.TWILIO_AUTH_TOKEN;
+    const fromNumber = process.env.TWILIO_FROM_NUMBER;
+    const client = require("twilio")(accountSid, authToken);
+    const number = mobile;
+    client.messages
+      .create({
+        body: `Thanks for your order no: ${orderId}. Our chefs have started cooking up your meal and it will be with you within 30 min.`,
+        from: fromNumber,
+        to: number
+      })
+      .then(message => console.log(message.sid))
+      .done();
+    // not waiting for response from Twilio as it is irrelevant
+}
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });
-
-
-// const keys = Object.keys(orders);
-// const newKey = Math.max([...keys]) + 1;
-// console.log(newKey);
-// orders[newKey] = req.body;
-// res.json(newKey);

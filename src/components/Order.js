@@ -27,7 +27,6 @@ class Order extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    // this.props.order = {};
     this.setState({
         customer: {
             name: this.state.name,

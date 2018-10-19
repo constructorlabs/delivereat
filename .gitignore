@@ -3,3 +3,4 @@
 /static/bundle.js.map
 .DS_Store
 .env
+.send_sms.js

@@ -30,3 +30,5 @@ insert into menu (id, item_name, image, item_price) values (4, 'chicken ramen', 
 insert into menu (id, item_name, image, item_price) values (5, 'yaki udon', 'udon.png', 9.95);
 insert into menu (id, item_name, image, item_price) values (6, 'chicken katsu curry', 'curry.png', 10.75);
 alter sequence menu_id_seq restart with 7 increment by 1;
+
+alter table transaction add column order_time timestamp with time zone;
