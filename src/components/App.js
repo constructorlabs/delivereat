@@ -37,6 +37,7 @@ class App extends React.Component {
     this.handleChangeLogin = this.handleChangeLogin.bind(this);
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this);
     this.handleChangeRegister = this.handleChangeRegister.bind(this);
+    this.handleSubmitRegister = this.handleSubmitRegister.bind(this);
   }
 
   componentWillMount() {
@@ -143,18 +144,36 @@ class App extends React.Component {
         registerForm: Object.assign({}, this.state.registerForm, {[event.target.id]:event.target.value})
     },()=>console.log(this.state.registerForm))
     console.log(this.state.registerForm)
-
   }
 
+  handleSubmitRegister(event) {
+    event.preventDefault();
 
-  // handleChangeRegister(event) {
-  //   registerForm[event.target.id] = event.target.value;
-  //   this.setState(prevState => ({
-  //       registerForm: {...prevState.registerForm, [event.target.id]: event.target.value }
-  //     }),
-  //     () => console.log(prevState.registerForm)
-  //   );
-  // }
+    console.log('app 149')
+    fetch("/api/customer", {
+      method: "post",
+      body: JSON.stringify(this.state.registerForm),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        this.login(data.email).then(customer => {
+          if (!!customer) {
+            this.setState({
+              customer: customer,
+              whichScreen: "ordering",
+              loginInput: ""
+            });
+          }
+          console.log('app')
+        });
+      });
+  }
+
   
   handleSubmitLogin(event) {
     event.preventDefault();
@@ -213,6 +232,7 @@ class App extends React.Component {
             handleChangeLogin={this.handleChangeLogin}
             handleSubmitLogin={this.handleSubmitLogin}
             handleChangeRegister={this.handleChangeRegister}
+            handleSubmitRegister={this.handleSubmitRegister}
           />
         )}
       </div>

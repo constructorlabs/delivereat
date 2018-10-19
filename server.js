@@ -106,6 +106,15 @@ app.post('/api/order', function (req, res) {
   }))
 })
     
+app.post('/api/customer', function (req, res) {
+  console.log('wtf')
+  const {email, name, companyName, streetAddress, town, postCode, telephone, deliveryInfo} = req.body
+  db.one('INSERT INTO customer (email, name, company_name, street_address, town, post_code, telephone, delivery_info) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING id', [email, name, companyName, streetAddress, town, postCode, telephone, deliveryInfo])
+  .then(data => res.json(Object.assign({email: email},data)))
+  .catch(error => {
+    console.log(`${error} - could not add user`)
+  })
+})
 
 app.listen(8080, function(){
   console.log('Listening on port 8080');
