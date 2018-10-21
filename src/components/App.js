@@ -166,7 +166,7 @@ class App extends React.Component {
   }
 
   retrieveCustomer(customerOld) {
-    const user = {customerOld: customerOld}
+    const user = {customerOld: customerOld};
     fetch("http://localhost:8080/api/customerOld", {
       method: "post",
       body: JSON.stringify(user),
@@ -181,10 +181,8 @@ class App extends React.Component {
           customerID: data.id,
           mobile: data.mobile
         },
-        () => {
-          console.log(this.state.customerID, this.state.mobile);
-          // this.submitOrder(this.state.customerID, this.state.mobile);
-        }
+        () => 
+          this.submitOrder(this.state.customerID, this.state.mobile)
       );
     })
   }
@@ -239,7 +237,8 @@ class App extends React.Component {
   closeModal() {
     this.setState({
       confirmation: "",
-      on: !this.state.on
+      on: !this.state.on,
+      changeScreen: "ordering"
     });
   }
 

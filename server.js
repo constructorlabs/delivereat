@@ -27,18 +27,15 @@ app.get("/api/menu", (req, res) => {
 });
 
 app.post("/api/customerOld", (req, res) => {
-  req.method = "get";
-  app.get('/api/customerOld/:username/:password', (req,res) => {
-    const { customerOld } = req.body;
-    db.one(
-      `select id, mobile from customer where username=$1 and user_password=$2`,
-      [customerOld.username, customerOld.password]
-    )
-    .then(data => {console.log(data); res.json(data)})
-    .catch(error => res.json({ error: error.message }));
-  })
-  .then(data=>res.json(data))  
+  const { customerOld } = req.body;
+  db.one(
+    `select id, mobile from customer where username=$1 and user_password=$2`,
+    [customerOld.emailOld, customerOld.passwordOld]
+  )
+  .then(data => res.json(data))
+  .catch(error => res.json({ error: error.message }));
 });
+
 
 app.post("/api/customer", (req, res) => {
   const { customer } = req.body;

@@ -53,14 +53,12 @@ class Login extends React.Component {
         e.preventDefault();
         this.setState({
             customerOld: {
-                emailOld: this.state.email,
-                passwordOld: this.state.password
+                emailOld: this.state.emailOld,
+                passwordOld: this.state.passwordOld
             },
             emailOld: '',
             passwordOld: ''
         }, () => this.props.retrieveCustomer(this.state.customerOld))
-        
-        
       }
 
     render() { 
