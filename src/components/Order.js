@@ -4,10 +4,13 @@ import '../styles/Order.scss';
 
 
 function Order({newOrder, menu, orderTotals, sendOrder, customer, handleClickLogout, handleClickLogin}){
+      console.log(menu)
+      console.log(newOrder)
       return (
         <div className="orders">
         <ul className="order__items">
             {Object.values(newOrder).map(orderItem => {
+                console.log(menu[orderItem.id])
                 return <OrderItem menuItem={menu[orderItem.id]} orderItem={orderItem} key={orderItem.id} />
             })}
         </ul>
@@ -24,6 +27,7 @@ function Order({newOrder, menu, orderTotals, sendOrder, customer, handleClickLog
           <p><button id="login" onClick={handleClickLogin}>Login / Register</button></p>
         )}
         
+
 
         {orderTotals.itemsCost > 1 && (      
           <button id="order" onClick={sendOrder}>ORDER ME PIZZA!!!</button>
