@@ -1,7 +1,9 @@
 import React from "react";
 import Menu from "./Menu";
 import Order from "./Order";
+import Login from "./Login";
 import cx from "classnames";
+
 
 import "../styles/components/app.scss";
 
@@ -16,7 +18,8 @@ class App extends React.Component {
       on: false,
       finalPrice: "",
       deliveryCharge: "",
-      confirmation: ""
+      confirmation: "",
+      changeScreen: "ordering"
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -27,6 +30,7 @@ class App extends React.Component {
     this.displayModal = this.displayModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.calculateFinalPrice = this.calculateFinalPrice.bind(this);
+    this.anotherScreen=this.anotherScreen.bind(this)
   }
 
   componentDidMount() {
@@ -132,17 +136,22 @@ class App extends React.Component {
       () => console.log(this.state.finalPrice)
     );
   }
+  anotherScreen(){
+    this.setState({
+      changeScreen: 'login'
+    }, () => console.log(this.state.changeScreen))
+  }
 
   submitOrder(customer) {
     let finalOrder = [];
     Object.values(this.state.order).map(value =>
       finalOrder.push({ menuItemId: value.id, quantity: value.quantity })
     );
-    const items = {finalOrder: finalOrder, customer: customer};
-    console.log(items);
+    const items = { finalOrder: finalOrder, customer: customer };
     this.setState({
       order: {}
-    });
+    }, () => console.log(this.state.changeScreen));
+    
     fetch("http://localhost:8080/api/order", {
       method: "post",
       body: JSON.stringify(items),
@@ -194,23 +203,29 @@ class App extends React.Component {
           <img className="logo" src="../../../static/images/delivery.png" />
           <h1>deliverEATs</h1>
         </header>
-        <main>
-          <Menu
-            menuArr={this.state.menuArr}
-            addToOrder={this.addToOrder}
-            removeFromOrder={this.removeFromOrder}
-          />
-        </main>
-        <aside>
-          <Order
-            order={this.state.order}
-            submitOrder={this.submitOrder}
-            totalFoodPrice={this.state.totalFoodPrice}
-            finalPrice={this.state.finalPrice}
-            deliveryCharge={this.state.deliveryCharge}
-          />
-        </aside>
-
+        {this.state.changeScreen === "ordering" && (
+          <React.Fragment>
+            <main>
+              <Menu
+                menuArr={this.state.menuArr}
+                addToOrder={this.addToOrder}
+                removeFromOrder={this.removeFromOrder}
+              />
+            </main>
+            <aside>
+              <Order
+                order={this.state.order}
+                anotherScreen={this.anotherScreen}
+                totalFoodPrice={this.state.totalFoodPrice}
+                finalPrice={this.state.finalPrice}
+                deliveryCharge={this.state.deliveryCharge}
+              />
+            </aside>
+          </React.Fragment>
+        )}
+        {this.state.changeScreen === 'login' && (
+          <Login submitOrder={this.submitOrder}/>
+        )}
         <div id="confirmationModal" className={classes}>
           <span onClick={this.closeModal} className="close">
             &times;
