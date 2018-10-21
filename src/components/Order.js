@@ -29,7 +29,7 @@ function Order({newOrder, menu, orderTotals, sendOrder, customer, handleClickLog
         
 
 
-        {orderTotals.itemsCost > 1 && (      
+        {!!customer.name && orderTotals.itemsCost > 1 && (      
           <button id="order" onClick={sendOrder}>ORDER ME PIZZA!!!</button>
         )}
 

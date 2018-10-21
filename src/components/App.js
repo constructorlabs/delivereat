@@ -5,6 +5,7 @@ import ConfirmationOrder from "./ConfirmationOrder";
 import Login from "./Login";
 import Menu from "./Menu";
 import Order from "./Order";
+import Admin from "./Admin";
 
 import { orderTotals } from "../../common/orderTotals";
 import "../styles/App.scss";
@@ -173,7 +174,14 @@ class App extends React.Component {
   handleSubmitLogin(event) {
     event.preventDefault();
     this.login(this.state.loginInput).then(customer => {
-      if (!!customer) {
+      if (customer.admin === true) {
+        console.log('admin')
+        this.setState({
+          customer: customer,
+          whichScreen: "admin",
+          loginInput: ""
+        });
+      } else if (!!customer) {
         this.setState({
           customer: customer,
           whichScreen: "ordering",
@@ -230,6 +238,11 @@ class App extends React.Component {
             handleSubmitRegister={this.handleSubmitRegister}
           />
         )}
+
+        {this.state.whichScreen === "admin" && (
+          <Admin />
+        )}
+
       </div>
     );
   }

@@ -23,6 +23,7 @@ describe('order', ()=> {
     })
     it('when order button clicked it should call sendOrder', ()=> {
         const orderTotals = {itemsCost: 5, deliveryCost: 5, discount: 0, deliveryMessage: "Free delivery on orders over £30"}
+        const customer = {name: "harry"}
         const sendOrder = jest.fn();
         const wrapper = shallow(<Order orderTotals={orderTotals} newOrder={newOrder} customer={customer} menu={menu} sendOrder={sendOrder}/>);
         wrapper.find('#order').simulate('click');
