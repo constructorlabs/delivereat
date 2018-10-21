@@ -19,7 +19,8 @@ class App extends React.Component {
       deliveryCharge: "",
       confirmation: "",
       changeScreen: "ordering",
-      customerID: ""
+      customerID: "",
+      mobile: ""
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -32,6 +33,7 @@ class App extends React.Component {
     this.calculateFinalPrice = this.calculateFinalPrice.bind(this);
     this.anotherScreen = this.anotherScreen.bind(this);
     this.addCustomer = this.addCustomer.bind(this);
+    this.retrieveCustomer = this.retrieveCustomer.bind(this);
   }
 
   componentDidMount() {
@@ -138,14 +140,6 @@ class App extends React.Component {
   }
 
   addCustomer(customer) {
-    // const user = [
-    //   { username: customer.email },
-    //   { user_password: customer.password },
-    //   { name: customer.name },
-    //   { address: customer.address },
-    //   { mobile: customer.mobile }
-    // ];
-    // console.log(user);
     const user = { customer: customer };
     fetch("http://localhost:8080/api/customer", {
       method: "post",
@@ -163,10 +157,36 @@ class App extends React.Component {
             customerID: data.id,
             mobile: data.mobile
           },
-          () => {console.log(this.state.customerID, this.state.mobile); 
-            this.submitOrder(this.state.customerID, this.state.mobile)
-          })
-        });
+          () => {
+            console.log(this.state.customerID, this.state.mobile);
+            this.submitOrder(this.state.customerID, this.state.mobile);
+          }
+        );
+      });
+  }
+
+  retrieveCustomer(customerOld) {
+    const user = {customerOld: customerOld}
+    fetch("http://localhost:8080/api/customerOld", {
+      method: "post",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.setState(
+        {
+          customerID: data.id,
+          mobile: data.mobile
+        },
+        () => {
+          console.log(this.state.customerID, this.state.mobile);
+          // this.submitOrder(this.state.customerID, this.state.mobile);
+        }
+      );
+    })
   }
 
   submitOrder(customerID, mobile) {
@@ -174,7 +194,11 @@ class App extends React.Component {
     Object.values(this.state.order).map(value =>
       finalOrder.push({ menuItemId: value.id, quantity: value.quantity })
     );
-    const items = { finalOrder: finalOrder, customerID: customerID, mobile: mobile };
+    const items = {
+      finalOrder: finalOrder,
+      customerID: customerID,
+      mobile: mobile
+    };
     this.setState({
       order: {}
     });
@@ -251,10 +275,13 @@ class App extends React.Component {
           </React.Fragment>
         )}
         {this.state.changeScreen === "login" && (
-          <Login
-            submitOrder={this.submitOrder}
-            addCustomer={this.addCustomer}
-          />
+          <section>
+            <Login
+              submitOrder={this.submitOrder}
+              addCustomer={this.addCustomer}
+              retrieveCustomer={this.retrieveCustomer}
+            />
+          </section>
         )}
         <div id="confirmationModal" className={classes}>
           <span onClick={this.closeModal} className="close">

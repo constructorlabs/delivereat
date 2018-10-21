@@ -46,3 +46,7 @@ create table customer (
 
 alter table transaction add column customer_id int, add constraint fk_customer foreign key (customer_id) references customer (id)
 
+alter table customer 
+add column name varchar(50),
+add column address varchar(200),
+add column mobile varchar(15)

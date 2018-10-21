@@ -1,5 +1,12 @@
-.addressInput, .nameInput, .mobileInput, .mobileInput, .emailInput{
+.addressInput, .nameInput, .mobileInput, .mobileInput, .emailInput, .passwordInput{
     margin-bottom: 1em;
     border-radius: 8px;
     margin-right: 2em;
+}
+
+button{
+    font-size: 1em;
+    border-radius: 8px;
+    max-width: 6em;
+    align-self: centre;
 }

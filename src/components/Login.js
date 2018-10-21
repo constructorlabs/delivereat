@@ -58,7 +58,7 @@ class Login extends React.Component {
             },
             emailOld: '',
             passwordOld: ''
-        }, () => this.props.submitOrder(this.state.customer))
+        }, () => this.props.retrieveCustomer(this.state.customerOld))
         
         
       }

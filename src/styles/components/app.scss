@@ -35,6 +35,10 @@ aside{
   grid-area: a;
 }
 
+section{
+  grid-area: s;
+}
+
 .wrapper{
   display: grid;
   grid-gap: 1em;
@@ -42,7 +46,8 @@ aside{
   grid-template-areas: 
   'h'
   'm'
-  'a';
+  'a'
+  's';
 }
 
 .modal{
@@ -92,12 +97,15 @@ span{
 
 @media(min-width: 768px){
   .wrapper{
+    margin-right: 10vw;
+    margin-left: 10vw;
     display: grid;
     grid-gap: 1em;
     grid-template-columns: 2fr 1fr;
     grid-template-areas: 
     'h h'
-    'm a';
+    'm a'
+    's s';
   }
 
   .modal--active{
