@@ -141,13 +141,11 @@ class App extends React.Component {
     this.setState({
         registerForm: Object.assign({}, this.state.registerForm, {[event.target.id]:event.target.value})
     },()=>console.log(this.state.registerForm))
-    console.log(this.state.registerForm)
   }
 
   handleSubmitRegister(event) {
     event.preventDefault();
 
-    console.log('app 149')
     fetch("/api/customer", {
       method: "post",
       body: JSON.stringify(this.state.registerForm),

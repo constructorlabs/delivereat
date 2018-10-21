@@ -3,23 +3,14 @@ import MenuItem from './MenuItem'
 
 import "../styles/Menu.scss";
 
-class Menu extends React.Component {
-  constructor() {
-    super()
-  }
-
-
-
-    render(){
+function Menu({menu,receiverAddToOrder,newOrder}) {
       return (
-
         <ul className="menu">
-            {Object.values(this.props.menu).map(menuItem => {
-                return <MenuItem menuItem={menuItem} key={menuItem.id} receiverAddToOrder={this.props.receiverAddToOrder} quantity={!this.props.newOrder[menuItem.id]?0:this.props.newOrder[menuItem.id].quantity} />
+            {Object.values(menu).map(menuItem => {
+                return <MenuItem menuItem={menuItem} key={menuItem.id} receiverAddToOrder={receiverAddToOrder} quantity={!newOrder[menuItem.id]?0:newOrder[menuItem.id].quantity} />
             })}
         </ul>
       )
     }  
-}
 
 export default Menu;

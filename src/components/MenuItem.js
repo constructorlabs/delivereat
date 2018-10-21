@@ -15,7 +15,6 @@ class MenuItem extends React.Component {
 
   handleClick(quantity) {
     this.props.receiverAddToOrder({id:this.props.menuItem.id, quantity:quantity==='add'?1:-1})
-    console.log(`quanityt = ${this.props.quantity}`)
 }
 
     render(){

@@ -1,15 +1,8 @@
 import React from "react";
 
-
 import "../styles/ConfirmationMessage.scss";
 
-class ConfirmationMessage extends React.Component {
-  constructor() {
-    super()
-  }
-
-
-    render(){
+function ConfirmationMessage() {
       return (
         <div className="confirmation__message">
             <p>Thanks for ordering with 90 // 30 Pizza Co.</p>
@@ -17,7 +10,6 @@ class ConfirmationMessage extends React.Component {
             <p>Bella</p>
         </div>
       )
-    }  
 }
 
 export default ConfirmationMessage;

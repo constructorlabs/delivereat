@@ -3,19 +3,14 @@ import OrderItem from './OrderItem'
 import addMinutes from 'date-fns/add_minutes'
 import format from 'date-fns/format'
 
-
-
 import "../styles/ConfirmationOrder.scss";
-
 
 class ConfirmationOrder extends React.Component {
   constructor() {
     super()
     this.deliveryTime = this.deliveryTime.bind(this)
     this.orderTime = this.orderTime.bind(this)
-
   }
-
 
   deliveryTime() {
     return (format(addMinutes(this.props.orderConfirmation.dateTime,30),'HH:mm'))
@@ -24,7 +19,6 @@ class ConfirmationOrder extends React.Component {
   orderTime() {
     return (format(addMinutes(this.props.orderConfirmation.dateTime,0),'HH:mm'))
   }
-
 
     render(){
       return (
