@@ -5,7 +5,9 @@ import ConfirmationOrder from "./ConfirmationOrder";
 import Login from "./Login";
 import Menu from "./Menu";
 import Order from "./Order";
-import Admin from "./Admin";
+import AdminOrders from "./AdminOrders";
+import AdminTotals from "./AdminTotals";
+
 
 import { orderTotals } from "../../common/orderTotals";
 import "../styles/App.scss";
@@ -240,8 +242,12 @@ class App extends React.Component {
         )}
 
         {this.state.whichScreen === "admin" && (
-          <Admin />
+          <AdminOrders />
         )}
+
+        {/* {this.state.whichScreen === "admin" && (
+          <AdminTotals />
+        )} */}
 
       </div>
     );

@@ -112,6 +112,12 @@ app.post('/api/customer', function (req, res) {
   })
 })
 
+app.get('/api/admin/order', function (req, res) {
+  db.any('SELECT transaction.id, customer.name, customer.street_address, customer.post_code, customer.telephone, SUM(transaction_item.quantity), transaction.date_time, transaction.status FROM transaction, transaction_item, customer WHERE transaction.id = transaction_item.transaction_id AND transaction.customer_id = customer.id GROUP BY customer.name, customer.street_address, customer.post_code, transaction.id, customer.telephone Order By transaction.date_time')
+    .then(function(data){
+    res.json(menuObject(data))
+  })})
+
 app.listen(8080, function(){
   console.log('Listening on port 8080');
 });

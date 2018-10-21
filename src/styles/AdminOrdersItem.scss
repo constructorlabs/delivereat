@@ -1,0 +1,49 @@
+.admin__item {
+    width: 320px;
+    min-height:50px;
+    background: #FBECEC;
+    border:solid 1px black;
+    padding:5px;
+    margin:10px 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 5px;
+    grid-template-areas:
+      'id         name'
+      'street-address post-code'
+      'telephone item-count'
+  }
+  
+  .adminOrders__id {
+    font-weight: bold;
+    text-align:left;
+    grid-area: id
+  }
+  
+  .adminOrders__name {
+    text-align:left;
+    grid-area: name
+  }
+  
+  .adminOrders__street-address {
+    text-align:center;
+    grid-area: street-address
+  }
+  
+  .adminOrders__post-code{
+    grid-area: post-code;
+    text-align: center;
+  }
+
+  .adminOrders__telephone{
+    grid-area: telephone;
+    text-align: center;
+  }
+  
+  .adminOrders__item-count {
+    grid-area: item-count;
+    font-size: 0.9em;
+    font-weight: bold
+  }
+  
