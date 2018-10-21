@@ -4,7 +4,6 @@ import Order from "./Order";
 import Login from "./Login";
 import cx from "classnames";
 
-
 import "../styles/components/app.scss";
 
 class App extends React.Component {
@@ -19,7 +18,8 @@ class App extends React.Component {
       finalPrice: "",
       deliveryCharge: "",
       confirmation: "",
-      changeScreen: "ordering"
+      changeScreen: "ordering",
+      customerID: ""
     };
 
     this.addToOrder = this.addToOrder.bind(this);
@@ -30,16 +30,15 @@ class App extends React.Component {
     this.displayModal = this.displayModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.calculateFinalPrice = this.calculateFinalPrice.bind(this);
-    this.anotherScreen=this.anotherScreen.bind(this)
+    this.anotherScreen = this.anotherScreen.bind(this);
+    this.addCustomer = this.addCustomer.bind(this);
   }
 
   componentDidMount() {
     fetch("api/menu")
       .then(response => response.json())
       .then(body => {
-        this.setState({ menuArr: Object.values(body) }, () =>
-          console.log(this.state.menuArr)
-        );
+        this.setState({ menuArr: Object.values(body) });
       });
   }
 
@@ -49,7 +48,6 @@ class App extends React.Component {
       orderItem = Object.assign({}, this.state.order[item.id]);
       const itemsQuantity = orderItem.quantity + 1;
       const itemsPrice = parseFloat(orderItem.price) * itemsQuantity;
-      console.log(itemsPrice);
       orderItem.quantity = itemsQuantity;
       orderItem.orderPrice = parseFloat(itemsPrice).toFixed(2);
     } else {
@@ -60,7 +58,6 @@ class App extends React.Component {
         quantity: 1,
         orderPrice: Number(item.item_price).toFixed(2)
       };
-      console.log(orderItem);
     }
     const newOrder = Object.assign({}, this.state.order);
     newOrder[item.id] = orderItem;
@@ -129,29 +126,59 @@ class App extends React.Component {
   calculateFinalPrice() {
     let finalPrice =
       Number(this.state.totalFoodPrice) + Number(this.state.deliveryCharge);
-    this.setState(
-      {
-        finalPrice: Number(finalPrice).toFixed(2)
-      },
-      () => console.log(this.state.finalPrice)
-    );
-  }
-  anotherScreen(){
     this.setState({
-      changeScreen: 'login'
-    }, () => console.log(this.state.changeScreen))
+      finalPrice: Number(finalPrice).toFixed(2)
+    });
   }
 
-  submitOrder(customer) {
+  anotherScreen() {
+    this.setState({
+      changeScreen: "login"
+    });
+  }
+
+  addCustomer(customer) {
+    // const user = [
+    //   { username: customer.email },
+    //   { user_password: customer.password },
+    //   { name: customer.name },
+    //   { address: customer.address },
+    //   { mobile: customer.mobile }
+    // ];
+    // console.log(user);
+    const user = { customer: customer };
+    fetch("http://localhost:8080/api/customer", {
+      method: "post",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(function(response) {
+        return response.json();
+      })
+      .then(data => {
+        this.setState(
+          {
+            customerID: data.id,
+            mobile: data.mobile
+          },
+          () => {console.log(this.state.customerID, this.state.mobile); 
+            this.submitOrder(this.state.customerID, this.state.mobile)
+          })
+        });
+  }
+
+  submitOrder(customerID, mobile) {
     let finalOrder = [];
     Object.values(this.state.order).map(value =>
       finalOrder.push({ menuItemId: value.id, quantity: value.quantity })
     );
-    const items = { finalOrder: finalOrder, customer: customer };
+    const items = { finalOrder: finalOrder, customerID: customerID, mobile: mobile };
     this.setState({
       order: {}
-    }, () => console.log(this.state.changeScreen));
-    
+    });
+
     fetch("http://localhost:8080/api/order", {
       method: "post",
       body: JSON.stringify(items),
@@ -223,8 +250,11 @@ class App extends React.Component {
             </aside>
           </React.Fragment>
         )}
-        {this.state.changeScreen === 'login' && (
-          <Login submitOrder={this.submitOrder}/>
+        {this.state.changeScreen === "login" && (
+          <Login
+            submitOrder={this.submitOrder}
+            addCustomer={this.addCustomer}
+          />
         )}
         <div id="confirmationModal" className={classes}>
           <span onClick={this.closeModal} className="close">

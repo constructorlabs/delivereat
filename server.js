@@ -28,11 +28,21 @@ app.get('/api/menu', (req,res)=>{
   .catch(error => res.json ({error: error.message}))
 })
 
+app.post('/api/customer', (req,res)=>{
+  const {customer} = req.body
+  db.one("INSERT INTO customer (username, user_password, name, address, mobile) VALUES ($1, $2, $3, $4, $5) RETURNING id", [customer.email, customer.password, customer.name, customer.address, customer.mobile])
+  .then(result => {
+     return res.json({id: result.id, mobile: customer.mobile})})
+  .catch(error => res.json({ error: error.message }))
+});
+
 app.post('/api/order', (req,res)=>{
-  db.one("INSERT INTO transaction (id, order_time) VALUES (DEFAULT, clock_timestamp()) RETURNING id")
+  const { customerID } = req.body;
+  db.one("INSERT INTO transaction (id, order_time, customer_id) VALUES (DEFAULT, clock_timestamp(), $1) RETURNING id", [customerID])
   .then(result => {
       const orderId = result.id;
-      const { finalOrder } = req.body;
+      console.log(orderId);
+      const {finalOrder} = req.body;
       return Promise.all(finalOrder.map(item => {
         return db.none(
           "INSERT INTO basket (menu_id, transaction_id, quantity) VALUES ($1, $2, $3)",
@@ -41,8 +51,10 @@ app.post('/api/order', (req,res)=>{
       })).then(() => orderId);
     })
   .then(orderId => {
-
-    sendSMS(req.body.customer.mobile, orderId);
+    console.log(`second then`, orderId);
+    const {mobile} = req.body;
+    console.log(mobile);
+    sendSMS(mobile, orderId);
     
     res.json({ orderId: orderId })})
   .catch(error => res.json({ error: error.message }));

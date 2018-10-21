@@ -31,4 +31,18 @@ insert into menu (id, item_name, image, item_price) values (5, 'yaki udon', 'udo
 insert into menu (id, item_name, image, item_price) values (6, 'chicken katsu curry', 'curry.png', 10.75);
 alter sequence menu_id_seq restart with 7 increment by 1;
 
+
+-- "timestampz" type did not work for some reason
 alter table transaction add column order_time timestamp with time zone;
+
+
+-- did not set username and user_password to not null required, because this table was added later in the project. 
+create table customer (
+  id serial,
+  username varchar(50), 
+  user_password varchar(50),
+  primary key (id)
+)
+
+alter table transaction add column customer_id int, add constraint fk_customer foreign key (customer_id) references customer (id)
+

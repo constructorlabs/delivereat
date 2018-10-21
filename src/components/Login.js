@@ -45,7 +45,7 @@ class Login extends React.Component {
             email: '',
             mobile: '',
             password: ''
-        }, () => this.props.submitOrder(this.state.customer))
+        }, () => this.props.addCustomer(this.state.customer))
 
     }
     
