@@ -1,0 +1,40 @@
+@import '../base/colours';
+
+img{
+    max-width: 30vw;
+    max-height: auto;
+    margin: .5em;
+    border-radius: 8px;
+    grid-area: i;
+  }
+
+  p{
+    display: inline;
+    margin: 0px;
+  }
+
+  .name{
+    grid-area: n;
+  }
+
+  .plus{
+    grid-area: p;
+  }
+
+  .minus{
+    grid-area: m;
+  }
+
+  .cost{
+    grid-area: c;
+  }
+
+  .listItem{
+    display: grid;
+    grid-template-columns: 70% 3% 3% 24%;
+    grid-column-gap: .5em;
+    grid-template-areas: 
+    'n p m c'
+    'i i i i';
+    margin-bottom: 2em;
+  }
