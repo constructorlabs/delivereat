@@ -122,9 +122,8 @@ class App extends React.Component {
             {Object.keys(this.state.currentOrder).map(item => {
               return (
                 <p key={item}>
-                  {this.state.items[item]['name']} quality:{
-                    this.state.currentOrder[item]
-                  }{' '}
+                  {this.state.items[item]['name']} quality:
+                  {this.state.currentOrder[item]}{' '}
                 </p>
               );
             })}

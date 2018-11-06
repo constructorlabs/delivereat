@@ -1,6 +1,15 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const MongoClient = require('mongodb').MongoClient;
+
+require('dotenv').config({
+  path: path.resolve(__dirname, `.env.${process.env.NODE_ENV}`)
+});
+
+const url = `mongodb://${process.env.MONGO}:${process.env.PW}@ds253203.mlab.com:53203/delivereat`;
+
 
 app.set('view engine', 'hbs');
 
@@ -57,8 +66,21 @@ app.get('/', function(req, res) {
 
 
 app.get('/menu', function(req, res) {
-  res.json(menu);
-  // console.log("fetched");
+  MongoClient.connect(
+    url,{useNewUrlParser: true},
+    function(err, db) {
+      if (err) throw err;
+      var dbo = db.db('delivereat');
+      dbo
+        .collection('food')
+        .find({})
+        .toArray(function(err, result) {
+          if (err) throw err;
+          console.log(result);
+          res.json(result);
+          db.close();
+        });
+    })
 });
 
 app.post('/api/order', function(req, res) {
@@ -71,16 +93,17 @@ app.post('/api/order', function(req, res) {
 });
 
 app.get('/orders', function(req, res) {
+  
   res.json(orders);
 });
 
-app.post('/menu', function(req, res) {
-  const index = id;
-  menu[index] = req.body;
-  menu[index]['id'] = index;
-  id++;
-  res.status(200).json({ ok: 'menu added' });
-});
+// app.post('/menu', function(req, res) {
+//   const index = id;
+//   menu[index] = req.body;
+//   menu[index]['id'] = index;
+//   id++;
+//   res.status(200).json({ ok: 'menu added' });
+// });
 
 const port = process.env.PORT || 8080;
 app.listen(port, function() {
