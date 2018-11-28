@@ -1,6 +1,9 @@
 {
   "name": "react-testing",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.11.0"
+  },
   "description": "An app which allows customers to order food online",
   "main": "index.js",
   "scripts": {

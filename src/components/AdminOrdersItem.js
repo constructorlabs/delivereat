@@ -26,7 +26,10 @@ class AdminOrdersItem extends React.Component {
           <div className="adminOrders__post-code">{this.props.order.post_code}</div>
           <div className="adminOrders__telephone">{this.props.order.telephone}</div>
           <div className="adminOrders__item-count">ITEMS: {this.props.order.sum}</div>
-          <button>Confirmed</button> <button>Being Made</button> <button>Out For Delivery</button> <button>Delivered!</button>
+          <button onClick={(e)=>this.props.handleUpdateOrder({id:this.props.order.id,status:'confirmed'})}>Confirmed</button> 
+          <button onClick={(e)=>this.props.handleUpdateOrder({id:this.props.order.id,status:'Being Made'})}>Being Made</button> 
+          <button onClick={(e)=>this.props.handleUpdateOrder({id:this.props.order.id,status:'Out For Delivery'})}>Out For Delivery</button> 
+          <button onClick={(e)=>this.props.handleUpdateOrder({id:this.props.order.id,status:'Delivered'})}>Delivered!</button> 
 
         </li>
       )
@@ -34,3 +37,5 @@ class AdminOrdersItem extends React.Component {
 }
 
 export default AdminOrdersItem;
+
+

@@ -92,6 +92,7 @@ class App extends React.Component {
       });
   }
 
+
   receiverAddToOrder(item) {
     const order = Object.assign({}, this.state.newOrder);
     if (order[item.id]) {

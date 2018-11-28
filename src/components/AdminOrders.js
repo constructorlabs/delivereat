@@ -13,6 +13,8 @@ class Admin extends React.Component {
             adminOrders : {}
         }
 
+        this.handleUpdateOrder = this.handleUpdateOrder.bind(this)
+
     }
 
     componentDidMount() {
@@ -30,6 +32,26 @@ class Admin extends React.Component {
         });
     }
 
+    handleUpdateOrder(orderToUpdate) {
+        console.log('update order')
+        const orderId = orderToUpdate.id
+        fetch(`/api/admin/order/${orderId}`, {
+          method: "put",
+          body: JSON.stringify({orderToUpdate}),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+          .then(function(response) {
+            return response.json();
+          })
+          .then(data => {
+            console.log("order update response");
+            console.log(data);
+            this.fetchOrders()
+          });
+      }
+
     render() {
       return (
         <div className="admin-orders">
@@ -38,7 +60,7 @@ class Admin extends React.Component {
             <ul className="order__items">
             {Object.values(this.state.adminOrders).map(order => {
                 console.log(order)
-                return <AdminOrdersItem order={order}  />
+                return <AdminOrdersItem handleUpdateOrder={this.handleUpdateOrder} order={order} key={order.id} />
             })}
             </ul>
         </div>
