@@ -19,6 +19,13 @@ DB_USERNAME=
 DB_PASSWORD=
 
 ```
+- In order to receive confirmation texts from the app, also add the following variables to `.env` file:
+
+```
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+```
 
 - Run `npm start` to launch the app and navigate to localhost:8080
 - Use `npm run dev -- --watch` to build React
