@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`order rendered output snapshot 1`] = `
+<div
+  className="orders"
+>
+  <ul
+    className="order__items"
+  />
+  <p>
+    <strong>
+      Free delivery on orders over £30
+    </strong>
+  </p>
+  <p>
+    Discount :
+    10% on order more than £50
+  </p>
+  <p>
+    Pizzas : £
+    0
+  </p>
+  <p>
+    Delivery : £
+    5
+     
+  </p>
+  <p />
+  <p>
+    <strong>
+      Total :£
+      0
+       
+    </strong>
+  </p>
+  <p>
+    <button
+      id="login"
+      onClick={undefined}
+    >
+      Login / Register
+    </button>
+  </p>
+</div>
+`;

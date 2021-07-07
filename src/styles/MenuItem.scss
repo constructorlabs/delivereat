@@ -1,0 +1,47 @@
+.menu__item {
+    width: 320px;
+    min-height:50px;
+    background: #FBECEC;
+    border:solid 1px black;
+    padding:5px;
+    margin:10px 0;
+    display: grid;
+    grid-template-columns: 6fr 2fr 1fr 1fr 1fr;
+    grid-template-rows: 30px 1fr;
+    grid-gap: 5px;
+    grid-template-areas:
+      'name         price down quantity up'
+      'ingredients  ingredients ingredients ingredients ingredients'
+  }
+  
+  .menu__name {
+    font-weight: bold;
+    text-align:left;
+    grid-area: name
+  }
+  
+  .menu__ingredients {
+    text-align:left;
+    grid-area: ingredients
+  }
+  
+  .menu__quantity {
+    text-align:center;
+    grid-area: quantity
+  }
+  
+  .menu__up {
+    grid-area: up;
+    text-align: center;
+  }
+  
+  .menu__down {
+    grid-area: down;
+    text-align: center
+  }
+  
+  .menu__price {
+    grid-area: price;
+    font-size: 0.9em;
+    font-weight: bold
+  }

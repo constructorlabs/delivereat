@@ -1,12 +1,17 @@
 {
   "name": "react-testing",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.11.0"
+  },
   "description": "An app which allows customers to order food online",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "dev": "webpack --mode development",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "start": "nodemon server.js",
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -18,11 +23,17 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "date-fns": "^1.29.0",
+    "dotenv": "^6.1.0",
+    "event-stream": "^3.3.4",
     "express": "^4.16.3",
     "hbs": "^4.0.1",
     "jest": "^22.3.0",
+    "pg-promise": "^8.5.0",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "nodemon": "^1.17.5",
+    "twilio": "^3.23.1"
   },
   "devDependencies": {
     "babel-jest": "^22.4.1",
@@ -30,16 +41,15 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^22.4.2",
     "jest-fetch-mock": "^1.6.6",
     "node-sass": "^4.9.1",
-    "nodemon": "1.17.5",
+    "react-test-renderer": "^16.2.0",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
-    "react-test-renderer": "^16.2.0",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9"
   }
