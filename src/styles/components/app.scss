@@ -1,0 +1,121 @@
+@import '../base/colours';
+
+html {
+  box-sizing: border-box;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  margin: 0px;
+}
+
+body {
+  background-color: $background-color;
+  color: $font-color;
+}
+
+.logo{
+  max-height: 50px;
+}
+
+header{
+  grid-area: h;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+ul{
+  padding: 1em 1em 0em 1em;
+  margin-bottom: 0px;
+}
+
+main{
+  grid-area: m;
+}
+
+aside{
+  grid-area: a;
+}
+
+section{
+  grid-area: s;
+}
+
+.wrapper{
+  display: grid;
+  grid-gap: 1em;
+  grid-template-columns: 1fr;
+  grid-template-areas: 
+  'h'
+  'm'
+  'a'
+  's';
+}
+
+.modal{
+  display:none;
+  position: fixed;
+  z-index:0;
+  left: 0;
+  top:0;
+  height: 100%;
+  width:100%;
+  overflow: auto;
+  background-color:$background-color ;
+    .fas{
+      display: none;
+    }
+  
+}
+ .modal--active{
+  display: flex;
+  position: fixed;
+  z-index:2;
+  left: 50%;
+  top:50%;
+  height: 50%;
+  width:50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  background-color: $font-color;
+  border-radius: 8px;
+  color: $background-color;
+  flex-direction: column;
+}
+
+.close{
+  align-self: flex-end;
+  margin-right: .5em;
+}
+
+span{
+  font-size: 2em;
+}
+
+.confirmation{
+  text-align: center;
+  margin: 1em;
+}
+
+@media(min-width: 768px){
+  .wrapper{
+    margin-right: 10vw;
+    margin-left: 10vw;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+    'h h'
+    'm a'
+    's s';
+  }
+
+  .modal--active{
+    height: 30%;
+    width:30%;
+    position: fixed;
+  }
+
+  ul{
+    padding-left: 3em;
+  }
+ 
+}

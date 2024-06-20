@@ -1,0 +1,90 @@
+// .order{
+//     grid-area: or;
+// }
+
+// .delivery{
+//     grid-area: de;
+// }
+
+// .total{
+//     grid-area: to;
+// }
+
+// .name{
+//     grid-area: na;
+// }
+
+// .nameInput{
+//     grid-area: ni;
+// }
+
+// .address{
+//     grid-area: ad;
+// }
+
+// .addressInput{
+//     grid-area: ai;
+// }
+
+// .email{
+//     grid-area: em;
+// }
+
+// .emailInput{
+//     grid-area: ei;
+// }
+
+// .mobile{
+//     grid-area: mo;
+// }
+
+// .mobileInput{
+//     grid-area: mi;
+// }
+
+// .feedMe{
+//     grid-area: fm;
+// }
+
+// form{
+//     display: grid;
+//     grid-template-columns: 1fr 1fr;
+//     grid-column-gap: .5em;
+//     grid-template-areas: 
+//     'or or'
+//     'de de'
+//     'to to'
+//     'na ni'
+//     'ad ai'
+//     'em ei'
+//     'mo mi'
+//     'fm fm';
+// }
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1.5em;
+}
+
+.order{
+    margin-top: 2em;
+}
+
+.order, .delivery, .total{
+    margin-bottom: .6em;
+    padding-left: 2em;
+}
+
+.addressInput, .nameInput, .mobileInput, .mobileInput, .emailInput{
+    margin-bottom: 1em;
+    border-radius: 8px;
+    margin-right: 2em;
+}
+
+.feedMe{
+    font-size: 1em;
+    border-radius: 8px;
+    max-width: 6em;
+    align-self: centre;
+}
